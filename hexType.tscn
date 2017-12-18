@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=1]
+
+[ext_resource path="res://hexType.gd" type="Script" id=1]
+[ext_resource path="res://Assets/SizedTown.png" type="Texture" id=2]
+[ext_resource path="res://Assets/land-action.png" type="Texture" id=3]
+[ext_resource path="res://Assets/lake-action.png" type="Texture" id=4]
+[ext_resource path="res://Assets/tree-action.png" type="Texture" id=5]
+[ext_resource path="res://Assets/hill-action.png" type="Texture" id=6]
+[ext_resource path="res://Assets/sand-action.png" type="Texture" id=7]
+[ext_resource path="res://Assets/SizedMine.png" type="Texture" id=8]
+
+[node name="hexType" type="Node2D"]
+
+script/script = ExtResource( 1 )
+
+[node name="orb" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 2 )
+
+[node name="plains" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 3 )
+
+[node name="lake" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 4 )
+
+[node name="forest" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 5 )
+
+[node name="mountain" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 6 )
+
+[node name="desert" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 7 )
+
+[node name="well" type="Sprite" parent="."]
+
+visibility/visible = false
+transform/scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 8 )
+
+

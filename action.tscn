@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://action_button.gd" type="Script" id=1]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -38.6542, -0.323357, -19.8914, -28.9816, 18.7908, -28.8531, 38.4532, -1.47997, 17.3772, 28.9774, -16.4215, 28.9774 )
+
+[node name="action" type="Sprite"]
+
+script/script = ExtResource( 1 )
+actionType = null
+
+[node name="Area2D" type="Area2D" parent="."]
+
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+
+build_mode = 0
+polygon = Vector2Array( -38.6542, -0.323357, -19.8914, -28.9816, 18.7908, -28.8531, 38.4532, -1.47997, 17.3772, 28.9774, -16.4215, 28.9774 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+

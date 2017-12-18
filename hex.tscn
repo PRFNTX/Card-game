@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://hex.gd" type="Script" id=1]
+[ext_resource path="res://Assets/hex.png" type="Texture" id=2]
+[ext_resource path="res://hexType.tscn" type="PackedScene" id=3]
+[ext_resource path="res://hexEntity.tscn" type="PackedScene" id=4]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -43.3568, -24.7836, 0.0536782, -49.8026, 43.1328, -25.115, 43.2985, 25.2545, -0.277699, 50.1078, -43.3568, 25.2545 )
+
+[node name="hex" type="Node2D"]
+
+transform/scale = Vector2( 0.7, 0.7 )
+script/script = ExtResource( 1 )
+initial_state = null
+
+[node name="sprite" type="Sprite" parent="."]
+
+texture = ExtResource( 2 )
+
+[node name="hexType" parent="." instance=ExtResource( 3 )]
+
+transform/scale = Vector2( 1, 1 )
+
+[node name="hexEntity" parent="." instance=ExtResource( 4 )]
+
+transform/scale = Vector2( 1, 1 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+
+build_mode = 0
+polygon = Vector2Array( -43.3568, -24.7836, 0.0536782, -49.8026, 43.1328, -25.115, 43.2985, 25.2545, -0.277699, 50.1078, -43.3568, 25.2545 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[connection signal="mouse_enter" from="Area2D" to="." method="_on_Area2D_mouse_enter"]
+
+[connection signal="mouse_exit" from="Area2D" to="." method="_on_Area2D_mouse_exit"]
+
+

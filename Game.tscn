@@ -1,0 +1,317 @@
+[gd_scene load_steps=12 format=1]
+
+[ext_resource path="res://board.gd" type="Script" id=1]
+[ext_resource path="res://Assets/White hex 2.png" type="Texture" id=2]
+[ext_resource path="res://hex.tscn" type="PackedScene" id=3]
+[ext_resource path="res://action.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/tree-action.png" type="Texture" id=5]
+[ext_resource path="res://Assets/gold-action.png" type="Texture" id=6]
+[ext_resource path="res://Assets/lake-action.png" type="Texture" id=7]
+[ext_resource path="res://Assets/land-action.png" type="Texture" id=8]
+[ext_resource path="res://Assets/sand-action.png" type="Texture" id=9]
+[ext_resource path="res://Assets/hill-action.png" type="Texture" id=10]
+[ext_resource path="res://Assets/card-action.png" type="Texture" id=11]
+
+[node name="Game" type="Node2D"]
+
+[node name="board" type="Node2D" parent="."]
+
+script/script = ExtResource( 1 )
+
+[node name="back" type="Sprite" parent="board"]
+
+editor/display_folded = true
+transform/pos = Vector2( 555.348, 219.55 )
+transform/scale = Vector2( 0.65, 0.65 )
+texture = ExtResource( 2 )
+
+[node name="hex 1" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -192.657, -250.721 )
+transform/scale = Vector2( 1, 1 )
+initial_state = 3
+
+[node name="hex 2" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -95.9045, -250.391 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 3" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 0.187561, -250.391 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 4" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 96.6099, -250.721 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 5" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 193.693, -250.391 )
+transform/scale = Vector2( 1, 1 )
+initial_state = 3
+
+[node name="hex 6" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -240.174, -166.733 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 7" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -144.264, -167.739 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 8" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -47.8415, -166.334 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 9" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 49.234, -166.206 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 10" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 144.879, -167.056 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 11" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 241.702, -167.056 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 12" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -289.041, -82.54 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 13" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -192.323, -82.8489 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 14" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -95.5378, -83.3344 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 15" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 0.849731, -83.0034 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 16" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 97.061, -83.0916 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 17" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 193.757, -83.4669 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 18" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 289.99, -83.4448 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 19" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -337.367, 0.386871 )
+transform/scale = Vector2( 1, 1 )
+initial_state = 2
+
+[node name="hex 20" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -240.797, 0.254425 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 21" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -143.692, -0.00970459 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 22" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -47.3304, 0.922058 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 23" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 48.721, 0.893433 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 24" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 144.929, 0.409729 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 25" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 241.929, 0.431183 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 26" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 337.673, 0.563202 )
+transform/scale = Vector2( 1, 1 )
+initial_state = 2
+
+[node name="hex 27" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -289.711, 83.9315 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 28" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -191.828, 84.085 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 29" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -95.6658, 83.9958 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 30" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 0.100037, 83.9975 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 31" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 97.1671, 83.621 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 32" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 193.506, 84.4153 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 33" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 289.668, 83.887 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 34" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -240.691, 168.18 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 35" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -143.735, 167.739 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 36" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -47.1766, 167.496 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 37" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 48.6785, 167.475 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 38" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 145.456, 167.539 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 39" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 241.419, 167.628 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 40" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -192.379, 251.746 )
+transform/scale = Vector2( 1, 1 )
+initial_state = 3
+
+[node name="hex 41" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -96.8558, 251.195 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 42" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 0.739685, 251.482 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 43" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 96.8143, 251.504 )
+transform/scale = Vector2( 1, 1 )
+
+[node name="hex 44" parent="board/back" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 193.794, 251.04 )
+transform/scale = Vector2( 1, 1 )
+initial_state = 3
+
+[node name="Control" type="Control" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 40.0
+
+[node name="Panel" type="Panel" parent="Control"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 5.0
+margin/top = 370.0
+margin/right = 279.0
+margin/bottom = 593.0
+
+[node name="action" parent="Control/Panel" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 79.8705, 133.948 )
+texture = ExtResource( 5 )
+actionType = 4
+
+[node name="action1" parent="Control/Panel" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 137.906, 38.8662 )
+texture = ExtResource( 6 )
+actionType = 1
+
+[node name="action2" parent="Control/Panel" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 78.386, 71.5847 )
+texture = ExtResource( 7 )
+actionType = 3
+
+[node name="action3" parent="Control/Panel" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 140.622, 101.782 )
+texture = ExtResource( 8 )
+
+[node name="action4" parent="Control/Panel" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 203.599, 131.542 )
+texture = ExtResource( 9 )
+actionType = 5
+
+[node name="action6" parent="Control/Panel" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 142.295, 164.209 )
+texture = ExtResource( 10 )
+actionType = 6
+
+[node name="action5" parent="Control/Panel" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 199.846, 68.2711 )
+texture = ExtResource( 11 )
+actionType = 2
+
+
