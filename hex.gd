@@ -133,6 +133,8 @@ func setState(newState):
 		currentState=land.new(self,newState)
 	elif (newState==STATE_TREE):
 		currentState=land.new(self,newState)
+	elif (newState==STATE_LAKE):
+		currentState=land.new(self,newState)
 	elif (newState==STATE_HILL):
 		currentState=land.new(self,newState)
 	elif (newState==STATE_SAND):
@@ -144,7 +146,6 @@ func setState(newState):
 
 func _on_Area2D_mouse_enter():
 	print("entered")
-	print(currentState)
 	mouseover=true
 	if currentState.has_method("onMouseOver"):
 		currentState.call("onMouseOver",true)
