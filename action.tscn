@@ -30,4 +30,8 @@ polygon = Vector2Array( -38.6542, -0.323357, -19.8914, -28.9816, 18.7908, -28.85
 shape_range = Vector2( 0, 0 )
 trigger = false
 
+[connection signal="mouse_enter" from="Area2D" to="." method="_on_Area2D_mouse_enter"]
+
+[connection signal="mouse_exit" from="Area2D" to="." method="_on_Area2D_mouse_exit"]
+
 

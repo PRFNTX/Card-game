@@ -70,9 +70,9 @@ class orb:
 		#me.hexType.call("setState",stateID)
 	
 	func onMouseOver(action):
-		if action=="land" or action=="water":
+		if true:
 			me.show()
-			me.set_modulate(Color(50,200,120,0.4))
+			me.get_child(0).set_modulate(Color(50,200,120,0.4))
 	
 	func handleClick(action):
 		pass
@@ -93,9 +93,9 @@ class well:
 		#me.hexType.call("setState",stateID)
 	
 	func onMouseOver(action):
-		if action=="land" or action=="water":
+		if true:
 			me.show()
-			me.set_modulate(Color(50,200,120,0.4))
+			me.get_child(0).set_modulate(Color(50,200,120,0.4))
 	
 	func handleClick(action):
 		pass
@@ -121,8 +121,9 @@ var currentState
 onready var hexType=find_node("hexType")
 
 func _ready():
+	print(initial_state)
 	setState(initial_state)
-	print(hexType)
+
 
 func setState(newState):
 	if (newState==STATE_EMPTY):
@@ -145,14 +146,12 @@ func setState(newState):
 
 
 func _on_Area2D_mouse_enter():
-	print("entered")
 	mouseover=true
 	if currentState.has_method("onMouseOver"):
 		currentState.call("onMouseOver",true)
 
 
 func _on_Area2D_mouse_exit():
-	print("exited")
 	mouseover=false
 	if currentState.has_method("onMouseExit"):
 		currentState.call("onMouseExit",true)

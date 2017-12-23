@@ -1,6 +1,6 @@
 extends Node2D
 
-export(int,"land","coin","card","lake","tree","sand","hill") var actionType
+export(String,"land","coin","card","lake","tree","sand","hill") var actionType
 
 
 # class member variables go here, for example:
@@ -12,7 +12,10 @@ func _ready():
 
 
 func _input(event):
-	if event.is_action("click"):
+	print(mouseover)
+	print(event.is_action("click"))
+	if event.is_action("click") and mouseover:
+		print("actionType")
 		Input.action_press(actionType)
 		Input.action_release(actionType)
 
