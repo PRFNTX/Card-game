@@ -1,5 +1,6 @@
 extends Node2D
 
+onready var parent=get_parent()
 onready var grid=get_child(0).get_children()
 onready var adj = fill_adj(grid)
 
@@ -48,6 +49,7 @@ func fill_adj(grid):
 			iSet.append(grid[get_i([pos[0]+1,pos[1]+1])]) if (pos[0]<6) else 0
 		ret[i]=iSet
 		grid[i].adjacent=iSet
+		grid[i].call('connect',parent)
 	
 	return ret
 

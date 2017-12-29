@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=1]
+
+[ext_resource path="res://hexProperties.gd" type="Script" id=1]
+
+[node name="Empty" type="Sprite"]
+
+script/script = ExtResource( 1 )
+type = 0
+moveWater = true
+moveLand = false
+moveAir = true
+spawnsFaeria = false
+buildAny = false
+actionLand = true
+buildSand = false
+actionSand = false
+buildTree = false
+actionTree = false
+buildHill = false
+actionHill = false
+buildLake = false
+actionLake = false
+
+

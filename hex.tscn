@@ -15,6 +15,14 @@ points = Vector2Array( -43.3568, -24.7836, 0.0536782, -49.8026, 43.1328, -25.115
 transform/scale = Vector2( 0.7, 0.7 )
 script/script = ExtResource( 1 )
 initial_state = null
+id = null
+move = Color( 0.419449, 0.789165, 0.902344, 0.675412 )
+land = Color( 1, 0.679688, 0, 0.563922 )
+attack = Color( 0.9375, 0.161133, 0.161133, 0.501647 )
+summon = Color( 0.371338, 0.914062, 0.405258, 0.455725 )
+targetOther = Color( 0.798555, 0.279663, 0.90625, 0.498353 )
+mouseover_color = Color( 1, 1, 1, 0.449176 )
+gather = Color( 0.933594, 0.906242, 0.233398, 0.485255 )
 
 [node name="sprite" type="Sprite" parent="."]
 
@@ -22,11 +30,7 @@ texture = ExtResource( 2 )
 
 [node name="hexType" parent="." instance=ExtResource( 3 )]
 
-transform/scale = Vector2( 1, 1 )
-
 [node name="hexEntity" parent="." instance=ExtResource( 4 )]
-
-transform/scale = Vector2( 1, 1 )
 
 [node name="Area2D" type="Area2D" parent="."]
 

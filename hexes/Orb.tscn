@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://Assets/SizedArbor.png" type="Texture" id=1]
+[ext_resource path="res://hexProperties.gd" type="Script" id=2]
+
+[node name="Orb" type="Sprite"]
+
+texture = ExtResource( 1 )
+script/script = ExtResource( 2 )
+type = 1
+moveWater = false
+moveLand = false
+moveAir = false
+spawnsFaeria = false
+buildAny = false
+actionLand = false
+buildSand = false
+actionSand = false
+buildTree = false
+actionTree = false
+buildHill = false
+actionHill = false
+buildLake = false
+actionLake = false
+
+

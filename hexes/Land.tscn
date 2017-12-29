@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://Assets/land-action.png" type="Texture" id=1]
+[ext_resource path="res://hexProperties.gd" type="Script" id=2]
+
+[node name="Land" type="Sprite"]
+
+texture = ExtResource( 1 )
+script/script = ExtResource( 2 )
+type = 2
+moveWater = false
+moveLand = true
+moveAir = true
+spawnsFaeria = false
+buildAny = true
+actionLand = false
+buildSand = false
+actionSand = true
+buildTree = false
+actionTree = true
+buildHill = false
+actionHill = true
+buildLake = false
+actionLake = true
+
+

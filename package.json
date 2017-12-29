@@ -1,0 +1,25 @@
+{
+  "name": "temp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PRFNTX/temp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PRFNTX/temp/issues"
+  },
+  "homepage": "https://github.com/PRFNTX/temp#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "http": "0.0.0",
+    "ws": "^3.3.3"
+  }
+}
