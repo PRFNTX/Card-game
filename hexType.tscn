@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=1]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://hexType.gd" type="Script" id=1]
 [ext_resource path="res://hexes/Empty.tscn" type="PackedScene" id=2]
@@ -12,7 +12,7 @@
 
 [node name="hexType" type="Node2D"]
 
-script/script = ExtResource( 1 )
+script = ExtResource( 1 )
 Empty = ExtResource( 2 )
 Orb = ExtResource( 3 )
 Land = ExtResource( 4 )

@@ -1,28 +1,22 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://hex.gd" type="Script" id=1]
 [ext_resource path="res://Assets/hex.png" type="Texture" id=2]
 [ext_resource path="res://hexType.tscn" type="PackedScene" id=3]
 [ext_resource path="res://hexEntity.tscn" type="PackedScene" id=4]
 
-[sub_resource type="ConvexPolygonShape2D" id=1]
-
-custom_solver_bias = 0.0
-points = Vector2Array( -43.3568, -24.7836, 0.0536782, -49.8026, 43.1328, -25.115, 43.2985, 25.2545, -0.277699, 50.1078, -43.3568, 25.2545 )
-
 [node name="hex" type="Node2D"]
 
-transform/scale = Vector2( 0.7, 0.7 )
-script/script = ExtResource( 1 )
-initial_state = null
+script = ExtResource( 1 )
+initial_state = 0
 id = null
-move = Color( 0.419449, 0.789165, 0.902344, 0.675412 )
-land = Color( 1, 0.679688, 0, 0.563922 )
-attack = Color( 0.9375, 0.161133, 0.161133, 0.501647 )
-summon = Color( 0.371338, 0.914062, 0.405258, 0.455725 )
-targetOther = Color( 0.798555, 0.279663, 0.90625, 0.498353 )
-mouseover_color = Color( 1, 1, 1, 0.449176 )
-gather = Color( 0.933594, 0.906242, 0.233398, 0.485255 )
+move = Color( 0.395988, 0.827314, 0.996094, 0.478824 )
+land = Color( 0.988281, 0.721323, 0.261247, 0.542392 )
+attack = Color( 0.984375, 0.112961, 0.112961, 0.533882 )
+summon = Color( 0.0102459, 1, 0.0953029, 0.542392 )
+targetOther = Color( 1, 0.045082, 0.917937, 0.495765 )
+mouseover_color = Color( 0.996094, 0.996094, 0.996094, 0.5 )
+gather = Color( 1, 0.984375, 0, 0.364392 )
 
 [node name="sprite" type="Sprite" parent="."]
 
@@ -34,24 +28,17 @@ texture = ExtResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="."]
 
-input/pickable = true
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/0/trigger = false
+input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 
 build_mode = 0
-polygon = Vector2Array( -43.3568, -24.7836, 0.0536782, -49.8026, 43.1328, -25.115, 43.2985, 25.2545, -0.277699, 50.1078, -43.3568, 25.2545 )
-shape_range = Vector2( 0, 0 )
-trigger = false
-
-[connection signal="mouse_enter" from="Area2D" to="." method="_on_Area2D_mouse_enter"]
-
-[connection signal="mouse_exit" from="Area2D" to="." method="_on_Area2D_mouse_exit"]
+polygon = PoolVector2Array( -43.3568, -24.7836, 0.0536782, -49.8026, 43.1328, -25.115, 43.2985, 25.2545, -0.277699, 50.1078, -43.3568, 25.2545 )
 
 

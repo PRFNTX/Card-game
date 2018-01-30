@@ -12,7 +12,8 @@ func _ready():
 
 
 func _input(event):
-	if event.type==3 and mouseover:
+	if event is InputEventMouseButton and mouseover:
+		print(event is InputEventMouseButton)
 		Input.action_press(actionType)
 		Input.action_release(actionType)
 

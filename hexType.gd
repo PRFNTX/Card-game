@@ -18,7 +18,8 @@ class state:
 	func _init(myself,i):
 		me=myself
 		state=i
-		me.child=me.arr_Lands[state].instance()
+		print(i)
+		me.child=me.arr_Lands[i].instance()
 		me.add_child(me.child)
 
 

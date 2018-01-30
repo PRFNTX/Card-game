@@ -1,11 +1,11 @@
-[gd_scene load_steps=2 format=1]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://hexProperties.gd" type="Script" id=1]
 
 [node name="Empty" type="Sprite"]
 
-script/script = ExtResource( 1 )
-type = 0
+script = ExtResource( 1 )
+type = null
 moveWater = true
 moveLand = false
 moveAir = true

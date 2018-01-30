@@ -1,6 +1,6 @@
 extends Node2D
 
-export(int,"empty","orb","land","lake","tree","hill","sand","well") var initial_state
+export(int,"empty","orb","land","lake","tree","hill","sand","well") var initial_state=0
 onready var sprite=get_node("sprite")
 export(int) var id
 
@@ -138,9 +138,10 @@ var currentState
 #'''
 
 
-onready var hexType=find_node("hexType")
+var hexType
 
 func _ready():
+	hexType=find_node("hexType")
 	hexType.setState(initial_state)
 	set_process_input(true)
 
