@@ -19,262 +19,262 @@
 
 script = ExtResource( 1 )
 
-[node name="board" type="Node2D" parent="."]
+[node name="board" type="Node2D" parent="." index="0"]
 
 script = ExtResource( 2 )
 
-[node name="back" type="Sprite" parent="board"]
+[node name="back" type="Sprite" parent="board" index="0"]
 
 position = Vector2( 507.593, 241.133 )
 scale = Vector2( 0.720365, 0.73331 )
 texture = ExtResource( 3 )
 
-[node name="hex 1" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 1" parent="board/back" index="0" instance=ExtResource( 4 )]
 
 position = Vector2( -192.435, -250.691 )
 initial_state = 7
 id = 0
 
-[node name="hex 2" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 2" parent="board/back" index="1" instance=ExtResource( 4 )]
 
 position = Vector2( -95.9581, -250.691 )
 
-[node name="hex 3" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 3" parent="board/back" index="2" instance=ExtResource( 4 )]
 
 position = Vector2( 0.518677, -249.852 )
 
-[node name="hex 4" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 4" parent="board/back" index="3" instance=ExtResource( 4 )]
 
 position = Vector2( 96.9953, -251.036 )
 
-[node name="hex 5" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 5" parent="board/back" index="4" instance=ExtResource( 4 )]
 
 position = Vector2( 193.304, -250.347 )
 initial_state = 7
 
-[node name="hex 6" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 6" parent="board/back" index="5" instance=ExtResource( 4 )]
 
 position = Vector2( -240.673, -166.618 )
 
-[node name="hex 7" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 7" parent="board/back" index="6" instance=ExtResource( 4 )]
 
 position = Vector2( -144.196, -167.128 )
 
-[node name="hex 8" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 8" parent="board/back" index="7" instance=ExtResource( 4 )]
 
 position = Vector2( -48.0706, -166.783 )
 
-[node name="hex 9" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 9" parent="board/back" index="8" instance=ExtResource( 4 )]
 
 position = Vector2( 48.7571, -166.618 )
 
-[node name="hex 10" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 10" parent="board/back" index="9" instance=ExtResource( 4 )]
 
 position = Vector2( 145.234, -167.253 )
 
-[node name="hex 11" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 11" parent="board/back" index="10" instance=ExtResource( 4 )]
 
 position = Vector2( 241.192, -166.618 )
 
-[node name="hex 12" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 12" parent="board/back" index="11" instance=ExtResource( 4 )]
 
 position = Vector2( -288.393, -83.0543 )
 
-[node name="hex 13" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 13" parent="board/back" index="12" instance=ExtResource( 4 )]
 
 position = Vector2( -192.953, -83.5638 )
 
-[node name="hex 14" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 14" parent="board/back" index="13" instance=ExtResource( 4 )]
 
 position = Vector2( -95.958, -83.2192 )
 
-[node name="hex 15" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 15" parent="board/back" index="14" instance=ExtResource( 4 )]
 
 position = Vector2( -0.000183105, -83.0543 )
 
-[node name="hex 16" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 16" parent="board/back" index="15" instance=ExtResource( 4 )]
 
 position = Vector2( 96.9953, -83.5638 )
 
-[node name="hex 17" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 17" parent="board/back" index="16" instance=ExtResource( 4 )]
 
 position = Vector2( 193.121, -83.0543 )
 
-[node name="hex 18" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 18" parent="board/back" index="17" instance=ExtResource( 4 )]
 
 position = Vector2( 289.949, -83.0543 )
 
-[node name="hex 19" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 19" parent="board/back" index="18" instance=ExtResource( 4 )]
 
 position = Vector2( -337.669, 0 )
 initial_state = 1
 
-[node name="hex 20" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 20" parent="board/back" index="19" instance=ExtResource( 4 )]
 
 position = Vector2( -240.505, 0.509552 )
 
-[node name="hex 21" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 21" parent="board/back" index="20" instance=ExtResource( 4 )]
 
 position = Vector2( -144.196, 0 )
 
-[node name="hex 22" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 22" parent="board/back" index="21" instance=ExtResource( 4 )]
 
 position = Vector2( -47.2009, 0 )
 
-[node name="hex 23" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 23" parent="board/back" index="22" instance=ExtResource( 4 )]
 
 position = Vector2( 48.2383, 0.509521 )
 
-[node name="hex 24" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 24" parent="board/back" index="23" instance=ExtResource( 4 )]
 
 position = Vector2( 145.234, 0.509521 )
 
-[node name="hex 25" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 25" parent="board/back" index="24" instance=ExtResource( 4 )]
 
 position = Vector2( 241.711, 0.509552 )
 
-[node name="hex 26" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 26" parent="board/back" index="25" instance=ExtResource( 4 )]
 
 position = Vector2( 337.357, -0.164948 )
 initial_state = 1
 
-[node name="hex 27" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 27" parent="board/back" index="26" instance=ExtResource( 4 )]
 
 position = Vector2( -288.393, 84.0733 )
 
-[node name="hex 28" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 28" parent="board/back" index="27" instance=ExtResource( 4 )]
 
 position = Vector2( -192.435, 84.5829 )
 
-[node name="hex 29" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 29" parent="board/back" index="28" instance=ExtResource( 4 )]
 
 position = Vector2( -95.958, 84.0733 )
 
-[node name="hex 30" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 30" parent="board/back" index="29" instance=ExtResource( 4 )]
 
 position = Vector2( 0.518738, 84.2531 )
 
-[node name="hex 31" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 31" parent="board/back" index="30" instance=ExtResource( 4 )]
 
 position = Vector2( 96.9955, 83.5638 )
 
-[node name="hex 32" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 32" parent="board/back" index="31" instance=ExtResource( 4 )]
 
 position = Vector2( 193.472, 83.5638 )
 
-[node name="hex 33" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 33" parent="board/back" index="32" instance=ExtResource( 4 )]
 
 position = Vector2( 289.43, 84.0733 )
 
-[node name="hex 34" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 34" parent="board/back" index="33" instance=ExtResource( 4 )]
 
 position = Vector2( -240.154, 167.637 )
 
-[node name="hex 35" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 35" parent="board/back" index="34" instance=ExtResource( 4 )]
 
 position = Vector2( -143.987, 167.334 )
 
-[node name="hex 36" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 36" parent="board/back" index="35" instance=ExtResource( 4 )]
 
 position = Vector2( -47.7197, 167.637 )
 
-[node name="hex 37" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 37" parent="board/back" index="36" instance=ExtResource( 4 )]
 
 position = Vector2( 48.7571, 168.147 )
 
-[node name="hex 38" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 38" parent="board/back" index="37" instance=ExtResource( 4 )]
 
 position = Vector2( 145.234, 167.637 )
 
-[node name="hex 39" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 39" parent="board/back" index="38" instance=ExtResource( 4 )]
 
 position = Vector2( 241.71, 168.147 )
 
-[node name="hex 40" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 40" parent="board/back" index="39" instance=ExtResource( 4 )]
 
 position = Vector2( -192.435, 251.201 )
 initial_state = 7
 
-[node name="hex 41" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 41" parent="board/back" index="40" instance=ExtResource( 4 )]
 
 position = Vector2( -96.1675, 250.953 )
 
-[node name="hex 42" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 42" parent="board/back" index="41" instance=ExtResource( 4 )]
 
 position = Vector2( 0.518616, 251.242 )
 
-[node name="hex 43" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 43" parent="board/back" index="42" instance=ExtResource( 4 )]
 
 position = Vector2( 97.2051, 251.201 )
 
-[node name="hex 44" parent="board/back" instance=ExtResource( 4 )]
+[node name="hex 44" parent="board/back" index="43" instance=ExtResource( 4 )]
 
 position = Vector2( 193.121, 250.856 )
 initial_state = 7
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 mouse_filter = 0
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 
-[node name="actionTree" parent="Control" instance=ExtResource( 5 )]
+[node name="actionTree" parent="Control" index="0" instance=ExtResource( 5 )]
 
 position = Vector2( 66.3413, 521.253 )
 texture = ExtResource( 6 )
 
-[node name="actionCoin" parent="Control" instance=ExtResource( 5 )]
+[node name="actionCoin" parent="Control" index="1" instance=ExtResource( 5 )]
 
 position = Vector2( 193.921, 457.099 )
 texture = ExtResource( 7 )
 
-[node name="actionLake" parent="Control" instance=ExtResource( 5 )]
+[node name="actionLake" parent="Control" index="2" instance=ExtResource( 5 )]
 
 position = Vector2( 67.0704, 455.641 )
 texture = ExtResource( 8 )
 
-[node name="actionLand" parent="Control" instance=ExtResource( 5 )]
+[node name="actionLand" parent="Control" index="3" instance=ExtResource( 5 )]
 
 position = Vector2( 129.767, 487.718 )
 texture = ExtResource( 9 )
 
-[node name="actionSand" parent="Control" instance=ExtResource( 5 )]
+[node name="actionSand" parent="Control" index="4" instance=ExtResource( 5 )]
 
 position = Vector2( 193.192, 520.524 )
 texture = ExtResource( 10 )
 actionType = "sand"
 
-[node name="actionHill" parent="Control" instance=ExtResource( 5 )]
+[node name="actionHill" parent="Control" index="5" instance=ExtResource( 5 )]
 
 position = Vector2( 129.767, 552.601 )
 texture = ExtResource( 11 )
 actionType = "hill"
 
-[node name="actionCard" parent="Control" instance=ExtResource( 5 )]
+[node name="actionCard" parent="Control" index="6" instance=ExtResource( 5 )]
 
 position = Vector2( 131.225, 422.835 )
 texture = ExtResource( 12 )
 actionType = "card"
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite" type="Sprite" parent="." index="2"]
 
 visible = false
 position = Vector2( 509.985, 235.287 )
 scale = Vector2( 6.44462, 5.94225 )
 texture = ExtResource( 13 )
 
-[node name="end turn" type="Sprite" parent="."]
+[node name="end turn" type="Sprite" parent="." index="3"]
 
 position = Vector2( 82.3799, 76.5477 )
 texture = ExtResource( 14 )
 
-[node name="RichTextLabel" type="Label" parent="."]
+[node name="RichTextLabel" type="Label" parent="." index="4"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -285,8 +285,8 @@ margin_top = 340.0
 margin_right = 88.0
 margin_bottom = 354.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 mouse_filter = 2
+mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
 text = "actions"

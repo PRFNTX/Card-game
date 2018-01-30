@@ -18,15 +18,15 @@ targetOther = Color( 1, 0.045082, 0.917937, 0.495765 )
 mouseover_color = Color( 0.996094, 0.996094, 0.996094, 0.5 )
 gather = Color( 1, 0.984375, 0, 0.364392 )
 
-[node name="sprite" type="Sprite" parent="."]
+[node name="sprite" type="Sprite" parent="." index="0"]
 
 texture = ExtResource( 2 )
 
-[node name="hexType" parent="." instance=ExtResource( 3 )]
+[node name="hexType" parent="." index="1" instance=ExtResource( 3 )]
 
-[node name="hexEntity" parent="." instance=ExtResource( 4 )]
+[node name="hexEntity" parent="." index="2" instance=ExtResource( 4 )]
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." index="3"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -36,7 +36,7 @@ angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" index="0"]
 
 build_mode = 0
 polygon = PoolVector2Array( -43.3568, -24.7836, 0.0536782, -49.8026, 43.1328, -25.115, 43.2985, 25.2545, -0.277699, 50.1078, -43.3568, 25.2545 )

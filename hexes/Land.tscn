@@ -7,7 +7,7 @@
 
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
-type = 2
+type = 3
 moveWater = false
 moveLand = true
 moveAir = true

@@ -5,7 +5,7 @@
 [node name="Empty" type="Sprite"]
 
 script = ExtResource( 1 )
-type = null
+type = 1
 moveWater = true
 moveLand = false
 moveAir = true

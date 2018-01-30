@@ -3,11 +3,11 @@
 [ext_resource path="res://Assets/tree-action.png" type="Texture" id=1]
 [ext_resource path="res://hexProperties.gd" type="Script" id=2]
 
-[node name="Tree" type="Sprite"]
+[node name="Tree" type="Sprite" index="0"]
 
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
-type = 4
+type = 5
 moveWater = false
 moveLand = true
 moveAir = true

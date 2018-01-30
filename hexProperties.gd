@@ -1,6 +1,6 @@
 extends Sprite
 
-export(int,"empty","orb","land","lake","tree","hill","sand","well") var type
+export(int,"null","empty","orb","land","lake","tree","hill","sand","well") var type
 
 export(bool) var moveWater=false
 export(bool) var moveLand=false
@@ -24,7 +24,7 @@ func ActionLand(hex):
 		var ret = false
 		for oneHex in hex.adjacent:
 			print(oneHex.hexType.child.type)
-			if oneHex.hexType.child.type>=1 and oneHex.hexType.child.type<=6:
+			if oneHex.hexType.child.type>=2 and oneHex.hexType.child.type<=7:
 				ret=true
 		return ret
 
