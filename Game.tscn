@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://board.gd" type="Script" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Assets/card-action.png" type="Texture" id=12]
 [ext_resource path="res://Assets/hex.png" type="Texture" id=13]
 [ext_resource path="res://Assets/SizedGrave.png" type="Texture" id=14]
+[ext_resource path="res://PlayerObject.tscn" type="PackedScene" id=15]
 
 [node name="Game" type="Node2D"]
 
@@ -25,6 +26,7 @@ script = ExtResource( 2 )
 
 [node name="back" type="Sprite" parent="board" index="0"]
 
+editor/display_folded = true
 position = Vector2( 507.593, 241.133 )
 scale = Vector2( 0.720365, 0.73331 )
 texture = ExtResource( 3 )
@@ -214,6 +216,7 @@ initial_state = 7
 
 [node name="Control" type="Control" parent="." index="1"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -228,21 +231,25 @@ size_flags_vertical = 1
 
 position = Vector2( 66.3413, 521.253 )
 texture = ExtResource( 6 )
+actionType = "tree"
 
 [node name="actionCoin" parent="Control" index="1" instance=ExtResource( 5 )]
 
 position = Vector2( 193.921, 457.099 )
 texture = ExtResource( 7 )
+actionType = "coin"
 
 [node name="actionLake" parent="Control" index="2" instance=ExtResource( 5 )]
 
 position = Vector2( 67.0704, 455.641 )
 texture = ExtResource( 8 )
+actionType = "lake"
 
 [node name="actionLand" parent="Control" index="3" instance=ExtResource( 5 )]
 
 position = Vector2( 129.767, 487.718 )
 texture = ExtResource( 9 )
+actionType = "land"
 
 [node name="actionSand" parent="Control" index="4" instance=ExtResource( 5 )]
 
@@ -293,5 +300,9 @@ text = "actions"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+
+[node name="PlayerObject" parent="." index="5" instance=ExtResource( 15 )]
+
+position = Vector2( 794.346, 1.22775 )
 
 

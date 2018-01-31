@@ -192,19 +192,21 @@ func update_Action(val):
 ### INPUT SECTION
 
 func _input(event):
-	if mouseover and stateCopy["action"]!="" and event.type==3 and stateLocal["target"]:
+	if mouseover and stateCopy["action"]!="" and event is InputEventMouseButton and stateLocal["target"]:
 		gameNode.completeAction(self)
 		stateLocal["target"]=false
 
+
 var mouseover=false
 
-func _on_Area2D_mouse_enter():
+
+func _on_Area2D_mouse_entered():
 	mouseover=true
 	if stateLocal["cover"]!=null:
 		setModulate(mouseover_color)
 
 
-func _on_Area2D_mouse_exit():
+func _on_Area2D_mouse_exited():
 	mouseover=false
 	if stateLocal["cover"]!=null:
 		setModulate(stateLocal["cover"])

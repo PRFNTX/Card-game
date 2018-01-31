@@ -41,4 +41,8 @@ audio_bus_name = "Master"
 build_mode = 0
 polygon = PoolVector2Array( -43.3568, -24.7836, 0.0536782, -49.8026, 43.1328, -25.115, 43.2985, 25.2545, -0.277699, 50.1078, -43.3568, 25.2545 )
 
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_Area2D_mouse_entered"]
+
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_Area2D_mouse_exited"]
+
 
