@@ -10,6 +10,7 @@
 script = ExtResource( 1 )
 initial_state = 0
 id = null
+initial_owner = -1
 move = Color( 0.395988, 0.827314, 0.996094, 0.478824 )
 land = Color( 0.988281, 0.721323, 0.261247, 0.542392 )
 attack = Color( 0.984375, 0.112961, 0.112961, 0.533882 )

@@ -3,7 +3,7 @@
 [ext_resource path="res://Assets/land-action.png" type="Texture" id=1]
 [ext_resource path="res://hexProperties.gd" type="Script" id=2]
 
-[node name="Land" type="Sprite"]
+[node name="Land" type="Sprite" index="0"]
 
 texture = ExtResource( 1 )
 script = ExtResource( 2 )

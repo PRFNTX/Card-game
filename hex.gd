@@ -3,6 +3,7 @@ extends Node2D
 export(int,"empty","orb","land","lake","tree","hill","sand","well") var initial_state=0
 onready var sprite=get_node("sprite")
 export(int) var id
+export(int) var initial_owner = -1
 
 export(Color,RGBA) var move
 export(Color,RGBA) var land
@@ -18,104 +19,67 @@ var adjacent =[]
 
 var me
 
-func action(type):
 
+func activePlayerCanAffect(by, strict=false):
+	if stateLocal['hex_owner']==by:
+		print('here')
+	return( (stateLocal['hex_owner']==-1 and !strict) or stateLocal['hex_owner']==by)
+
+func action(type,by):
 	if type=="":
-		setModulate(Color(0,0,0,0))
-		stateLocal["cover"]=Color(0,0,0,0)
-
+		setState({'cover':Color(0,0,0,0)})
 	##make lands
 	elif type=="actionLand":
-		if hexType.child.ActionLand(self):
-			setModulate(land)
-			stateLocal["cover"]=land
-			stateLocal["target"]=true
+		if hexType.child.ActionLand(self, by):
+			setState({'cover':land, 'target':true, 'hex_owner':by})
 		else:
-			setModulate(Color(0,0,0,0))
-			stateLocal["cover"]=Color(0,0,0,0)
-			stateLocal["target"]=false
+			setState({'cover':Color(0,0,0,0), 'target':false})
 	elif type=="actionSand":
-		if hexType.child.actionSand:
-			setModulate(move)
-			stateLocal["cover"]=move
-			stateLocal["target"]=true
+		if hexType.child.actionSand and activePlayerCanAffect(by):
+			setState({'cover':move, 'target':true})
 		else:
-			setModulate(Color(0,0,0,0))
-			stateLocal["cover"]=Color(0,0,0,0)
-			stateLocal["target"]=false
+			setState({'cover':Color(0,0,0,0), 'target':false})
 	elif type=="actionLake":
-		if hexType.child.actionLake:
-			setModulate(summon)
-			stateLocal["cover"]=summon
-			stateLocal["target"]=true
+		if hexType.child.actionLake and activePlayerCanAffect(by):
+			setState({'cover':summon, 'target':true})
 		else:
-			setModulate(Color(0,0,0,0))
-			stateLocal["cover"]=Color(0,0,0,0)
-			stateLocal["target"]=false
+			setState({'cover':Color(0,0,0,0), 'target':false})
 	elif type=="actionTree":
-		if hexType.child.actionTree:
-			setModulate(gather)
-			stateLocal["cover"]=gather
-			stateLocal["target"]=true
+		if hexType.child.actionTree and activePlayerCanAffect(by):
+			setState({'cover':gather, 'target':true})
 		else:
-			setModulate(Color(0,0,0,0))
-			stateLocal["cover"]=Color(0,0,0,0)
-			stateLocal["target"]=false
+			setState({'cover':Color(0,0,0,0), 'target':false})
 	elif type=="actionHill":
-		if hexType.child.actionHill:
-			setModulate(targetOther)
-			stateLocal["cover"]=targetOther
-			stateLocal["target"]=true
+		if hexType.child.actionHill and activePlayerCanAffect(by):
+			setState({'cover':targetOther, 'target':true})
 		else:
-			setModulate(Color(0,0,0,0))
-			stateLocal["cover"]=Color(0,0,0,0)
-			stateLocal["target"]=false
+			setState({'cover':Color(0,0,0,0), 'target':false})
 	#make things
 	elif type=="buildAny":
-		if hexType.child.buildAny:
-			setModulate(summon)
-			stateLocal["cover"]=summon
-			stateLocal["target"]=true
+		if hexType.child.buildAny and activePlayerCanAffect(by):
+			setState({'cover':summon, 'target':true})
 		else:
-			setModulate(Color(0,0,0,0))
-			stateLocal["cover"]=Color(0,0,0,0)
-			stateLocal["target"]=false
+			setState({'cover':Color(0,0,0,0), 'target':false})
 	elif type=="buildSand":
-		if hexType.child.buildSand:
-			setModulate(summon)
-			stateLocal["cover"]=summon
-			stateLocal["target"]=true
+		if hexType.child.buildSand and activePlayerCanAffect(by):
+			setState({'cover':summon, 'target':true})
 		else:
-			setModulate(Color(0,0,0,0))
-			stateLocal["cover"]=Color(0,0,0,0)
-			stateLocal["target"]=false
+			setState({'cover':Color(0,0,0,0), 'target':false})
 	elif type=="buildLake":
-		if hexType.child.buildLake:
-			setModulate(summon)
-			stateLocal["cover"]=summon
-			stateLocal["target"]=true
+		if hexType.child.buildLake and activePlayerCanAffect(by):
+			setState({'cover':summon, 'target':true})
 		else:
-			setModulate(Color(0,0,0,0))
-			stateLocal["cover"]=Color(0,0,0,0)
-			stateLocal["target"]=false
+			setState({'cover':Color(0,0,0,0), 'target':false})
 	elif type=="buildTree":
-		if hexType.child.buildTree:
-			setModulate(summon)
-			stateLocal["cover"]=summon
-			stateLocal["target"]=true
+		if hexType.child.buildTree and activePlayerCanAffect(by):
+			setState({'cover':summon, 'target':true})
 		else:
-			setModulate(Color(0,0,0,0))
-			stateLocal["cover"]=Color(0,0,0,0)
-			stateLocal["target"]=false
+			setState({'cover':Color(0,0,0,0), 'target':false})
 	elif type=="buildHill":
-		if hexType.child.buildHill:
-			setModulate(summon)
-			stateLocal["cover"]=summon
-			stateLocal["target"]=true
+		if hexType.child.buildHill and activePlayerCanAffect(by):
+			setState({'cover':summon, 'target':true})
 		else:
-			setModulate(Color(0,0,0,0))
-			stateLocal["cover"]=Color(0,0,0,0)
-			stateLocal["target"]=false
+			setState({'cover':Color(0,0,0,0), 'target':false})
 
 func setModulate(color):
 	sprite.set_modulate(color)
@@ -144,29 +108,39 @@ func _ready():
 	hexType=find_node("hexType")
 	hexType.setState(initial_state)
 	set_process_input(true)
+	stateLocal['hex_owner']=initial_owner
 
 
-#func setState(newState):
-	#if (newState==STATE_EMPTY):
-		#currentState=empty.new(self)
-	#elif (newState==STATE_ORB):
-		#currentState=orb.new(self)
-	#elif (newState==STATE_LAND):
-		#currentState=land.new(self)
-	#elif (newState==STATE_TREE):
-		#currentState=land.new(self)
-	#elif (newState==STATE_LAKE):
-		#currentState=land.new(self)
-	#elif (newState==STATE_HILL):
-		#currentState=land.new(self)
-	#elif (newState==STATE_SAND):
-		#currentState=land.new(self)
-	#elif (newState==STATE_WELL):
-		#currentState=well.new(self)
 
 var gameNode
 
-var stateLocal={"cover":null,"target":false}
+#### LOCAL STATE
+
+var stateLocal={"cover":null,"target":false, "hex_type":initial_state}
+
+###LOCAL STATE UPDATE FUNCTIONS
+
+func setState(newState):
+	for key in newState.keys():
+		call(key, newState[key])
+
+func affectState(newState,by):
+	if activePlayerCanAffect(by):
+		setState(newState)
+
+func cover(val):
+	setModulate(val)
+	stateLocal['cover']=val
+
+func target(val):
+	stateLocal['target']=val
+
+func hex_owner(val):
+	stateLocal['hex_owner']=val
+
+func hex_type(val):
+	hexType.setState(val)
+	stateLocal['hex_type']=val
 
 #watchState: components of state to track and respond to
 var watchState=["action"]
@@ -180,12 +154,12 @@ func connect(game):
 func state_update(state):
 	for check in watchState:
 		if stateCopy[check]!=state[check]:
-			call(stateCopyMethods[check],state[check])
+			call(stateCopyMethods[check], state[check], state['current_turn'])
 			stateCopy[check]=state[check]
 
 ####UPDATE FUNCTIONS
-func update_Action(val):
-	action(val)
+func update_Action(val, by):
+	action(val, by)
 
 
 

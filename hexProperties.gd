@@ -17,16 +17,15 @@ export(bool) var actionHill=false
 export(bool) var buildLake=false
 export(bool) var actionLake=false
 
-func ActionLand(hex):
-	if !actionLand:
+func ActionLand(hex,by):
+	if !actionLand or !hex.activePlayerCanAffect(by):
 		return false
 	else:
 		var ret = false
 		for oneHex in hex.adjacent:
-			print(oneHex.hexType.child.type)
-			if oneHex.hexType.child.type>=2 and oneHex.hexType.child.type<=7:
+			if oneHex.hexType.child.type>=2 and oneHex.hexType.child.type<=7 and oneHex.activePlayerCanAffect(by, true):
 				ret=true
 		return ret
 
 func _ready():
-	print(type)
+	pass
