@@ -1,0 +1,166 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Card.gd" type="Script" id=1]
+[ext_resource path="res://Assets/TownBasic.png" type="Texture" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
+
+[node name="Card" type="Node2D"]
+
+script = ExtResource( 1 )
+base_health = 1
+base_attack = 1
+cost_gold = 1
+cost_faeria = 1
+lands_num = 1
+lands_type = null
+art = null
+base = null
+
+[node name="Base" type="Sprite" parent="." index="0"]
+
+texture = ExtResource( 2 )
+
+[node name="Art" type="Sprite" parent="." index="1"]
+
+position = Vector2( 99.1375, -125.965 )
+scale = Vector2( -198.315, 150.717 )
+
+[node name="Health" type="RichTextLabel" parent="." index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 83.0
+margin_top = 113.0
+margin_right = 123.0
+margin_bottom = 153.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+bbcode_enabled = false
+bbcode_text = ""
+visible_characters = -1
+percent_visible = 1.0
+meta_underlined = true
+tab_size = 4
+text = "H"
+scroll_active = true
+scroll_following = false
+selection_enabled = false
+override_selected_font_color = false
+
+[node name="Attack" type="RichTextLabel" parent="." index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -111.0
+margin_top = 107.0
+margin_right = -71.0
+margin_bottom = 147.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+bbcode_enabled = false
+bbcode_text = ""
+visible_characters = -1
+percent_visible = 1.0
+meta_underlined = true
+tab_size = 4
+text = "A"
+scroll_active = true
+scroll_following = false
+selection_enabled = false
+override_selected_font_color = false
+
+[node name="Faeria" type="RichTextLabel" parent="." index="4"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -68.0
+margin_top = -149.0
+margin_right = -28.0
+margin_bottom = -109.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+bbcode_enabled = false
+bbcode_text = ""
+visible_characters = -1
+percent_visible = 1.0
+meta_underlined = true
+tab_size = 4
+text = "F"
+scroll_active = true
+scroll_following = false
+selection_enabled = false
+override_selected_font_color = false
+
+[node name="Gold" type="RichTextLabel" parent="." index="5"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -107.0
+margin_top = -148.0
+margin_right = -67.0
+margin_bottom = -108.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+bbcode_enabled = false
+bbcode_text = ""
+visible_characters = -1
+percent_visible = 1.0
+meta_underlined = true
+tab_size = 4
+text = "G"
+scroll_active = true
+scroll_following = false
+selection_enabled = false
+override_selected_font_color = false
+
+[node name="Lands" type="Node2D" parent="." index="6"]
+
+position = Vector2( 17.4565, -148.926 )
+scale = Vector2( 0.540155, 0.520117 )
+
+[node name="1" type="Sprite" parent="Lands" index="0"]
+
+position = Vector2( 192.881, -1.02045 )
+texture = ExtResource( 3 )
+
+[node name="2" type="Sprite" parent="Lands" index="1"]
+
+position = Vector2( 128.243, 0.0611877 )
+scale = Vector2( 1, 1.02474 )
+texture = ExtResource( 3 )
+
+[node name="3" type="Sprite" parent="Lands" index="2"]
+
+position = Vector2( 62.756, 0.12088 )
+texture = ExtResource( 3 )
+
+[node name="4" type="Sprite" parent="Lands" index="3"]
+
+position = Vector2( -1.81369, -0.762848 )
+texture = ExtResource( 3 )
+
+

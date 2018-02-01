@@ -13,11 +13,28 @@ var local_state={'active':false}
 var actions = 0
 var gold = 2
 var faeria = 0
+var cards = 0
 
 var lbl_cards
 var lbl_actions
 var lbl_gold
 var lbl_faeria
+
+var Deck setget deck_init
+
+func deck_init(val):
+	print('deck init')
+	Deck = val
+	var cards = 0
+	for card in val.keys():
+		for i in val[card]:
+			curr_Deck.push_back(card)
+		cards+=val[card]
+	setCards(cards)
+
+var curr_Deck=[]
+var Hand=[]
+var Discard=[]
 
 func _ready():
 	pass
@@ -71,6 +88,16 @@ func useAction(num):
 	else:
 		return false
 
+func setCards(val):
+	print('set')
+	print(cards)
+	cards=val
+	lbl_cards.text=str(cards)
+
+func modCards(mod):
+	cards+=mod
+	lbl_cards.text=str(cards)
+
 func setActions(val):
 	actions=val
 	lbl_actions.text=str(actions)
@@ -91,4 +118,21 @@ func addFaeria(num):
 	#set display
 
 func drawCard():
-	pass
+	var card = floor(rand_range(0,curr_Deck.size()))
+	Hand.push_back(curr_Deck[card])
+	curr_Deck.remove(card)
+	modCards(-1)
+
+func discard_hand(card=-1):
+	if card < 0:
+		var discard = floor(rand_range(0,Hand.size()))
+		Discard.push_back(Hand[discard])
+		Hand.remove(discard)
+	else:
+		Discard.append(Hand[card])
+		Hand.remove(card)
+
+func discard_deck():
+	var card = floor(rand_range(0,curr_Deck.size()))
+	Discard.push_back(curr_Deck[card])
+	curr_Deck.remove(card)

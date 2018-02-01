@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Card.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/TownBasic.png" type="Texture" id=2]
+
+[node name="7" type="Node2D" index="0"]
+
+[node name="Card" parent="." index="0" instance=ExtResource( 1 )]
+
+card_number = 7
+lands_type = 0
+base = ExtResource( 2 )
+
+

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Card.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/TownBasic.png" type="Texture" id=2]
+
+[node name="Farmer" type="Node2D" index="0"]
+
+position = Vector2( 123.643, 154.328 )
+
+[node name="Card" parent="." index="0" instance=ExtResource( 1 )]
+
+_sections_unfolded = [ "Transform" ]
+card_number = 1
+cost_faeria = 0
+lands_num = 0
+lands_type = 2
+base = ExtResource( 2 )
+
+

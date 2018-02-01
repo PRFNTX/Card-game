@@ -4,7 +4,7 @@ extends Node2D
 # member variables here, example:
 # var a=2
 # var b="textvar"
-
+onready var globals = get_node('/root/master')
 signal UpdateState
 signal GameStart
 signal TurnStart
@@ -25,21 +25,24 @@ func setState(obj):
 		#call 'setters' instead?
 	emit_signal("UpdateState",state)
 
-
+func create_player(num):
+	var res_playerObject = load('res://PlayerObject.tscn')
+	var p = res_playerObject.instance()
+	add_child(p)
+	if num==0:
+		p.position=$pointP1.position
+	else:
+		p.position=$pointP2.position
+	p.onCreate(self,num)
+	p.Deck = globals.Deck
+	return p
 
 func _ready():
 	set_process_input(true)
-	var res_playerObject = load('res://PlayerObject.tscn')
-	var p1 = res_playerObject.instance()
-	add_child(p1)
-	p1.position=$pointP1.position
-	p1.onCreate(self,0)
-	var p2 = res_playerObject.instance()
-	add_child(p2)
-	p2.position=$pointP2.position
-	p2.onCreate(self,1)
-	players[0]=p1
-	players[1]=p2
+	
+	players[0]=create_player(0)
+	players[1]=create_player(1)
+	
 	setState({'current_turn':0})
 	actionTimer = $actionTimer
 	emit_signal('GameStart')
@@ -59,7 +62,10 @@ func _input(event):
 	
 	if players[state['current_turn']].actions>0 and actionReady:
 		if event.is_action("card"):
-			pass
+			actionReady=false
+			complete = false
+			startTimer()
+			actionCard()
 		if event.is_action("land"):
 			actionReady=false
 			complete = false
@@ -135,7 +141,7 @@ func actionCoin():
 
 func actionCard():
 	if (players[state['current_turn']].useAction(1)):
-		players[state['current_turn']].addCard()
+		players[state['current_turn']].drawCard()
 		complete=true
 
 func startTimer():
