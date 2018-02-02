@@ -25,6 +25,9 @@ func activePlayerCanAffect(by, strict=false):
 		print('here')
 	return( (stateLocal['hex_owner']==-1 and !strict) or stateLocal['hex_owner']==by)
 
+func hex_is_empty():
+	return !($hexEntity.has_node('Card'))
+
 func action(type,by):
 	if type=="":
 		setState({'cover':Color(0,0,0,0)})
@@ -56,27 +59,27 @@ func action(type,by):
 			setState({'cover':Color(0,0,0,0), 'target':false})
 	#make things
 	elif type=="buildAny":
-		if hexType.child.buildAny and activePlayerCanAffect(by):
+		if hexType.child.buildAny and activePlayerCanAffect(by) and hex_is_empty():
 			setState({'cover':summon, 'target':true})
 		else:
 			setState({'cover':Color(0,0,0,0), 'target':false})
 	elif type=="buildSand":
-		if hexType.child.buildSand and activePlayerCanAffect(by):
+		if hexType.child.buildSand and activePlayerCanAffect(by) and hex_is_empty():
 			setState({'cover':summon, 'target':true})
 		else:
 			setState({'cover':Color(0,0,0,0), 'target':false})
 	elif type=="buildLake":
-		if hexType.child.buildLake and activePlayerCanAffect(by):
+		if hexType.child.buildLake and activePlayerCanAffect(by) and hex_is_empty():
 			setState({'cover':summon, 'target':true})
 		else:
 			setState({'cover':Color(0,0,0,0), 'target':false})
 	elif type=="buildTree":
-		if hexType.child.buildTree and activePlayerCanAffect(by):
+		if hexType.child.buildTree and activePlayerCanAffect(by) and hex_is_empty():
 			setState({'cover':summon, 'target':true})
 		else:
 			setState({'cover':Color(0,0,0,0), 'target':false})
 	elif type=="buildHill":
-		if hexType.child.buildHill and activePlayerCanAffect(by):
+		if hexType.child.buildHill and activePlayerCanAffect(by) and hex_is_empty():
 			setState({'cover':summon, 'target':true})
 		else:
 			setState({'cover':Color(0,0,0,0), 'target':false})

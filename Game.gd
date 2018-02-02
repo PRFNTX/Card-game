@@ -166,22 +166,27 @@ func buildAny(target):
 func actionLand(target):
 	if (players[state['current_turn']].useAction(1)):
 		target.affectState({'hex_type':2}, state['current_turn'])
+		players[state['current_turn']].modLands('land',1)
 
 func actionLake(target):
 	if (players[state['current_turn']].useAction(1)):
 		target.affectState({'hex_type':3}, state['current_turn'])
+		players[state['current_turn']].modLands('lake',1)
 
 func actionTree(target):
 	if (players[state['current_turn']].useAction(1)):
 		target.affectState({'hex_type':4}, state['current_turn'])
+		players[state['current_turn']].modLands('tree',1)
 
 func actionHill(target):
 	if (players[state['current_turn']].useAction(1)):
 		target.affectState({'hex_type':5}, state['current_turn'])
+		players[state['current_turn']].modLands('hill',1)
 
 func actionSand(target):
 	if (players[state['current_turn']].useAction(1)):
 		target.affectState({'hex_type':6}, state['current_turn'])
+		players[state['current_turn']].modLands('sand',1)
 
 func actionCoin():
 	print('coin')

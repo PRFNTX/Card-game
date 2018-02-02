@@ -155,7 +155,7 @@ func has_resource(c_gold,c_faeria,c_lands):
 	return true
 
 func pay_costs(c_gold,c_faeria):
-	modCoin(-1*gold)
-	modFaeria(-1*faeria)
+	modCoin(-1*c_gold)
+	modFaeria(-1*c_faeria)
 	return(true)
 	

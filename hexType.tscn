@@ -10,7 +10,7 @@
 [ext_resource path="res://hexes/Sand.tscn" type="PackedScene" id=8]
 [ext_resource path="res://hexes/Well.tscn" type="PackedScene" id=9]
 
-[node name="hexType" type="Node2D"]
+[node name="hexType" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 Empty = ExtResource( 2 )
