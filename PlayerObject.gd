@@ -14,6 +14,8 @@ var actions = 0
 var gold = 2
 var faeria = 0
 var cards = 0
+var int_to_land = ['land','lake','tree','hill','sand']
+var lands = {'land':0,'lake':0,'tree':0,'hill':0,'sand':0}
 
 var lbl_cards
 var lbl_actions
@@ -34,6 +36,7 @@ func deck_init(val):
 
 var curr_Deck=[]
 var Hand=[]
+var hand_object
 var Discard=[]
 
 func _ready():
@@ -80,6 +83,9 @@ func current_turn(newVal):
 
 ####VALUE CONTROLLS
 
+func modLands(s_type,mod):
+	lands[s_type]+=mod
+
 func useAction(num):
 	
 	if actions>0:
@@ -106,13 +112,13 @@ func modActions(mod):
 	actions+=mod
 	lbl_actions.text=str(actions)
 
-func addCoin(num):
+func modCoin(num):
 	gold+=num
 	lbl_gold.text=str(gold)
-	print(gold)
+	
 	#set displayed gold
 
-func addFaeria(num):
+func modFaeria(num):
 	faeria+=num
 	lbl_faeria.text=str(faeria)
 	#set display
@@ -122,6 +128,7 @@ func drawCard():
 	Hand.push_back(curr_Deck[card])
 	curr_Deck.remove(card)
 	modCards(-1)
+	hand_object.update()
 
 func discard_hand(card=-1):
 	if card < 0:
@@ -131,8 +138,24 @@ func discard_hand(card=-1):
 	else:
 		Discard.append(Hand[card])
 		Hand.remove(card)
+	hand_object.update()
 
 func discard_deck():
 	var card = floor(rand_range(0,curr_Deck.size()))
 	Discard.push_back(curr_Deck[card])
 	curr_Deck.remove(card)
+
+func has_resource(c_gold,c_faeria,c_lands):
+	#fuck you, me
+	for land in c_lands.keys():
+		if lands[int_to_land[land]]<c_lands[land]:
+			return false
+	if gold<c_gold or faeria<c_faeria:
+		return false
+	return true
+
+func pay_costs(c_gold,c_faeria):
+	modCoin(-1*gold)
+	modFaeria(-1*faeria)
+	return(true)
+	

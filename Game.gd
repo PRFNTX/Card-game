@@ -19,11 +19,26 @@ var actionTimer
 func _init(initial_state={}):
 	pass
 
+
+#STATE 
 func setState(obj):
 	for key in obj.keys():
-		state[key]=obj[key]
+		call(key, obj[key])
 		#call 'setters' instead?
 	emit_signal("UpdateState",state)
+
+######## STATE FUNCTIONS
+func action(val):
+	state['action'] = val
+
+func current_turn(val):
+	state['current_turn'] = val
+	$Hand.assign_player(players[val])
+	players[val].hand_object=$Hand
+
+
+
+################
 
 func create_player(num):
 	var res_playerObject = load('res://PlayerObject.tscn')
@@ -42,6 +57,9 @@ func _ready():
 	
 	players[0]=create_player(0)
 	players[1]=create_player(1)
+	
+	$Hand.assign_player(players[0])
+	players[0].hand_object=$Hand
 	
 	setState({'current_turn':0})
 	actionTimer = $actionTimer
@@ -100,6 +118,21 @@ func _input(event):
 		cancelAction()
 		startTimer()
 
+var building_card_ind
+var building_card
+
+#func get_hand_card(ind):
+#	return players[state['current_turn']].Hand[ind]
+
+func start_build_action(gold, faeria, lands,card_num, card, buildType):
+	if actionReady and players[state['current_turn']].has_resource(gold,faeria,lands):
+		building_card = card
+		building_card_ind = card_num
+		actionReady=false
+		complete=false
+		startTimer()
+		setState({'action':buildType})
+
 func completeAction(target):
 	call(state["action"],target)
 	setState({"action":""})
@@ -111,6 +144,24 @@ func cancelAction():
 
 
 ##ACTIONS
+
+func buildAny(target):
+	
+	var costs = {
+		'gold':building_card.get_node('Card').cost_gold,
+		'faeria':building_card.get_node('Card').cost_faeria
+	}
+	
+	if players[state['current_turn']].pay_costs(costs['gold'],costs['faeria']):
+		## replcae with actual board entity
+		var child_card = building_card.get_node('Card')
+		building_card.remove_child(child_card)
+		building_card.queue_free()
+		players[state['current_turn']].discard_hand(building_card_ind)
+		target.get_node('hexEntity').add_child(child_card)
+		target.get_node('hexEntity').show()
+		child_card.position = target.get_node('hexEntity/pos').position
+		child_card.scale = Vector2(0.15,0.15)
 
 func actionLand(target):
 	if (players[state['current_turn']].useAction(1)):
@@ -136,13 +187,18 @@ func actionCoin():
 	print('coin')
 	if (players[state['current_turn']].useAction(1)):
 		print('coin 2')
-		players[state['current_turn']].addCoin(1)
+		players[state['current_turn']].modCoin(1)
 		complete=true
 
 func actionCard():
-	if (players[state['current_turn']].useAction(1)):
-		players[state['current_turn']].drawCard()
-		complete=true
+	if players[state['current_turn']].cards>0:
+		if (players[state['current_turn']].useAction(1)):
+			players[state['current_turn']].drawCard()
+			complete=true
+
+func actionPlayCard(gold,faeria):
+	#change hex entity
+	pass
 
 func startTimer():
 	#actionTimer.wait_time=0.4

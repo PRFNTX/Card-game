@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://board.gd" type="Script" id=2]
@@ -13,8 +13,9 @@
 [ext_resource path="res://Assets/hill-action.png" type="Texture" id=11]
 [ext_resource path="res://Assets/card-action.png" type="Texture" id=12]
 [ext_resource path="res://Assets/hex.png" type="Texture" id=13]
+[ext_resource path="res://Hand.gd" type="Script" id=14]
 
-[node name="Game" type="Node2D" index="0"]
+[node name="Game" type="Node2D"]
 
 script = ExtResource( 1 )
 
@@ -225,6 +226,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
 
 [node name="actionTree" parent="Control" index="0" instance=ExtResource( 5 )]
 
@@ -333,9 +335,23 @@ text = "End Turn"
 flat = false
 align = 1
 
-[node name="Hand" type="Node2D" parent="." index="8"]
+[node name="Hand" type="Control" parent="." index="8"]
 
-position = Vector2( 305.817, 499.723 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 282.0
+margin_top = 480.0
+margin_right = 822.0
+margin_bottom = 590.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+script = ExtResource( 14 )
+_sections_unfolded = [ "Rect", "Transform" ]
 
 [connection signal="timeout" from="actionTimer" to="." method="_on_Timer_timeout"]
 

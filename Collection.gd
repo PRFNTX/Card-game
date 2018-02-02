@@ -23,7 +23,7 @@ func _ready():
 
 func update(mod_card):
 	var par_deck = get_parent().Deck
-	print(deck)
+	
 	if (deck):
 		$Gold.clear()
 		$Faeria.clear()
@@ -62,8 +62,8 @@ func show_card(card):
 		shown_card.queue_free()
 	shown_card = par.resources[card].instance()
 	add_child(shown_card)
-	shown_card.scale=Vector2(0.7,0.7)
-	shown_card.position = $Display.position
+	shown_card.rect_scale=Vector2(2,2)
+	shown_card.rect_position = $Display.position
 	
 
 var active = null

@@ -1,10 +1,10 @@
 extends Node2D
 
-onready var singleton = get_node('/root/master')
+onready var globals = get_node('/root/master')
 
 var resources = {}
 var cards = {}
-const dirPath='res://cards/'
+
 
 var Deck={}
 
@@ -27,18 +27,6 @@ func update(card):
 	$Deck.update(card)
 	$Collection.update(card)
 
-func load_cards():
-	var dir = Directory.new()
-	dir.open(dirPath)
-	dir.list_dir_begin()
-	var file_name = dir.get_next()
-	
-	while(file_name!=""):
-		if dir.current_is_dir():
-			pass
-		else:
-			resources[file_name.split('.')[0]]=load(dirPath+file_name)
-		file_name = dir.get_next()
 
 func populate_collection():
 	resources.forEach
@@ -52,7 +40,8 @@ func show_card(card):
 	
 
 func _ready():
-	load_cards()
+	resources= globals.card_resources
+	
 	for card in resources.keys():
 		var newCard = resources[card].instance()
 		cards[card] = newCard
@@ -65,8 +54,8 @@ func _ready():
 
 
 func _on_Done_pressed():
-	singleton.Deck = Deck
-	singleton.set_scene('game')
+	globals.Deck = Deck
+	globals.set_scene('game')
 	#save deck to globals
 	#change scene
 	

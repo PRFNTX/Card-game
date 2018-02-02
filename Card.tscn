@@ -4,15 +4,16 @@
 [ext_resource path="res://Assets/TownBasic.png" type="Texture" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
 
-[node name="Card" type="Node2D"]
+[node name="Card" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
+card_number = 0
 base_health = 1
 base_attack = 1
 cost_gold = 1
 cost_faeria = 1
 lands_num = 1
-lands_type = null
+lands_type = 0
 art = null
 base = null
 
@@ -27,6 +28,7 @@ scale = Vector2( -198.315, 150.717 )
 
 [node name="Health" type="RichTextLabel" parent="." index="2"]
 
+modulate = Color( 0.0195313, 0.0102234, 0.0102234, 1 )
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -52,9 +54,11 @@ scroll_active = true
 scroll_following = false
 selection_enabled = false
 override_selected_font_color = false
+_sections_unfolded = [ "Visibility" ]
 
 [node name="Attack" type="RichTextLabel" parent="." index="3"]
 
+modulate = Color( 0, 0, 0, 1 )
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -83,6 +87,7 @@ override_selected_font_color = false
 
 [node name="Faeria" type="RichTextLabel" parent="." index="4"]
 
+modulate = Color( 0, 0, 0, 1 )
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -111,6 +116,7 @@ override_selected_font_color = false
 
 [node name="Gold" type="RichTextLabel" parent="." index="5"]
 
+modulate = Color( 0, 0, 0, 1 )
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -139,7 +145,7 @@ override_selected_font_color = false
 
 [node name="Lands" type="Node2D" parent="." index="6"]
 
-position = Vector2( 17.4565, -148.926 )
+position = Vector2( 12.944, -143.511 )
 scale = Vector2( 0.540155, 0.520117 )
 
 [node name="1" type="Sprite" parent="Lands" index="0"]

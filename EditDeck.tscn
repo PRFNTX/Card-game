@@ -276,7 +276,7 @@ align = 1
 
 [node name="Display" type="Position2D" parent="Collection" index="12"]
 
-position = Vector2( 568.285, 483.765 )
+position = Vector2( 531.72, 375.177 )
 
 [node name="list_name" type="Label" parent="Collection" index="13"]
 
@@ -586,7 +586,7 @@ align = 1
 
 [node name="Display" type="Position2D" parent="Deck" index="12"]
 
-position = Vector2( 861.285, 479.765 )
+position = Vector2( 747.158, 374.501 )
 
 [node name="list_name" type="Label" parent="Deck" index="13"]
 
