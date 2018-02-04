@@ -14,6 +14,8 @@ export(Texture) var base
 
 var costIcons=["", load('res://icon.png'),load('res://icon.png'),load('res://icon.png'),load('res://icon.png')]
 
+export(PackedScene) var board_entity
+
 func _ready():
 	$Base.texture = base
 	$Art.texture = art

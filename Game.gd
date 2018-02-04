@@ -5,6 +5,12 @@ extends Node2D
 # var a=2
 # var b="textvar"
 onready var globals = get_node('/root/master')
+
+var BoardEntity = load('res://BoardEntity.tscn')
+var OrbEntity = load('res://Cards/entities/orb_entity.tscn')
+var WellEntity = load('res://Cards/entities/well_entity.tscn')
+
+signal SpawnFaeria
 signal UpdateState
 signal GameStart
 signal TurnStart
@@ -12,7 +18,7 @@ signal ActionPhase
 signal TurnEnd
 
 var players = [null, null]
-var state={"action":"", 'current_turn':0}
+var state={"action":"", 'current_turn':0,'active_unit':null}
 
 var actionTimer
 
@@ -30,11 +36,19 @@ func setState(obj):
 ######## STATE FUNCTIONS
 func action(val):
 	state['action'] = val
+	print(val)
 
 func current_turn(val):
 	state['current_turn'] = val
 	$Hand.assign_player(players[val])
 	players[val].hand_object=$Hand
+
+func active_unit(unit):
+	if !(state['active_unit']==null):
+		state['active_unit'].setState({'active':false})
+	state['active_unit']=unit
+	if !(unit==null):
+		unit.setState({'active':true})
 
 
 
@@ -63,13 +77,32 @@ func _ready():
 	
 	setState({'current_turn':0})
 	actionTimer = $actionTimer
+	
+	### spawn starting structures
+	var ORB = 2
+	var WELL = 8
+	for hex in get_tree().get_nodes_in_group('Hex'):
+		if hex.hexType.child.type==ORB:
+			var starting_entity = BoardEntity.instance()
+			hex.get_node('hexEntity').add_child(starting_entity)
+			starting_entity.possess(OrbEntity,hex,hex.initial_owner)
+			starting_entity.Game =self
+		if hex.hexType.child.type==WELL:
+			var starting_entity = BoardEntity.instance()
+			hex.get_node('hexEntity').add_child(starting_entity)
+			starting_entity.possess(WellEntity,hex,hex.initial_owner)
+			starting_entity.Game =self
+			starting_entity.spawn_faeria()
+	
+	emit_signal('SpawnFaeria')
 	emit_signal('GameStart')
 	emit_signal('TurnStart', state['current_turn'])
 	emit_signal('ActionPhase', state['current_turn'])
 
 func change_turns():
+	cancelAction()
 	emit_signal("TurnEnd", state['current_turn'])
-	setState({'current_turn':(state['current_turn']+1)%2})
+	setState({'current_turn':(state['current_turn']+1)%2,'action':"",'active_unit':null})
 	emit_signal("TurnStart", state['current_turn'])
 	emit_signal("ActionPhase", state['current_turn'])
 	
@@ -84,27 +117,27 @@ func _input(event):
 			complete = false
 			startTimer()
 			actionCard()
-		if event.is_action("land"):
+		if event.is_action("land") and check_valid_action('actionLand'):
 			actionReady=false
 			complete = false
 			startTimer()
 			setState({"action":"actionLand"})
-		if event.is_action("tree"):
+		if event.is_action("tree") and check_valid_action('actionTree'):
 			actionReady=false
 			complete = false
 			startTimer()
 			setState({"action":"actionTree"})
-		if event.is_action("lake"):
+		if event.is_action("lake") and check_valid_action('actionLake'):
 			actionReady=false
 			complete = false
 			startTimer()
 			setState({"action":"actionLake"})
-		if event.is_action("hill"):
+		if event.is_action("hill") and check_valid_action('actionHill'):
 			actionReady=false
 			complete = false
 			startTimer()
 			setState({"action":"actionHill"})
-		if event.is_action("sand"):
+		if event.is_action("sand")  and check_valid_action('actionSand'):
 			actionReady=false
 			complete = false
 			startTimer()
@@ -118,11 +151,21 @@ func _input(event):
 		cancelAction()
 		startTimer()
 
+
+
 var building_card_ind
 var building_card
 
 #func get_hand_card(ind):
 #	return players[state['current_turn']].Hand[ind]
+
+func start_unit_action(type):
+	startBasictimeout()
+	if actionReady and check_valid_action(type) and state['active_unit']!=null:
+		actionReady=false
+		complete = false
+		startTimer()
+		setState({"action":type})
 
 func start_build_action(gold, faeria, lands,card_num, card, buildType):
 	if actionReady and players[state['current_turn']].has_resource(gold,faeria,lands):
@@ -133,17 +176,55 @@ func start_build_action(gold, faeria, lands,card_num, card, buildType):
 		startTimer()
 		setState({'action':buildType})
 
+func activate(unit):
+	startBasictimeout()
+	if unit.Owner==state['current_turn'] and actionReady and state['active_unit']!=unit:
+		setState({'active_unit':unit})
+		unit.Unit.on_select(self, unit.Hex)
+
+
 func completeAction(target):
-	call(state["action"],target)
-	setState({"action":""})
+	if can_do:
+		call(state["action"],target)
+
+func actionDone():
+	setState({"action":"",'active_unit':null})
 	complete = true
 
 func cancelAction():
-	setState({"action":""})
+	setState({"action":"",'active_unit':null})
 	complete = true
 
 
 ##ACTIONS
+
+func moveBase(target):
+	startBasictimeout()
+	var unit = state['active_unit']
+	unit.on_move(target.get_node('hexEntity'))
+	#unit.rect_position = target.get_node('hexEntity/pos').position
+	unit.Hex=target
+	unit.use_energy()
+	if check_valid_action(unit.Unit.get_action_name('Attack')):
+		actionReady=true
+		unit.Unit.start_attack(self)
+	else:
+		actionDone()
+
+func AttackAdjOrCollect(target):
+	var unit = state['active_unit']
+	unit.on_attack(target.get_node('hexEntity').get_node('BoardEntity'))
+	actionDone()
+
+func AttackAdj(target):
+	var unit = state['active_unit']
+	unit.on_attack(target.get_node('hexEntity').get_child())
+	actionDone()
+
+func Collect(target):
+	var unit = state['active_unit']
+	unit.on_attack(target.get_node('hexEntity').get_child())
+	actionDone()
 
 func buildAny(target):
 	
@@ -155,38 +236,43 @@ func buildAny(target):
 	if players[state['current_turn']].pay_costs(costs['gold'],costs['faeria']):
 		## replcae with actual board entity
 		var child_card = building_card.get_node('Card')
-		building_card.remove_child(child_card)
-		building_card.queue_free()
 		players[state['current_turn']].discard_hand(building_card_ind)
-		target.get_node('hexEntity').add_child(child_card)
-		target.get_node('hexEntity').show()
-		child_card.position = target.get_node('hexEntity/pos').position
-		child_card.scale = Vector2(0.15,0.15)
+		
+		var entity = BoardEntity.instance()
+		target.get_node('hexEntity').add_child(entity)
+		entity.possess(child_card.board_entity,target,state['current_turn'])
+		entity.Game =self
+	actionDone()
 
 func actionLand(target):
 	if (players[state['current_turn']].useAction(1)):
 		target.affectState({'hex_type':2}, state['current_turn'])
 		players[state['current_turn']].modLands('land',1)
+	actionDone()
 
 func actionLake(target):
 	if (players[state['current_turn']].useAction(1)):
 		target.affectState({'hex_type':3}, state['current_turn'])
 		players[state['current_turn']].modLands('lake',1)
+	actionDone()
 
 func actionTree(target):
 	if (players[state['current_turn']].useAction(1)):
 		target.affectState({'hex_type':4}, state['current_turn'])
 		players[state['current_turn']].modLands('tree',1)
+	actionDone()
 
 func actionHill(target):
 	if (players[state['current_turn']].useAction(1)):
 		target.affectState({'hex_type':5}, state['current_turn'])
 		players[state['current_turn']].modLands('hill',1)
+	actionDone()
 
 func actionSand(target):
 	if (players[state['current_turn']].useAction(1)):
 		target.affectState({'hex_type':6}, state['current_turn'])
 		players[state['current_turn']].modLands('sand',1)
+	actionDone()
 
 func actionCoin():
 	print('coin')
@@ -194,20 +280,43 @@ func actionCoin():
 		print('coin 2')
 		players[state['current_turn']].modCoin(1)
 		complete=true
+	actionDone()
 
 func actionCard():
 	if players[state['current_turn']].cards>0:
 		if (players[state['current_turn']].useAction(1)):
 			players[state['current_turn']].drawCard()
 			complete=true
+	actionDone()
 
 func actionPlayCard(gold,faeria):
 	#change hex entity
 	pass
+	
+###############
+###
+
+#### VERFIFICATIONS
+
+func check_valid_action(action):
+	var targets = false
+	for hex in get_tree().get_nodes_in_group('Hex'):
+		if hex.action(action,state['current_turn'],true):
+			targets = true
+	print("IS VALID ACTION:")
+	print(targets)
+	return targets
+
 
 func startTimer():
 	#actionTimer.wait_time=0.4
 	actionTimer.start()
+
+var can_do = true
+func startBasictimeout():
+	can_do = false
+	set_process_input(false)
+	$basic_timeout.start()
 
 func _on_Timer_timeout():
 	print('TIMER')
@@ -219,3 +328,8 @@ func _on_Timer_timeout():
 
 func _on_endturn_pressed():
 	change_turns()
+
+
+func _on_basic_timeout_timeout():
+	can_do=true
+	set_process_input(true)

@@ -11,6 +11,7 @@ export(PackedScene) var Well
 
 onready var arr_Lands=[Empty,Orb,Land,Lake,_Tree,Hill,Sand,Well]
 
+
 class state:
 	var me
 	var state
@@ -20,6 +21,7 @@ class state:
 		state=i
 		me.child=me.arr_Lands[i].instance()
 		me.add_child(me.child)
+
 
 
 var currentState

@@ -5,9 +5,13 @@
 [ext_resource path="res://hexType.tscn" type="PackedScene" id=3]
 [ext_resource path="res://hexEntity.tscn" type="PackedScene" id=4]
 
-[node name="hex" type="Node2D"]
+[node name="hex" type="Node2D" groups=[
+"Hex",
+]]
 
+rotation = -1.5708
 script = ExtResource( 1 )
+_sections_unfolded = [ "Transform", "Visibility" ]
 initial_state = 0
 id = null
 initial_owner = -1
@@ -21,9 +25,14 @@ gather = Color( 1, 0.984375, 0, 0.364392 )
 
 [node name="sprite" type="Sprite" parent="." index="0"]
 
+rotation = -1.5708
 texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="hexType" parent="." index="1" instance=ExtResource( 3 )]
+
+position = Vector2( 0, 10 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="hexEntity" parent="." index="2" instance=ExtResource( 4 )]
 

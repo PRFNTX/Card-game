@@ -58,7 +58,8 @@ func onCreate(node,this):
 ###SIGNAL FUNCTIONS
 
 func sig_TurnStart(turn):
-	pass
+	if hand_object!=null:
+		hand_object.update()
 
 func sig_ActionPhase(turn):
 	if local_state['active']:

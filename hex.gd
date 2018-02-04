@@ -19,6 +19,7 @@ var adjacent =[]
 
 var me
 
+### HELPERS
 
 func activePlayerCanAffect(by, strict=false):
 	if stateLocal['hex_owner']==by:
@@ -26,63 +27,204 @@ func activePlayerCanAffect(by, strict=false):
 	return( (stateLocal['hex_owner']==-1 and !strict) or stateLocal['hex_owner']==by)
 
 func hex_is_empty():
-	return !($hexEntity.has_node('Card'))
+	return !($hexEntity.has_node('BoardEntity'))
 
-func action(type,by):
+func hex_is_empty_or_self():
+	return !($hexEntity.has_node('BoardEntity')) or $hexEntity.get_node('BoardEntity')==stateLocal['active_unit']
+
+func has_opposing_unit():
+	if $hexEntity.get_children().size()>1:
+		if $hexEntity.get_children()[1].Owner>=0:
+			if $hexEntity.get_children()[1].Owner!=stateLocal['active_unit'].Owner:
+				return true
+			else:
+				return false
+
+func is_harvestable():
+	if hexType.child.spawnsFaeria:
+		if $hexEntity.get_node("BoardEntity").Unit.current_faeria>0:
+			return true
+	
+	return false
+
+func is_adjacent_to(hex):
+	return adjacent.has(hex)
+
+func is_adjacent_or_equal_to(hex):
+	return adjacent.has(hex) or hex==self
+
+### ACTION HIGHLIGHTING AND TARGET VERIFICATION
+
+func action(type,by,test=false):
 	if type=="":
 		setState({'cover':Color(0,0,0,0)})
 	##make lands
 	elif type=="actionLand":
 		if hexType.child.ActionLand(self, by):
-			setState({'cover':land, 'target':true, 'hex_owner':by})
+			if !test:
+				setState({'cover':land, 'target':true, 'hex_owner':by})
+			else:
+				return true
 		else:
 			setState({'cover':Color(0,0,0,0), 'target':false})
+			if test:
+				return false
 	elif type=="actionSand":
 		if hexType.child.actionSand and activePlayerCanAffect(by):
-			setState({'cover':move, 'target':true})
+			if !test:
+				setState({'cover':move, 'target':true})
+			else:
+				return true
 		else:
 			setState({'cover':Color(0,0,0,0), 'target':false})
+			if test:
+				return false
 	elif type=="actionLake":
 		if hexType.child.actionLake and activePlayerCanAffect(by):
-			setState({'cover':summon, 'target':true})
+			if !test:
+				setState({'cover':summon, 'target':true})
+			else:
+				return true
 		else:
 			setState({'cover':Color(0,0,0,0), 'target':false})
+			if test:
+				return false
 	elif type=="actionTree":
 		if hexType.child.actionTree and activePlayerCanAffect(by):
-			setState({'cover':gather, 'target':true})
+			if !test:
+				setState({'cover':gather, 'target':true})
+			else:
+				return true
 		else:
 			setState({'cover':Color(0,0,0,0), 'target':false})
+			if test:
+				return false
 	elif type=="actionHill":
 		if hexType.child.actionHill and activePlayerCanAffect(by):
-			setState({'cover':targetOther, 'target':true})
+			if !test:
+				setState({'cover':targetOther, 'target':true})
+			else:
+				return true
 		else:
 			setState({'cover':Color(0,0,0,0), 'target':false})
+			if test:
+				return false
 	#make things
 	elif type=="buildAny":
 		if hexType.child.buildAny and activePlayerCanAffect(by) and hex_is_empty():
-			setState({'cover':summon, 'target':true})
+			if !test:
+				setState({'cover':summon, 'target':true})
+			else:
+				return true
 		else:
 			setState({'cover':Color(0,0,0,0), 'target':false})
+			if test:
+				return false
 	elif type=="buildSand":
 		if hexType.child.buildSand and activePlayerCanAffect(by) and hex_is_empty():
-			setState({'cover':summon, 'target':true})
+			if !test:
+				setState({'cover':summon, 'target':true})
+			else:
+				return true
 		else:
 			setState({'cover':Color(0,0,0,0), 'target':false})
+			if test:
+				return false
 	elif type=="buildLake":
 		if hexType.child.buildLake and activePlayerCanAffect(by) and hex_is_empty():
-			setState({'cover':summon, 'target':true})
+			if !test:
+				setState({'cover':summon, 'target':true})
+			else:
+				return true
 		else:
 			setState({'cover':Color(0,0,0,0), 'target':false})
+			if test:
+				return false
 	elif type=="buildTree":
 		if hexType.child.buildTree and activePlayerCanAffect(by) and hex_is_empty():
-			setState({'cover':summon, 'target':true})
+			if !test:
+				setState({'cover':summon, 'target':true})
+			else:
+				return true
 		else:
 			setState({'cover':Color(0,0,0,0), 'target':false})
+			if test:
+				return false
 	elif type=="buildHill":
 		if hexType.child.buildHill and activePlayerCanAffect(by) and hex_is_empty():
-			setState({'cover':summon, 'target':true})
+			if !test:
+				setState({'cover':summon, 'target':true})
+			else:
+				return true
 		else:
 			setState({'cover':Color(0,0,0,0), 'target':false})
+			if test:
+				return false
+	elif type=="moveBase":
+		if hexType.child.moveLand and hex_is_empty_or_self() and is_adjacent_or_equal_to(stateLocal['active_unit'].Hex):
+			if !test:
+				setState({'cover':move,'target':true})
+			else:
+				return true
+		else:
+			setState({'cover':Color(0,0,0,0), 'target':false})
+			if test:
+				return false
+	elif type=="moveAir":
+		if hexType.child.moveAir and hex_is_empty():
+			if !test:
+				setState({'cover':move,'target':true})
+			else:
+				return true
+		else:
+			setState({'cover':Color(0,0,0,0), 'target':false})
+			if test:
+				return false
+	elif type=="moveLand":
+		if hexType.child.moveWater and hex_is_empty():
+			if !test:
+				setState({'cover':move,'target':true})
+			else:
+				return true
+		else:
+			setState({'cover':Color(0,0,0,0), 'target':false})
+			if test:
+				return false
+	elif type=="AttackAdj":
+		if is_adjacent_to(stateLocal['active_unit'].Hex) and (has_opposing_unit()):
+			if !test:
+				setState({'cover':attack,'target':true})
+			else:
+				return true
+		else:
+			setState({'cover':Color(0,0,0,0), 'target':false})
+			if test:
+				return false
+	elif type=="AttackAdjOrCollect":
+		if is_adjacent_to(stateLocal['active_unit'].Hex) and has_opposing_unit():
+			if !test:
+				setState({'cover':attack,'target':true})
+			else:
+				return true
+		elif is_adjacent_to(stateLocal['active_unit'].Hex) and is_harvestable():
+			if !test:
+				setState({'cover':gather,'target':true})
+			else:
+				return true
+		else:
+			setState({'cover':Color(0,0,0,0), 'target':false})
+			if test:
+				return false
+	elif type=='Collect':
+		if is_adjacent_to(stateLocal['active_unit'].Hex) and is_harvestable():
+			if !test:
+				setState({'cover':attack,'target':true})
+			else:
+				return true
+		else:
+			setState({'cover':Color(0,0,0,0), 'target':false})
+			if test:
+				return false
 
 func setModulate(color):
 	sprite.set_modulate(color)
@@ -119,7 +261,7 @@ var gameNode
 
 #### LOCAL STATE
 
-var stateLocal={"cover":null,"target":false, "hex_type":initial_state}
+var stateLocal={"cover":null,"target":false, "hex_type":initial_state,"active_unit":null}
 
 ###LOCAL STATE UPDATE FUNCTIONS
 
@@ -145,10 +287,13 @@ func hex_type(val):
 	hexType.setState(val)
 	stateLocal['hex_type']=val
 
+func active_unit(unit):
+	stateLocal['active_unit']=unit
+
 #watchState: components of state to track and respond to
-var watchState=["action"]
-var stateCopy={"action":""}
-var stateCopyMethods={"action":"update_Action"}
+var watchState=["action",'active_unit']
+var stateCopy={"action":"",'active_unit':null}
+var stateCopyMethods={"action":"update_Action",'active_unit':'update_active_unit'}
 
 func connect(game):
 	gameNode=game
@@ -164,6 +309,8 @@ func state_update(state):
 func update_Action(val, by):
 	action(val, by)
 
+func update_active_unit(val, by):
+	active_unit(val)
 
 
 ### INPUT SECTION

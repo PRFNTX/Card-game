@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://changeResourceValue.gd" type="Script" id=1]
+
+[node name="modifyResourceValue" type="Node"]
+
+script = ExtResource( 1 )
+resource = 0
+add_amount = 0
+
+
