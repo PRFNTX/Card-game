@@ -11,7 +11,7 @@ func _ready():
 
 func request(endpoint):
 	var err = 0
-	var http = HTTPClient
+	var http = HTTPClient.new()
 	
 	err = http.connect_to_host('localhost',8080)
 	
@@ -24,10 +24,12 @@ func request(endpoint):
 	
 	var headers=[
 		"User-Agent: Pirulo/1.0 (Godot)",
-		"Accept: */*"
+		"Accept: */*",
+		"Content-Type: application/json; charset=utf-8"
 	]
 	var body = {'username':$username.text,'password':$password.text}
-	err = http.request(HTTPClient.METHOD_POST,"/"+endpoint,headers, body.to_json()) 
+	print(to_json(body))
+	err = http.request(HTTPClient.METHOD_POST,"/"+endpoint,headers, to_json(body)) 
 
 	assert( err == OK ) # Make sure all is OK
 
@@ -50,6 +52,7 @@ func request(endpoint):
 		print("**headers:\\n", headers)
 		globals.authentication_token = headers['authenticate']
 		globals.set_scene('title')
+		print(globals.authentication_token)
 		
 		if (http.is_response_chunked()):
 			print('response is chunked')

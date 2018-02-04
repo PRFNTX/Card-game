@@ -13,7 +13,7 @@ mongoose.connect('mongodb://localhost:27017/NotFaeria')
 
 const app = express()
 app.use(express.json())
-//app.use(express.url_encoded({extended:true}))
+app.use(express.urlencoded({extended:true}))
 
 
 
@@ -61,6 +61,7 @@ app.post('/decks/:name', authenticate,(req,res)=>{
 })
 
 app.post('/register', (req,res)=>{
+    console.log(req)
     const username = req.body.username
     const password = req.body.password
     register(username,password).then(
@@ -71,7 +72,10 @@ app.post('/register', (req,res)=>{
             res.status(200).json(user)
         }
     ).catch(
-        res.status(401).json({message:'failed to create user'})
+        err=>{
+            console.log(err)
+            res.status(401).json({message:'failed to create user'})
+        }
     )
 })
 
