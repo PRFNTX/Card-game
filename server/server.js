@@ -1,52 +1,227 @@
-const express = require("express")
-const WebSocket=require("ws")
-const http=require("http")
-const app=express()
+const xpress = require("express")
+const mongoose = require('mongoose')
+
+const jwt=require('jsonwebtoken')
+const bcrypt = require('bcrypt')
+
+const User = require('./models/user')
+const Deck = require('./models/deck')
 
 const PORT=8080
 
-const server= http.createServer(app)
-const wss=new WebSocket.Server({server})
+mongoose.connect('mongodb://localhost:27017/NotFaeria')
 
-const games={}
+const app = express()
+app.use(express.json())
+app.use(express.url_encoded({extended:true}))
 
-function joinGame(games,getId){
-	console.log("outer Run")
-	return function(ws,req){
-		let id=getId(games)
-		console.log("inner run")
-		games[id].push(ws)
-		ws.on("message",(message)=>{
-			//will need to verify message with game server logic
-			games[id].forEach(con=>{
-				con.send(message)
-			})
 
-			ws.send("connected")
-		})
-	}
-}
 
-function getId(games){
-	//check for open game
-	//TODO eventually make separate arrays for open games?
-	for (game in games){
-		if (games[game].length<2){
-			return game
-		}
-	}
-	//TODO make this deterministic not random, large hash
-	let rand = Math.floor(Math.random()*100000)
-	while (Object.keys(games).includes(rand)){
-		rand = Math.floor(Math.random()*100000)
-	}
-	games[rand]=[]
-	return rand
-	
-}
 
-wss.on("connection", joinGame(games,getId))
-
-server.listen(PORT, ()=>{
-	console.log("server started")
+app.get('/decks', authenticate,(req,res)=>{
+    const user = req.user.username
+    Deck.find({username:user}).then(
+        decks=>{
+            const deckNames = decks.map(deck=>deck.name)
+            res.status(200).json(deckNames)
+        }
+    ).catch(
+        err=>{
+            console.log(err)
+            res.status(403).json({message:'could not load decks'})
+        }
+    )
 })
+
+app.get('/decks/:name', autenticate, (req,res)=>{
+    const user = req.user.username
+    Deck.findOne({username:user,name:req.params.name}).then(
+        deck=>{
+            
+            res.status(200).json(deck)
+        }
+    ).catch(
+        err=>{
+            console.log(err)
+            res.status(403).json({message:'could not load decks'})
+        }
+    )
+    
+})
+
+app.post('/decks/:name', authenticate,(req,res)=>{
+    const deckList = req.body.deck.cards
+    const user = req.user.username
+    Deck.create({
+        username:user,
+        name:req.body.deck.name,
+        cards:deckList
+    })
+    res.send('deck')
+})
+
+app.post('/register', (req,res)=>{
+    const username = req.body.username
+    const password = req.body.password
+    register(username,password).then(
+        user=>{
+            //add jwt
+            res.set({authenticate:signJWT({username:user.username,id:user._id})})
+            delete user.password
+            res.status(200).json(user)
+        }
+    ).catch(
+        res.status(401).json({message:'failed to create user'})
+    )
+})
+
+app.post('/login',(req,res)=>{
+    const username = req.body.username
+    const password = req.body.password
+    verify(username,password).then(
+        user=>{
+            //add jwt
+            res.set({authenticate:signJWT({username:user.username,id:user._id})})
+            delete user.password
+            res.status(200).json(user)
+        }
+    ).catch(
+        err=>{
+            res.status(403).json({message:'failed to log in'})
+        }
+    )
+})
+
+app.get('/user/friends', authenticate, (reqmres)=>{
+    const user = req.user.id
+    User.findOne({_id:user}).then(
+        user=>{
+            res.status(200).json(user.friends)
+        }
+    ).catch(
+        err=>{
+            res.status(404).json({message:'could not get friends'})
+        }
+    )
+}
+
+app.post('/user/friends', authenticate, (req,res)=>{
+    const user = req.user.id
+    const friend = req.body.friend
+    User.findOne({username:friend}).then(
+        foundUser=>{
+            return User.findOne({_id:user}).then(
+                user=>{
+                    user.friends.push(foundUser.username)
+                    return user.save()
+                }
+            )
+        }
+    )
+    .then(
+        savedUser=>{
+            res.status(200).json({message:'friend added'})
+        }
+    )
+    .catch(err=>{
+        res.status(500).json({message:'friend add failed'})
+    })
+})
+
+
+function register(username, password){
+
+    return new Promise((resolve,reject)=>{
+        bcrypt.genSalt(12,(err,salt)=>{
+            if (err){
+                return reject(err)
+            }
+            bcrypt.hash(password,salt,(err,hash)=>{
+                if (err){
+                    return reject(err)
+                }
+                console.log(hash)
+                
+                User.create({
+                    username:username,
+                    password:hash,
+                }, (err,user)=>{
+                    if (err){
+                        console.log('hash err')
+                        return reject(err)
+                    }
+                    if (!user){
+                        console.log("null user")
+                        return reject("failed to make user")
+                    }
+                    return resolve(user)
+                })
+            })
+        })
+    })
+}
+
+function verify(username, password){
+return new Promise((resolve,reject)=>{
+    User.findOne({'username':user},(err,founduser)=>{
+        if (err){
+            return reject(err)
+        }
+        if (!founduser){
+            return reject("user not found")
+        }
+        bcrypt.compare(pass,founduser.password,(err,res)=>{
+            console.log('res',res)
+            if (err){
+                console.log('err',err)
+                return reject(err)
+            }
+            if (res){
+                return resolve(user)
+            } else {
+                return reject("password mismatch")
+            }
+            
+        })
+    })
+})
+
+function authenticate(req,res,next){
+    let token = req.headers.authenticate
+
+    verifyJWT(token).then(
+        user =>{
+            req.user = user.data
+            next()
+        }
+    ).catch(
+        err=>{
+            res.status(403).json({message:'authentication failed'})
+        }
+    )
+}
+
+function signJWT(obj){
+    	let token = jwt.sign(
+			{data:obj},
+			'secret',
+			 {algorithm:'HS256'}
+		)
+	return token
+}
+
+
+function verifyJWT(token){
+	//copied code
+	return new Promise ((resolve,reject)=>{
+		jwt.verify(token,'secret', (err,tokenDecoded)=>{
+			if (err || !tokenDecoded){
+				return reject(err);
+			}
+			resolve(tokenDecoded)
+		})
+	})
+}
+
+
+
