@@ -13,7 +13,7 @@ var currentScene
 
 func _ready():
 	load_cards()
-	get_tree().change_scene(scenes['login'])
+	#get_tree().change_scene(scenes['login'])
 	
 
 const dirPath='res://cards/'
