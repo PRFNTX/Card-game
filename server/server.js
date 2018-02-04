@@ -1,4 +1,4 @@
-const xpress = require("express")
+const express = require("express")
 const mongoose = require('mongoose')
 
 const jwt=require('jsonwebtoken')
@@ -13,7 +13,7 @@ mongoose.connect('mongodb://localhost:27017/NotFaeria')
 
 const app = express()
 app.use(express.json())
-app.use(express.url_encoded({extended:true}))
+//app.use(express.url_encoded({extended:true}))
 
 
 
@@ -33,9 +33,9 @@ app.get('/decks', authenticate,(req,res)=>{
     )
 })
 
-app.get('/decks/:name', autenticate, (req,res)=>{
+app.get('/decks/:name', authenticate, (req,res)=>{
     const user = req.user.username
-    Deck.findOne({username:user,name:req.params.name}).then(
+    Deck.findOne({username:user,deck_name:req.params.name}).then(
         deck=>{
             
             res.status(200).json(deck)
@@ -54,7 +54,7 @@ app.post('/decks/:name', authenticate,(req,res)=>{
     const user = req.user.username
     Deck.create({
         username:user,
-        name:req.body.deck.name,
+        deck_name:req.body.deck.name,
         cards:deckList
     })
     res.send('deck')
@@ -92,7 +92,7 @@ app.post('/login',(req,res)=>{
     )
 })
 
-app.get('/user/friends', authenticate, (reqmres)=>{
+app.get('/user/friends', authenticate, (req, res)=>{
     const user = req.user.id
     User.findOne({_id:user}).then(
         user=>{
@@ -103,7 +103,7 @@ app.get('/user/friends', authenticate, (reqmres)=>{
             res.status(404).json({message:'could not get friends'})
         }
     )
-}
+})
 
 app.post('/user/friends', authenticate, (req,res)=>{
     const user = req.user.id
@@ -162,29 +162,30 @@ function register(username, password){
 }
 
 function verify(username, password){
-return new Promise((resolve,reject)=>{
-    User.findOne({'username':user},(err,founduser)=>{
-        if (err){
-            return reject(err)
-        }
-        if (!founduser){
-            return reject("user not found")
-        }
-        bcrypt.compare(pass,founduser.password,(err,res)=>{
-            console.log('res',res)
+    return new Promise((resolve,reject)=>{
+        User.findOne({'username':user},(err,founduser)=>{
             if (err){
-                console.log('err',err)
                 return reject(err)
             }
-            if (res){
-                return resolve(user)
-            } else {
-                return reject("password mismatch")
+            if (!founduser){
+                return reject("user not found")
             }
+            bcrypt.compare(pass,founduser.password,(err,res)=>{
+                console.log('res',res)
+                if (err){
+                    console.log('err',err)
+                    return reject(err)
+                }
+                if (res){
+                    return resolve(user)
+                } else {
+                    return reject("password mismatch")
+                }
             
+            })
         })
     })
-})
+}
 
 function authenticate(req,res,next){
     let token = req.headers.authenticate
@@ -223,5 +224,8 @@ function verifyJWT(token){
 	})
 }
 
+app.listen(PORT, ()=>{
+    console.log('connected on '+ PORT)
+})
 
 

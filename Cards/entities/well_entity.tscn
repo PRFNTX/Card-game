@@ -24,8 +24,6 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="collectFaeria" parent="on_damage" index="0" instance=ExtResource( 3 )]
 
-[node name="on_clock" type="Node" parent="." index="14"]
-
 [node name="spawnFaeria" parent="on_clock" index="0" instance=ExtResource( 4 )]
 
 

@@ -1,5 +1,8 @@
 extends Node
-var scenes = {'game':"res://Game.tscn",'title':'res://Title.tscn', 'deck':'res://EditDeck.tscn'}
+
+var authentication_token
+
+var scenes = {'game':"res://Game.tscn",'title':'res://Title.tscn', 'deck':'res://EditDeck.tscn','login':'res://Login.tscn'}
 var card_resources = {}
 
 var Deck = {}
@@ -10,9 +13,8 @@ var currentScene
 
 func _ready():
 	load_cards()
-	get_tree().change_scene(scenes['title'])
+	get_tree().change_scene(scenes['login'])
 	
-	pass
 
 const dirPath='res://cards/'
 func load_cards():

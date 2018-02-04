@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const userSchema = new mongoose.model({
+const userSchema = new mongoose.Schema({
     username:{type:String, index:{unique:true}},
     password:String,
     friends:[String]
