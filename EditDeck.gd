@@ -59,3 +59,12 @@ func _on_Done_pressed():
 	#save deck to globals
 	#change scene
 	
+
+
+func _on_Save_pressed():
+	var deck_name = $Name.text
+	var list = []
+	for key in cards.keys():
+		for i in cards[key]:
+			list.append(key)
+	globals.authenticated_server_request("/decks/"+deck_name,HTTPClient.METHOD_POST,{'cards':list})

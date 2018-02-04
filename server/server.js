@@ -17,8 +17,12 @@ app.use(express.urlencoded({extended:true}))
 
 
 
+function check(req,res,next){
+    console.log("body", req.body)
+    next()
+}
 
-app.get('/decks', authenticate,(req,res)=>{
+app.get('/decks', authenticate, check,(req,res)=>{
     const user = req.user.username
     Deck.find({username:user}).then(
         decks=>{
@@ -50,18 +54,20 @@ app.get('/decks/:name', authenticate, (req,res)=>{
 })
 
 app.post('/decks/:name', authenticate,(req,res)=>{
-    const deckList = req.body.deck.cards
+    const deckList = req.body.cards
     const user = req.user.username
     Deck.create({
         username:user,
-        deck_name:req.body.deck.name,
+        deck_name:req.params.name,
         cards:deckList
-    })
-    res.send('deck')
+    }).then(
+        ret=>{
+            res.send('deck')
+        }
+    )
 })
 
 app.post('/register', (req,res)=>{
-    console.log(req)
     const username = req.body.username
     const password = req.body.password
     register(username,password).then(
@@ -91,6 +97,7 @@ app.post('/login',(req,res)=>{
         }
     ).catch(
         err=>{
+            console.log(err)
             res.status(403).json({message:'failed to log in'})
         }
     )
@@ -167,21 +174,21 @@ function register(username, password){
 
 function verify(username, password){
     return new Promise((resolve,reject)=>{
-        User.findOne({'username':user},(err,founduser)=>{
+        User.findOne({'username':username},(err,founduser)=>{
             if (err){
                 return reject(err)
             }
             if (!founduser){
                 return reject("user not found")
             }
-            bcrypt.compare(pass,founduser.password,(err,res)=>{
+            bcrypt.compare(password,founduser.password,(err,res)=>{
                 console.log('res',res)
                 if (err){
                     console.log('err',err)
                     return reject(err)
                 }
                 if (res){
-                    return resolve(user)
+                    return resolve(founduser)
                 } else {
                     return reject("password mismatch")
                 }

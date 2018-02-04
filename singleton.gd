@@ -33,7 +33,7 @@ func load_cards():
 func set_scene(scene):
 	get_tree().change_scene(scenes[scene])
 
-func authenticated_server_request(endpoint,method,body,params):
+func authenticated_server_request(endpoint,method,body):
 	var err = 0
 	var http = HTTPClient.new()
 	
@@ -69,7 +69,7 @@ func authenticated_server_request(endpoint,method,body,params):
 
 	print("response? ",http.has_response()) # Site might not have a response.
 	
-	
+	var rb = PoolByteArray()
 	
 	if (http.has_response()):
 		headers = http.get_response_headers_as_dictionary()
@@ -82,7 +82,6 @@ func authenticated_server_request(endpoint,method,body,params):
 			var b1 = http.get_response_body_length()
 			print("response length: ",b1)
 		
-		var rb = PoolByteArray()
 		
 		while (http.get_status()==HTTPClient.STATUS_BODY):
 			http.poll()
@@ -91,5 +90,5 @@ func authenticated_server_request(endpoint,method,body,params):
 				OS.delay_usec(1000)
 			else:
 				rb = rb+chunk
-	print(rb)
+	print(rb.get_string_from_utf8())
 	return rb
