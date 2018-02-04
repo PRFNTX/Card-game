@@ -1,14 +1,15 @@
 extends Node2D
 
-var singleton
+var globals
 
 func _ready():
-	singleton = get_node('/root/master')
+	globals = get_node('/root/master')
+	print(globals.authenticated_server_request("/decks","",""))
 	
 
 func _on_game_pressed():
-	singleton.set_scene('game')
+	globals.set_scene('game')
 
 
 func _on_deck_pressed():
-	singleton.set_scene('deck')
+	globals.set_scene('deck')
