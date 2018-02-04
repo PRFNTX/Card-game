@@ -81,6 +81,7 @@ export(bool) var on_move = 0
 export(bool) var on_collect = 0
 export(bool) var on_damage = 0
 export(bool) var on_death = 0
+export(bool) var on_clock = 0
 
 export(Texture) var frame_alt = null
 
@@ -156,6 +157,10 @@ func get_actions():
 		ret[ability.description]=ability
 	
 	return(ret)
+
+func clock(time):
+	for effectNode in $on_clock.get_children():
+		effectNode.activate(get_parent().Game,get_parent(),time)
 
 func get_action_name(type):
 	if get_node(type).get_child_count()>0:

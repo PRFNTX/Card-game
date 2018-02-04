@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://board.gd" type="Script" id=2]
@@ -14,10 +14,12 @@
 [ext_resource path="res://Assets/card-action.png" type="Texture" id=12]
 [ext_resource path="res://Assets/hex.png" type="Texture" id=13]
 [ext_resource path="res://Hand.gd" type="Script" id=14]
+[ext_resource path="res://Clock.tscn" type="PackedScene" id=15]
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="board" type="Node2D" parent="." index="0"]
 
@@ -409,11 +411,17 @@ size_flags_vertical = 1
 script = ExtResource( 14 )
 _sections_unfolded = [ "Rect", "Transform" ]
 
+[node name="Clock" parent="." index="10" instance=ExtResource( 15 )]
+
+position = Vector2( 887.117, 459.1 )
+scale = Vector2( 2, 2 )
+_sections_unfolded = [ "Transform" ]
+
 [connection signal="timeout" from="actionTimer" to="." method="_on_Timer_timeout"]
 
-[connection signal="timeout" from="basic_timeout" to="." method="_on_basic_timeout_timeout"]
-
 [connection signal="timeout" from="basic_timeout" to="." method="_on_Timer_timeout"]
+
+[connection signal="timeout" from="basic_timeout" to="." method="_on_basic_timeout_timeout"]
 
 [connection signal="pressed" from="endturn" to="." method="_on_endturn_pressed"]
 

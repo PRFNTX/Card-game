@@ -70,10 +70,11 @@ func sig_TurnEnd(turn):
 
 
 ###STATE UPDATE
-func state_update(newState):
+func state_update(newState,keys):
 	print(newState)
-	for check in watch_state:
-		self.call(check, newState[check])
+	for check in keys:
+		if watch_state.has(check):
+			self.call(check, newState[check])
 
 ###STATE UPDATE FUNCTIONS
 func current_turn(newVal):

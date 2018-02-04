@@ -26,8 +26,10 @@ gather = Color( 1, 0.984375, 0, 0.364392 )
 [node name="sprite" type="Sprite" parent="." index="0"]
 
 rotation = -1.5708
+scale = Vector2( 0.75, 1 )
+z_index = 2
 texture = ExtResource( 2 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="hexType" parent="." index="1" instance=ExtResource( 3 )]
 
@@ -49,7 +51,7 @@ audio_bus_name = "Master"
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" index="0"]
 
 build_mode = 0
-polygon = PoolVector2Array( -43.3568, -24.7836, 0.0536782, -49.8026, 43.1328, -25.115, 43.2985, 25.2545, -0.277699, 50.1078, -43.3568, 25.2545 )
+polygon = PoolVector2Array( -24.3677, -32.7163, 25.4284, -32.2868, 50.1118, -0.734804, 24.7843, 32.7488, -24.368, 32.7486, -49.9099, -0.0912528 )
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_Area2D_mouse_entered"]
 

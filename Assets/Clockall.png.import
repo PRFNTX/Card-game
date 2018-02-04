@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Lake.png-161570cf4f60319a33b9ff60cdc3b4aa.stex"
+path="res://.import/Clockall.png-6a855d66d767f6aef6765e11a1b0b419.stex"
 
 [deps]
 
-source_file="res://Assets/Lake.png"
-source_md5="6b9d8d57ddfdd2bf943f7089bd2da2b2"
+source_file="res://Assets/Clockall.png"
+source_md5="ef056f2ab372204a607229be750b573c"
 
-dest_files=[ "res://.import/Lake.png-161570cf4f60319a33b9ff60cdc3b4aa.stex" ]
-dest_md5="53c1c2278410f19d307dfe04aca1f4cd"
+dest_files=[ "res://.import/Clockall.png-6a855d66d767f6aef6765e11a1b0b419.stex" ]
+dest_md5="471691a1304d70585406df32fc982ac0"
 
 [params]
 

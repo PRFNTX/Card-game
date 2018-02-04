@@ -10,13 +10,14 @@ func set_game(val):
 	Game.connect('TurnStart', self, 'sig_turn_start')
 	Game.connect('UpdateState', self, 'sig_update_state')
 
-func spawn_faeria():
-	Game.connect('SpawnFaeria',self,'sig_spawn_faeria')
+#func spawn_faeria():
+#	Game.connect('SpawnFaeria',self,'sig_spawn_faeria')
 
 var actionList={}
 
 var state={
-	'active':false
+	'active':false,
+	'clock_time':0
 }
 
 func _ready():
@@ -96,14 +97,18 @@ func setState(newState):
 
 ### STATE FUNCTIONS
 
-func active(boo):
-	state['active']=boo
-	if boo:
+func active(newVal):
+	state['active']=newVal==self
+	if newVal==self:
 		$light.show()
 		
 	else:
 		$light.hide()
-		
+
+func clock_time(time):
+	state['clock_time']=time
+	if Unit.on_clock:
+		Unit.clock(time)
 
 
 ### SIGNAL FUNCTIONS
@@ -112,12 +117,14 @@ func sig_turn_start(player):
 	if player==Owner:
 		Unit.turn_start()
 
-func sig_spawn_faeria():
-	
+func spawn_faeria():
 	Unit.add_one_faeria()
 
-func sig_update_state(newState):
-	setState({'active':newState['active_unit']==self})
+var watch = ['active','clock_time']
+func sig_update_state(newState,keys):
+	for key in keys:
+		if watch.has(key):
+			setState({key:newState[key]})
 
 
 ######

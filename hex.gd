@@ -299,11 +299,12 @@ func connect(game):
 	gameNode=game
 	game.connect("UpdateState",self,"state_update")
 
-func state_update(state):
-	for check in watchState:
-		if stateCopy[check]!=state[check]:
-			call(stateCopyMethods[check], state[check], state['current_turn'])
-			stateCopy[check]=state[check]
+func state_update(state,keys):
+	for check in keys:
+		if watchState.has(check):
+			if stateCopy[check]!=state[check]:
+				call(stateCopyMethods[check], state[check], state['current_turn'])
+				stateCopy[check]=state[check]
 
 ####UPDATE FUNCTIONS
 func update_Action(val, by):

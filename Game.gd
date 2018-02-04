@@ -10,7 +10,7 @@ var BoardEntity = load('res://BoardEntity.tscn')
 var OrbEntity = load('res://Cards/entities/orb_entity.tscn')
 var WellEntity = load('res://Cards/entities/well_entity.tscn')
 
-signal SpawnFaeria
+#signal SpawnFaeria
 signal UpdateState
 signal GameStart
 signal TurnStart
@@ -18,7 +18,7 @@ signal ActionPhase
 signal TurnEnd
 
 var players = [null, null]
-var state={"action":"", 'current_turn':0,'active_unit':null}
+var state={"action":"", 'current_turn':0,'active_unit':null,'clock_time':0}
 
 var actionTimer
 
@@ -31,7 +31,7 @@ func setState(obj):
 	for key in obj.keys():
 		call(key, obj[key])
 		#call 'setters' instead?
-	emit_signal("UpdateState",state)
+	emit_signal("UpdateState",state,obj.keys())
 
 ######## STATE FUNCTIONS
 func action(val):
@@ -49,6 +49,15 @@ func active_unit(unit):
 	state['active_unit']=unit
 	if !(unit==null):
 		unit.setState({'active':true})
+
+const MORNING=0
+const EVENING=1
+const NIGHT=2
+func clock_time(val):
+	$Clock.frame=val
+	#if val == MORNING:
+	#	emit_signal('SpawnFaeria')
+	state['clock_time']=val
 
 
 
@@ -92,9 +101,9 @@ func _ready():
 			hex.get_node('hexEntity').add_child(starting_entity)
 			starting_entity.possess(WellEntity,hex,hex.initial_owner)
 			starting_entity.Game =self
-			starting_entity.spawn_faeria()
+			#starting_entity.spawn_faeria()
 	
-	emit_signal('SpawnFaeria')
+	
 	emit_signal('GameStart')
 	emit_signal('TurnStart', state['current_turn'])
 	emit_signal('ActionPhase', state['current_turn'])
@@ -102,7 +111,8 @@ func _ready():
 func change_turns():
 	cancelAction()
 	emit_signal("TurnEnd", state['current_turn'])
-	setState({'current_turn':(state['current_turn']+1)%2,'action':"",'active_unit':null})
+	var current_time = state['clock_time']
+	setState({'current_turn':(state['current_turn']+1)%2,'action':"",'active_unit':null,'clock_time':(current_time+1)%3})
 	emit_signal("TurnStart", state['current_turn'])
 	emit_signal("ActionPhase", state['current_turn'])
 	
