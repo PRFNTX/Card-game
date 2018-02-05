@@ -90,5 +90,5 @@ func authenticated_server_request(endpoint,method,body):
 				OS.delay_usec(1000)
 			else:
 				rb = rb+chunk
-	print(rb.get_string_from_utf8())
+	print(rb)
 	return rb

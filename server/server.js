@@ -26,6 +26,7 @@ app.get('/decks', authenticate, check,(req,res)=>{
     const user = req.user.username
     Deck.find({username:user}).then(
         decks=>{
+            console.log(decks)
             const deckNames = decks.map(deck=>deck.name)
             res.status(200).json(deckNames)
         }
@@ -55,7 +56,6 @@ app.get('/decks/:name', authenticate, (req,res)=>{
 
 app.post('/decks/:name', authenticate,(req,res)=>{
     const deckList = req.body.cards
-    console.log(deckList, typeof(deckList))
     const user = req.user.username
     Deck.create({
         username:user,
