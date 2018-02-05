@@ -6,9 +6,10 @@ var scenes = {'game':"res://Game.tscn",'title':'res://Title.tscn', 'deck':'res:/
 var card_resources = {}
 
 var Deck = {}
-var deck_list={}
+var deck_list=null
 
 func set_deck_list(parsedjson):
+	deck_list={}
 	for deck in parsedjson:
 		deck_list[deck['deck_name']] = deck['cards']
 	print(deck_list)

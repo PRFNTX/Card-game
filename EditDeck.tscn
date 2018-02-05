@@ -446,4 +446,6 @@ tabs_visible = true
 
 [connection signal="pressed" from="Save" to="." method="_on_Save_pressed"]
 
+[connection signal="tab_changed" from="Tabs" to="." method="_on_Tabs_tab_changed"]
+
 

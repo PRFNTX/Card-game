@@ -56,6 +56,30 @@ app.get('/decks/:name', authenticate, (req,res)=>{
     
 })
 
+app.put('/decks/:name', authenticate, (req,res)=>{
+    const changes = req.body
+    const user = req.user.username
+    Deck.findOne({username:user,deck_name:req.params.name}).then(
+        found=>{
+            if (found){
+                Object.keys(changes).forEach(prop=>{
+                    found[prop]=changes[prop]
+                })
+                return found.save()
+            } else {
+                res.status(404).json({message:'could not find deck to edit'})
+            }
+        }
+    ).then(
+        result =>{
+            res.status(200).json({message:'deck updated successfully'})
+        }
+    ).catch(err=>{
+        console.log(err)
+        res.status(501).json({message:'something failed, saving deck'})
+    })
+})
+
 app.post('/decks/:name', authenticate,(req,res)=>{
     const deckList = req.body.cards
     const user = req.user.username

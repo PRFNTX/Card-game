@@ -13,13 +13,28 @@ var deck_lists={}
 
 var state = {'current_deck':null}
 
+var new_unsaved=false
+
 func setState(newState):
 	for key in newState.keys():
 		call(key, newState[key])
 
 func current_deck(deck):
+	
+	if !deck_lists.keys().has(deck):
+		if deck=="+":
+			deck='new deck'
+			$Tabs.get_node("+").set_name(deck)
+		deck_nodes[deck] = $Tabs.get_node(deck)
+		deck_lists[deck]={}
+		
 	state['current_deck'] = deck
 	
+	for card in deck_lists[deck].keys():
+		$Collection.update(card)
+	
+
+
 
 func cards_array_to_dict(arr):
 	var dict_ret={}
@@ -30,18 +45,40 @@ func cards_array_to_dict(arr):
 			dict_ret[card]=1
 	return dict_ret
 
-func initialize_decks():
+func initialize_decks(reset=true):
+	if reset:
+		deck_lists={}
+		deck_nodes={}
+		for child in $Tabs.get_children():
+			child.free()
 	deck_list_local = globals.deck_list
 	for deck in deck_list_local.keys():
-		setState({'current_deck':deck})
-		var new_deck_tab = DeckListEdit.instance()
-		deck_nodes[deck] = new_deck_tab
-		deck_lists[deck] = cards_array_to_dict(deck_list_local[deck])
-		$Tabs.add_child(new_deck_tab)
-		new_deck_tab.set_name(deck)
-		new_deck_tab.top_level = self
-		for card in deck_lists[deck]:
-			update(card, deck)
+		if !$Tabs.has_node(deck):
+			setState({'current_deck':deck})
+			var new_deck_tab = DeckListEdit.instance()
+			deck_nodes[deck] = new_deck_tab
+			deck_lists[deck] = cards_array_to_dict(deck_list_local[deck])
+			$Tabs.add_child(new_deck_tab)
+			new_deck_tab.set_name(deck)
+			new_deck_tab.top_level = self
+			for card in deck_lists[deck]:
+				update(card, deck)
+	add_blank_tab()
+
+func add_blank_tab():
+	var empty = DeckListEdit.instance()
+	$Tabs.add_child(empty)
+	empty.set_name("+")
+	empty.top_level=self
+
+func add_tab(tab_name='new deck'):
+	var empty = DeckListEdit.instance()
+	$Tabs.add_child(empty)
+	empty.set_name(tab_name)
+	deck_nodes[tab_name] = empty
+	deck_lists[tab_name] = {}
+	empty.top_level=self
+	setState({'current_deck':tab_name})
 
 func add_card(card_name,in_deck=null):
 	var deck_name = in_deck
@@ -93,7 +130,12 @@ func _ready():
 		cards[card] = newCard
 		$Collection.add_item(cards[card])
 		$Collection.top_level=self
-	initialize_decks()
+	print(globals.deck_list.keys().size())
+	if !globals.deck_list==null and globals.deck_list.keys().size()>0:
+		initialize_decks()
+	else:
+		add_tab()
+		
 	
 
 #func _process(delta):
@@ -116,5 +158,12 @@ func _on_Save_pressed():
 	for key in deck_lists[state['current_deck']].keys():
 		for i in deck_lists[state['current_deck']][key]:
 			list.append(key)
-	globals.deck_list[state['current_deck']] = list
+	
 	globals.authenticated_server_request("/decks/"+deck_name,HTTPClient.METHOD_POST,{'cards':list})
+	
+	globals.set_deck_list(globals.authenticated_server_request("/decks",HTTPClient.METHOD_GET,{}))
+	initialize_decks()
+
+
+func _on_Tabs_tab_changed( tab ):
+	setState({'current_deck':$Tabs.get_child(tab).get_name()})

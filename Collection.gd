@@ -6,6 +6,9 @@ var dy = 18
 # var b = "textvar"
 var top_level
 
+func set_name(val):
+	.set_name(val)
+	$Rename.text=val
 
 func init_deck():
 	pass	
@@ -136,11 +139,21 @@ func _on_Quant_item_selected( index ):
 
 func _on_add_pressed():
 	var card = $Name.get_item_text(active)
-	get_parent().add_card(card)
-	get_parent().update(card)
+	top_level.add_card(card)
+	top_level.update(card)
 
 
 func _on_remove_pressed():
 	var card = $Name.get_item_text(active)
-	get_parent().remove_card(card)
-	get_parent().update(card)
+	top_level.remove_card(card)
+	top_level.update(card)
+
+
+func _on_Save_pressed():
+	var list = []
+	for key in top_level.deck_lists[top_level.state['current_deck']].keys():
+		for i in top_level.deck_lists[top_level.state['current_deck']][key]:
+			list.append(key)
+	top_level.globals.authenticated_server_request("/decks/"+get_parent().get_name(),HTTPClient.METHOD_PUT,{'cards':list,'deck_name':$Rename.text})
+	top_level.globals.set_deck_list(top_level.globals.authenticated_server_request("/decks",HTTPClient.METHOD_GET,{}))
+	top_level.initialize_decks()
