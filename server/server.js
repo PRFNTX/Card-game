@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt')
 const User = require('./models/user')
 const Deck = require('./models/deck')
 
-const http = require('http')
+const https = require('https')
 const ws = require('ws').Server
 
 const PORT=process.env.PORT || 80
