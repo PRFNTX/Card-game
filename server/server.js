@@ -13,7 +13,7 @@ const ws = require('ws').Server
 
 const PORT=process.env.PORT || 80
 
-const server = http.Server(app)
+const server = https.Server(app)
 
 const wss = new ws({
     server: server,
