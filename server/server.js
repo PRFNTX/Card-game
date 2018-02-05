@@ -11,6 +11,8 @@ const Deck = require('./models/deck')
 const http = require('http')
 const ws = require('ws').Server
 
+const bufferutil = require('bufferutil')
+
 const PORT=process.env.PORT || 443
 
 const server = http.Server(app)
@@ -41,7 +43,7 @@ var connections = []
 wss.on('connection', (socket, req)=>{
     console.log('connected')
     socket.on('message', event=>{
-        console.log(event)
+        console.log(bufferutil.unmask(event,1234))
         socket.send('TEXT')
     })
     socket.on('error', error=>console.log(error))
