@@ -1,4 +1,4 @@
-extends Node
+extends Control
 export(bool) var deck = false
 var dy = 18
 # class member variables go here, for example:

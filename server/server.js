@@ -27,7 +27,8 @@ app.get('/decks', authenticate, check,(req,res)=>{
     Deck.find({username:user}).then(
         decks=>{
             console.log(decks)
-            const deckNames = decks.map(deck=>deck.deck_name)
+            
+            const deckNames = decks.map(deck=>{return {deck_name:deck.deck_name,cards:deck.cards}})
             res.status(200).json(deckNames)
         }
     ).catch(

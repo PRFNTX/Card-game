@@ -6,6 +6,7 @@ var scenes = {'game':"res://Game.tscn",'title':'res://Title.tscn', 'deck':'res:/
 var card_resources = {}
 
 var Deck = {}
+var deck_list
 # class member variables go here, for example:
 # var a = 2
 # var b = "textvar"
@@ -90,5 +91,5 @@ func authenticated_server_request(endpoint,method,body):
 				OS.delay_usec(1000)
 			else:
 				rb = rb+chunk
-	print(rb.get_string_from_utf8())
-	return rb
+	var tryreturn = parse_json(str((rb.get_string_from_utf8())))
+	return parse_json(str((rb.get_string_from_utf8())))

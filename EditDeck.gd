@@ -2,11 +2,14 @@ extends Node2D
 
 onready var globals = get_node('/root/master')
 
+export(PackedScene) var DeckListEdit
+
 var resources = {}
 var cards = {}
 
 
-var Deck={}
+func initialize_decks():
+	var decks = globals.deck_list
 
 func add_card(name):
 	if Deck.keys().has(name):
@@ -41,7 +44,9 @@ func show_card(card):
 
 func _ready():
 	resources= globals.card_resources
-	
+	for deck in globals.deck_list:
+		print(deck)
+		$Tabs.add
 	for card in resources.keys():
 		var newCard = resources[card].instance()
 		cards[card] = newCard

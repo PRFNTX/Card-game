@@ -4,7 +4,7 @@ var globals
 
 func _ready():
 	globals = get_node('/root/master')
-	print(globals.authenticated_server_request("/decks",HTTPClient.METHOD_GET,{}))
+	globals.deck_list = (globals.authenticated_server_request("/decks",HTTPClient.METHOD_GET,{}))
 	
 
 func _on_game_pressed():
