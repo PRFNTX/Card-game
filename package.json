@@ -25,5 +25,9 @@
     "mongoose": "^5.0.3",
     "socket.io": "^2.0.4",
     "ws": "^3.3.3"
+  },
+  "optionalDependencies": {
+    "bufferutil": "^3.0.3",
+    "utf-8-validate": "^4.0.0"
   }
 }
