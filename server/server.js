@@ -43,7 +43,7 @@ var connections = []
 wss.on('connection', (socket, req)=>{
     console.log('connected')
     socket.on('message', event=>{
-        console.log(bufferutil.unmask(event,1234))
+        console.log(event.data)
         socket.send('TEXT')
     })
     socket.on('error', error=>console.log(error))
