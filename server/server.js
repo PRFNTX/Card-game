@@ -80,10 +80,15 @@ function message_channel(channel_name,sent_by,message){
 
 //games
 function create_game(name,owner){
-    games.push({
-        name,
-        owner
-    })
+    if (games.filter(game=>game.name!==name).length===0){
+        games.push({
+           name,
+         owner
+        })
+        owner.send(JSON.stringify({'create':name}))
+    } else {
+        owner.send(JSON.stringify({'collision':name}))
+    }
 }
 
 function join_game(name,member){
@@ -95,6 +100,7 @@ function join_game(name,member){
     })
     found.challenger = member
     found.owner.send(JSON.stringify({'join':member.name}))
+    found.challenger.send(JSON.stringify({'join':found.owner.name}))
 }
 
 function leave_game(name,member){
@@ -106,6 +112,7 @@ function leave_game(name,member){
     })
     found.challenger = null
     found.owner.send(JSON.stringify({'leave':""}))
+    member.send(JSON.stringify({'leave':""}))
 }
 
 function close_game(name){
@@ -409,7 +416,7 @@ app.post('/user/friends', authenticate, (req,res)=>{
     })
 })
 
-app.get('/games', authenticate, (res,res)=>{
+app.get('/games', authenticate, (req,res)=>{
     res.status(200).json(games.filter(game=>!game.started))
 })
 
