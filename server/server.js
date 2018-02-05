@@ -8,8 +8,8 @@ const bcrypt = require('bcrypt')
 const User = require('./models/user')
 const Deck = require('./models/deck')
 
-const server = require('http').Server(app)
-const io = require('socket.io')(server)
+const server = require('http').createServer(app)
+const io = require('socket.io').listen(server)
 
 
 const PORT=process.env.PORT || 80
@@ -21,6 +21,9 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
 //SOCKET
+
+var users = []
+var connections = []
 
 io.on('connection', function(socket){
     console.log('connection')
@@ -299,8 +302,14 @@ function verifyJWT(token){
 	})
 }
 
+/*
 app.listen(PORT, ()=>{
     console.log('connected on '+ PORT)
+})
+*/
+
+server.listen(PORT,()=>{
+    console.log('socket running')
 })
 
 
