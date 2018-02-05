@@ -70,7 +70,7 @@ app.put('/decks/:name', authenticate, (req,res)=>{
                 })
                 return found.save()
             } else {
-                res.status(404).json({message:'could not find deck to edit'})
+               throw "deck not found"
             }
         }
     ).then(
