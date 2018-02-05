@@ -60,7 +60,7 @@ app.post('/decks/:name', authenticate,(req,res)=>{
     Deck.create({
         username:user,
         deck_name:req.params.name,
-        cards:JSON.parse(deckList)
+        cards:deckList
     }).then(
         ret=>{
             res.send('deck')
