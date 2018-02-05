@@ -9,7 +9,7 @@ const User = require('./models/user')
 const Deck = require('./models/deck')
 
 const server = require('http').Server(app)
-const ios = require('socket.io')(server)
+const io = require('socket.io')(server)
 
 
 const PORT=process.env.PORT || 80
@@ -312,6 +312,6 @@ app.listen(PORT, ()=>{
 server.listen(PORT,()=>{
     console.log('socket running')
 })
-var io=io.listen(server)
+io.listen(server)
 
 
