@@ -214,10 +214,12 @@ function authenticate(req,res,next){
     verifyJWT(token).then(
         user =>{
             req.user = user.data
+            console.log('auth good')
             next()
         }
     ).catch(
         err=>{
+            console.log('auth bad')
             res.status(403).json({message:'authentication failed'})
         }
     )
