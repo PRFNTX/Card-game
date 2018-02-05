@@ -60,6 +60,7 @@ app.put('/decks/:name', authenticate, (req,res)=>{
     const changes = req.body
     const user = req.user.username
     console.log(changes)
+    console.log(req.params.name)
     Deck.findOne({username:user,deck_name:req.params.name}).then(
         found=>{
             if (found){
