@@ -84,10 +84,13 @@ function message_channel(channel_name,sent_by,message){
 
 //games
 function create_game(name,owner){
+    console.log('CREATE OWNER',owner.name)
     if (games.filter(game=>game.name!==name).length===0){
         games.push({
-           name,
-         owner
+            name,
+            owner,
+            challenger:"",
+            started:false
         })
         owner.send(JSON.stringify({'create':name}))
     } else {
