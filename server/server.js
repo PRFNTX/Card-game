@@ -40,13 +40,13 @@ var connections = []
 
 wss.on('connection', (socket)=>{
     console.log('connected')
-    ws.onmessage = event=>console.log(event.data)
-    ws.onerror = error=>console.log(error)
+    socket.onmessage = event=>console.log(event.data)
+    socket.onerror = error=>console.log(error)
 })
 
 _on_time = ()=>{
     msg = "A"
-    console.log(wss.clients)
+    
     wss.clients.forEach(client=>{
         try{
             client.send(msg)
