@@ -8,15 +8,23 @@ const bcrypt = require('bcrypt')
 const User = require('./models/user')
 const Deck = require('./models/deck')
 
-const server = require('http').Server(app)
-let io = require('socket.io')(server)
+const http = require('http')
+const ws = require('ws').Server
+
 const PORT=process.env.PORT || 80
+
+const server = http.Server(app)
+
+const wss = new ws({
+    server: server,
+    perMessafeDefalte:false
+})
+
+
 
 server.listen(PORT,()=>{
     console.log('socket running')
 })
-io=io.listen(server)
-
 
 
 mongoose.connect('mongodb://localhost:27017/NotFaeria')
@@ -30,6 +38,25 @@ app.use(express.urlencoded({extended:true}))
 var users = []
 var connections = []
 
+wss.on('connection', (socket)=>{
+    console.log('connected'+ ws.upgradeReq.url)
+    ws.onmessage = event=>console.log(event.data)
+    ws.onerror = error=>console.log(error)
+})
+
+_on_time = ()=>{
+    msg = "A"
+    wss.clients.forEach(client=>{
+        try{
+            client.send(msg)
+        } catch(err){
+            console.log(err)
+        }
+    })
+}
+
+setinterval(_on_time,3000)
+/*
 io.on('connection', function(socket){
     console.log('connection')
     connections.push(socket)
@@ -38,7 +65,11 @@ io.on('connection', function(socket){
     })
 })
 
+*/
 
+server.listen(PORT,()=>{
+    console.log('socket running')
+})
 
 function check(req,res,next){
     console.log("body", req.body)
