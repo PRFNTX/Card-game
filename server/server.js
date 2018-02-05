@@ -42,7 +42,7 @@ wss.on('connection', (socket, req)=>{
     console.log('connected')
     socket.on('message', event=>{
         console.log(event)
-        ws.send('TEXT')
+        socket.send('TEXT')
     })
     socket.on('error', error=>console.log(error))
 
