@@ -55,7 +55,7 @@ app.get('/decks/:name', authenticate, (req,res)=>{
 
 app.post('/decks/:name', authenticate,(req,res)=>{
     const deckList = req.body.cards
-    print(deckList, typeof(deckList))
+    console.log(deckList, typeof(deckList))
     const user = req.user.username
     Deck.create({
         username:user,
