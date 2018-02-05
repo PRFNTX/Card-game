@@ -59,10 +59,13 @@ app.get('/decks/:name', authenticate, (req,res)=>{
 app.put('/decks/:name', authenticate, (req,res)=>{
     const changes = req.body
     const user = req.user.username
+    console.log(changes)
     Deck.findOne({username:user,deck_name:req.params.name}).then(
         found=>{
             if (found){
                 Object.keys(changes).forEach(prop=>{
+                    console.log(prop)
+                    
                     found[prop]=changes[prop]
                 })
                 return found.save()
