@@ -8,12 +8,12 @@ const bcrypt = require('bcrypt')
 const User = require('./models/user')
 const Deck = require('./models/deck')
 
-const https = require('https')
+const http = require('http')
 const ws = require('ws').Server
 
-const PORT=process.env.PORT || 80
+const PORT=process.env.PORT || 443
 
-const server = https.Server(app)
+const server = http.Server(app)
 
 const wss = new ws({
     server: server,
@@ -39,7 +39,7 @@ var users = []
 var connections = []
 
 wss.on('connection', (socket)=>{
-    console.log('connected'+ ws.upgradeReq.url)
+    console.log('connected')
     ws.onmessage = event=>console.log(event.data)
     ws.onerror = error=>console.log(error)
 })
