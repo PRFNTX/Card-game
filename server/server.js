@@ -60,11 +60,21 @@ app.post('/decks/:name', authenticate,(req,res)=>{
     const deckList = req.body.cards
     const user = req.user.username
     console.log('create deck for ', user)
-    Deck.create({
-        username:user,
-        deck_name:req.params.name,
-        cards:deckList
-    }).then(
+    Deck.findOne({username:user,deck_name:req.params.name}).then(
+        found=>{
+            if (found){
+                found.cards = deckList
+                return found.save()
+            } else {
+                return Deck.create({
+                    username:user,
+                    deck_name:req.params.name,
+                    cards:deckList
+                })
+            }
+        }
+    )
+    .then(
         ret=>{
             console.log('deck made')
             res.status(200).json({message:'deck create'})
