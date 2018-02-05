@@ -46,6 +46,7 @@ wss.on('connection', (socket)=>{
 
 _on_time = ()=>{
     msg = "A"
+    console.log(wss.clients)
     wss.clients.forEach(client=>{
         try{
             client.send(msg)
