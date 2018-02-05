@@ -55,7 +55,7 @@ _on_time = ()=>{
     })
 }
 
-setinterval(_on_time,3000)
+setInterval(_on_time,3000)
 /*
 io.on('connection', function(socket){
     console.log('connection')
