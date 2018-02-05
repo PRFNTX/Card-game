@@ -2,8 +2,8 @@ const mongoose = require('mongoose')
 
 const deckSchema = new mongoose.Schema({
     username:String,
-    name:String,
-    cards:[Number]
+    deck_name:String,
+    cards:[String]
 })
 
 module.exports = mongoose.model('deck',deckSchema)
