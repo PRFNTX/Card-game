@@ -34,9 +34,9 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
 
-let chat_channels = [{name:'',members:[]}]
+let chat_channels = []
 
-let games = [{name:'',owner:socket, challenger:socket,started:'bool'}]
+let games = []
 
 //chanels
 function join_channel(name, member){
