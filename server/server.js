@@ -38,9 +38,12 @@ app.use(express.urlencoded({extended:true}))
 var users = []
 var connections = []
 
-wss.on('connection', (socket)=>{
+wss.on('connection', (socket, req)=>{
     console.log('connected')
-    socket.onmessage = event=>console.log(event.data)
+    socket.on('message', event=>{
+        console.log(event)
+        ws.send('TEXT')
+    })
     socket.onerror = error=>console.log(error)
 })
 
