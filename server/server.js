@@ -67,10 +67,6 @@ io.on('connection', function(socket){
 
 */
 
-server.listen(PORT,()=>{
-    console.log('socket running')
-})
-
 function check(req,res,next){
     console.log("body", req.body)
     next()
