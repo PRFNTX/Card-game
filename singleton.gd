@@ -6,10 +6,15 @@ var scenes = {'game':"res://Game.tscn",'title':'res://Title.tscn', 'deck':'res:/
 var card_resources = {}
 
 var Deck = {}
-var deck_list
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
+var deck_list={}
+
+func set_deck_list(parsedjson):
+	for deck in parsedjson:
+		deck_list[deck['deck_name']] = deck['cards']
+	print(deck_list)
+
+
+
 var currentScene
 
 func _ready():
@@ -92,4 +97,6 @@ func authenticated_server_request(endpoint,method,body):
 			else:
 				rb = rb+chunk
 	var tryreturn = parse_json(str((rb.get_string_from_utf8())))
+	
+	#arrays of objects are arrays of dictionaries
 	return parse_json(str((rb.get_string_from_utf8())))

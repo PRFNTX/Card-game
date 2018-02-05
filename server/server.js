@@ -64,7 +64,12 @@ app.post('/decks/:name', authenticate,(req,res)=>{
         cards:deckList
     }).then(
         ret=>{
-            res.send('deck')
+            res.status(200).json({message:'deck create'})
+        }
+    ).catch(
+        err=>{
+            console.log(err)
+            res.status(403).json({message:'could not save deck'})
         }
     )
 })

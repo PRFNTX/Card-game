@@ -1,13 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://EditDeck.gd" type="Script" id=1]
-[ext_resource path="res://Collection.gd" type="Script" id=2]
+[ext_resource path="res://Deck_list_edit.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Collection.gd" type="Script" id=3]
 
-[node name="EditDeck" type="Node2D" index="0"]
+[node name="EditDeck" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
-DeckListEdit = null
+DeckListEdit = ExtResource( 2 )
 
 [node name="Collection" type="Control" parent="." index="0"]
 
@@ -20,7 +21,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 2 )
+script = ExtResource( 3 )
 deck = false
 
 [node name="Gold" type="ItemList" parent="Collection" index="0"]

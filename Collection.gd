@@ -4,6 +4,12 @@ var dy = 18
 # class member variables go here, for example:
 # var a = 2
 # var b = "textvar"
+var top_level
+
+
+func init_deck():
+	pass	
+
 func add_item(card_node):
 	var card = card_node.get_node('Card')
 	$Gold.add_item(str(card.cost_gold))
@@ -15,14 +21,19 @@ func add_item(card_node):
 	$Num.add_item(str(card.lands_num))
 	$Deck.add_item(str(0))
 	$Quant.add_item(str(3))
+	
 
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
 	pass
 
-func update(mod_card):
-	var par_deck = get_parent().Deck
+func update(mod_card, in_deck=null):
+	var node_name =get_name()
+	var par_deck = top_level.deck_lists[top_level.state['current_deck']]
+	
+	if !in_deck==null:
+		par_deck = top_level.deck_lists[in_deck]
 	
 	if (deck):
 		$Gold.clear()
@@ -36,7 +47,7 @@ func update(mod_card):
 		$Quant.clear()
 		var line = 0
 		for card in par_deck.keys():
-			add_item(get_parent().cards[card])
+			add_item(top_level.cards[card])
 			$Deck.set_item_text(line, str(par_deck[card]))
 			line+=1
 		if active!=null and active<$Name.get_item_count():
@@ -57,7 +68,7 @@ func update(mod_card):
 
 var shown_card = null
 func show_card(card):
-	var par=get_parent()
+	var par=top_level
 	if (shown_card!=null):
 		shown_card.queue_free()
 	shown_card = par.resources[card].instance()
