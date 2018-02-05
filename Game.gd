@@ -18,7 +18,7 @@ signal ActionPhase
 signal TurnEnd
 
 var players = [null, null]
-var state={"action":"", 'current_turn':0,'active_unit':null,'clock_time':0}
+var state={"action":"", 'current_turn':0,'active_unit':null,'clock_time':0,'hovered':null}
 
 var actionTimer
 
@@ -36,7 +36,6 @@ func setState(obj):
 ######## STATE FUNCTIONS
 func action(val):
 	state['action'] = val
-	print(val)
 
 func current_turn(val):
 	state['current_turn'] = val
@@ -59,7 +58,8 @@ func clock_time(val):
 	#	emit_signal('SpawnFaeria')
 	state['clock_time']=val
 
-
+func hovered(hex):
+	state['hovered'] = hex
 
 ################
 
@@ -72,7 +72,8 @@ func create_player(num):
 	else:
 		p.position=$pointP2.position
 	p.onCreate(self,num)
-	p.Deck = globals.Deck
+	if !globals.deck_list==null and globals.deck_list.keys().size()>0:
+		p.Deck = globals.deck_list[globals.Deck]
 	return p
 
 func _ready():

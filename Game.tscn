@@ -16,7 +16,7 @@
 [ext_resource path="res://Hand.gd" type="Script" id=14]
 [ext_resource path="res://Clock.tscn" type="PackedScene" id=15]
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
@@ -37,232 +37,281 @@ texture = ExtResource( 3 )
 
 [node name="hex 1" parent="board/back" index="0" instance=ExtResource( 4 )]
 
-position = Vector2( -192.435, -250.691 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( 193.61, 251.512 )
+z_index = 11
 initial_state = 1
-id = 0
-initial_owner = 1
+id = 1
+initial_owner = 0
 
 [node name="hex 2" parent="board/back" index="1" instance=ExtResource( 4 )]
 
-position = Vector2( -95.9581, -250.691 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( 97.1367, 251.512 )
+z_index = 9
+id = 2
 
 [node name="hex 3" parent="board/back" index="2" instance=ExtResource( 4 )]
 
-position = Vector2( 0.518677, -249.852 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( 0.36145, 252.134 )
+z_index = 7
+id = 3
 
 [node name="hex 4" parent="board/back" index="3" instance=ExtResource( 4 )]
 
-position = Vector2( 96.9953, -251.036 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( -96.0186, 251.763 )
+z_index = 5
+id = 4
 
 [node name="hex 5" parent="board/back" index="4" instance=ExtResource( 4 )]
 
-position = Vector2( 193.304, -250.347 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( -193.059, 251.535 )
+z_index = 3
 initial_state = 7
+id = 5
 
 [node name="hex 6" parent="board/back" index="5" instance=ExtResource( 4 )]
 
-position = Vector2( -240.673, -166.618 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( 241.347, 167.939 )
+z_index = 12
+id = 6
 
 [node name="hex 7" parent="board/back" index="6" instance=ExtResource( 4 )]
 
-position = Vector2( -144.196, -167.128 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( 145.328, 167.939 )
+z_index = 10
+id = 7
 
 [node name="hex 8" parent="board/back" index="7" instance=ExtResource( 4 )]
 
-position = Vector2( -48.0706, -166.783 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( 47.9833, 167.939 )
+z_index = 8
+id = 8
 
 [node name="hex 9" parent="board/back" index="8" instance=ExtResource( 4 )]
 
-position = Vector2( 48.7571, -166.618 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( -48.0364, 167.451 )
+z_index = 6
+id = 9
 
 [node name="hex 10" parent="board/back" index="9" instance=ExtResource( 4 )]
 
-position = Vector2( 145.234, -167.253 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( -144.718, 167.451 )
+z_index = 4
+id = 10
 
 [node name="hex 11" parent="board/back" index="10" instance=ExtResource( 4 )]
 
-position = Vector2( 241.192, -166.618 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( -240.738, 167.451 )
+z_index = 2
+id = 11
 
 [node name="hex 12" parent="board/back" index="11" instance=ExtResource( 4 )]
 
-position = Vector2( -288.393, -83.0543 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( 289.688, 84.3437 )
+z_index = 13
+id = 12
 
 [node name="hex 13" parent="board/back" index="12" instance=ExtResource( 4 )]
 
-position = Vector2( -192.953, -83.5638 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( 193.006, 84.344 )
+z_index = 11
+id = 13
 
 [node name="hex 14" parent="board/back" index="13" instance=ExtResource( 4 )]
 
-position = Vector2( -95.958, -83.2192 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( 96.3239, 84.3443 )
+z_index = 9
+id = 14
 
 [node name="hex 15" parent="board/back" index="14" instance=ExtResource( 4 )]
 
-position = Vector2( -0.000183105, -83.0543 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( 0.304108, 84.8334 )
+z_index = 7
+id = 15
 
 [node name="hex 16" parent="board/back" index="15" instance=ExtResource( 4 )]
 
-position = Vector2( 96.9953, -83.5638 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( -95.7156, 84.3448 )
+z_index = 5
+id = 16
 
 [node name="hex 17" parent="board/back" index="16" instance=ExtResource( 4 )]
 
-position = Vector2( 193.121, -83.0543 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( -193.06, 83.8562 )
+z_index = 3
+id = 17
 
 [node name="hex 18" parent="board/back" index="17" instance=ExtResource( 4 )]
 
-position = Vector2( 289.949, -83.0543 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( -289.08, 84.8342 )
+z_index = 1
+_sections_unfolded = [ "Rect", "Transform", "Visibility", "Z Index" ]
+id = 18
 
 [node name="hex 19" parent="board/back" index="18" instance=ExtResource( 4 )]
 
-position = Vector2( -337.669, 0 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( 338.028, 0.748657 )
+z_index = 14
+_sections_unfolded = [ "Rect", "Transform", "Visibility", "Z Index" ]
 initial_state = 7
+id = 19
 
 [node name="hex 20" parent="board/back" index="19" instance=ExtResource( 4 )]
 
-position = Vector2( -240.505, 0.509552 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( 242.009, 0.260071 )
+z_index = 12
+id = 20
 
 [node name="hex 21" parent="board/back" index="20" instance=ExtResource( 4 )]
 
-position = Vector2( -144.196, 0 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( 145.327, 0.749207 )
+z_index = 10
+id = 21
 
 [node name="hex 22" parent="board/back" index="21" instance=ExtResource( 4 )]
 
-position = Vector2( -47.2009, 0 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( 48.6447, 0.749512 )
+z_index = 8
+id = 22
 
 [node name="hex 23" parent="board/back" index="22" instance=ExtResource( 4 )]
 
-position = Vector2( 48.2383, 0.509521 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( -48.0373, 0.749695 )
+z_index = 6
+id = 23
 
 [node name="hex 24" parent="board/back" index="23" instance=ExtResource( 4 )]
 
-position = Vector2( 145.234, 0.509521 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( -144.719, 0.261108 )
+z_index = 4
+id = 24
 
 [node name="hex 25" parent="board/back" index="24" instance=ExtResource( 4 )]
 
-position = Vector2( 241.711, 0.509552 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( -240.077, 0.750244 )
+z_index = 2
+id = 25
 
 [node name="hex 26" parent="board/back" index="25" instance=ExtResource( 4 )]
 
-position = Vector2( 337.357, -0.164948 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( -336.759, 0.750488 )
+_sections_unfolded = [ "Rect", "Transform", "Visibility", "Z Index" ]
 initial_state = 7
+id = 26
 
 [node name="hex 27" parent="board/back" index="26" instance=ExtResource( 4 )]
 
-position = Vector2( -288.393, 84.0733 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( 289.687, -82.8461 )
+z_index = 13
+id = 27
 
 [node name="hex 28" parent="board/back" index="27" instance=ExtResource( 4 )]
 
-position = Vector2( -192.435, 84.5829 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( 193.667, -83.3347 )
+z_index = 11
+id = 28
 
 [node name="hex 29" parent="board/back" index="28" instance=ExtResource( 4 )]
 
-position = Vector2( -95.958, 84.0733 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( 96.9853, -83.3344 )
+z_index = 9
+id = 29
 
 [node name="hex 30" parent="board/back" index="29" instance=ExtResource( 4 )]
 
-position = Vector2( 0.518738, 84.2531 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( 0.303284, -82.8453 )
+z_index = 7
+_sections_unfolded = [ "Rect", "Transform", "Visibility", "Z Index" ]
+id = 30
 
 [node name="hex 31" parent="board/back" index="30" instance=ExtResource( 4 )]
 
-position = Vector2( 96.9955, 83.5638 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( -97.0409, -82.8451 )
+z_index = 5
+id = 31
 
 [node name="hex 32" parent="board/back" index="31" instance=ExtResource( 4 )]
 
-position = Vector2( 193.472, 83.5638 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( -192.398, -83.3337 )
+z_index = 3
+id = 32
 
 [node name="hex 33" parent="board/back" index="32" instance=ExtResource( 4 )]
 
-position = Vector2( 289.43, 84.0733 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( -289.08, -82.8445 )
+z_index = 1
+_sections_unfolded = [ "Rect", "Transform", "Visibility", "Z Index" ]
+id = 33
 
 [node name="hex 34" parent="board/back" index="33" instance=ExtResource( 4 )]
 
-position = Vector2( -240.154, 167.637 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( 242.008, -166.93 )
+z_index = 12
+_sections_unfolded = [ "Rect", "Transform", "Visibility", "Z Index" ]
+id = 34
 
 [node name="hex 35" parent="board/back" index="34" instance=ExtResource( 4 )]
 
-position = Vector2( -143.987, 167.334 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( 144.664, -166.44 )
+z_index = 10
+id = 35
 
 [node name="hex 36" parent="board/back" index="35" instance=ExtResource( 4 )]
 
-position = Vector2( -47.7197, 167.637 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( 48.6439, -166.44 )
+z_index = 8
+id = 36
 
 [node name="hex 37" parent="board/back" index="36" instance=ExtResource( 4 )]
 
-position = Vector2( 48.7571, 168.147 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( -47.7337, -166.401 )
+z_index = 6
+id = 37
 
 [node name="hex 38" parent="board/back" index="37" instance=ExtResource( 4 )]
 
-position = Vector2( 145.234, 167.637 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( -144.371, -166.359 )
+z_index = 4
+id = 38
 
 [node name="hex 39" parent="board/back" index="38" instance=ExtResource( 4 )]
 
-position = Vector2( 241.71, 168.147 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( -241.276, -166.626 )
+z_index = 2
+id = 39
 
 [node name="hex 40" parent="board/back" index="39" instance=ExtResource( 4 )]
 
-position = Vector2( -192.435, 251.201 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( 193.134, -250.455 )
+z_index = 11
+_sections_unfolded = [ "Rect", "Transform", "Visibility", "Z Index" ]
 initial_state = 7
+id = 40
 
 [node name="hex 41" parent="board/back" index="40" instance=ExtResource( 4 )]
 
-position = Vector2( -96.1675, 250.953 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( 96.7432, -250.207 )
+z_index = 9
+id = 41
 
 [node name="hex 42" parent="board/back" index="41" instance=ExtResource( 4 )]
 
-position = Vector2( 0.518616, 251.242 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( 0.303741, -250.14 )
+z_index = 7
+id = 42
 
 [node name="hex 43" parent="board/back" index="42" instance=ExtResource( 4 )]
 
-position = Vector2( 97.2051, 251.201 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( -95.9407, -250.418 )
+z_index = 5
+id = 43
 
 [node name="hex 44" parent="board/back" index="43" instance=ExtResource( 4 )]
 
-position = Vector2( 193.121, 250.856 )
-scale = Vector2( 1, 1.33 )
+position = Vector2( -192.655, -250.17 )
+z_index = 3
 initial_state = 1
-initial_owner = 0
+id = 44
+initial_owner = 1
 
 [node name="Control" type="Control" parent="." index="1"]
 
@@ -419,9 +468,9 @@ _sections_unfolded = [ "Transform" ]
 
 [connection signal="timeout" from="actionTimer" to="." method="_on_Timer_timeout"]
 
-[connection signal="timeout" from="basic_timeout" to="." method="_on_Timer_timeout"]
-
 [connection signal="timeout" from="basic_timeout" to="." method="_on_basic_timeout_timeout"]
+
+[connection signal="timeout" from="basic_timeout" to="." method="_on_Timer_timeout"]
 
 [connection signal="pressed" from="endturn" to="." method="_on_endturn_pressed"]
 

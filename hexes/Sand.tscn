@@ -6,7 +6,9 @@
 [node name="Sand" type="Sprite"]
 
 texture = ExtResource( 1 )
+offset = Vector2( 0, -7 )
 script = ExtResource( 2 )
+_sections_unfolded = [ "Offset" ]
 type = 7
 moveWater = false
 moveLand = true

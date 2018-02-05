@@ -6,7 +6,9 @@
 [node name="Tree" type="Sprite"]
 
 texture = ExtResource( 1 )
+offset = Vector2( 0, -8 )
 script = ExtResource( 2 )
+_sections_unfolded = [ "Offset" ]
 type = 5
 moveWater = false
 moveLand = true

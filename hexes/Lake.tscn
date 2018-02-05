@@ -5,8 +5,11 @@
 
 [node name="Lake" type="Sprite"]
 
+position = Vector2( 2, 0 )
 texture = ExtResource( 1 )
+offset = Vector2( -1, -2 )
 script = ExtResource( 2 )
+_sections_unfolded = [ "Offset" ]
 type = 4
 moveWater = true
 moveLand = true

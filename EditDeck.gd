@@ -63,7 +63,8 @@ func initialize_decks(reset=true):
 			new_deck_tab.top_level = self
 			for card in deck_lists[deck]:
 				update(card, deck)
-	add_blank_tab()
+	if !$Tabs.has_node("+"):
+		add_blank_tab()
 
 func add_blank_tab():
 	var empty = DeckListEdit.instance()
@@ -130,7 +131,7 @@ func _ready():
 		cards[card] = newCard
 		$Collection.add_item(cards[card])
 		$Collection.top_level=self
-	print(globals.deck_list.keys().size())
+	
 	if !globals.deck_list==null and globals.deck_list.keys().size()>0:
 		initialize_decks()
 	else:
@@ -145,6 +146,16 @@ func _ready():
 
 
 func _on_Done_pressed():
+	var deck_name = state['current_deck']
+	var list = []
+	for key in deck_lists[state['current_deck']].keys():
+		for i in deck_lists[state['current_deck']][key]:
+			list.append(key)
+	
+	globals.authenticated_server_request("/decks/"+deck_name,HTTPClient.METHOD_POST,{'cards':list})
+	
+	globals.set_deck_list(globals.authenticated_server_request("/decks",HTTPClient.METHOD_GET,{}))
+	
 	globals.Deck = $Tabs.get_current_tab_control().get_name()
 	globals.set_scene('game')
 	#save deck to globals

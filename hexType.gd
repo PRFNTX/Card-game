@@ -17,9 +17,13 @@ class state:
 	var state
 
 	func _init(myself,i):
+		
 		me=myself
 		state=i
+		for child in me.get_children():
+			child.queue_free()
 		me.child=me.arr_Lands[i].instance()
+		
 		me.add_child(me.child)
 
 

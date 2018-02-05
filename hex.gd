@@ -2,7 +2,7 @@ extends Node2D
 
 export(int,"empty","orb","land","lake","tree","hill","sand","well") var initial_state=0
 onready var sprite=get_node("sprite")
-export(int) var id
+export(int) var id = 0
 export(int) var initial_owner = -1
 
 export(Color,RGBA) var move
@@ -261,7 +261,7 @@ var gameNode
 
 #### LOCAL STATE
 
-var stateLocal={"cover":null,"target":false, "hex_type":initial_state,"active_unit":null}
+var stateLocal={"cover":Color(0,0,0,0),"target":false, "hex_type":initial_state,"active_unit":null,'hovered':false}
 
 ###LOCAL STATE UPDATE FUNCTIONS
 
@@ -290,10 +290,16 @@ func hex_type(val):
 func active_unit(unit):
 	stateLocal['active_unit']=unit
 
+func hovered(val):
+	if val and stateLocal['cover']!=Color(0,0,0,0):
+		$sprite.modulate =mouseover_color
+	else:
+		$sprite.modulate= stateLocal['cover']
+
 #watchState: components of state to track and respond to
-var watchState=["action",'active_unit']
-var stateCopy={"action":"",'active_unit':null}
-var stateCopyMethods={"action":"update_Action",'active_unit':'update_active_unit'}
+var watchState=["action",'active_unit','hovered']
+var stateCopy={"action":"",'active_unit':null,'hovered':null}
+var stateCopyMethods={"action":"update_Action",'active_unit':'update_active_unit','hovered':'update_hovered'}
 
 func connect(game):
 	gameNode=game
@@ -313,25 +319,23 @@ func update_Action(val, by):
 func update_active_unit(val, by):
 	active_unit(val)
 
+func update_hovered(val,by):
+	hovered(val==self.id)
+
 
 ### INPUT SECTION
 
 func _input(event):
-	if mouseover and stateCopy["action"]!="" and event is InputEventMouseButton and stateLocal["target"]:
+	if stateCopy["action"]!="" and event.is_action('click') and stateLocal["target"] and false:
+		gameNode.completeAction(self)
+		stateLocal["target"]=false
+
+func complete_action_click():
+	if stateLocal["target"] and stateCopy["action"]!="":
 		gameNode.completeAction(self)
 		stateLocal["target"]=false
 
 
-var mouseover=false
-
-
-func _on_Area2D_mouse_entered():
-	mouseover=true
-	if stateLocal["cover"]!=null:
-		setModulate(mouseover_color)
-
 
 func _on_Area2D_mouse_exited():
-	mouseover=false
-	if stateLocal["cover"]!=null:
-		setModulate(stateLocal["cover"])
+	gameNode.setState({'hovered':null})

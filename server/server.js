@@ -1,4 +1,5 @@
 const express = require("express")
+const app = express()
 const mongoose = require('mongoose')
 
 const jwt=require('jsonwebtoken')
@@ -7,13 +8,26 @@ const bcrypt = require('bcrypt')
 const User = require('./models/user')
 const Deck = require('./models/deck')
 
+const server = require('http').Server(app)
+const io = require('socket.io')(server)
+
+
 const PORT=process.env.PORT || 80
 
 mongoose.connect('mongodb://localhost:27017/NotFaeria')
 
-const app = express()
+
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
+
+//SOCKET
+
+io.on('connection', function(socket){
+    console.log('connection')
+    socket.on('disconnect', function(){
+        console.log('disconnected')
+    })
+})
 
 
 

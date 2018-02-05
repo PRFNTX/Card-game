@@ -28,10 +28,9 @@ func deck_init(val):
 	print('deck init')
 	Deck = val
 	var cards = 0
-	for card in val.keys():
-		for i in val[card]:
-			curr_Deck.push_back(card)
-		cards+=val[card]
+	for card in val:
+		curr_Deck.push_back(card)
+		cards+=1
 	setCards(cards)
 
 var curr_Deck=[]
@@ -71,17 +70,14 @@ func sig_TurnEnd(turn):
 
 ###STATE UPDATE
 func state_update(newState,keys):
-	print(newState)
 	for check in keys:
 		if watch_state.has(check):
 			self.call(check, newState[check])
 
 ###STATE UPDATE FUNCTIONS
 func current_turn(newVal):
-	print(newVal)
-	print(me)
 	local_state['active'] = (newVal==me)
-	print(local_state['active'])
+	
 
 ####VALUE CONTROLLS
 
@@ -98,7 +94,7 @@ func useAction(num):
 
 func setCards(val):
 	print('set')
-	print(cards)
+	
 	cards=val
 	lbl_cards.text=str(cards)
 

@@ -98,8 +98,8 @@ func setState(newState):
 ### STATE FUNCTIONS
 
 func active(newVal):
-	state['active']=newVal==self
-	if newVal==self:
+	state['active']= newVal
+	if newVal:
 		$light.show()
 		
 	else:
