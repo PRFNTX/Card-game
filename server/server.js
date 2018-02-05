@@ -7,7 +7,7 @@ const bcrypt = require('bcrypt')
 const User = require('./models/user')
 const Deck = require('./models/deck')
 
-const PORT=process.env.PORT || 8080
+const PORT=process.env.PORT || 80
 
 mongoose.connect('mongodb://localhost:27017/NotFaeria')
 

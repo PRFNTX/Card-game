@@ -3,7 +3,7 @@
 [ext_resource path="res://EditDeck.gd" type="Script" id=1]
 [ext_resource path="res://Collection.gd" type="Script" id=2]
 
-[node name="EditDeck" type="Node2D" index="0"]
+[node name="EditDeck" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
@@ -652,55 +652,54 @@ text = "Done"
 flat = false
 align = 1
 
-[node name="Name" type="LineEdit" parent="." index="3"]
+[node name="Save" type="Button" parent="." index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 880.0
-margin_top = 481.0
-margin_right = 1012.0
-margin_bottom = 508.0
+margin_left = 934.0
+margin_top = 526.0
+margin_right = 1011.0
+margin_bottom = 546.0
 rect_pivot_offset = Vector2( 0, 0 )
 focus_mode = 2
-mouse_filter = 2
+mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
-size_flags_vertical = 4
-max_length = 20
-focus_mode = 2
-context_menu_enabled = true
-placeholder_text = "Deck Name"
-placeholder_alpha = 0.6
-caret_blink = false
-caret_blink_speed = 0.65
-caret_position = 0
-_sections_unfolded = [ "Placeholder" ]
-
-[node name="Save" type="Button" parent="." index="4"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 930.0
-margin_top = 518.0
-margin_right = 1007.0
-margin_bottom = 538.0
-rect_pivot_offset = Vector2( 0, 0 )
-focus_mode = 2
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
+size_flags_vertical = 1
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
 text = "Save Deck"
 flat = false
-align = 0
+align = 1
+
+[node name="Name" type="LineEdit" parent="." index="4"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 892.0
+margin_top = 490.0
+margin_right = 1015.0
+margin_bottom = 514.0
+rect_pivot_offset = Vector2( 0, 0 )
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 1
+size_flags_horizontal = 1
+size_flags_vertical = 1
+focus_mode = 2
+context_menu_enabled = true
+placeholder_text = "Deck name"
+placeholder_alpha = 0.6
+caret_blink = false
+caret_blink_speed = 0.65
+caret_position = 0
+_sections_unfolded = [ "Placeholder" ]
 
 [connection signal="item_selected" from="Collection/Gold" to="Collection" method="_on_Gold_item_selected"]
 

@@ -13,7 +13,7 @@ func request(endpoint):
 	var err = 0
 	var http = HTTPClient.new()
 	
-	err = http.connect_to_host('localhost',8080)
+	err = http.connect_to_host('54.244.61.234',80)
 	
 	while( http.get_status()==HTTPClient.STATUS_CONNECTING or http.get_status()==HTTPClient.STATUS_RESOLVING):
 		http.poll()
