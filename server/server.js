@@ -11,8 +11,6 @@ const Deck = require('./models/deck')
 const http = require('http')
 const ws = require('ws').Server
 
-const bufferutil = require('bufferutil')
-
 const PORT=process.env.PORT || 443
 
 const server = http.Server(app)
