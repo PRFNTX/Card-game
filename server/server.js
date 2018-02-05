@@ -312,5 +312,6 @@ app.listen(PORT, ()=>{
 server.listen(PORT,()=>{
     console.log('socket running')
 })
+io=io.listen(server)
 
 
