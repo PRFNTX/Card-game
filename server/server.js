@@ -25,8 +25,9 @@ app.use(express.urlencoded({extended:true}))
 var users = []
 var connections = []
 
-io.on('connection', function(socket){
+io.sockets.on('connection', function(socket){
     console.log('connection')
+    connections.push(socket)
     socket.on('disconnect', function(){
         console.log('disconnected')
     })
