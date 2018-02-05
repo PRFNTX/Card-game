@@ -40,6 +40,7 @@ app.get('/decks', authenticate, check,(req,res)=>{
 })
 
 app.get('/decks/:name', authenticate, (req,res)=>{
+    
     const user = req.user.username
     Deck.findOne({username:user,deck_name:req.params.name}).then(
         deck=>{
@@ -58,12 +59,14 @@ app.get('/decks/:name', authenticate, (req,res)=>{
 app.post('/decks/:name', authenticate,(req,res)=>{
     const deckList = req.body.cards
     const user = req.user.username
+    console.log('create deck for ', user)
     Deck.create({
         username:user,
         deck_name:req.params.name,
         cards:deckList
     }).then(
         ret=>{
+            console.log('deck made')
             res.status(200).json({message:'deck create'})
         }
     ).catch(
