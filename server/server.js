@@ -237,6 +237,7 @@ wss.on('connection', (socket, req)=>{
     socket.on('error', error=>console.log(error))
 
     socket.on('close', error=>console.log('close'))
+    setInterval(_on_time,3000)
 })
 
 _on_time = ()=>{
@@ -244,14 +245,14 @@ _on_time = ()=>{
     
     wss.clients.forEach(client=>{
         try{
-            client.send(msg)
+            console.log('has name', client.hasOwnProperty('name'))
         } catch(err){
             console.log(err)
         }
     })
 }
 
-setInterval(_on_time,3000)
+
 
 
 
