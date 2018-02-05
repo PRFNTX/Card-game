@@ -33,16 +33,190 @@ mongoose.connect('mongodb://localhost:27017/NotFaeria')
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
+
+let chat_channels = [{name:'',members:[]}]
+
+let games = [{name:'',owner:socket, challenger:socket,started:'bool'}]
+
+//chanels
+function join_channel(name, member){
+    //join events to keep member lists updated
+    //send joiner the member list
+    let found_channel
+    chat_channels.forEach(channel=>{
+        if (channel.name===name){
+            found_channel = channel
+        }
+    })
+    if (!found_channel){
+        chat_channels.push({
+            name,
+            members:[member]
+        })
+    }
+    found_channel.members.push(member)
+}
+
+function leave_channel(name, member){
+    //leave events to keep lists update
+    chat_channels.forEach((chat,i)=>{
+        if (chat.name===name){
+            chat_channels[i] = chat.members.filter(usr=>usr.name!==member.name)
+        }
+    })
+}
+
+function message_channel(channel_name,sent_by,message){
+    let found
+    chat_channels.forEach(chat=>{
+        if (chat.name===channel_name){
+            found=chat
+        }
+    })
+    found.members.forEach(member=>{
+        member.send(JSON.stringify({'msg_channel':{name:sent_by.name,message:message}}))
+    })
+}
+
+//games
+function create_game(name,owner){
+    games.push({
+        name,
+        owner
+    })
+}
+
+function join_game(name,member){
+    let found
+    games.forEach(game=>{
+        if ((game.name===name) && (!game.challenger)){
+            found = game
+        }
+    })
+    found.challenger = member
+    found.owner.send(JSON.stringify({'join':member.name}))
+}
+
+function leave_game(name,member){
+    let found
+    games.forEach(game=>{
+        if (game.name===name){
+            found = game
+        }
+    })
+    found.challenger = null
+    found.owner.send(JSON.stringify({'leave':""}))
+}
+
+function close_game(name){
+    //message members that game has closed
+    let found
+    games.forEach(game=>{
+        if (game.name===name){
+            game.started=true
+            game.owner.send(JSON.stringify({'close':""}))
+            game.challenger.send(JSON.stringify({'close':""}))
+        }
+    })
+    games = games.filter(game=>game.name!==name)
+}
+
+function start_game(name){
+    let found
+    games.forEach(game=>{
+        if (game.name===name){
+            game.started=true
+            game.owner.send(JSON.stringify({'start':"0"}))
+            game.challenger.send(JSON.stringify({'start':"1"}))
+        }
+    })
+}
+
+//ACTIONS
+
+function action(name,params){
+    let found
+    games.forEach(game=>{
+        if (game.name===name){
+            found = game
+        }
+    })
+    //params [ 0 ] = player num
+    let send_to
+    if (params[0]==0){
+        send_to = found.challenger
+    } else {
+        sound_to = found.owner
+    }
+    //params[ 1 ] action name (to .call())
+    //params[ 2 ] action target
+    //params[ 3 ] setState({this thing})
+    send_to.send(JSON.stringify(params))
+}
 //SOCKET
 
+//connect user
+    //user identifies {'greeting':username}
+    //user commands:
+        //create game room {'create':name}
+        //join game room {'join':name}
+        //drop
+        //game room starts game {'start':name}
+            //game actions {'action': {state stuff}}
+        
+        //send message {'msg_user':'message'}
+        //join chat channel {'channel': name}
+            //message channel {'msg_channel':[channel,message]}
+
+        
 var users = []
 var connections = []
 
 wss.on('connection', (socket, req)=>{
     console.log('connected')
+    
     socket.on('message', event=>{
-        console.log(event)
-        socket.send('TEXT')
+        let command = JSON.parse(event)
+        if (Object.keys(command)[0]==='greeting'){
+            socket.name=command['greeting']
+        }
+        let key = Object.keys(command)[0]
+        let value = command[key]
+        if (socket.hasOwnProperty('name')){
+            switch (key){
+                case 'create':
+                    create_game(value,socket);
+                    break;
+                case 'join':
+                    join_game(value,socket);
+                    break;
+                case 'drop':
+                    leave_game(value,socket);
+                    break;
+                case 'close':
+                    close_game(value);
+                    break;
+                case 'start':
+                    start_game(value);
+                    break;
+                case 'join_channel':
+                    join_channel(value,socket);
+                    break;
+                case 'leave_channel':
+                    leave_channel(value,socket);
+                    break;
+                case 'msg_channel':
+                    message_channel(value[0],socket,value[1]);
+                    break;
+                case 'action':
+                    game_action(name,value);
+                    break;
+
+        }
+        
+
+        }
+        
     })
     socket.on('error', error=>console.log(error))
 
@@ -233,6 +407,14 @@ app.post('/user/friends', authenticate, (req,res)=>{
     .catch(err=>{
         res.status(500).json({message:'friend add failed'})
     })
+})
+
+app.get('/games', authenticate, (res,res)=>{
+    res.status(200).json(games.filter(game=>!game.started))
+})
+
+app.get('/channels', authenticate, (req,res)=>{
+    res.status(200).json(chat_channels)
 })
 
 

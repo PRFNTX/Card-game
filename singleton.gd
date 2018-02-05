@@ -8,20 +8,26 @@ var card_resources = {}
 var Deck = {}
 var deck_list=null
 
+var websocket
+
 func set_deck_list(parsedjson):
 	deck_list={}
 	for deck in parsedjson:
 		deck_list[deck['deck_name']] = deck['cards']
 	print(deck_list)
 
-
-
 var currentScene
 
 func _ready():
 	load_cards()
+	websocket = preload('res://Godot-Websocket/websocket.gd')
 	#get_tree().change_scene(scenes['login'])
 	
+
+func socket_start():
+	websocket.start('54.244.61.234',443)
+	websocket.set_reciever(self,'_on_message_recieved')
+
 
 const dirPath='res://cards/'
 func load_cards():
@@ -101,3 +107,25 @@ func authenticated_server_request(endpoint,method,body):
 	
 	#arrays of objects are arrays of dictionaries
 	return parse_json(str((rb.get_string_from_utf8())))
+
+#CHAT CHANNELS
+#join_chat
+#leave_chat
+#msg_channel
+
+#GAMES
+#join
+#leave
+#close
+#start
+
+#ACTIONS
+#actions
+
+
+func _on_message_recieved(msg):
+	var event = to_json(msg)
+	var action = event.keys()[0]
+	
+
+
