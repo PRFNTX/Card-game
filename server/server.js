@@ -9,10 +9,15 @@ const User = require('./models/user')
 const Deck = require('./models/deck')
 
 const server = require('http').Server(app)
-const io = require('socket.io')(server)
-
-
+let io = require('socket.io')(server)
 const PORT=process.env.PORT || 80
+
+server.listen(PORT,()=>{
+    console.log('socket running')
+})
+io=io.listen(server)
+
+
 
 mongoose.connect('mongodb://localhost:27017/NotFaeria')
 
@@ -309,9 +314,6 @@ app.listen(PORT, ()=>{
 })
 */
 
-server.listen(PORT,()=>{
-    console.log('socket running')
-})
-io.listen(server)
+
 
 
