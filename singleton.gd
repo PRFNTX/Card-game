@@ -20,13 +20,14 @@ var currentScene
 
 func _ready():
 	load_cards()
-	websocket = preload('res://Godot-Websocket/websocket.gd')
+	websocket = preload('res://Godot-Websocket/websocket.gd').new(self)
 	#get_tree().change_scene(scenes['login'])
 	
 
 func socket_start():
 	websocket.start('54.244.61.234',443)
 	websocket.set_reciever(self,'_on_message_recieved')
+	websocket.send({'greeting':'prfntx'})
 
 
 const dirPath='res://cards/'
@@ -129,7 +130,8 @@ func authenticated_server_request(endpoint,method,body):
 
 #ACTIONS
 #actions
-
+func send_msg(value):
+	websocket.send(value)
 
 func _on_message_recieved(msg):
 	var event = parse_json(msg)

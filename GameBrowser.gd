@@ -17,7 +17,7 @@ func setState(newState):
 
 func show_owner(val):
 	state['show_owner']=val
-	if not val==nul:
+	if not val==null:
 		$Owner/lbl_Name.text=val
 		$Owner.show()
 	else:
@@ -25,7 +25,7 @@ func show_owner(val):
 
 func show_challenger(val):
 	state['show_challenger']=val
-	if not val==nul:
+	if not val==null:
 		$Challenger/lbl_Name.text=val
 		$Challenger.show()
 		$Games.hide()
@@ -45,22 +45,18 @@ func is_owner(boo):
 ########
 func _ready():
 	globals.get_games()
-	for game in globals.open_games.keys():
-		$Games/Games.add_item(game)
+	for game in globals.open_games:
+		$Games/Games.add_item(game['name'])
 		
 
 
 ###EVENTS
 
 func join(value):
-	if not is_owner:
-		$Games.hide()
-		$Challenger/lbl_Name.text = "THIS IS YOU"
-		$Challenger.show()
-		$Owner/lblName.text = event[value]
+	if not state['is_owner']:
+		setState({'show_owner':value,'show_challenger':'THis is yoU'})
 	else:
-		$Challenger/lbl_Name.text = value
-		$Challenger.show()
+		setState({'show_challenger':value})
 
 func collision(val):
 	$Games/GameName.text = ""
@@ -83,15 +79,15 @@ func start(val):
 func _on_Join_pressed():
 	var game
 	if $Games/Games.get_selected_items().size()>0:
-		game = $Games/Games.get_selected_items()[0].get
-		globals.send_msg(to_json({'join':game}))
+		game = $Games/Games.get_selected_items()
+		globals.send_msg({'join':game})
 
 
 func _on_Create_pressed():
 	var game
 	if $Games/GameName.text.length()>0:
-		game = $Games/Games.get_selected_items()[0].get
-		globals.send_msg(to_json({'create':game}))
+		game = $Games/Games.get_selected_items()
+		globals.send_msg({'create':game})
 
 
 func _on_Games_item_selected( index ):

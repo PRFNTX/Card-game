@@ -187,6 +187,7 @@ wss.on('connection', (socket, req)=>{
     console.log('connected')
     
     socket.on('message', event=>{
+        console.log(event)
         let command = JSON.parse(event)
         if (Object.keys(command)[0]==='greeting'){
             socket.name=command['greeting']
@@ -196,6 +197,7 @@ wss.on('connection', (socket, req)=>{
         if (socket.hasOwnProperty('name')){
             switch (key){
                 case 'create':
+                    console.log('create')
                     create_game(value,socket);
                     break;
                 case 'join':
