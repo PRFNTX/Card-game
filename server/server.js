@@ -8,17 +8,21 @@ const bcrypt = require('bcrypt')
 const User = require('./models/user')
 const Deck = require('./models/deck')
 
-const http = require('http')
+const server = require('http').Server(app)
+/*
 const ws = require('ws').Server
+*/
 
+var io = require('socket.io')(server)
 const PORT=process.env.PORT || 443
 
-const server = http.Server(app)
 
+/*
 const wss = new ws({
     server: server,
     perMessafeDefalte:false
 })
+*/
 
 
 
@@ -37,13 +41,13 @@ app.use(express.urlencoded({extended:true}))
 
 var users = []
 var connections = []
-
+/*
 wss.on('connection', (socket)=>{
     console.log('connected')
     ws.onmessage = event=>console.log(event.data)
     ws.onerror = error=>console.log(error)
 })
-
+*/
 _on_time = ()=>{
     msg = "A"
     console.log(wss.clients)
@@ -57,16 +61,19 @@ _on_time = ()=>{
 }
 
 setInterval(_on_time,3000)
-/*
+
 io.on('connection', function(socket){
     console.log('connection')
     connections.push(socket)
+    socket.on('message', function(data){
+        console.log(data)
+    })
     socket.on('disconnect', function(){
         console.log('disconnected')
     })
 })
 
-*/
+
 
 function check(req,res,next){
     console.log("body", req.body)
