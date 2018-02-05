@@ -44,7 +44,9 @@ wss.on('connection', (socket, req)=>{
         console.log(event)
         ws.send('TEXT')
     })
-    socket.onerror = error=>console.log(error)
+    socket.on('error', error=>console.log(error))
+
+    socket.on('close', error=>console.log('close'))
 })
 
 _on_time = ()=>{
