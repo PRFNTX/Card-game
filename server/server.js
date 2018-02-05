@@ -26,6 +26,10 @@ server.listen(PORT,()=>{
     console.log('socket running')
 })
 
+app.listen(80,()=>{
+    console.log('endpoints')
+})
+
 
 mongoose.connect('mongodb://localhost:27017/NotFaeria')
 

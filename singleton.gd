@@ -2,7 +2,7 @@ extends Node
 
 var authentication_token
 
-var scenes = {'game':"res://Game.tscn",'title':'res://Title.tscn', 'deck':'res://EditDeck.tscn','login':'res://Login.tscn'}
+var scenes = {'game':"res://Game.tscn",'title':'res://Title.tscn', 'deck':'res://EditDeck.tscn','login':'res://Login.tscn','browse_games':'res://GameBrowser.tscn'}
 var card_resources = {}
 
 var Deck = {}
@@ -42,6 +42,12 @@ func load_cards():
 		else:
 			card_resources[file_name.split('.')[0]]=load(dirPath+file_name)
 		file_name = dir.get_next()
+
+
+var open_games
+func get_games():
+	open_games = authenticated_server_request('/games',HTTPClient.METHOD_GET,{})
+
 
 func set_scene(scene):
 	get_tree().change_scene(scenes[scene])
@@ -118,14 +124,49 @@ func authenticated_server_request(endpoint,method,body):
 #leave
 #close
 #start
+#open
+#collision
 
 #ACTIONS
 #actions
 
 
 func _on_message_recieved(msg):
-	var event = to_json(msg)
+	var event = parse_json(msg)
 	var action = event.keys()[0]
-	
+	call(action,event[action])
+	if get_tree().get_current_scene().has_method(action):
+		get_tree().get_current_scene().call(action,event[action])
+
+##CHATS
+func join_chat(val):
+	pass
+
+func leave_chat(val):
+	pass
+
+func msg_channel(val):
+	pass
+
+
+var Game_player_num = null
+### GAMES
+func join(val):
+	pass
+
+func leave(val):
+	pass
+
+func close(val):
+	pass
+
+func start(val):
+	pass
+
+func open(val):
+	pass
+
+func collision(val):
+	pass
 
 

@@ -9,7 +9,7 @@ func _ready():
 	
 
 func _on_game_pressed():
-	globals.set_scene('game')
+	globals.set_scene('browse_games')
 
 
 func _on_deck_pressed():
