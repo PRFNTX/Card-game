@@ -264,7 +264,7 @@ wss.on('connection', (socket, req)=>{
                     }
                     break;
                 case 'game_list':
-                    get_list(socket)
+                    game_list(socket)
                     break;
                 case 'join':
                     join_game(value,socket);

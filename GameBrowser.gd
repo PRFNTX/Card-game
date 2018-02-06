@@ -107,15 +107,11 @@ func opp_ready(val):
 ########
 func _ready():
 	globals.get_games()
-	for game in globals.open_games:
-		$Games/Games.add_item(game['name'])
-	for deck in globals.deck_list.keys():
-		$Decks/Decks.add_item(deck)
+	
 
 func refresh_games():
 	globals.get_games()
-	for game in globals.open_games:
-		$Games/Games.add_item(game['name'])
+	
 
 
 ###EVENTS
@@ -157,7 +153,7 @@ func deck(val):
 		$Owner/DeckName.text = val
 
 
-
+var selected_game
 func _on_Join_pressed():
 	var game
 	if $Games/Games.get_selected_items().size()>0:
@@ -176,6 +172,7 @@ func _on_Games_item_selected( index ):
 	var game = $Games/Games.get_item_text(index)
 	var game_owner = globals.open_games[game]
 	setState({'show_owner':game_owner,'show_challenger':null,'is_owner':false})
+	selected_game = index
 	
 
 #### DECK SELECTION STUFF

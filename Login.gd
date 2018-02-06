@@ -13,6 +13,7 @@ func _ready():
 func request(endpoint):
 	var err = 0
 	var http = HTTPClient.new()
+	http.set_blocking_mode(true)
 	
 	err = http.connect_to_host('54.244.61.234',80)
 	

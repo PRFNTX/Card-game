@@ -25,10 +25,13 @@ func _ready():
 	#get_tree().change_scene(scenes['login'])
 	
 
+var socket_active = false
 func socket_start():
-	websocket.start('54.244.61.234',443)
-	websocket.set_reciever(self,'_on_message_recieved')
-	websocket.send({'greeting':user.username})
+	if !socket_active:
+		websocket.start('54.244.61.234',443)
+		websocket.set_reciever(self,'_on_message_recieved')
+		websocket.send({'greeting':user.username})
+		socket_active=true
 
 
 const dirPath='res://cards/'
@@ -88,6 +91,9 @@ func _on_message_recieved(msg):
 
 func hello(val):
 	print('hello')
+
+func invalid(val):
+	print("UNRECOGNIZED MESSAGE ID")
 
 func game_list(val):
 	open_games = val
