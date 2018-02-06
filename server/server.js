@@ -143,7 +143,7 @@ function close_game(name,owner_disc=false,member_disc=false){
             if (!owner_disc){
                 game.owner.send(JSON.stringify({'close':""}))
             }
-            if (!member_disc){
+            if (!member_disc && game.challenger){
                 game.challenger.send(JSON.stringify({'close':""}))
             }
             
