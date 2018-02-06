@@ -92,6 +92,8 @@ function create_game(name,owner){
             challenger:"",
             started:false
         })
+        console.log(owner)
+        console.log('can send', owner.hasOwnProperty('send'))
         owner.send(JSON.stringify({'create':name}))
     } else {
         owner.send(JSON.stringify({'collision':name}))
@@ -237,7 +239,7 @@ wss.on('connection', (socket, req)=>{
     socket.on('error', error=>console.log(error))
 
     socket.on('close', error=>console.log('close'))
-    setInterval(_on_time,3000)
+    
 })
 
 _on_time = ()=>{
@@ -251,6 +253,8 @@ _on_time = ()=>{
         }
     })
 }
+
+setInterval(_on_time,3000)
 
 
 
