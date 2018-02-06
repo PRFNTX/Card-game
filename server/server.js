@@ -163,6 +163,42 @@ function start_game(name){
     })
 }
 
+function ready_game(name, value, by){
+    let found 
+    games.forEach(game=>{
+        if (game.name===name){
+            found = game
+        }
+    })
+    try {
+        if (found.challenger.name===by){
+            found.owner.send(JSON.stringify({'ready':value}))
+        } else if (found.owner.name===by){
+            found.challenger.send(JSON.stringify({'ready':value}))
+        }
+    } catch(err){
+        console.log(err)
+    }
+}
+
+function deck_game(name, value, by){
+    let found 
+    games.forEach(game=>{
+        if (game.name===name){
+            found = game
+        }
+    })
+    try {
+        if (found.challenger.name===by){
+            found.owner.send(JSON.stringify({'deck':value}))
+        } else if (found.owner.name===by){
+            found.challenger.send(JSON.stringify({'deck':value}))
+        }
+    } catch(err){
+        console.log(err)
+    }
+}
+
 //ACTIONS
 
 function action(name,params){
@@ -229,10 +265,10 @@ wss.on('connection', (socket, req)=>{
                     leave_game(value,socket);
                     break;
                 case 'close':
-                    close_game(value);
+                    close_game(own_game, value);
                     break;
                 case 'start':
-                    start_game(value);
+                    start_game(in_game||own_game);
                     break;
                 case 'join_channel':
                     join_channel(value,socket);
@@ -244,7 +280,13 @@ wss.on('connection', (socket, req)=>{
                     message_channel(value[0],socket,value[1]);
                     break;
                 case 'action':
-                    game_action(name,value);
+                    game_action(in_game||own_game,value);
+                    break;
+                case 'ready':
+                    ready_game(in_game||own_game, value, socket.name)
+                    break;
+                case 'deck':
+                    deck_game(in_game||own_game, value, socket.name)
                     break;
 
         }
@@ -280,7 +322,7 @@ _on_time = ()=>{
     })
 }
 
-setInterval(_on_time,3000)
+//setInterval(_on_time,3000)
 
 
 

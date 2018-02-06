@@ -45,6 +45,7 @@ func load_cards():
 		file_name = dir.get_next()
 
 
+#### GET GAME LIST
 var open_games
 func get_games():
 	open_games = authenticated_server_request('/games',HTTPClient.METHOD_GET,{})
@@ -166,7 +167,7 @@ func close(val):
 func start(val):
 	pass
 
-func open(val):
+func create(val):
 	pass
 
 func collision(val):
