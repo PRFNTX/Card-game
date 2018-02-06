@@ -50,10 +50,12 @@ func request(endpoint):
 		headers = http.get_response_headers_as_dictionary()
 		print("code: ", http.get_response_code())
 		print("**headers:\\n", headers)
+		
 		globals.authentication_token = headers['authenticate']
+	
 		globals.set_scene('title')
 
-		"""
+	
 		if (http.is_response_chunked()):
 			print('response is chunked')
 		else:
@@ -69,7 +71,12 @@ func request(endpoint):
 				OS.delay_usec(1000)
 			else:
 				rb = rb+chunk
-		"""
+				
+		globals.username = parse_json(str((rb.get_string_from_utf8())))
+		globals.set_scene('title')
+		
+		
+
 func _on_Button_pressed():
 	if $username.text.length()>0 and $password.text.length()>0:
 		if method_login:

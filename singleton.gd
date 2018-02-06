@@ -27,7 +27,7 @@ func _ready():
 func socket_start():
 	websocket.start('54.244.61.234',443)
 	websocket.set_reciever(self,'_on_message_recieved')
-	websocket.send({'greeting':'prfntx'})
+	websocket.send({'greeting':username})
 
 
 const dirPath='res://cards/'
@@ -50,10 +50,12 @@ var open_games
 func get_games():
 	open_games = authenticated_server_request('/games',HTTPClient.METHOD_GET,{})
 
-
+### SCENES
 func set_scene(scene):
 	get_tree().change_scene(scenes[scene])
 
+
+#### HTTP REUQESTS
 func authenticated_server_request(endpoint,method,body):
 	var err = 0
 	var http = HTTPClient.new()
