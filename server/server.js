@@ -93,7 +93,7 @@ function create_game(name,owner){
             started:false
         })
         console.log(owner)
-        console.log('can send', owner.hasOwnProperty('send'))
+        console.log('can send', 'send' in owner)
         owner.send(JSON.stringify({'create':name}))
     } else {
         owner.send(JSON.stringify({'collision':name}))
