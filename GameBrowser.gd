@@ -120,6 +120,10 @@ func refresh_games():
 
 ###EVENTS
 
+func game_list(val):
+	for game in globals.open_games:
+		$Games/Games.add_item(game['name'])
+
 func join(value):
 	if not state['is_owner']:
 		setState({'show_owner':value,'show_challenger':'THis is yoU','in_game':true})

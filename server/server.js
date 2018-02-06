@@ -88,6 +88,11 @@ function message_channel(channel_name,sent_by,message){
 }
 
 //games
+
+function game_list(res){
+    res.send(JSON.stringify(games.map(game=>{return {'name':game.name, 'owner':game.owner.name}})))
+}
+
 function create_game(name,owner){
     console.log('CREATE OWNER',owner.name)
     if (games.filter(game=>game.name===name).length===0){
@@ -258,6 +263,9 @@ wss.on('connection', (socket, req)=>{
                         own_game=value
                     }
                     break;
+                case 'game_list':
+                    get_list(socket)
+                    break;
                 case 'join':
                     join_game(value,socket);
                     in_game=value
@@ -289,6 +297,9 @@ wss.on('connection', (socket, req)=>{
                 case 'deck':
                     deck_game(in_game||own_game, value, socket.name)
                     break;
+                default:
+                    socket.send(JSON.strigify({'invalid':value}))
+                    
 
         }
         

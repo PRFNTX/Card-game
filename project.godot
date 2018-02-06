@@ -17,6 +17,7 @@ config/icon="res://icon.png"
 [autoload]
 
 master="*res://singleton.gd"
+HTTP="*res://HTTPScript.gd"
 
 [gdnative]
 
