@@ -175,14 +175,16 @@ function ready_game(name, value, by){
             found = game
         }
     })
-    try {
-        if (found.challenger.name===by){
-            found.owner.send(JSON.stringify({'ready':value}))
-        } else if (found.owner.name===by){
-            found.challenger.send(JSON.stringify({'ready':value}))
+    if (Found.challenger){
+        try {
+           if (found.challenger.name===by){
+               found.owner.send(JSON.stringify({'ready':value}))
+            } else if (found.owner.name===by){
+                found.challenger.send(JSON.stringify({'ready':value}))
+            }
+        } catch(err){
+            console.log(err)
         }
-    } catch(err){
-        console.log(err)
     }
 }
 
@@ -193,14 +195,16 @@ function deck_game(name, value, by){
             found = game
         }
     })
-    try {
-        if (found.challenger.name===by){
-            found.owner.send(JSON.stringify({'deck':value}))
-        } else if (found.owner.name===by){
-            found.challenger.send(JSON.stringify({'deck':value}))
+    if (Found.challenger){
+        try {
+            if (found.challenger.name===by){
+                found.owner.send(JSON.stringify({'deck':value}))
+            } else if (found.owner.name===by){
+                found.challenger.send(JSON.stringify({'deck':value}))
+            }
+        } catch(err){
+            console.log(err)
         }
-    } catch(err){
-        console.log(err)
     }
 }
 
