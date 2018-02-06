@@ -13,13 +13,13 @@ func setState(newState):
 	for key in newState.keys():
 		call(key,newState[key])
 	
-	$Owner/Change.hide()
-	$Challenger/Change.hide()
-	if state['ready']:
+	$Owner/Change_o.hide()
+	$Challenger/Change_c.hide()
+	if state['self_ready']:
 		if state['is_owner']:
-			$Owner/Change.show()
+			$Owner/Change_o.show()
 		else:
-			$Challenger/Change.show()
+			$Challenger/Change_c.show()
 	
 	if state['is_owner'] and state['self_ready'] and state['opp_ready']:
 		$Start.show()
@@ -72,7 +72,7 @@ func in_game(val):
 	
 
 func self_ready(val):
-	state['ready']=val
+	state['self_ready']=val
 	if val:
 		if state['is_owner']:
 			$Owner/is_ready.text='Ready!'
@@ -88,7 +88,8 @@ func self_ready(val):
 		else:
 			$Challenger/is_ready.text='waiting...'
 			$Challenger/Change_c.hide()
-		$Decks.show()
+		if state['in_game']:
+			$Decks.show()
 	globals.send_msg({'ready':val})
 
 func opp_ready(val):
@@ -107,12 +108,19 @@ func opp_ready(val):
 ########
 func _ready():
 	globals.get_games()
+	get_decks()
 	
 
 func refresh_games():
 	globals.get_games()
 	
 
+var deck_list
+func get_decks():
+	deck_list = globals.deck_list
+	for deck in deck_list.keys():
+		$Decks/Decks.add_item(deck)
+	$Decks/Decks.select(0)
 
 ###EVENTS
 
@@ -132,7 +140,7 @@ func collision(val):
 
 func create(val):
 	print("CREATING")
-	setState({'show_owner':"This is you",'is_owner':true})
+	setState({'show_owner':"This is you",'is_owner':true,'in_game':true})
 
 func drop(val):
 	setState({'show_challenger':null})
@@ -179,20 +187,24 @@ func _on_Games_item_selected( index ):
 
 func _on_Select_pressed():
 	$Decks.hide()
+	"""
 	var d_name = $Decks/Decks.get_item_text($Decks/Decks.get_selected_id())
 	if state['is_owner']:
 		$Owner/DeckName.text = d_name
 	else:
 		$Challenger/DeckName.text = d_name
-	globals.send_msg({'deck_name':d_name})
+	"""
+	setState({'self_ready':true})
+	globals.send_msg({'deck_name':deck_text})
 
-
+var deck_text=""
 func _on_Decks_item_selected( ID ):
 	$Decks/DeckList.clear()
+	deck_text = $Decks/Decks.get_item_text(ID)
 	if state['is_owner']:
-		$Owner/DeckName.text = $Decks/Decks.get_item_text(ID)
+		$Owner/DeckName.text = deck_text
 	else:
-		$Challenger/DeckName.text = $Decks/Decks.get_item_text(ID)
+		$Challenger/DeckName.text = deck_text
 	for card in globals.deck_list[$Decks/Decks.get_item_text(ID)]:
 		$Decks/DeckList.add_item(card)
 

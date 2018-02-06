@@ -99,7 +99,7 @@ function create_game(name,owner){
         games.push({
             name:name,
             owner:owner,
-            challenger:"",
+            challenger:null,
             started:false
         })
         console.log(owner)
@@ -328,7 +328,7 @@ _on_time = ()=>{
     wss.clients.forEach(client=>{
         try{
             client.send(msg)
-            console.log('has name', client.hasOwnProperty('name'))
+            
         } catch(err){
             console.log(err)
         }
