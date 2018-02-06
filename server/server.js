@@ -57,8 +57,9 @@ function join_channel(name, member){
             name,
             members:[member]
         })
+    } else {
+        found_channel.members.push(member)
     }
-    found_channel.members.push(member)
 }
 
 function leave_channel(name, member,disc=false){
@@ -82,9 +83,11 @@ function message_channel(channel_name,sent_by,message){
             found=chat
         }
     })
-    found.members.forEach(member=>{
-        member.send(JSON.stringify({'msg_channel':{name:sent_by.name,message:message}}))
-    })
+    if (found){
+        found.members.forEach(member=>{
+            member.send(JSON.stringify({'msg_channel':{name:sent_by.name,message:message}}))
+        })
+    }
 }
 
 //games
@@ -119,9 +122,11 @@ function join_game(name,member){
             found = game
         }
     })
-    found.challenger = member
-    found.owner.send(JSON.stringify({'join':member.name}))
-    found.challenger.send(JSON.stringify({'join':found.owner.name}))
+    if (found){
+        found.challenger = member
+        found.owner.send(JSON.stringify({'join':member.name}))
+        found.challenger.send(JSON.stringify({'join':found.owner.name}))
+    }
 }
 
 function leave_game(name,member,disc=false){
@@ -131,11 +136,13 @@ function leave_game(name,member,disc=false){
             found = game
         }
     })
-    found.challenger = null
-    found.owner.send(JSON.stringify({'leave':""}))
-    if (!disc){
-        member.send(JSON.stringify({'leave':""}))
+    if (found){
+        found.challenger = null
+        found.owner.send(JSON.stringify({'leave':""}))
+        if (!disc){
+            member.send(JSON.stringify({'leave':""}))
     }
+}
     
 }
 
@@ -171,13 +178,12 @@ function start_game(name){
 function ready_game(name, value, by){
     let found 
     games.forEach(game=>{
-        console.log(game)
         if (game.name===name){
             found = game
-            console.log(game)
+            
         }
     })
-    if (found.challenger){
+    if (found && found.challenger){
         try {
            if (found.challenger.name===by){
                found.owner.send(JSON.stringify({'ready':value}))
@@ -197,7 +203,7 @@ function deck_game(name, value, by){
             found = game
         }
     })
-    if (found.challenger){
+    if (found && found.challenger){
         try {
             if (found.challenger.name===by){
                 found.owner.send(JSON.stringify({'deck':value}))
