@@ -246,6 +246,7 @@ wss.on('connection', (socket, req)=>{
         let command = JSON.parse(event)
         if (Object.keys(command)[0]==='greeting'){
             socket.name=command['greeting']
+            socket.send(JSON.stringify({'hello':socket.name}))
         }
         let key = Object.keys(command)[0]
         let value = command[key]

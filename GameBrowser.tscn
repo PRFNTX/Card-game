@@ -3,7 +3,7 @@
 [ext_resource path="res://GameBrowser.gd" type="Script" id=1]
 [ext_resource path="res://Assets/border-box.png" type="Texture" id=2]
 
-[node name="GameBrowser" type="Node2D" index="0"]
+[node name="GameBrowser" type="Node2D"]
 
 script = ExtResource( 1 )
 
@@ -105,7 +105,6 @@ max_lines_visible = -1
 
 [node name="Games" type="Node2D" parent="." index="2"]
 
-editor/display_folded = true
 position = Vector2( 50.337, 65.0699 )
 
 [node name="lbl_Games" type="Label" parent="Games" index="1"]

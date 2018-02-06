@@ -7,7 +7,7 @@ var card_resources = {}
 
 var Deck = {}
 var deck_list=null
-
+var user
 var websocket
 
 func set_deck_list(parsedjson):
@@ -27,7 +27,7 @@ func _ready():
 func socket_start():
 	websocket.start('54.244.61.234',443)
 	websocket.set_reciever(self,'_on_message_recieved')
-	websocket.send({'greeting':username})
+	websocket.send({'greeting':user.username})
 
 
 const dirPath='res://cards/'
@@ -143,6 +143,11 @@ func _on_message_recieved(msg):
 	call(action,event[action])
 	if get_tree().get_current_scene().has_method(action):
 		get_tree().get_current_scene().call(action,event[action])
+
+###OTHER
+
+func hello(val):
+	console.log('hello')
 
 ##CHATS
 func join_chat(val):

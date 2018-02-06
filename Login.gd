@@ -72,7 +72,7 @@ func request(endpoint):
 			else:
 				rb = rb+chunk
 				
-		globals.username = parse_json(str((rb.get_string_from_utf8())))
+		globals.user = parse_json(str((rb.get_string_from_utf8())))
 		globals.set_scene('title')
 		
 		
