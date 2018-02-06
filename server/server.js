@@ -171,6 +171,7 @@ function start_game(name){
 function ready_game(name, value, by){
     let found 
     games.forEach(game=>{
+        console.log(game)
         if (game.name===name){
             found = game
             console.log(game)
@@ -303,7 +304,8 @@ wss.on('connection', (socket, req)=>{
                     deck_game(in_game||own_game, value, socket.name)
                     break;
                 default:
-                    socket.send(JSON.stringify({'invalid':value}))
+                    socket.send(JSON.stringify({'invalid':value}));
+                    break;
                     
 
         }
