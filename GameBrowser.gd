@@ -62,11 +62,14 @@ func selected_game(val):
 func in_game(val):
 	state['in_game'] = val
 	if val:
+		$Leave.show()
 		$Games.hide()
 		$Decks.show()
 	else:
+		$Leave.hide()
 		$Games.show()
 		$Decks.hide()
+	
 
 func self_ready(val):
 	state['ready']=val
@@ -131,7 +134,7 @@ func create(val):
 	print("CREATING")
 	setState({'show_owner':"This is you",'is_owner':true})
 
-func leave(val):
+func drop(val):
 	setState({'show_challenger':null})
 
 func close(val):
@@ -204,3 +207,11 @@ func _on_Change_c_pressed():
 
 func _on_Change_o_pressed():
 	setState({'self_ready':false})
+
+
+func _on_Leave_pressed():
+	if state['is_owner']:
+		globals.send_msg({'close':''})
+	else:
+		globals.send_msg({'drop':''})
+	setState({'show_owner':null,'show_challenger':null,'is_owner':false,'in_game':false,'self_ready':false,'opp_ready':false})
