@@ -102,7 +102,7 @@ function create_game(name,owner){
             challenger:null,
             started:false
         })
-        console.log(owner)
+        
         
         owner.send(JSON.stringify({'create':name}))
         return true
@@ -173,6 +173,7 @@ function ready_game(name, value, by){
     games.forEach(game=>{
         if (game.name===name){
             found = game
+            console.log(game)
         }
     })
     if (found.challenger){
