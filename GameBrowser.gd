@@ -7,7 +7,7 @@ var socket_events = ['join','close','leave','start','open','collision']
 # var a = 2
 # var b = "textvar"
 
-var state= {'show_owner':null,'show_challenger':null,'is_owner':false}
+var state= {'show_owner':null,'show_challenger':null,'is_owner':false, 'selected_game':null}
 
 func setState(newState):
 	for key in newState.keys():
@@ -39,7 +39,9 @@ func is_owner(boo):
 	else:
 		$Games.show()
 
-
+func selected_game(val):
+	state['selected_game'] = val
+	
 
 
 ########
@@ -79,17 +81,19 @@ func start(val):
 func _on_Join_pressed():
 	var game
 	if $Games/Games.get_selected_items().size()>0:
-		game = $Games/Games.get_selected_items()
+		game = $Games/Games.get_item_text(state['selected_game'])
 		globals.send_msg({'join':game})
 
 
 func _on_Create_pressed():
 	var game
 	if $Games/GameName.text.length()>0:
-		game = $Games/Games.get_selected_items()
+		game = $Games/GameName.text
 		globals.send_msg({'create':game})
 
 
 func _on_Games_item_selected( index ):
 	var game = $Games/Games.get_item_text(index)
 	var game_owner = globals.open_games[game]
+	setState({'show_owner':game_owner,'show_challenger':null,'is_owner':false, 'selected_game':index})
+	
