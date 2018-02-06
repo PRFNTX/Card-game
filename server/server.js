@@ -298,7 +298,7 @@ wss.on('connection', (socket, req)=>{
                     deck_game(in_game||own_game, value, socket.name)
                     break;
                 default:
-                    socket.send(JSON.strigify({'invalid':value}))
+                    socket.send(JSON.stringify({'invalid':value}))
                     
 
         }
