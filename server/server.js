@@ -87,16 +87,16 @@ function create_game(name,owner){
     console.log('CREATE OWNER',owner.name)
     if (games.filter(game=>game.name!==name).length===0){
         games.push({
-            name,
+            name:owner.name,
             owner,
             challenger:"",
             started:false
         })
         console.log(owner)
-        console.log('can send', 'send' in owner)
-        owner.send(JSON.stringify({'create':name}))
+        
+        owner.send(JSON.stringify({'create':owner.name}))
     } else {
-        owner.send(JSON.stringify({'collision':name}))
+        owner.send(JSON.stringify({'collision':owner.name}))
     }
 }
 

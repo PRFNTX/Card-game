@@ -134,6 +134,7 @@ func send_msg(value):
 	websocket.send(value)
 
 func _on_message_recieved(msg):
+	print(msg)
 	var event = parse_json(msg)
 	var action = event.keys()[0]
 	call(action,event[action])
