@@ -175,7 +175,7 @@ function ready_game(name, value, by){
             found = game
         }
     })
-    if (Found.challenger){
+    if (found.challenger){
         try {
            if (found.challenger.name===by){
                found.owner.send(JSON.stringify({'ready':value}))
@@ -195,7 +195,7 @@ function deck_game(name, value, by){
             found = game
         }
     })
-    if (Found.challenger){
+    if (found.challenger){
         try {
             if (found.challenger.name===by){
                 found.owner.send(JSON.stringify({'deck':value}))
