@@ -316,6 +316,7 @@ _on_time = ()=>{
     
     wss.clients.forEach(client=>{
         try{
+            client.send(msg)
             console.log('has name', client.hasOwnProperty('name'))
         } catch(err){
             console.log(err)
@@ -323,7 +324,7 @@ _on_time = ()=>{
     })
 }
 
-//setInterval(_on_time,3000)
+setInterval(_on_time,3000)
 
 
 

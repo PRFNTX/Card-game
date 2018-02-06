@@ -147,7 +147,7 @@ func _on_message_recieved(msg):
 ###OTHER
 
 func hello(val):
-	console.log('hello')
+	print('hello')
 
 ##CHATS
 func join_chat(val):
