@@ -61,13 +61,18 @@ function join_channel(name, member){
     found_channel.members.push(member)
 }
 
-function leave_channel(name, member){
+function leave_channel(name, member,disc=false){
     //leave events to keep lists update
     chat_channels.forEach((chat,i)=>{
         if (chat.name===name){
             chat_channels[i] = chat.members.filter(usr=>usr.name!==member.name)
+            chat_channels[i].members.forEach(member=>member.send(JSON.stringify({"chat_leave":member.name})))
         }
     })
+    if (!disc){
+        member.sent(JSON.stringify({'leave':""}))
+    }
+    
 }
 
 function message_channel(channel_name,sent_by,message){
@@ -85,18 +90,20 @@ function message_channel(channel_name,sent_by,message){
 //games
 function create_game(name,owner){
     console.log('CREATE OWNER',owner.name)
-    if (games.filter(game=>game.name!==name).length===0){
+    if (games.filter(game=>game.name===name).length===0){
         games.push({
-            name,
-            owner,
+            name:name,
+            owner:owner,
             challenger:"",
             started:false
         })
         console.log(owner)
         
         owner.send(JSON.stringify({'create':name}))
+        return true
     } else {
         owner.send(JSON.stringify({'collision':name}))
+        return false
     }
 }
 
@@ -112,7 +119,7 @@ function join_game(name,member){
     found.challenger.send(JSON.stringify({'join':found.owner.name}))
 }
 
-function leave_game(name,member){
+function leave_game(name,member,disc=false){
     let found
     games.forEach(game=>{
         if (game.name===name){
@@ -121,17 +128,25 @@ function leave_game(name,member){
     })
     found.challenger = null
     found.owner.send(JSON.stringify({'leave':""}))
-    member.send(JSON.stringify({'leave':""}))
+    if (!disc){
+        member.send(JSON.stringify({'leave':""}))
+    }
+    
 }
 
-function close_game(name){
+function close_game(name,owner_disc=false,member_disc=false){
     //message members that game has closed
     let found
     games.forEach(game=>{
         if (game.name===name){
             game.started=true
-            game.owner.send(JSON.stringify({'close':""}))
-            game.challenger.send(JSON.stringify({'close':""}))
+            if (!owner_disc){
+                game.owner.send(JSON.stringify({'close':""}))
+            }
+            if (!member_disc){
+                game.challenger.send(JSON.stringify({'close':""}))
+            }
+            
         }
     })
     games = games.filter(game=>game.name!==name)
@@ -185,12 +200,11 @@ function action(name,params){
             //message channel {'msg_channel':[channel,message]}
 
         
-var users = []
-var connections = []
 
 wss.on('connection', (socket, req)=>{
     console.log('connected')
-    
+    let own_game
+    let in_game
     socket.on('message', event=>{
         console.log(event)
         let command = JSON.parse(event)
@@ -203,10 +217,13 @@ wss.on('connection', (socket, req)=>{
             switch (key){
                 case 'create':
                     console.log('create')
-                    create_game(value,socket);
+                    if (create_game(value,socket)){
+                        own_game=value
+                    }
                     break;
                 case 'join':
                     join_game(value,socket);
+                    in_game=value
                     break;
                 case 'drop':
                     leave_game(value,socket);
@@ -238,7 +255,16 @@ wss.on('connection', (socket, req)=>{
     })
     socket.on('error', error=>console.log(error))
 
-    socket.on('close', error=>console.log('close'))
+    socket.on('close', error=>{
+        if (own_game){
+            close_game(own_game,true)
+            own_game=null
+        } else if (in_game){
+            leave_game(in_game,false,true)
+            in_game=null
+        }
+        
+    })
     
 })
 

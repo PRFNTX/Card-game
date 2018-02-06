@@ -7,7 +7,7 @@ var socket_events = ['join','close','leave','start','open','collision']
 # var a = 2
 # var b = "textvar"
 
-var state= {'show_owner':null,'show_challenger':null,'is_owner':false, 'selected_game':null}
+var state= {'show_owner':null,'show_challenger':null,'is_owner':false, 'selected_game':0}
 
 func setState(newState):
 	for key in newState.keys():
