@@ -152,10 +152,7 @@ func close(val):
 	setState({'show_owner':null,'show_challenger':null,'is_owner':false,'in_game':false})
 
 func start(val):
-	if state['is_owner']:
-		globals.Deck = $Owner/Deckname.text
-	else:
-		globals.Deck = $Challenger/Deckname.text
+	pass
 
 func ready(val):
 	print('OPP READY VAL')
@@ -209,6 +206,7 @@ func _on_Select_pressed():
 		$Challenger/DeckName.text = d_name
 	"""
 	setState({'self_ready':true})
+	globals.Deck = deck_text
 	globals.send_msg({'deck_name':deck_text})
 
 var deck_text=""
