@@ -125,7 +125,7 @@ func get_decks():
 ###EVENTS
 
 func game_list(val):
-	for game in globals.open_games:
+	for game in val:
 		$Games/Games.add_item(game['name'])
 
 func join(value):
