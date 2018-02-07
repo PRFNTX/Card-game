@@ -75,7 +75,9 @@ func request(endpoint):
 				rb = rb+chunk
 				
 		globals.user = parse_json(str((rb.get_string_from_utf8())))
-		globals.set_scene('title')
+		
+		globals.init_user()
+		
 		
 		
 
