@@ -235,7 +235,7 @@ function action(name,params){
     //params [ 0 ] = player num
     if (found){
 
-        console.log(found)
+        console.log(params)
         let send_to
         if (params.player==0){
             send_to = found.challenger

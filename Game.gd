@@ -143,7 +143,7 @@ func _input(event):
 			actionReady=false
 			complete = false
 			startTimer()
-			actionCard()
+			actionCard(null)
 		if event.is_action("land") and check_valid_action('actionLand'):
 			actionReady=false
 			complete = false
@@ -173,7 +173,7 @@ func _input(event):
 			actionReady=false
 			complete = false
 			startTimer()
-			actionCoin()
+			actionCoin(null)
 	elif event.is_action("cancel"):
 		cancelAction()
 		startTimer()
