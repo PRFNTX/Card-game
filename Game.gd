@@ -137,7 +137,7 @@ func change_turns():
 var actionReady = true
 var complete = true
 func _input(event):
-	if players[state['current_turn']].actions>0 and actionReady and ready:
+	if players[int(state['current_turn'])].actions>0 and actionReady and ready:
 		if event.is_action("card"):
 			actionReady=false
 			complete = false
