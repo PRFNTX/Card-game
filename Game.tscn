@@ -468,9 +468,9 @@ _sections_unfolded = [ "Transform" ]
 
 [connection signal="timeout" from="actionTimer" to="." method="_on_Timer_timeout"]
 
-[connection signal="timeout" from="basic_timeout" to="." method="_on_Timer_timeout"]
-
 [connection signal="timeout" from="basic_timeout" to="." method="_on_basic_timeout_timeout"]
+
+[connection signal="timeout" from="basic_timeout" to="." method="_on_Timer_timeout"]
 
 [connection signal="pressed" from="endturn" to="." method="_on_endturn_pressed"]
 

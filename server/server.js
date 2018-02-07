@@ -308,7 +308,7 @@ wss.on('connection', (socket, req)=>{
                     message_channel(value[0],socket,value[1]);
                     break;
                 case 'game_action':
-                    game_action(in_game||own_game,value);
+                    action(in_game||own_game,value);
                     break;
                 case 'ready':
                     ready_game(in_game||own_game, value, socket.name)

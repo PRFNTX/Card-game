@@ -51,11 +51,12 @@ func current_turn(val):
 	
 
 func active_unit(unit_hex_id):
-	var unit = get_unit_by_hex(get_hex_by_id(unit_hex_id))
+	
 	if !(state['active_unit']==null):
 		get_unit_by_hex(get_hex_by_id(state['active_unit'])).setState({'active':false})
 	state['active_unit']=unit_hex_id
 	if !(unit_hex_id==null):
+		var unit = get_unit_by_hex(get_hex_by_id(unit_hex_id))
 		unit.setState({'active':true})
 
 const MORNING=0
