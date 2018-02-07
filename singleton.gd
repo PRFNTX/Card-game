@@ -86,7 +86,9 @@ func send_msg(value):
 func _on_message_recieved(msg):
 	print(msg)
 	var event = parse_json(msg)
+	print(msg)
 	var action = event.keys()[0]
+	print(msg)
 	call(action,event[action])
 	print(get_tree().get_current_scene())
 	print(action)
@@ -134,6 +136,12 @@ func create(val):
 	pass
 
 func collision(val):
+	pass
+
+func ready(val):
+	pass
+
+func deck(val):
 	pass
 
 
