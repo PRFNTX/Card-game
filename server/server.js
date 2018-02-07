@@ -40,7 +40,7 @@ app.use(express.urlencoded({extended:true}))
 
 let chat_channels = []
 
-let games = [{'name':'fake game, please ignore',owner:'nop',challenger:null,started:false}]
+let games = [{'name':'fake game, please ignore',owner:{name:'nop'},challenger:null,started:false}]
 
 //chanels
 function join_channel(name, member){
@@ -97,7 +97,7 @@ function game_list(res){
     .filter(game=>!game.started && !game.challenger && game.owner)
     .map(game=>{
         console.log(game)
-        return {'name':game.name, 'owner':game.owner.name}
+        return {'name':game.name, owner:game.owner.name}
     })}
     console.log(JSON.stringify(response))
     res.send(JSON.stringify(response))
