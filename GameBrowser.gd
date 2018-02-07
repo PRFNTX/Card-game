@@ -120,7 +120,7 @@ func get_decks():
 	deck_list = globals.deck_list
 	for deck in deck_list.keys():
 		$Decks/Decks.add_item(deck)
-	$Decks/Decks.select(0)
+	_on_Decks_item_selected( 0 )
 
 ###EVENTS
 
@@ -168,7 +168,9 @@ var selected_game
 func _on_Join_pressed():
 	var game
 	if $Games/Games.get_selected_items().size()>0:
-		game = $Games/Games.get_item_text(state['selected_game'])
+		var game_index = $Games/Games.get_selected_items()[0]
+		game = $Games/Games.get_item_text(game_index)
+		setState({'show_owner':globals.game_list[game_index].owner,'show_challenger':globals.username,'is_owner':false,'in_game':true})
 		globals.send_msg({'join':game})
 
 

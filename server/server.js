@@ -93,7 +93,10 @@ function message_channel(channel_name,sent_by,message){
 //games
 
 function game_list(res){
-    res.send(JSON.stringify({'game_list':games.map(game=>{return {'name':game.name, 'owner':game.owner.name}})}))
+    
+    res.send(JSON.stringify({'game_list':games
+        .filter(game=>!game.started && !game.challenger && game.owner)
+        .map(game=>{return {'name':game.name, 'owner':game.owner.name}})}))
 }
 
 function create_game(name,owner){
