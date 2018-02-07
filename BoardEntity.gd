@@ -114,7 +114,7 @@ func clock_time(time):
 ### SIGNAL FUNCTIONS
 
 func sig_turn_start(player):
-	if player==Owner:
+	if int(player)==int(Owner):
 		Unit.turn_start()
 
 func spawn_faeria():
