@@ -158,9 +158,13 @@ func start(val):
 	globals.set_scene('Game')
 
 func ready(val):
+	print('OPP READY VAL')
+	print(val)
 	setState({'opp_ready':val})
 
 func deck(val):
+	print('OPP Deck VAL')
+	print(val)
 	if state['is_owner']:
 		$Challenger/DeckName.text = val
 	else:

@@ -145,9 +145,9 @@ function leave_game(name,member,disc=false){
     })
     if (found){
         found.challenger = null
-        found.owner.send(JSON.stringify({'leave':""}))
+        found.owner.send(JSON.stringify({'drop':""}))
         if (!disc){
-            member.send(JSON.stringify({'leave':""}))
+            member.send(JSON.stringify({'drop':""}))
     }
 }
     
@@ -313,7 +313,7 @@ wss.on('connection', (socket, req)=>{
                 case 'ready':
                     ready_game(in_game||own_game, value, socket.name)
                     break;
-                case 'deck':
+                case 'deck_name':
                     deck_game(in_game||own_game, value, socket.name)
                     break;
                 default:
@@ -355,7 +355,7 @@ _on_time = ()=>{
     })
 }
 
-setInterval(_on_time,3000)
+setInterval(_on_time,15000)
 
 
 
