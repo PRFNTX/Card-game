@@ -203,7 +203,7 @@ func start_unit_action(type):
 
 func start_build_action(gold, faeria, lands,card_num, card, buildType):
 	if actionReady and players[state['current_turn']].has_resource(gold,faeria,lands):
-		setState({'building_card':card.get_name()})
+		setState({'building_card':card.get_node("Card").name})
 		building_card_ind = card_num
 		actionReady=false
 		complete=false
@@ -291,6 +291,7 @@ func buildAny(target, set_state=null):
 	if !set_state==null:
 		var state=set_state
 		local = false
+	
 	
 	var costs = {
 		'gold': globals.card_instances[state['building_card']].get_node('Card').cost_gold,

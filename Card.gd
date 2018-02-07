@@ -2,6 +2,7 @@ extends Node2D
 
 export(int) var card_number = 0
 
+export(String) var name =""
 export(int) var base_health = 1
 export(int) var base_attack = 1
 export(int) var cost_gold = 1
