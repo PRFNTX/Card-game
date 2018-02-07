@@ -248,7 +248,7 @@ function action(name,params){
         //params[ 1 ] action name (to .call())
         //params[ 2 ] action target
         //params[ 3 ] setState({this thing})
-        send_to.send(JSON.stringify({game_action:params}))
+        send_to.send(JSON.stringify({game_action:{player:params.player, type:params.type, target:params.target, state:params.state}}))
 }
 }
 //SOCKET
