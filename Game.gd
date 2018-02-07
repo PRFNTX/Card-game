@@ -299,7 +299,7 @@ func buildAny(target, set_state=null):
 			## remove 1 card from enemy hand counter
 			pass
 		var entity = BoardEntity.instance()
-		target.get_node('hexEntity').add_child(entity)
+		get_hex_by_id(target).get_node('hexEntity').add_child(entity)
 		entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'])
 		entity.Game =self
 	if local:
@@ -315,7 +315,7 @@ func actionLand(target, set_state=null):
 		get_hex_by_id(target).affectState({'hex_type':2}, state['current_turn'])
 		players[state['current_turn']].modLands('land',1)
 	if local:
-		send_action('BuildAny', 45-target,{'empty':true})
+		send_action('actionLand', 45-target,{'empty':true})
 	actionDone()
 
 func actionLake(target, set_state=null):
@@ -327,7 +327,7 @@ func actionLake(target, set_state=null):
 		get_hex_by_id(target).affectState({'hex_type':3}, state['current_turn'])
 		players[state['current_turn']].modLands('lake',1)
 	if local:
-		send_action('BuildAny', 45-target,{'empty':true})
+		send_action('actionLake', 45-target,{'empty':true})
 	actionDone()
 
 func actionTree(target, set_state=null):
@@ -339,7 +339,7 @@ func actionTree(target, set_state=null):
 		get_hex_by_id(target).affectState({'hex_type':4}, state['current_turn'])
 		players[state['current_turn']].modLands('tree',1)
 	if local:
-		send_action('BuildAny', 45-target,{'empty':true})
+		send_action('actionTree', 45-target,{'empty':true})
 	actionDone()
 
 func actionHill(target, set_state=null):
@@ -351,7 +351,7 @@ func actionHill(target, set_state=null):
 		get_hex_by_id(target).affectState({'hex_type':5}, state['current_turn'])
 		players[state['current_turn']].modLands('hill',1)
 	if local:
-		send_action('BuildAny', 45-target,{'empty':true})
+		send_action('actionHill', 45-target,{'empty':true})
 	actionDone()
 
 func actionSand(target, set_state=null):
@@ -363,7 +363,7 @@ func actionSand(target, set_state=null):
 		get_hex_by_id(target).affectState({'hex_type':6}, state['current_turn'])
 		players[state['current_turn']].modLands('sand',1)
 	if local:
-		send_action('BuildAny', 45-target,{'empty':true})
+		send_action('actionSand', 45-target,{'empty':true})
 	actionDone()
 
 func actionCoin(target, set_state=null):
@@ -377,7 +377,7 @@ func actionCoin(target, set_state=null):
 		players[state['current_turn']].modCoin(1)
 		complete=true
 	if local:
-		send_action('BuildAny', 0,{'empty':true})
+		send_action('actionCoin', 0,{'empty':true})
 	actionDone()
 
 func actionCard(target, set_state=null):
@@ -390,7 +390,7 @@ func actionCard(target, set_state=null):
 			players[state['current_turn']].drawCard()
 			complete=true
 	if local:
-		send_action('BuildAny', 0,{'empty':true})
+		send_action('actionCard', 0,{'empty':true})
 	actionDone()
 
 
