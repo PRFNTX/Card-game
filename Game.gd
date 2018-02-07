@@ -88,6 +88,7 @@ func create_player(num):
 		p.Deck = globals.deck_list[globals.Deck]
 	return p
 
+var ready = false
 func _ready():
 	set_process_input(true)
 	
@@ -120,6 +121,7 @@ func _ready():
 	emit_signal('GameStart')
 	emit_signal('TurnStart', state['current_turn'])
 	emit_signal('ActionPhase', state['current_turn'])
+	ready = true
 
 func change_turns():
 	if state['current_turn'] == 0:
@@ -135,8 +137,7 @@ func change_turns():
 var actionReady = true
 var complete = true
 func _input(event):
-	
-	if players[state['current_turn']].actions>0 and actionReady:
+	if players[state['current_turn']].actions>0 and actionReady and ready:
 		if event.is_action("card"):
 			actionReady=false
 			complete = false
