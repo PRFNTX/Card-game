@@ -1,15 +1,9 @@
 extends Node2D
 
-var globals
+onready var globals = get_node("/root/master")
 
-var is_ready = false
 func _ready():
-	if !is_ready:
-		globals = get_node('/root/master')
-		globals.set_deck_list(HTTP.authenticated_server_request("/decks",HTTPClient.METHOD_GET,{}))
-		globals.socket_start()
-		is_ready=true
-	
+	pass
 
 func _on_game_pressed():
 	globals.set_scene('browse_games')

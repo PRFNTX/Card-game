@@ -23,9 +23,13 @@ func _ready():
 	load_cards()
 	websocket = preload('res://Godot-Websocket/websocket.gd').new(self)
 	#get_tree().change_scene(scenes['login'])
-	
+
+func init_user():
+	set_deck_list(HTTP.authenticated_server_request("/decks",HTTPClient.METHOD_GET,{}))
+	socket_start()
 
 var socket_active = false
+
 func socket_start():
 	if !socket_active:
 		websocket.start('54.244.61.234',443)
