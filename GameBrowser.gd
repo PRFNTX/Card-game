@@ -136,6 +136,9 @@ func join(value):
 		setState({'show_owner':value,'show_challenger':'THis is yoU','in_game':true})
 	else:
 		setState({'show_challenger':value})
+	if state['self_ready']:
+		globals.send_msg({'ready':true})
+		globals.send_msg({'deck_name':$Owner/DeckName.text})
 
 func collision(val):
 	$Games/GameName.text = ""
@@ -170,7 +173,7 @@ func _on_Join_pressed():
 	if $Games/Games.get_selected_items().size()>0:
 		var game_index = $Games/Games.get_selected_items()[0]
 		game = $Games/Games.get_item_text(game_index)
-		setState({'show_owner':globals.open_games[game_index].owner,'show_challenger':globals.username,'is_owner':false,'in_game':true})
+		setState({'show_owner':globals.open_games[game_index].owner,'show_challenger':globals.user.username,'is_owner':false,'in_game':true})
 		globals.send_msg({'join':game})
 
 
@@ -183,7 +186,7 @@ func _on_Create_pressed():
 
 func _on_Games_item_selected( index ):
 	var game = $Games/Games.get_item_text(index)
-	var game_owner = globals.open_games[game]
+	var game_owner = globals.open_games[index].owner
 	setState({'show_owner':game_owner,'show_challenger':null,'is_owner':false})
 	selected_game = index
 	

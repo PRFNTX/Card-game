@@ -100,7 +100,8 @@ func invalid(val):
 	print("UNRECOGNIZED MESSAGE ID")
 
 func game_list(val):
-	open_games = val.game_list
+	
+	open_games = val
 
 ##CHATS
 func join_chat(val):
