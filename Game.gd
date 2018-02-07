@@ -130,9 +130,10 @@ func _ready():
 	emit_signal('ActionPhase', state['current_turn'])
 	ready = true
 
-func change_turns():
+func change_turns(none,unused):
 	if state['current_turn'] == 0:
 		send_action('change_turns',0,{'empty':true})
+	print('changing turns')
 	cancelAction()
 	emit_signal("TurnEnd", state['current_turn'])
 	var current_time = state['clock_time']
