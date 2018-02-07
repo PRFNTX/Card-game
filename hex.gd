@@ -30,7 +30,8 @@ func hex_is_empty():
 	return !($hexEntity.has_node('BoardEntity'))
 
 func hex_is_empty_or_self():
-	return !($hexEntity.has_node('BoardEntity')) or $hexEntity.get_node('BoardEntity')==stateLocal['active_unit']
+	#return !($hexEntity.has_node('BoardEntity')) or $hexEntity.get_node('BoardEntity')==stateLocal['active_unit']
+	return !($hexEntity.has_node('BoardEntity')) or $hexEntity.get_parent().id==stateLocal['active_unit']
 
 func has_opposing_unit():
 	if $hexEntity.get_children().size()>1:
@@ -161,7 +162,7 @@ func action(type,by,test=false):
 			if test:
 				return false
 	elif type=="moveBase":
-		if hexType.child.moveLand and hex_is_empty_or_self() and is_adjacent_or_equal_to(get_unit_from_hex(get_hex_from_id(stateLocal['active_unit'])).Hex):
+		if hexType.child.moveLand and hex_is_empty_or_self() and is_adjacent_or_equal_to(gameNode.get_unit_from_hex(gameNode.get_hex_from_id(stateLocal['active_unit'])).Hex):
 			if !test:
 				setState({'cover':move,'target':true})
 			else:
