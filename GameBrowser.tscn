@@ -3,7 +3,7 @@
 [ext_resource path="res://GameBrowser.gd" type="Script" id=1]
 [ext_resource path="res://Assets/border-box.png" type="Texture" id=2]
 
-[node name="GameBrowser" type="Node2D" index="0"]
+[node name="GameBrowser" type="Node2D"]
 
 script = ExtResource( 1 )
 
@@ -494,8 +494,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 12.0
-margin_bottom = 20.0
+margin_left = 317.0
+margin_top = 46.0
+margin_right = 396.0
+margin_bottom = 66.0
 rect_pivot_offset = Vector2( 0, 0 )
 focus_mode = 2
 mouse_filter = 0
@@ -506,6 +508,7 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
+text = "Refresh"
 flat = false
 align = 1
 

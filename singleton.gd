@@ -84,14 +84,11 @@ func send_msg(value):
 	websocket.send(value)
 
 func _on_message_recieved(msg):
-	print(msg)
-	var event = parse_json(msg)
-	print(msg)
+
+	var event
 	var action = event.keys()[0]
-	print(msg)
 	call(action,event[action])
-	print(get_tree().get_current_scene())
-	print(action)
+
 	if get_tree().get_current_scene().has_method(action):
 		get_tree().get_current_scene().call(action,event[action])
 

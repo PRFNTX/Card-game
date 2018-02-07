@@ -239,4 +239,5 @@ func _on_Leave_pressed():
 	setState({'show_owner':null,'show_challenger':null,'is_owner':false,'in_game':false,'self_ready':false,'opp_ready':false})
 
 func _on_Refresh_pressed():
+	$Games/Games.clear()
 	refresh_games()
