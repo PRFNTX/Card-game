@@ -475,7 +475,7 @@ func _on_Timer_timeout():
 
 
 func _on_endturn_pressed():
-	change_turns()
+	change_turns(1,2)
 
 
 func _on_basic_timeout_timeout():
