@@ -4,7 +4,7 @@
 [ext_resource path="res://Card.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/TownBasic.png" type="Texture" id=3]
 
-[node name="3" type="Control" index="0"]
+[node name="3" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0
