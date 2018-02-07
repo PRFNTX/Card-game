@@ -237,7 +237,7 @@ function action(name,params){
 
         
         let send_to
-        if (params.player==0){
+        if (params.player==1){
             send_to = found.challenger
             
         } else {

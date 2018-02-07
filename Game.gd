@@ -410,6 +410,9 @@ func deck_cards(val):
 	players[1].deck_init(val)
 
 func game_action(val):
+	print(val.type)
+	print(val.target)
+	print(val.state)
 	call(val.type,val.target,val.state)
 
 ##
