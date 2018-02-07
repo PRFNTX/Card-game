@@ -81,7 +81,7 @@ func state_update(newState,keys):
 
 ###STATE UPDATE FUNCTIONS
 func current_turn(newVal):
-	local_state['active'] = (newVal==me)
+	local_state['active'] = (int(newVal)==int(me))
 	
 
 ####VALUE CONTROLLS
