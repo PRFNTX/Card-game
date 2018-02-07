@@ -19,8 +19,10 @@ signal TurnEnd
 
 var players = [null, null]
 
+var global_player_num = 0
 
 func set_player(val):
+	global_player_num = val
 	setState({'current_turn':val})
 
 
@@ -47,6 +49,10 @@ func action(val):
 
 func current_turn(val):
 	state['current_turn'] = val
+	if val==0:
+		$endturn.show()
+	else:
+		$endturn.hide()
 	
 	
 
@@ -138,7 +144,7 @@ func change_turns():
 var actionReady = true
 var complete = true
 func _input(event):
-	if players[int(state['current_turn'])].actions>0 and actionReady and ready:
+	if state['current_turn']==0 and players[int(state['current_turn'])].actions>0 and actionReady and ready:
 		if event.is_action("card"):
 			actionReady=false
 			complete = false
@@ -400,7 +406,7 @@ func actionCard(target, set_state=null):
 
 func send_action(type,target, loc_state):
 	globals.send_msg({'game_action':{
-		'player':(state['current_turn']+1)%2,
+		'player':global_player_num,
 		'type':type,
 		'target':target,
 		'state':loc_state
