@@ -170,7 +170,7 @@ func _on_Join_pressed():
 	if $Games/Games.get_selected_items().size()>0:
 		var game_index = $Games/Games.get_selected_items()[0]
 		game = $Games/Games.get_item_text(game_index)
-		setState({'show_owner':globals.game_list[game_index].owner,'show_challenger':globals.username,'is_owner':false,'in_game':true})
+		setState({'show_owner':globals.open_games[game_index].owner,'show_challenger':globals.username,'is_owner':false,'in_game':true})
 		globals.send_msg({'join':game})
 
 

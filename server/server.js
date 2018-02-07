@@ -96,7 +96,10 @@ function game_list(res){
     
     res.send(JSON.stringify({'game_list':games
         .filter(game=>!game.started && !game.challenger && game.owner)
-        .map(game=>{return {'name':game.name, 'owner':game.owner.name}})}))
+        .map(game=>{
+            console.log(game)
+            return {'name':game.name, 'owner':game.owner.name}
+        })}))
 }
 
 function create_game(name,owner){
