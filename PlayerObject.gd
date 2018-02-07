@@ -3,6 +3,7 @@ extends Node2D
 
 var GameNode
 var me
+var is_dummy = false
 
 var watch_state=[
 	'current_turn'
@@ -25,13 +26,16 @@ var lbl_faeria
 var Deck setget deck_init
 
 func deck_init(val):
-	print('deck init')
-	Deck = val
-	var cards = 0
-	for card in val:
-		curr_Deck.push_back(card)
-		cards+=1
-	setCards(cards)
+	if !is_dummy:
+	
+		Deck = val
+		var cards = 0
+		for card in val:
+			curr_Deck.push_back(card)
+			cards+=1
+		setCards(cards)
+	else:
+		setCards(val)
 
 var curr_Deck=[]
 var Hand=[]
@@ -57,8 +61,9 @@ func onCreate(node,this):
 ###SIGNAL FUNCTIONS
 
 func sig_TurnStart(turn):
-	if hand_object!=null:
-		hand_object.update()
+	if ! is_dummy:
+		if hand_object!=null:
+			hand_object.update()
 
 func sig_ActionPhase(turn):
 	if local_state['active']:
@@ -122,35 +127,40 @@ func modFaeria(num):
 	#set display
 
 func drawCard():
-	var card = floor(rand_range(0,curr_Deck.size()))
-	Hand.push_back(curr_Deck[card])
-	curr_Deck.remove(card)
-	modCards(-1)
-	hand_object.update()
+	if !is_dummy:
+		var card = floor(rand_range(0,curr_Deck.size()))
+		Hand.push_back(curr_Deck[card])
+		curr_Deck.remove(card)
+		modCards(-1)
+		hand_object.update()
+	
 
 func discard_hand(card=-1):
-	if card < 0:
-		var discard = floor(rand_range(0,Hand.size()))
-		Discard.push_back(Hand[discard])
-		Hand.remove(discard)
-	else:
-		Discard.append(Hand[card])
-		Hand.remove(card)
-	hand_object.update()
+	if !is_dummy:
+		if card < 0:
+			var discard = floor(rand_range(0,Hand.size()))
+			Discard.push_back(Hand[discard])
+			Hand.remove(discard)
+		else:
+			Discard.append(Hand[card])
+			Hand.remove(card)
+		hand_object.update()
 
 func discard_deck():
-	var card = floor(rand_range(0,curr_Deck.size()))
-	Discard.push_back(curr_Deck[card])
-	curr_Deck.remove(card)
+	if !is_dummy:
+		var card = floor(rand_range(0,curr_Deck.size()))
+		Discard.push_back(curr_Deck[card])
+		curr_Deck.remove(card)
 
 func has_resource(c_gold,c_faeria,c_lands):
 	#fuck you, me
-	for land in c_lands.keys():
-		if lands[int_to_land[land]]<c_lands[land]:
+	if !is_dummy:
+		for land in c_lands.keys():
+			if lands[int_to_land[land]]<c_lands[land]:
+				return false
+		if gold<c_gold or faeria<c_faeria:
 			return false
-	if gold<c_gold or faeria<c_faeria:
-		return false
-	return true
+		return true
 
 func pay_costs(c_gold,c_faeria):
 	modCoin(-1*c_gold)

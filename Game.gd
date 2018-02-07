@@ -18,7 +18,16 @@ signal ActionPhase
 signal TurnEnd
 
 var players = [null, null]
-var state={"action":"", 'current_turn':0,'active_unit':null,'clock_time':0,'hovered':null}
+
+
+func set_player(val):
+	absolute_player_number = val
+	setState({'current_turn':val})
+
+
+
+###### current_turn will be set to 0 during local players turn and 1 during remote players turn
+var state={"action":"", 'current_turn':0,'active_unit':null,'clock_time':0,'hovered':null,'building_card':null}
 
 var actionTimer
 
@@ -39,14 +48,15 @@ func action(val):
 
 func current_turn(val):
 	state['current_turn'] = val
-	$Hand.assign_player(players[val])
-	players[val].hand_object=$Hand
+	
+	
 
-func active_unit(unit):
+func active_unit(unit_hex_id):
+	var unit = get_unit_by_hex(get_hex_by_id(unit_hex_id))
 	if !(state['active_unit']==null):
-		state['active_unit'].setState({'active':false})
-	state['active_unit']=unit
-	if !(unit==null):
+		get_unit_by_hex(get_hex_by_id(state['active_unit'])).setState({'active':false})
+	state['active_unit']=unit_hex_id
+	if !(unit_hex_id==null):
 		unit.setState({'active':true})
 
 const MORNING=0
@@ -61,6 +71,9 @@ func clock_time(val):
 func hovered(hex):
 	state['hovered'] = hex
 
+func building_card(card):
+	state['building_card'] = card
+
 ################
 
 func create_player(num):
@@ -72,7 +85,7 @@ func create_player(num):
 	else:
 		p.position=$pointP2.position
 	p.onCreate(self,num)
-	if !globals.deck_list==null and globals.deck_list.keys().size()>0:
+	if !globals.deck_list==null and globals.deck_list.keys().size()>0 and num==0:
 		p.Deck = globals.deck_list[globals.Deck]
 	return p
 
@@ -104,7 +117,7 @@ func _ready():
 			starting_entity.Game =self
 			#starting_entity.spawn_faeria()
 	
-	
+	set_player(globals.player_num)
 	emit_signal('GameStart')
 	emit_signal('TurnStart', state['current_turn'])
 	emit_signal('ActionPhase', state['current_turn'])
@@ -165,7 +178,7 @@ func _input(event):
 
 
 var building_card_ind
-var building_card
+
 
 #func get_hand_card(ind):
 #	return players[state['current_turn']].Hand[ind]
@@ -180,7 +193,7 @@ func start_unit_action(type):
 
 func start_build_action(gold, faeria, lands,card_num, card, buildType):
 	if actionReady and players[state['current_turn']].has_resource(gold,faeria,lands):
-		building_card = card
+		setState({'building_card':card.get_name()})
 		building_card_ind = card_num
 		actionReady=false
 		complete=false
@@ -189,14 +202,14 @@ func start_build_action(gold, faeria, lands,card_num, card, buildType):
 
 func activate(unit):
 	startBasictimeout()
-	if unit.Owner==state['current_turn'] and actionReady and state['active_unit']!=unit:
-		setState({'active_unit':unit})
+	if unit.Owner==state['current_turn'] and actionReady and state['active_unit']!=unit.Hex.id:
+		setState({'active_unit':unit.Hex.id})
 		unit.Unit.on_select(self, unit.Hex)
 
 
 func completeAction(target):
 	if can_do:
-		call(state["action"],target)
+		call(state["action"],target.id)
 
 func actionDone():
 	setState({"action":"",'active_unit':null})
@@ -209,103 +222,183 @@ func cancelAction():
 
 ##ACTIONS
 
-func moveBase(target):
+func moveBase(target, set_state=null):
+	if !set_state==null:
+		var state=set_state
+	var hex_target = get_hex_by_id(target)
 	startBasictimeout()
-	var unit = state['active_unit']
-	unit.on_move(target.get_node('hexEntity'))
+	var unit = get_unit_by_hex(get_hex_by_id(state['active_unit']))
+	unit.on_move(hex_target.get_node('hexEntity'))
 	#unit.rect_position = target.get_node('hexEntity/pos').position
-	unit.Hex=target
+	unit.Hex=hex_target
 	unit.use_energy()
+	
+	send_action('moveBase',target,{'active_unit':state['active_unit']})
+	
 	if check_valid_action(unit.Unit.get_action_name('Attack')):
 		actionReady=true
 		unit.Unit.start_attack(self)
 	else:
 		actionDone()
 
-func AttackAdjOrCollect(target):
-	var unit = state['active_unit']
+func AttackAdjOrCollect(target, set_state=null):
+	if !set_state==null:
+		var state=set_state
+	var unit = get_unit_by_hex(get_hex_by_id(state['active_unit']))
 	unit.on_attack(target.get_node('hexEntity').get_node('BoardEntity'))
+	
+	send_action('AttackAdjOrCollect',target,{'active_unit':state['active_unit']})
 	actionDone()
 
-func AttackAdj(target):
-	var unit = state['active_unit']
+func AttackAdj(target, set_state=null):
+	if !set_state==null:
+		var state=set_state
+	var unit = get_unit_by_hex(get_hex_by_id(state['active_unit']))
 	unit.on_attack(target.get_node('hexEntity').get_child())
+	send_action('AttackAdj',target,{'active_unit':state['active_unit']})
 	actionDone()
 
-func Collect(target):
-	var unit = state['active_unit']
+func Collect(target, set_state=null):
+	if !set_state==null:
+		var state=set_state
+	var unit = get_unit_by_hex(get_hex_by_id(state['active_unit']))
 	unit.on_attack(target.get_node('hexEntity').get_child())
+	send_action('Collect',target,{'active_unit':state['active_unit']})
 	actionDone()
 
-func buildAny(target):
+func buildAny(target, set_state=null):
+	var local = true
+	if !set_state==null:
+		var state=set_state
+		local = false
 	
 	var costs = {
-		'gold':building_card.get_node('Card').cost_gold,
-		'faeria':building_card.get_node('Card').cost_faeria
+		'gold': globals.card_instances[state['building_card']].get_node('Card').cost_gold,
+		'faeria':globals.card_instances[state['building_card']].get_node('Card').cost_faeria
 	}
 	
 	if players[state['current_turn']].pay_costs(costs['gold'],costs['faeria']):
 		## replcae with actual board entity
-		var child_card = building_card.get_node('Card')
-		players[state['current_turn']].discard_hand(building_card_ind)
-		
+		var child_card = globals.card_instances[state['building_card']].get_node('Card')
+		if local:
+			players[state['current_turn']].discard_hand(building_card_ind)
+		else:
+			## remove 1 card from enemy hand counter
+			pass
 		var entity = BoardEntity.instance()
 		target.get_node('hexEntity').add_child(entity)
-		entity.possess(child_card.board_entity,target,state['current_turn'])
+		entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'])
 		entity.Game =self
+	send_action('BuildAny', target,{'active_unit':state['active_unit'],'building_card':state['building_card']})
 	actionDone()
 
-func actionLand(target):
+func actionLand(target, set_state=null):
+	if !set_state==null:
+		var state=set_state
 	if (players[state['current_turn']].useAction(1)):
-		target.affectState({'hex_type':2}, state['current_turn'])
+		get_hex_by_id(target).affectState({'hex_type':2}, state['current_turn'])
 		players[state['current_turn']].modLands('land',1)
+	
+	send_action('BuildAny', target,{})
 	actionDone()
 
-func actionLake(target):
+func actionLake(target, set_state=null):
+	if !set_state==null:
+		var state=set_state
 	if (players[state['current_turn']].useAction(1)):
-		target.affectState({'hex_type':3}, state['current_turn'])
+		get_hex_by_id(target).affectState({'hex_type':3}, state['current_turn'])
 		players[state['current_turn']].modLands('lake',1)
+	send_action('BuildAny', target,{})
 	actionDone()
 
-func actionTree(target):
+func actionTree(target, set_state=null):
+	if !set_state==null:
+		var state=set_state
 	if (players[state['current_turn']].useAction(1)):
-		target.affectState({'hex_type':4}, state['current_turn'])
+		get_hex_by_id(target).affectState({'hex_type':4}, state['current_turn'])
 		players[state['current_turn']].modLands('tree',1)
+	send_action('BuildAny', target,{})
 	actionDone()
 
-func actionHill(target):
+func actionHill(target, set_state=null):
+	if !set_state==null:
+		var state=set_state
 	if (players[state['current_turn']].useAction(1)):
-		target.affectState({'hex_type':5}, state['current_turn'])
+		get_hex_by_id(target).affectState({'hex_type':5}, state['current_turn'])
 		players[state['current_turn']].modLands('hill',1)
+	send_action('BuildAny', target,{})
 	actionDone()
 
-func actionSand(target):
+func actionSand(target, set_state=null):
+	if !set_state==null:
+		var state=set_state
 	if (players[state['current_turn']].useAction(1)):
-		target.affectState({'hex_type':6}, state['current_turn'])
+		get_hex_by_id(target).affectState({'hex_type':6}, state['current_turn'])
 		players[state['current_turn']].modLands('sand',1)
+	send_action('BuildAny', target,{})
 	actionDone()
 
-func actionCoin():
+func actionCoin(set_state=null):
+	if !set_state==null:
+		var state=set_state
 	print('coin')
 	if (players[state['current_turn']].useAction(1)):
 		print('coin 2')
 		players[state['current_turn']].modCoin(1)
 		complete=true
+	send_action('BuildAny', target,{})
 	actionDone()
 
-func actionCard():
+func actionCard(set_state=null):
+	if !set_state==null:
+		var state=set_state
 	if players[state['current_turn']].cards>0:
 		if (players[state['current_turn']].useAction(1)):
 			players[state['current_turn']].drawCard()
 			complete=true
+	send_action('BuildAny', target,{})
 	actionDone()
 
-func actionPlayCard(gold,faeria):
-	#change hex entity
-	pass
+
 	
 ###############
-###
+### MESSAGE FUNCTIONS
+
+func send_action(type,target, state):
+	globals.send_msg({'game_action':{
+		'player':(state['current_turn']+1)%2,
+		'type':type,
+		'target':target,
+		'state':state
+	}})
+
+func deck_cards(val):
+	players[1].deck_init(val)
+
+func game_action(val):
+	call(val.type,val.target,val.state)
+
+##
+#HELPERS
+func get_hex_by_id(id):
+	for hex in get_tree().get_nodes_in_group("Hex"):
+		if hex.id == id:
+			return hex
+
+func get_unit_by_hex(hex):
+	return hex.get_node('hexEntity/BoardEntity')
+
+""" added instances to globals
+func get_card_properties_by_name(card,props):
+	var card_instance = globals.card_resources[name].instance()
+	var ret = {}
+	for prop in props:
+		ret[prop] = card[prop]
+	card_instance.queue_free()
+	return ret
+"""
+
+
 
 #### VERFIFICATIONS
 

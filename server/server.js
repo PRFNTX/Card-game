@@ -234,7 +234,7 @@ function action(name,params){
     })
     //params [ 0 ] = player num
     let send_to
-    if (params[0]==0){
+    if (params.player==0){
         send_to = found.challenger
     } else {
         sound_to = found.owner
@@ -242,7 +242,7 @@ function action(name,params){
     //params[ 1 ] action name (to .call())
     //params[ 2 ] action target
     //params[ 3 ] setState({this thing})
-    send_to.send(JSON.stringify(params))
+    send_to.send(JSON.stringify({game_action:params))
 }
 //SOCKET
 
@@ -307,7 +307,7 @@ wss.on('connection', (socket, req)=>{
                 case 'msg_channel':
                     message_channel(value[0],socket,value[1]);
                     break;
-                case 'action':
+                case 'game_action':
                     game_action(in_game||own_game,value);
                     break;
                 case 'ready':

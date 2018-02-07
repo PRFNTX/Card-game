@@ -5,6 +5,7 @@ onready var HTTP = get_node('/root/HTTP')
 
 var scenes = {'game':"res://Game.tscn",'title':'res://Title.tscn', 'deck':'res://EditDeck.tscn','login':'res://Login.tscn','browse_games':'res://GameBrowser.tscn'}
 var card_resources = {}
+var card_instances = {}
 
 var Deck = {}
 var deck_list=null
@@ -51,6 +52,8 @@ func load_cards():
 		else:
 			card_resources[file_name.split('.')[0]]=load(dirPath+file_name)
 		file_name = dir.get_next()
+	for card in card_resources.keys():
+		card_instances[card]= card_resources[card].instance()
 
 
 #### GET GAME LIST
@@ -127,8 +130,11 @@ func leave(val):
 func close(val):
 	pass
 
+var player_num
 func start(val):
-	pass
+	player_num = val
+	set_scene('game')
+
 
 func create(val):
 	pass
