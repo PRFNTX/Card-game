@@ -146,13 +146,13 @@ func collision(val):
 
 func create(val):
 	print("CREATING")
-	setState({'show_owner':"This is you",'is_owner':true,'in_game':true})
+	setState({'show_owner':globals.user.username,'is_owner':true,'in_game':true})
 
 func drop(val):
 	setState({'show_challenger':null})
 
 func close(val):
-	setState({'show_owner':null,'show_challenger':null,'is_owner':false})
+	setState({'show_owner':null,'show_challenger':null,'is_owner':false,'in_game':false})
 
 func start(val):
 	globals.set_scene('Game')
