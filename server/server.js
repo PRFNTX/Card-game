@@ -40,7 +40,7 @@ app.use(express.urlencoded({extended:true}))
 
 let chat_channels = []
 
-let games = []
+let games = [{'name':'fake game, please ignore',owner:'nop',challenger:null,started:false}]
 
 //chanels
 function join_channel(name, member){

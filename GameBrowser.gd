@@ -125,6 +125,9 @@ func get_decks():
 ###EVENTS
 
 func game_list(val):
+	print('val')
+	print(val)
+	
 	for game in val:
 		$Games/Games.add_item(game['name'])
 
