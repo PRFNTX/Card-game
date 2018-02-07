@@ -99,7 +99,7 @@ function game_list(res){
         console.log(game)
         return {'name':game.name, 'owner':game.owner.name}
     })}
-    console.log(response)
+    console.log(JSON.stringify(response))
     res.send(JSON.stringify(response))
 }
 
