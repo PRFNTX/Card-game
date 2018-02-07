@@ -132,7 +132,7 @@ func close(val):
 
 var player_num
 func start(val):
-	player_num = val
+	player_num = int(val)
 	set_scene('game')
 
 
