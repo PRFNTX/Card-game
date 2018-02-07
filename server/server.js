@@ -239,9 +239,12 @@ function action(name,params){
         let send_to
         if (params.player==0){
             send_to = found.challenger
+            console.log(sent_to)
         } else {
             sound_to = found.owner
+            console.log(sent_to)
         }
+        console.log(sent_to)
         //params[ 1 ] action name (to .call())
         //params[ 2 ] action target
         //params[ 3 ] setState({this thing})
