@@ -108,6 +108,9 @@ func game_list(val):
 	
 	open_games = val
 
+func game_action(val):
+	pass
+
 ##CHATS
 func join_chat(val):
 	pass
