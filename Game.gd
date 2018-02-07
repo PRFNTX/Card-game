@@ -397,12 +397,12 @@ func actionCard(target, set_state=null):
 ###############
 ### MESSAGE FUNCTIONS
 
-func send_action(type,target, state):
+func send_action(type,target, loc_state):
 	globals.send_msg({'game_action':{
 		'player':(state['current_turn']+1)%2,
 		'type':type,
 		'target':target,
-		'state':state
+		'state':loc_state
 	}})
 
 func deck_cards(val):
