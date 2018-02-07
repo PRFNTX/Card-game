@@ -154,7 +154,7 @@ func _on_Save_Deck_pressed():
 	for key in top_level.deck_lists[top_level.state['current_deck']].keys():
 		for i in top_level.deck_lists[top_level.state['current_deck']][key]:
 			list.append(key)
-	top_level.globals.authenticated_server_request("/decks/"+top_level.state['current_deck'],HTTPClient.METHOD_PUT,{'cards':list,'deck_name':$Rename.text})
+	top_level.HTTP.authenticated_server_request("/decks/"+top_level.state['current_deck'],HTTPClient.METHOD_PUT,{'cards':list,'deck_name':$Rename.text})
 	set_name($Rename.text)
-	top_level.globals.set_deck_list(top_level.globals.authenticated_server_request("/decks",HTTPClient.METHOD_GET,{}))
+	top_level.globals.set_deck_list(top_level.HTTP.authenticated_server_request("/decks",HTTPClient.METHOD_GET,{}))
 	top_level.initialize_decks(false)

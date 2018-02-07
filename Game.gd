@@ -203,7 +203,7 @@ func start_unit_action(type):
 
 func start_build_action(gold, faeria, lands,card_num, card, buildType):
 	if actionReady and players[state['current_turn']].has_resource(gold,faeria,lands):
-		setState({'building_card':card.get_node("Card").name})
+		setState({'building_card':card.get_node("Card").card_name})
 		building_card_ind = card_num
 		actionReady=false
 		complete=false

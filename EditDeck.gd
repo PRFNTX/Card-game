@@ -1,5 +1,6 @@
 extends Node2D
 
+onready var HTTP = get_node('/root/HTTP')
 onready var globals = get_node('/root/master')
 
 export(PackedScene) var DeckListEdit
@@ -177,4 +178,14 @@ func _on_Save_pressed():
 
 
 func _on_Tabs_tab_changed( tab ):
+	if $Tabs.get_child(tab).get_node('Name').get_item_count()==0:
+		$Tabs.get_child(tab).get_node('add').hide()
+		$Tabs.get_child(tab).get_node('remove').hide()
+	else:
+		$Tabs.get_child(tab).get_node('add').show()
+		$Tabs.get_child(tab).get_node('remove').show()
 	setState({'current_deck':$Tabs.get_child(tab).get_name()})
+
+
+func _on_Main_Menu_pressed():
+	globals.set_scene('title')

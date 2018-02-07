@@ -244,3 +244,7 @@ func _on_Leave_pressed():
 func _on_Refresh_pressed():
 	$Games/Games.clear()
 	refresh_games()
+
+
+func _on_Button_pressed():
+	globals.set_scene('title')
