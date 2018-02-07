@@ -125,9 +125,6 @@ func get_decks():
 ###EVENTS
 
 func game_list(val):
-	print('val')
-	print(val)
-	
 	for game in val:
 		$Games/Games.add_item(game['name'])
 
@@ -145,7 +142,7 @@ func collision(val):
 	$Games/GameName.placeholder_text = "Game: "+val+", name taken"
 
 func create(val):
-	print("CREATING")
+	
 	setState({'show_owner':globals.user.username,'is_owner':true,'in_game':true})
 
 func drop(val):
@@ -240,3 +237,6 @@ func _on_Leave_pressed():
 	else:
 		globals.send_msg({'drop':''})
 	setState({'show_owner':null,'show_challenger':null,'is_owner':false,'in_game':false,'self_ready':false,'opp_ready':false})
+
+func _on_Refresh_pressed():
+	refresh_games()
