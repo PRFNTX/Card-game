@@ -22,7 +22,7 @@ var me
 ### HELPERS
 
 func activePlayerCanAffect(by, strict=false):
-	if stateLocal['hex_owner']==by:
+	if stateLocal['hex_owner']==int(by):
 		print('here')
 	return( (stateLocal['hex_owner']==-1 and !strict) or stateLocal['hex_owner']==by)
 
