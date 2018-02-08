@@ -250,7 +250,7 @@ func moveBase(target, set_state=null):
 	unit.Hex=hex_target
 	unit.use_energy()
 	if local:
-		send_action('moveBase',45-target,{'active_unit':state['active_unit']})
+		send_action('moveBase',45-target,{'active_unit':45-state['active_unit']})
 		unit.setState({'active':false})
 		setState({'active_unit':target})
 	
@@ -271,7 +271,7 @@ func AttackAdjOrCollect(target, set_state=null):
 	var unit = get_unit_by_hex(get_hex_by_id(state['active_unit']))
 	unit.on_attack(get_hex_by_id(target).get_node('hexEntity').get_node('BoardEntity'))
 	if local:
-		send_action('AttackAdjOrCollect',45-target,{'active_unit':state['active_unit']})
+		send_action('AttackAdjOrCollect',45-target,{'active_unit':45-state['active_unit']})
 		unit.setState({'active':false})
 	
 	actionDone()
@@ -285,7 +285,7 @@ func AttackAdj(target, set_state=null):
 	var unit = get_unit_by_hex(get_hex_by_id(state['active_unit']))
 	unit.on_attack(get_hex_by_id(target).get_node('hexEntity').get_node('BoardEntity'))
 	if local:
-		send_action('AttackAdj',45-target,{'active_unit':state['active_unit']})
+		send_action('AttackAdj',45-target,{'active_unit':45-state['active_unit']})
 		unit.setState({'active':false})
 	
 	actionDone()
@@ -299,7 +299,7 @@ func Collect(target, set_state=null):
 	var unit = get_unit_by_hex(get_hex_by_id(state['active_unit']))
 	unit.on_attack(target.get_node('hexEntity').get_child())
 	if local:
-		send_action('Collect',45-target,{'active_unit':state['active_unit']})
+		send_action('Collect',45-target,{'active_unit':45-state['active_unit']})
 		unit.setState({'active':false})
 	
 	actionDone()
