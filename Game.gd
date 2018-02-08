@@ -299,6 +299,8 @@ func Collect(target, set_state=null):
 func buildAny(target, set_state=null):
 	var local = true
 	if !set_state==null:
+		print('building')
+		print(set_state)
 		var state=set_state
 		local = false
 	
