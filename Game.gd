@@ -241,6 +241,7 @@ func moveBase(target, set_state=null):
 	startBasictimeout()
 	var unit = get_unit_by_hex(get_hex_by_id(state['active_unit']))
 	unit.on_move(hex_target.get_node('hexEntity'))
+	setState({'active_unit':target})
 	#unit.rect_position = target.get_node('hexEntity/pos').position
 	unit.Hex=hex_target
 	unit.use_energy()
