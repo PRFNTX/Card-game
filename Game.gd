@@ -262,7 +262,7 @@ func AttackAdjOrCollect(target, set_state=null):
 		var state=set_state
 		local= false
 	var unit = get_unit_by_hex(get_hex_by_id(state['active_unit']))
-	unit.on_attack(target.get_node('hexEntity').get_node('BoardEntity'))
+	unit.on_attack(get_hex_by_id(target).get_node('hexEntity').get_node('BoardEntity'))
 	if local:
 		send_action('AttackAdjOrCollect',45-target,{'active_unit':state['active_unit']})
 		unit.setState({'active':false})
@@ -275,7 +275,7 @@ func AttackAdj(target, set_state=null):
 		var state=set_state
 		local = false
 	var unit = get_unit_by_hex(get_hex_by_id(state['active_unit']))
-	unit.on_attack(target.get_node('hexEntity').get_child())
+	unit.on_attack(get_hex_by_id(target).get_node('hexEntity').get_node('BoardEntity'))
 	if local:
 		send_action('AttackAdj',45-target,{'active_unit':state['active_unit']})
 		unit.setState({'active':false})
