@@ -235,7 +235,7 @@ func cancelAction():
 func moveBase(target, set_state=null):
 	var local = true
 	
-	if not set_state==null:
+	if set_state!=null:
 		var state=set_state
 		local=false
 	var hex_target = get_hex_by_id(target)
@@ -303,7 +303,7 @@ func Collect(target, set_state=null):
 func buildAny(target, set_state=null):
 	var local = true
 	var state = state
-	if not set_state==null:
+	if set_state!=null:
 		print('building')
 		print(set_state)
 		state=set_state
