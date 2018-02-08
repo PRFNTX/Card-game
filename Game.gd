@@ -242,13 +242,14 @@ func moveBase(target, set_state=null):
 	startBasictimeout()
 	var unit = get_unit_by_hex(get_hex_by_id(state['active_unit']))
 	unit.on_move(hex_target.get_node('hexEntity'))
-	setState({'active_unit':target})
+	
 	#unit.rect_position = target.get_node('hexEntity/pos').position
 	unit.Hex=hex_target
 	unit.use_energy()
 	if local:
 		send_action('moveBase',45-target,{'active_unit':state['active_unit']})
 		unit.setState({'active':false})
+		setState({'active_unit':target})
 	
 	
 	if check_valid_action(unit.Unit.get_action_name('Attack')):
@@ -301,14 +302,14 @@ func Collect(target, set_state=null):
 
 func buildAny(target, set_state=null):
 	var local = true
-	
+	var state = state
 	if not set_state==null:
 		print('building')
 		print(set_state)
-		var state=set_state
+		state=set_state
 		local = false
 	
-	
+	print(state)
 	var costs = {
 		'gold': globals.card_instances[state['building_card']].get_node('Card').cost_gold,
 		'faeria':globals.card_instances[state['building_card']].get_node('Card').cost_faeria
