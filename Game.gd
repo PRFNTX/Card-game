@@ -327,7 +327,7 @@ func buildAny(target, set_state=null):
 		entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'])
 		entity.Game =self
 	if local:
-		send_action('buildAny', 45-target,{'active_unit':state['active_unit'],'building_card':state['building_card']})
+		send_action('buildAny', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':state['building_card']})
 	actionDone()
 
 func actionLand(target, set_state=null):
