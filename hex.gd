@@ -30,8 +30,8 @@ func hex_is_empty():
 	return !($hexEntity.has_node('BoardEntity'))
 
 func hex_is_empty_or_self():
-	#return !($hexEntity.has_node('BoardEntity')) or $hexEntity.get_node('BoardEntity')==stateLocal['active_unit']
-	return !($hexEntity.has_node('BoardEntity')) or $hexEntity.get_parent().id==stateLocal['active_unit']
+	return !($hexEntity.has_node('BoardEntity')) or $hexEntity.get_node('BoardEntity')==stateLocal['active_unit']
+	
 
 func has_opposing_unit():
 	if $hexEntity.get_children().size()>1:
@@ -162,7 +162,7 @@ func action(type,by,test=false):
 			if test:
 				return false
 	elif type=="moveBase":
-		if hexType.child.moveLand and hex_is_empty_or_self() and is_adjacent_or_equal_to(gameNode.get_hex_by_id(stateLocal['active_unit'])):
+		if hexType.child.moveLand and hex_is_empty_or_self() and is_adjacent_or_equal_to(stateLocal['active_unit'].Hex):
 			if !test:
 				setState({'cover':move,'target':true})
 			else:
@@ -192,7 +192,7 @@ func action(type,by,test=false):
 			if test:
 				return false
 	elif type=="AttackAdj":
-		if is_adjacent_to(gameNode.get_hex_by_id(stateLocal['active_unit'])) and (has_opposing_unit()):
+		if is_adjacent_to(stateLocal['active_unit'].Hex) and (has_opposing_unit()):
 			if !test:
 				setState({'cover':attack,'target':true})
 			else:
@@ -202,12 +202,12 @@ func action(type,by,test=false):
 			if test:
 				return false
 	elif type=="AttackAdjOrCollect":
-		if is_adjacent_to(gameNode.get_hex_by_id(stateLocal['active_unit'])) and has_opposing_unit():
+		if is_adjacent_to(stateLocal['active_unit'].Hex) and has_opposing_unit():
 			if !test:
 				setState({'cover':attack,'target':true})
 			else:
 				return true
-		elif is_adjacent_to(gameNode.get_hex_by_id(stateLocal['active_unit'])) and is_harvestable():
+		elif is_adjacent_to(stateLocal['active_unit'].Hex) and is_harvestable():
 			if !test:
 				setState({'cover':gather,'target':true})
 			else:
@@ -217,7 +217,7 @@ func action(type,by,test=false):
 			if test:
 				return false
 	elif type=='Collect':
-		if is_adjacent_to(gameNode.get_unit_by_hex(gameNode.get_hex_by_id(stateLocal['active_unit'])).Hex) and is_harvestable():
+		if is_adjacent_to(stateLocal['active_unit'].Hex) and is_harvestable():
 			if !test:
 				setState({'cover':attack,'target':true})
 			else:
@@ -289,7 +289,7 @@ func hex_type(val):
 	stateLocal['hex_type']=val
 
 func active_unit(unit):
-	stateLocal['active_unit']=unit
+	stateLocal['active_unit']=gameNode.get_unit_bt_hex(get_hex_by_id(unit))
 
 func hovered(val):
 	if val and stateLocal['cover']!=Color(0,0,0,0):
