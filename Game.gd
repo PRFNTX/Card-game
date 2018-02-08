@@ -234,8 +234,9 @@ func cancelAction():
 
 func moveBase(target, set_state=null):
 	var local = true
+	var state = state
 	if !set_state==null:
-		var state=set_state
+		state=set_state
 		local=false
 	var hex_target = get_hex_by_id(target)
 	startBasictimeout()
@@ -259,8 +260,9 @@ func moveBase(target, set_state=null):
 
 func AttackAdjOrCollect(target, set_state=null):
 	var local = true
+	var state = state
 	if !set_state==null:
-		var state=set_state
+		state=set_state
 		local= false
 	var unit = get_unit_by_hex(get_hex_by_id(state['active_unit']))
 	unit.on_attack(get_hex_by_id(target).get_node('hexEntity').get_node('BoardEntity'))
@@ -272,8 +274,9 @@ func AttackAdjOrCollect(target, set_state=null):
 
 func AttackAdj(target, set_state=null):
 	var local = true
+	var state=state
 	if !set_state==null:
-		var state=set_state
+		state=set_state
 		local = false
 	var unit = get_unit_by_hex(get_hex_by_id(state['active_unit']))
 	unit.on_attack(get_hex_by_id(target).get_node('hexEntity').get_node('BoardEntity'))
@@ -298,10 +301,11 @@ func Collect(target, set_state=null):
 
 func buildAny(target, set_state=null):
 	var local = true
+	var state = state
 	if !set_state==null:
 		print('building')
 		print(set_state)
-		var state=set_state
+		state=set_state
 		local = false
 	
 	
@@ -432,6 +436,8 @@ func deck_cards(val):
 func game_action(val):
 	print("TO ACTION")
 	call(val.type,val.target,val.state)
+	print("END STATE")
+	print(state)
 
 ##
 #HELPERS
