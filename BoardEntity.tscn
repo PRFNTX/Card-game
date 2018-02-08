@@ -3,7 +3,7 @@
 [ext_resource path="res://BoardEntity.gd" type="Script" id=1]
 [ext_resource path="res://Assets/basic_entityhighlight.png" type="Texture" id=2]
 
-[node name="BoardEntity" type="Control"]
+[node name="BoardEntity" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -20,6 +20,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
 _sections_unfolded = [ "Rect" ]
+enemy_modulate = Color( 0, 0, 0, 0.552471 )
 
 [node name="light" type="Sprite" parent="." index="0"]
 

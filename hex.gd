@@ -13,6 +13,8 @@ export(Color,RGBA) var targetOther
 export(Color,RGBA) var mouseover_color
 export(Color,RGBA) var gather
 
+export(Color, RGBA) var enemy_modulate = Color(0,0,0,0)
+
 
 #this fills at runtime
 var adjacent =[]
@@ -24,7 +26,7 @@ var me
 func activePlayerCanAffect(by, strict=false):
 	if stateLocal['hex_owner']==int(by):
 		print('here')
-	return( (stateLocal['hex_owner']==-1 and !strict) or stateLocal['hex_owner']==by)
+	return( (stateLocal['hex_owner']==-1 and !strict) or stateLocal['hex_owner']==0)
 
 func hex_is_empty():
 	return !($hexEntity.has_node('BoardEntity'))

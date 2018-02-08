@@ -2,7 +2,7 @@
 
 [ext_resource path="res://hexProperties.gd" type="Script" id=1]
 
-[node name="Empty" type="Sprite"]
+[node name="Empty" type="Sprite" index="0"]
 
 script = ExtResource( 1 )
 type = 1

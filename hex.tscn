@@ -6,7 +6,7 @@
 [ext_resource path="res://hexEntity.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Area2D.gd" type="Script" id=5]
 
-[node name="hex" type="Node2D" groups=[
+[node name="hex" type="Node2D" index="0" groups=[
 "Hex",
 ]]
 
@@ -25,6 +25,7 @@ summon = Color( 0.0102459, 1, 0.0953029, 0.542392 )
 targetOther = Color( 1, 0.045082, 0.917937, 0.495765 )
 mouseover_color = Color( 0.996094, 0.996094, 0.996094, 0.5 )
 gather = Color( 1, 0.984375, 0, 0.364392 )
+enemy_modulate = Color( 0, 0, 0, 0.563529 )
 
 [node name="sprite" type="Sprite" parent="." index="0"]
 
@@ -53,6 +54,7 @@ gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
+priority = 3.0
 audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 5 )
