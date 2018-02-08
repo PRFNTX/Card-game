@@ -231,12 +231,15 @@ func cancelAction():
 
 
 ##ACTIONS
+#for reasons
+func get_state():
+	return state
 
 func moveBase(target, set_state=null):
 	var local = true
-	
+	var state = get_state()
 	if set_state!=null:
-		var state=set_state
+		state=set_state
 		local=false
 	var hex_target = get_hex_by_id(target)
 	startBasictimeout()
@@ -261,9 +264,9 @@ func moveBase(target, set_state=null):
 
 func AttackAdjOrCollect(target, set_state=null):
 	var local = true
-	
+	var state = get_state()
 	if not set_state==null:
-		var state=set_state
+		state=set_state
 		local= false
 	var unit = get_unit_by_hex(get_hex_by_id(state['active_unit']))
 	unit.on_attack(get_hex_by_id(target).get_node('hexEntity').get_node('BoardEntity'))
@@ -275,9 +278,9 @@ func AttackAdjOrCollect(target, set_state=null):
 
 func AttackAdj(target, set_state=null):
 	var local = true
-	
-	if not set_state==null:
-		var state=set_state
+	var state= get_state()
+	if set_state!=null:
+		state=set_state
 		local = false
 	var unit = get_unit_by_hex(get_hex_by_id(state['active_unit']))
 	unit.on_attack(get_hex_by_id(target).get_node('hexEntity').get_node('BoardEntity'))
@@ -289,8 +292,9 @@ func AttackAdj(target, set_state=null):
 
 func Collect(target, set_state=null):
 	var local = true
+	var state= get_state()
 	if not set_state==null:
-		var state=set_state
+		state=set_state
 		local = false
 	var unit = get_unit_by_hex(get_hex_by_id(state['active_unit']))
 	unit.on_attack(target.get_node('hexEntity').get_child())
@@ -300,16 +304,15 @@ func Collect(target, set_state=null):
 	
 	actionDone()
 
+
 func buildAny(target, set_state=null):
 	var local = true
-	var state = state
+	var state = get_state()
 	if set_state!=null:
-		print('building')
-		print(set_state)
+		
 		state=set_state
 		local = false
 	
-	print(state)
 	var costs = {
 		'gold': globals.card_instances[state['building_card']].get_node('Card').cost_gold,
 		'faeria':globals.card_instances[state['building_card']].get_node('Card').cost_faeria
