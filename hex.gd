@@ -289,7 +289,10 @@ func hex_type(val):
 	stateLocal['hex_type']=val
 
 func active_unit(unit):
-	stateLocal['active_unit']=gameNode.get_unit_by_hex(gameNode.get_hex_by_id(unit))
+	if unit==null:
+		stateLocal['active_unit']
+	else:
+		stateLocal['active_unit']=gameNode.get_unit_by_hex(gameNode.get_hex_by_id(unit))
 
 func hovered(val):
 	if val and stateLocal['cover']!=Color(0,0,0,0):
