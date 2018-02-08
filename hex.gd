@@ -285,6 +285,10 @@ func target(val):
 
 func hex_owner(val):
 	stateLocal['hex_owner']=val
+	if val ==1:
+		modulate = enemy_modulate
+	else:
+		modulate = Color(0,0,0,0)
 
 func hex_type(val):
 	hexType.setState(val)
