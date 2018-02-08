@@ -10,7 +10,7 @@ export(Color, RGBA) var enemy_modulate = Color(0,0,0,0)
 func set_owner(val):
 	Owner = val
 	if val == 1:
-		modulate=enemy_modulate
+		Unit.modulate=enemy_modulate
 
 func set_game(val):
 	Game = val
