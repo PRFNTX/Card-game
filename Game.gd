@@ -234,9 +234,9 @@ func cancelAction():
 
 func moveBase(target, set_state=null):
 	var local = true
-	var state = state
+	
 	if not set_state==null:
-		state=set_state
+		var state=set_state
 		local=false
 	var hex_target = get_hex_by_id(target)
 	startBasictimeout()
@@ -260,9 +260,9 @@ func moveBase(target, set_state=null):
 
 func AttackAdjOrCollect(target, set_state=null):
 	var local = true
-	var state = state
+	
 	if not set_state==null:
-		state=set_state
+		var state=set_state
 		local= false
 	var unit = get_unit_by_hex(get_hex_by_id(state['active_unit']))
 	unit.on_attack(get_hex_by_id(target).get_node('hexEntity').get_node('BoardEntity'))
@@ -274,9 +274,9 @@ func AttackAdjOrCollect(target, set_state=null):
 
 func AttackAdj(target, set_state=null):
 	var local = true
-	var state=state
+	
 	if not set_state==null:
-		state=set_state
+		var state=set_state
 		local = false
 	var unit = get_unit_by_hex(get_hex_by_id(state['active_unit']))
 	unit.on_attack(get_hex_by_id(target).get_node('hexEntity').get_node('BoardEntity'))
@@ -301,11 +301,11 @@ func Collect(target, set_state=null):
 
 func buildAny(target, set_state=null):
 	var local = true
-	var state = state
+	
 	if not set_state==null:
 		print('building')
 		print(set_state)
-		state=set_state
+		var state=set_state
 		local = false
 	
 	
@@ -356,7 +356,7 @@ func actionLake(target, set_state=null):
 
 func actionTree(target, set_state=null):
 	var local = true
-	if !set_state==null:
+	if not set_state==null:
 		var state=set_state
 		local = false
 	if (players[state['current_turn']].useAction(1)):
@@ -368,7 +368,7 @@ func actionTree(target, set_state=null):
 
 func actionHill(target, set_state=null):
 	var local = true
-	if !set_state==null:
+	if not set_state==null:
 		var state=set_state
 		local = false
 	if (players[state['current_turn']].useAction(1)):
@@ -380,7 +380,7 @@ func actionHill(target, set_state=null):
 
 func actionSand(target, set_state=null):
 	var local = true
-	if !set_state==null:
+	if not set_state==null:
 		var state=set_state
 		local = false
 	if (players[state['current_turn']].useAction(1)):
@@ -392,7 +392,7 @@ func actionSand(target, set_state=null):
 
 func actionCoin(target, set_state=null):
 	var local = true
-	if !set_state==null:
+	if not set_state==null:
 		var state=set_state
 		local = false
 	print('coin')
@@ -406,7 +406,7 @@ func actionCoin(target, set_state=null):
 
 func actionCard(target, set_state=null):
 	var local = true
-	if !set_state==null:
+	if not set_state==null:
 		var state=set_state
 		local = false
 	if players[state['current_turn']].cards>0:
