@@ -14,6 +14,10 @@ func _ready():
 	# Initialization here
 	pass
 
+func can_play():
+	pass
+	#fenodrae can only be played at night
+
 
 func _gui_input(event):
 	if event is InputEventMouseMotion:

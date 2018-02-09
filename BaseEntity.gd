@@ -64,24 +64,32 @@ func add_one_faeria():
 
 export(bool) var is_unit = 0
 export(bool) var is_building=0
+export(bool) var is_event=0
 
 export(bool) var move = 0
 export(bool) var charge = 0
 export(bool) var jump = 0
 export(bool) var aquatic = 0
 export(bool) var flying = 0
+export(bool) var conquest = 0
+export(bool) var convoke = 0
+export(bool) var radiate = 0
+export(bool) var auto_collect = 0
 
 export(bool) var collect = 0
 export(bool) var attack = 0
 export(bool) var abilities = 0
 
 export(bool) var on_play = 0
+export(bool) var on_production = 0
 export(bool) var on_attack = 0
 export(bool) var on_move = 0
 export(bool) var on_collect = 0
 export(bool) var on_damage = 0
 export(bool) var on_death = 0
 export(bool) var on_clock = 0
+export(bool) var on_action = 0
+export(bool) var on_turn_end = 0
 
 export(Texture) var frame_alt = null
 

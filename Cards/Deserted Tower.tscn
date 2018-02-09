@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Cards/scripts/hand_card.gd" type="Script" id=1]
 [ext_resource path="res://Card.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/TownBasic.png" type="Texture" id=3]
+[ext_resource path="res://Cards/entities/entity - Deserted Tower.tscn" type="PackedScene" id=4]
 
 [node name="Deserted Tower" type="Control" index="0"]
 
@@ -34,6 +35,6 @@ lands_num = 2
 lands_type = 3
 is_event = false
 base = ExtResource( 3 )
-board_entity = null
+board_entity = ExtResource( 4 )
 
 

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Cards/scripts/hand_card.gd" type="Script" id=1]
 [ext_resource path="res://Card.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/TownBasic.png" type="Texture" id=3]
+[ext_resource path="res://Cards/entities/entity - Earth Flap.tscn" type="PackedScene" id=4]
 
 [node name="Earth Flap" type="Control" index="0"]
 
@@ -35,6 +36,6 @@ lands_num = 3
 lands_type = 2
 is_event = true
 base = ExtResource( 3 )
-board_entity = null
+board_entity = ExtResource( 4 )
 
 

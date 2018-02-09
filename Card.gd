@@ -10,6 +10,8 @@ export(int) var cost_faeria = 1
 export(int) var lands_num = 1
 export(int,'null','lake','tree','hill','sand') var lands_type = 0
 
+export(bool) var is_event = false
+
 export(Texture) var art
 export(Texture) var base
 
