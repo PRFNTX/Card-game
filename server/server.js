@@ -412,8 +412,8 @@ app.get('/decks/:name', authenticate, (req,res)=>{
 app.put('/decks/:name', authenticate, (req,res)=>{
     const changes = req.body
     const user = req.user.username
-    console.log(changes)
-    console.log(req.params.name)
+    console.log('changes',changes)
+    console.log('params', req.params.name)
     Deck.findOne({username:user,deck_name:req.params.name}).then(
         found=>{
             if (found){
@@ -424,7 +424,7 @@ app.put('/decks/:name', authenticate, (req,res)=>{
                 })
                 return found.save()
             } else {
-                console.log(changes)
+                console.log("CREATE")
                 return Deck.create({
                     username:user,
                     deck_name:changes.deck_name,
