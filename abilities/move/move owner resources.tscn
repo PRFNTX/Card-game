@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://move resources.gd" type="Script" id=1]
+
+[node name="move owner resources" type="Node" index="0"]
+
+script = ExtResource( 1 )
+value = 1
+type = 0
+
+

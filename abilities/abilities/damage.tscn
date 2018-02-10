@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://damage.gd" type="Script" id=1]
+
+[node name="damage" type="Node" index="0"]
+
+script = ExtResource( 1 )
+gold_cost = 0
+action_cost = 0
+faeria_cost = 0
+energy_cost = 0
+damage = 1
+target_type = 0
+target_player = 1
+
+

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://destroy target.gd" type="Script" id=1]
+
+[node name="destroy target" type="Node" index="0"]
+
+script = ExtResource( 1 )
+player = 2
+type = 1
+
+

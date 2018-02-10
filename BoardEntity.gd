@@ -5,6 +5,8 @@ var Game setget set_game
 var Hex
 var Owner setget set_owner
 
+var stunned = false
+
 export(Color, RGBA) var enemy_modulate = Color(0,0,0,0)
 
 func set_owner(val):
@@ -30,14 +32,15 @@ var state={
 func _ready():
 	pass
 
-func possess(entity, hex, player):
+func possess(entity, hex, player, game):
 	Owner = player
 	set_process_input(true)
 	Unit = entity.instance()
 	add_child(Unit)
 	actionList = Unit.get_actions()
 	Hex = hex
-	on_play()
+	Game= game
+	return Unit.play()
 
 func receive_attack(val_damage):
 	var mod_damage = on_damage(val_damage)
@@ -49,7 +52,32 @@ func receive_attack(val_damage):
 		Unit.set_val(Unit.current_val-mod_damage)
 		if Unit.current_val <=0:
 			on_death()
-	
+
+## currently identical to above
+func receive_damage():
+	var mod_damage = on_damage(val_damage)
+	if Unit.is_unit:
+		Unit.set_health(Unit.current_health-mod_damage)
+		if Unit.current_health <=0:
+			on_death()
+	elif Unit.is_building:
+		Unit.set_val(Unit.current_val-mod_damage)
+		if Unit.current_val <=0:
+			on_death()
+
+## as above but damage is not reduced
+func life_change(val):
+	if val<0:
+		on_damage(val_damage)
+	Unit.set_health(Unit.current_health + val)
+	if Unit.is_unit:
+		Unit.set_health(Unit.current_health-mod_damage)
+		if Unit.current_health <=0:
+			on_death()
+	elif Unit.is_building:
+		Unit.set_val(Unit.current_val-mod_damage)
+		if Unit.current_val <=0:
+			on_death()
 
 func actions_populate():
 	#for act in actionList.keys():
@@ -58,6 +86,9 @@ func actions_populate():
 
 func use_energy():
 	Unit.current_energy-=1
+
+func get_energy():
+	return Unit.current_energy
 
 #### EVENT FUNCTIONS
 func on_play():
@@ -122,7 +153,8 @@ func clock_time(time):
 
 func sig_turn_start(player):
 	if int(player)==int(Owner):
-		Unit.turn_start()
+		Unit.turn_start(stunned)
+	stunned = false
 
 func spawn_faeria():
 	Unit.add_one_faeria()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://board.gd" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://Assets/hex.png" type="Texture" id=13]
 [ext_resource path="res://Hand.gd" type="Script" id=14]
 [ext_resource path="res://Clock.tscn" type="PackedScene" id=15]
+[ext_resource path="res://DisplayFrame.gd" type="Script" id=16]
 
 [node name="Game" type="Node2D"]
 
@@ -357,6 +358,23 @@ id = 44
 initial_owner = 1
 enemy_modulate = Color( 0, 0, 0, 0 )
 
+[node name="Local Cast" parent="board/back" index="44" instance=ExtResource( 4 )]
+
+position = Vector2( -176.781, -479.541 )
+z_index = 3
+initial_state = 1
+initial_owner = 1
+enemy_modulate = Color( 0, 0, 0, 0 )
+
+[node name="Remote Cast" parent="board/back" index="45" instance=ExtResource( 4 )]
+
+position = Vector2( -61.1174, -481.215 )
+z_index = 3
+initial_state = 1
+id = 45
+initial_owner = 1
+enemy_modulate = Color( 0, 0, 0, 0 )
+
 [node name="Control" type="Control" parent="." index="1"]
 
 editor/display_folded = true
@@ -492,10 +510,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 282.0
-margin_top = 480.0
-margin_right = 822.0
-margin_bottom = 590.0
+margin_left = 268.0
+margin_top = 477.0
+margin_right = 808.0
+margin_bottom = 587.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 0
 mouse_default_cursor_shape = 0
@@ -510,11 +528,16 @@ position = Vector2( 887.117, 459.1 )
 scale = Vector2( 2, 2 )
 _sections_unfolded = [ "Transform" ]
 
+[node name="DisplayFrame" type="Node2D" parent="." index="11"]
+
+position = Vector2( 124.001, 214.854 )
+script = ExtResource( 16 )
+
 [connection signal="timeout" from="actionTimer" to="." method="_on_Timer_timeout"]
 
-[connection signal="timeout" from="basic_timeout" to="." method="_on_basic_timeout_timeout"]
-
 [connection signal="timeout" from="basic_timeout" to="." method="_on_Timer_timeout"]
+
+[connection signal="timeout" from="basic_timeout" to="." method="_on_basic_timeout_timeout"]
 
 [connection signal="pressed" from="endturn" to="." method="_on_endturn_pressed"]
 

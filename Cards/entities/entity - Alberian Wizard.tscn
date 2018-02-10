@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://BaseEntity.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Round.png" type="Texture" id=2]
 [ext_resource path="res://Assets/energy_small.png" type="Texture" id=3]
 [ext_resource path="res://Assets/faeria.png" type="Texture" id=4]
+[ext_resource path="res://abilities/Movement/Move.tscn" type="PackedScene" id=5]
+[ext_resource path="res://abilities/Attacks/standardAttack.tscn" type="PackedScene" id=6]
+[ext_resource path="res://abilities/abilities/damage.tscn" type="PackedScene" id=7]
+[ext_resource path="res://abilities/abilities/discard.tscn" type="PackedScene" id=8]
 
 [node name="Unit" type="Node2D" index="0"]
 
@@ -28,6 +32,10 @@ charge = 0
 jump = 0
 aquatic = 0
 flying = 0
+conquest = 0
+convoke = 0
+radiate = 0
+auto_collect = 0
 collect = false
 attack = false
 abilities = true
@@ -40,6 +48,7 @@ on_damage = 0
 on_death = 0
 on_clock = false
 on_action = true
+on_turn_end = 0
 frame_alt = null
 
 [node name="Frame" type="Sprite" parent="." index="0"]
@@ -204,9 +213,25 @@ _sections_unfolded = [ "Visibility" ]
 
 [node name="Movement" type="Node" parent="." index="5"]
 
+[node name="Move" parent="Movement" index="0" instance=ExtResource( 5 )]
+
 [node name="Attack" type="Node" parent="." index="6"]
 
+[node name="standardAttack" parent="Attack" index="0" instance=ExtResource( 6 )]
+
 [node name="Abilities" type="Node" parent="." index="7"]
+
+[node name="damage" parent="Abilities" index="0" instance=ExtResource( 7 )]
+
+faeria_cost = 1
+energy_cost = 1
+damage = 2
+target_type = 1
+
+[node name="discard" parent="Abilities" index="1" instance=ExtResource( 8 )]
+
+action_cost = 1
+energy_cost = 1
 
 [node name="on_play" type="Node" parent="." index="8"]
 
@@ -221,5 +246,11 @@ _sections_unfolded = [ "Visibility" ]
 [node name="on_death" type="Node" parent="." index="13"]
 
 [node name="on_clock" type="Node" parent="." index="14"]
+
+[node name="on_action" type="Node" parent="." index="15"]
+
+[node name="on_turn_end" type="Node" parent="." index="16"]
+
+[node name="on_production" type="Node" parent="." index="17"]
 
 

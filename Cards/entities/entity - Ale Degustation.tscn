@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://BaseEntity.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Round.png" type="Texture" id=2]
 [ext_resource path="res://Assets/energy_small.png" type="Texture" id=3]
 [ext_resource path="res://Assets/faeria.png" type="Texture" id=4]
+[ext_resource path="res://abilities/Play/all - stun.tscn" type="PackedScene" id=5]
 
 [node name="Unit" type="Node2D" index="0"]
 
@@ -11,7 +12,7 @@ position = Vector2( 30, 30 )
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 max_faeria = 0
-max_energy = 1
+max_energy = 0
 base_attack = 0
 base_health = 2
 base_val = 0
@@ -22,12 +23,16 @@ ENERGY_ACTIVE = Color( 0, 1, 0.554688, 1 )
 ENERGY_INACTIVE = Color( 0.652344, 0.642151, 0.642151, 1 )
 is_unit = false
 is_building = false
-is_event = false
+is_event = true
 move = false
 charge = 0
 jump = 0
 aquatic = 0
 flying = 0
+conquest = 0
+convoke = 0
+radiate = 0
+auto_collect = 0
 collect = false
 attack = false
 abilities = false
@@ -40,6 +45,7 @@ on_damage = 0
 on_death = 0
 on_clock = false
 on_action = false
+on_turn_end = 0
 frame_alt = null
 
 [node name="Frame" type="Sprite" parent="." index="0"]
@@ -209,6 +215,8 @@ _sections_unfolded = [ "Visibility" ]
 [node name="Abilities" type="Node" parent="." index="7"]
 
 [node name="on_play" type="Node" parent="." index="8"]
+
+[node name="all - stun" parent="on_play" index="0" instance=ExtResource( 5 )]
 
 [node name="on_attack" type="Node" parent="." index="9"]
 

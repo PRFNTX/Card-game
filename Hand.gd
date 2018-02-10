@@ -78,4 +78,15 @@ func on_mouse_enter(num):
 var buildTypes=['buildAny','buildLake', 'buildTree','buildHill','buildSand']
 func on_mouse_button(num):
 	var card = card_nodes[num].get_node('Card')
-	game.start_build_action(card.cost_gold,card.cost_faeria,{card.lands_type:card.lands_num},num,card_nodes[num],buildTypes[card.lands_type] )
+	if card.is_event:
+		## .duplicate node
+		## add to cast box
+		## for each possible action add a button to do that thing
+		##if that thing is an action, start it as an action
+		## use the same process for board entities
+		pass
+	else:
+		game.start_build_action(card.cost_gold,card.cost_faeria,{card.lands_type:card.lands_num},num,card_nodes[num],buildTypes[card.lands_type] )
+
+func _on_cast_pressed():
+	

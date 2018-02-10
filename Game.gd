@@ -28,7 +28,7 @@ func set_player(val):
 
 
 ###### current_turn will be set to 0 during local players turn and 1 during remote players turn
-var state={"action":"", 'current_turn':0,'active_unit':null,'clock_time':0,'hovered':null,'building_card':null}
+var state={"action":"", 'current_turn':0,'active_unit':null,'clock_time':0,'hovered':null,'building_card':null, 'delegate':null, 'hand_cast':null}
 
 var actionTimer
 
@@ -53,8 +53,9 @@ func current_turn(val):
 		$endturn.show()
 	else:
 		$endturn.hide()
-	
-	
+
+func delegate_res(val):
+	state['delegate_res'] = val
 
 func active_unit(unit_hex_id):
 	
@@ -78,6 +79,9 @@ func hovered(hex):
 
 func building_card(card):
 	state['building_card'] = card
+
+func hand_cast(card_name):
+	state['hand_cast'] = card_name
 
 ################
 
@@ -114,13 +118,11 @@ func _ready():
 		if hex.hexType.child.type==ORB:
 			var starting_entity = BoardEntity.instance()
 			hex.get_node('hexEntity').add_child(starting_entity)
-			starting_entity.possess(OrbEntity,hex,hex.initial_owner)
-			starting_entity.Game =self
+			starting_entity.possess(OrbEntity,hex,hex.initial_owner,self)
 		if hex.hexType.child.type==WELL:
 			var starting_entity = BoardEntity.instance()
 			hex.get_node('hexEntity').add_child(starting_entity)
-			starting_entity.possess(WellEntity,hex,hex.initial_owner)
-			starting_entity.Game =self
+			starting_entity.possess(WellEntity,hex,hex.initial_owner,self)
 			#starting_entity.spawn_faeria()
 	
 	set_player(globals.player_num)
@@ -192,6 +194,15 @@ var building_card_ind
 #func get_hand_card(ind):
 #	return players[state['current_turn']].Hand[ind]
 
+func delegate_action(delegate):
+	startBasictimeout()
+	if actionReady:
+		actionReady=false
+		complete = false
+		startTimer()
+		setState({"action":'delegate','delegate_res':delegate})
+		delegate.targeting()
+
 func start_unit_action(type):
 	startBasictimeout()
 	if actionReady and check_valid_action(type) and state['active_unit']!=null:
@@ -222,18 +233,34 @@ func completeAction(target):
 
 func actionDone():
 	
-	setState({"action":"",'active_unit':null})
+	setState({"action":"",'active_unit':null, 'hand_cast':null, 'delegate':null})
 	complete = true
 
 func cancelAction():
-	setState({"action":"",'active_unit':null})
+	setState({"action":"",'active_unit':null, 'hand_cast':null, 'delegate':null})
 	complete = true
+
+
 
 
 ##ACTIONS
 #for reasons
 func get_state():
 	return state
+
+
+#currently only for remote
+func hardMove(target, set_state=null):
+	var local = false
+	var state = get_state()
+	if set_state!=null:
+		state=set_state
+	
+	var hex_target = get_hex_by_id(target)
+	var unit = get_unit_by_hex(get_hex_by_id(state['active_unit']))
+	unit.on_move(hex_target.get_node('hexEntity'))
+	unit.Hex=hex_target
+
 
 func moveBase(target, set_state=null):
 	var local = true
@@ -304,6 +331,39 @@ func Collect(target, set_state=null):
 	
 	actionDone()
 
+func castAny(target, set_state=null):
+	var local = true
+	var state = get_state()
+	var cast_hex = 0
+	if set_state!=null:
+		cast_hex=45
+		state=set_state
+		local = false
+	
+	var costs = {
+		'gold': globals.card_instances[state['building_card']].get_node('Card').cost_gold,
+		'faeria':globals.card_instances[state['building_card']].get_node('Card').cost_faeria
+	}
+	
+	if players[state['current_turn']].pay_costs(costs['gold'],costs['faeria']):
+		## replcae with actual board entity
+		var child_card = globals.card_instances[state['building_card']].get_node('Card')
+		if local:
+			players[state['current_turn']].discard_by_name(state['building_card'])
+		else:
+			players[state['current_turn']].set_hand_cards(players[state['current_turn']].hand_cards-1)
+		var entity = BoardEntity.instance()
+		get_hex_by_id(cast_hex).get_node('hexEntity').add_child(entity)
+		var play_effect = entity.possess(child_card.board_entity,get_hex_by_id(cast_hex),state['current_turn'],self)
+		entity.Owner = state['current_turn']
+		entity.add_to_group('entities')
+	if local:
+		send_action('castAny', 45-cast_hex,{'current_turn':(state['current_turn']+1%2),'building_card':state['building_card']})
+	
+	if play_effect==null:
+		actionDone()
+	else:
+		actionReady=true
 
 func buildAny(target, set_state=null):
 	var local = true
@@ -328,9 +388,9 @@ func buildAny(target, set_state=null):
 			pass
 		var entity = BoardEntity.instance()
 		get_hex_by_id(target).get_node('hexEntity').add_child(entity)
-		entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'])
-		entity.Game =self
+		entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'],self)
 		entity.Owner = state['current_turn']
+		entity.add_to_group('entities')
 	if local:
 		send_action('buildAny', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':state['building_card']})
 	actionDone()
@@ -424,7 +484,16 @@ func actionCard(target, set_state=null):
 	actionDone()
 
 
+func delegate(target, set_state=null):
+	var local = true
+	var state = get_state()
+	if not set_state==null:
+		state=set_state
+		local= false
 	
+	if (get_unit_by_hex(get_hex_by_id(state['delegate'])).complete(target, set_state)):
+		actionDone()
+
 ###############
 ### MESSAGE FUNCTIONS
 
@@ -464,6 +533,27 @@ func get_card_properties_by_name(card,props):
 	card_instance.queue_free()
 	return ret
 """
+
+##DISPLAY FRAME
+
+func set_displayframe(card):
+	$DisplayFrame.empty()
+	$DisplayFrame.show()
+	$DisplayFrame.set_card(card)
+
+func hide_displayframe():
+	$DisplayFrame.empty()
+	$DisplayFrame.hide()
+
+var temp_card
+func cast_from_hand(card_node):
+	## CHECK COSTS
+	var card_name = card_node.get_node('Card').card_name
+	set_state({'building_Card':card_name})
+	castAny(0)
+
+
+
 
 
 

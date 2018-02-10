@@ -28,6 +28,10 @@ charge = 0
 jump = 0
 aquatic = 0
 flying = 0
+conquest = 0
+convoke = 0
+radiate = 0
+auto_collect = 0
 collect = false
 attack = false
 abilities = false
@@ -40,6 +44,7 @@ on_damage = 0
 on_death = false
 on_clock = false
 on_action = false
+on_turn_end = 0
 frame_alt = null
 
 [node name="Frame" type="Sprite" parent="." index="0"]
@@ -221,5 +226,7 @@ _sections_unfolded = [ "Visibility" ]
 [node name="on_death" type="Node" parent="." index="13"]
 
 [node name="on_clock" type="Node" parent="." index="14"]
+
+[node name="on_production" type="Node" parent="." index="15"]
 
 

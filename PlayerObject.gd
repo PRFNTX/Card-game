@@ -15,6 +15,7 @@ var actions = 0
 var gold = 2
 var faeria = 0
 var cards = 0
+var hand_cards = 0 setget set_hand_cards
 var int_to_land = ['land','lake','tree','hill','sand']
 var lands = {'land':0,'lake':0,'tree':0,'hill':0,'sand':0}
 
@@ -55,6 +56,7 @@ func onCreate(node,this):
 	lbl_actions = get_node('box/actions')
 	lbl_gold = get_node('box/gold')
 	lbl_faeria = get_node('box/faeria')
+	lbl_hand = get_node('box/hand')
 	me = this
 	
 
@@ -133,6 +135,7 @@ func drawCard():
 		curr_Deck.remove(card)
 		modCards(-1)
 		hand_object.update()
+	lbl_hand.text = Hand.size()
 	
 
 func discard_hand(card=-1):
@@ -145,6 +148,11 @@ func discard_hand(card=-1):
 			Discard.append(Hand[card])
 			Hand.remove(card)
 		hand_object.update()
+	lbl_hand.text = str(Hand.size())
+
+func discard_by_name(card):
+	Hand.erase(card)
+	lbl_hand.text = str(Hand.size())
 
 func discard_deck():
 	if !is_dummy:
@@ -166,4 +174,10 @@ func pay_costs(c_gold,c_faeria):
 	modCoin(-1*c_gold)
 	modFaeria(-1*c_faeria)
 	return(true)
+
+func set_hand_cards(val):
+	hand_cards = val
+	lbl_hand.text = str(val)
+	
+	
 	

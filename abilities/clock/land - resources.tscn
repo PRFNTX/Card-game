@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://night.gd" type="Script" id=1]
+
+[node name="land - resources" type="Node" index="0"]
+
+script = ExtResource( 1 )
+morning = 0
+evening = 0
+night = true
+type = 0
+player = 0
+gained = 3
+land_occupied = 3
+
+

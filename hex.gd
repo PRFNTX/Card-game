@@ -23,6 +23,10 @@ var me
 
 ### HELPERS
 
+func get_unit():
+	if $hexEntity.get_children().size()>1:
+		return $hexEntity.get_children()[1]
+
 func activePlayerCanAffect(by, strict=false):
 	if stateLocal['hex_owner']==int(by):
 		print('here')
@@ -35,13 +39,39 @@ func hex_is_empty_or_self():
 	return !($hexEntity.has_node('BoardEntity')) or $hexEntity.get_node('BoardEntity')==stateLocal['active_unit']
 	
 
-func has_opposing_unit():
+func has_opposing_unit(friendly=0):
 	if $hexEntity.get_children().size()>1:
 		if $hexEntity.get_children()[1].Owner>=0:
-			if $hexEntity.get_children()[1].Owner!=stateLocal['active_unit'].Owner:
+			if $hexEntity.get_children()[1].Owner!=friendly:
 				return true
 			else:
 				return false
+
+func has_friendly_unit(friendly=0):
+	if $hexEntity.get_children().size()>1:
+		if $hexEntity.get_children()[1].Owner>=0:
+			if $hexEntity.get_children()[1].Owner==friendly:
+				return true
+			else:
+				return false
+
+func has_unit():
+	if $hexEntity.get_children().size()>1:
+		return true
+	else:
+		return false
+
+func unit_is_creature():
+	if has_unit():
+		if $hexEntity.get_children()[1].Unit.is_unit:
+			return true
+	return false
+
+func unit_is_building():
+	if has_unit():
+		if $hexEntity.get_children()[1].Unit.is_building:
+			return true
+	return false
 
 func is_harvestable():
 	if hexType.child.spawnsFaeria:
@@ -264,7 +294,7 @@ var gameNode
 
 #### LOCAL STATE
 
-var stateLocal={"cover":Color(0,0,0,0),"target":false, "hex_type":initial_state,"active_unit":null,'hovered':false}
+var stateLocal={"cover":Color(0,0,0,0),"target":false, "hex_type":initial_state,"active_unit":null,'hovered':false, 'hex_owner':-1}
 
 ###LOCAL STATE UPDATE FUNCTIONS
 
@@ -284,7 +314,10 @@ func target(val):
 	stateLocal['target']=val
 
 func hex_owner(val):
+	if stateLocal['hex_owner']>=0:
+		gameNode.player[stateLocal['hex_owner']].modLands(land_types[hex.stateLocal['hex_type']],-1)
 	stateLocal['hex_owner']=val
+	gameNode.player[val].modLands(land_types[hex.stateLocal['hex_type']],1)
 	if val == 1:
 		$hexType.child.modulate=enemy_modulate
 	elif val==0:

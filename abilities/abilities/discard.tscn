@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://discard.gd" type="Script" id=1]
+
+[node name="discard" type="Node" index="0"]
+
+script = ExtResource( 1 )
+gold_cost = 0
+action_cost = 0
+faeria_cost = 0
+energy_cost = 0
+random = true
+target_player = 1
+
+

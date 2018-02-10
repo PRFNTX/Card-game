@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://BaseEntity.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Round.png" type="Texture" id=2]
 [ext_resource path="res://Assets/energy_small.png" type="Texture" id=3]
 [ext_resource path="res://Assets/faeria.png" type="Texture" id=4]
+[ext_resource path="res://abilities/abilities/damage.tscn" type="PackedScene" id=5]
+[ext_resource path="res://abilities/production/gain stats capped.tscn" type="PackedScene" id=6]
 
 [node name="Unit" type="Node2D" index="0"]
 
@@ -28,6 +30,10 @@ charge = 0
 jump = 0
 aquatic = 0
 flying = 0
+conquest = 0
+convoke = 0
+radiate = 0
+auto_collect = 0
 collect = false
 attack = false
 abilities = true
@@ -40,6 +46,7 @@ on_damage = 0
 on_death = false
 on_clock = false
 on_action = false
+on_turn_end = 0
 frame_alt = null
 
 [node name="Frame" type="Sprite" parent="." index="0"]
@@ -208,6 +215,13 @@ _sections_unfolded = [ "Visibility" ]
 
 [node name="Abilities" type="Node" parent="." index="7"]
 
+[node name="damage" parent="Abilities" index="0" instance=ExtResource( 5 )]
+
+action_cost = 1
+energy_cost = 1
+target_type = 1
+adjacent_only = true
+
 [node name="on_play" type="Node" parent="." index="8"]
 
 [node name="on_attack" type="Node" parent="." index="9"]
@@ -221,5 +235,11 @@ _sections_unfolded = [ "Visibility" ]
 [node name="on_death" type="Node" parent="." index="13"]
 
 [node name="on_clock" type="Node" parent="." index="14"]
+
+[node name="on_production" type="Node" parent="." index="15"]
+
+[node name="gain stats capped" parent="on_production" index="0" instance=ExtResource( 6 )]
+
+attack_gain = 0
 
 
