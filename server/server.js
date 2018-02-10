@@ -424,7 +424,7 @@ app.put('/decks/:name', authenticate, (req,res)=>{
                 })
                 return found.save()
             } else {
-                print(changes)
+                console.log(changes)
                 return Deck.create({
                     username:user,
                     deck_name:changes.deck_name,
