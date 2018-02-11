@@ -398,6 +398,126 @@ func buildAny(target, set_state=null):
 		send_action('buildAny', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':state['building_card']})
 	actionDone()
 
+func buildLake(target, set_state=null):
+	var local = true
+	var state = get_state()
+	if set_state!=null:
+		
+		state=set_state
+		local = false
+	
+	var costs = {
+		'gold': globals.card_instances[state['building_card']].get_node('Card').cost_gold,
+		'faeria':globals.card_instances[state['building_card']].get_node('Card').cost_faeria
+	}
+	
+	if players[state['current_turn']].pay_costs(costs['gold'],costs['faeria']):
+		## replcae with actual board entity
+		var child_card = globals.card_instances[state['building_card']].get_node('Card')
+		if local:
+			players[state['current_turn']].discard_hand(building_card_ind)
+		else:
+			## remove 1 card from enemy hand counter
+			pass
+		var entity = BoardEntity.instance()
+		get_hex_by_id(target).get_node('hexEntity').add_child(entity)
+		entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'],self)
+		entity.Owner = state['current_turn']
+		entity.add_to_group('entities')
+	if local:
+		send_action('buildLake', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':state['building_card']})
+	actionDone()
+
+func buildTree(target, set_state=null):
+	var local = true
+	var state = get_state()
+	if set_state!=null:
+		
+		state=set_state
+		local = false
+	
+	var costs = {
+		'gold': globals.card_instances[state['building_card']].get_node('Card').cost_gold,
+		'faeria':globals.card_instances[state['building_card']].get_node('Card').cost_faeria
+	}
+	
+	if players[state['current_turn']].pay_costs(costs['gold'],costs['faeria']):
+		## replcae with actual board entity
+		var child_card = globals.card_instances[state['building_card']].get_node('Card')
+		if local:
+			players[state['current_turn']].discard_hand(building_card_ind)
+		else:
+			## remove 1 card from enemy hand counter
+			pass
+		var entity = BoardEntity.instance()
+		get_hex_by_id(target).get_node('hexEntity').add_child(entity)
+		entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'],self)
+		entity.Owner = state['current_turn']
+		entity.add_to_group('entities')
+	if local:
+		send_action('buildTree', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':state['building_card']})
+	actionDone()
+
+func buildHill(target, set_state=null):
+	var local = true
+	var state = get_state()
+	if set_state!=null:
+		
+		state=set_state
+		local = false
+	
+	var costs = {
+		'gold': globals.card_instances[state['building_card']].get_node('Card').cost_gold,
+		'faeria':globals.card_instances[state['building_card']].get_node('Card').cost_faeria
+	}
+	
+	if players[state['current_turn']].pay_costs(costs['gold'],costs['faeria']):
+		## replcae with actual board entity
+		var child_card = globals.card_instances[state['building_card']].get_node('Card')
+		if local:
+			players[state['current_turn']].discard_hand(building_card_ind)
+		else:
+			## remove 1 card from enemy hand counter
+			pass
+		var entity = BoardEntity.instance()
+		get_hex_by_id(target).get_node('hexEntity').add_child(entity)
+		entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'],self)
+		entity.Owner = state['current_turn']
+		entity.add_to_group('entities')
+	if local:
+		send_action('buildHill', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':state['building_card']})
+	actionDone()
+
+func buildSand(target, set_state=null):
+	var local = true
+	var state = get_state()
+	if set_state!=null:
+		
+		state=set_state
+		local = false
+	
+	var costs = {
+		'gold': globals.card_instances[state['building_card']].get_node('Card').cost_gold,
+		'faeria':globals.card_instances[state['building_card']].get_node('Card').cost_faeria
+	}
+	
+	if players[state['current_turn']].pay_costs(costs['gold'],costs['faeria']):
+		## replcae with actual board entity
+		var child_card = globals.card_instances[state['building_card']].get_node('Card')
+		if local:
+			players[state['current_turn']].discard_hand(building_card_ind)
+		else:
+			## remove 1 card from enemy hand counter
+			pass
+		var entity = BoardEntity.instance()
+		get_hex_by_id(target).get_node('hexEntity').add_child(entity)
+		entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'],self)
+		entity.Owner = state['current_turn']
+		entity.add_to_group('entities')
+	if local:
+		send_action('buildSand', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':state['building_card']})
+	actionDone()
+
 func actionLand(target, set_state=null):
 	var local = true
 	if not set_state==null:

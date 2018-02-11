@@ -130,6 +130,7 @@ func _ready():
 	
 
 func turn_start(stun):
+	print(stun)
 	if current_energy<max_energy and !stun:
 		add_one_energy()
 	if on_production:
@@ -147,6 +148,21 @@ func play():
 	for effectNode in $on_play.get_children():
 		return effectNode.activate()
 		
+
+func production():
+	if on_production:
+		for effectNode in $on_production.get_children():
+			effectNode.activate()
+
+func action():
+	if on_action:
+		for effectNode in $on_production.get_children():
+			effectNode.activate()
+
+func on_turn_end():
+	if on_turn_end:
+		for effectNode in $on_production.get_children():
+			effectNode.activate()
 
 func attack():
 	for effectNode in $on_attack.get_children():
@@ -172,10 +188,10 @@ func death():
 
 func get_actions():
 	var ret = {}
-	for move in $Movement.get_children():
-		ret[move.get_name()]=move
-	for ability in $Abilities.get_children():
-		ret[ability.description]=ability
+	#for move in $Movement.get_children():
+	#	ret[move.get_name()]=move
+	#for ability in $Abilities.get_children():
+#		ret[ability.description]=ability
 	
 	return(ret)
 
