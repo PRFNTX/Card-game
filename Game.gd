@@ -28,7 +28,7 @@ func set_player(val):
 
 
 ###### current_turn will be set to 0 during local players turn and 1 during remote players turn
-var state={"action":"", 'current_turn':0,'active_unit':null,'clock_time':0,'hovered':null,'building_card':null, 'delegate':null, 'hand_cast':null}
+var state={"action":"", 'current_turn':0,'active_unit':null,'clock_time':0,'hovered':null,'building_card':null, 'delegate_id':null, 'hand_cast':null}
 
 var actionTimer
 
@@ -82,6 +82,9 @@ func building_card(card):
 
 func hand_cast(card_name):
 	state['hand_cast'] = card_name
+
+func delegate_id(val):
+	state['delegate_id'] = val
 
 ################
 
@@ -200,7 +203,7 @@ func delegate_action(delegate):
 		actionReady=false
 		complete = false
 		startTimer()
-		setState({"action":'delegate','delegate_res':delegate})
+		setState({"action":'delegate','delegate_id':delegate})
 		delegate.targeting()
 
 func start_unit_action(type):
@@ -233,11 +236,11 @@ func completeAction(target):
 
 func actionDone():
 	
-	setState({"action":"",'active_unit':null, 'hand_cast':null, 'delegate':null})
+	setState({"action":"",'active_unit':null, 'hand_cast':null, 'delegate_id':null})
 	complete = true
 
 func cancelAction():
-	setState({"action":"",'active_unit':null, 'hand_cast':null, 'delegate':null})
+	setState({"action":"",'active_unit':null, 'hand_cast':null, 'delegate_id':null})
 	complete = true
 
 
@@ -344,7 +347,7 @@ func castAny(target, set_state=null):
 		'gold': globals.card_instances[state['building_card']].get_node('Card').cost_gold,
 		'faeria':globals.card_instances[state['building_card']].get_node('Card').cost_faeria
 	}
-	
+	var play_effect = null
 	if players[state['current_turn']].pay_costs(costs['gold'],costs['faeria']):
 		## replcae with actual board entity
 		var child_card = globals.card_instances[state['building_card']].get_node('Card')
@@ -354,7 +357,7 @@ func castAny(target, set_state=null):
 			players[state['current_turn']].set_hand_cards(players[state['current_turn']].hand_cards-1)
 		var entity = BoardEntity.instance()
 		get_hex_by_id(cast_hex).get_node('hexEntity').add_child(entity)
-		var play_effect = entity.possess(child_card.board_entity,get_hex_by_id(cast_hex),state['current_turn'],self)
+		play_effect = entity.possess(child_card.board_entity,get_hex_by_id(cast_hex),state['current_turn'],self)
 		entity.Owner = state['current_turn']
 		entity.add_to_group('entities')
 	if local:
@@ -491,7 +494,7 @@ func delegate(target, set_state=null):
 		state=set_state
 		local= false
 	
-	if (get_unit_by_hex(get_hex_by_id(state['delegate'])).complete(target, set_state)):
+	if (get_unit_by_hex(get_hex_by_id(state['delegate_id'])).complete(target, set_state)):
 		actionDone()
 
 ###############
@@ -522,7 +525,7 @@ func get_hex_by_id(id):
 			return hex
 
 func get_unit_by_hex(hex):
-	return hex.get_node('hexEntity/BoardEntity')
+	return hex.get_unit()
 
 """ added instances to globals
 func get_card_properties_by_name(card,props):

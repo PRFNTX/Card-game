@@ -153,9 +153,9 @@ func _on_Done_pressed():
 		for i in deck_lists[state['current_deck']][key]:
 			list.append(key)
 	
-	globals.authenticated_server_request("/decks/"+deck_name,HTTPClient.METHOD_POST,{'cards':list})
+	HTTP.authenticated_server_request("/decks/"+deck_name,HTTPClient.METHOD_POST,{'cards':list})
 	
-	globals.set_deck_list(globals.authenticated_server_request("/decks",HTTPClient.METHOD_GET,{}))
+	globals.set_deck_list(HTTP.authenticated_server_request("/decks",HTTPClient.METHOD_GET,{}))
 	
 	globals.Deck = $Tabs.get_current_tab_control().get_name()
 	globals.set_scene('game')

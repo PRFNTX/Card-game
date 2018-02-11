@@ -89,4 +89,4 @@ func on_mouse_button(num):
 		game.start_build_action(card.cost_gold,card.cost_faeria,{card.lands_type:card.lands_num},num,card_nodes[num],buildTypes[card.lands_type] )
 
 func _on_cast_pressed():
-	
+	pass

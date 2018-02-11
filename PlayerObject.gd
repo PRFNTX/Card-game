@@ -23,6 +23,7 @@ var lbl_cards
 var lbl_actions
 var lbl_gold
 var lbl_faeria
+var lbl_hand
 
 var Deck setget deck_init
 
@@ -83,7 +84,7 @@ func state_update(newState,keys):
 
 ###STATE UPDATE FUNCTIONS
 func current_turn(newVal):
-	local_state['active'] = (int(newVal)==int(me))
+	local_state['active'] = (newVal==me)
 	
 
 ####VALUE CONTROLLS

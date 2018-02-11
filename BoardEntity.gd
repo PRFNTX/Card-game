@@ -54,7 +54,7 @@ func receive_attack(val_damage):
 			on_death()
 
 ## currently identical to above
-func receive_damage():
+func receive_damage(val_damage):
 	var mod_damage = on_damage(val_damage)
 	if Unit.is_unit:
 		Unit.set_health(Unit.current_health-mod_damage)
@@ -68,14 +68,14 @@ func receive_damage():
 ## as above but damage is not reduced
 func life_change(val):
 	if val<0:
-		on_damage(val_damage)
+		on_damage(val)
 	Unit.set_health(Unit.current_health + val)
 	if Unit.is_unit:
-		Unit.set_health(Unit.current_health-mod_damage)
+		Unit.set_health(Unit.current_health+val)
 		if Unit.current_health <=0:
 			on_death()
 	elif Unit.is_building:
-		Unit.set_val(Unit.current_val-mod_damage)
+		Unit.set_val(Unit.current_val+val)
 		if Unit.current_val <=0:
 			on_death()
 

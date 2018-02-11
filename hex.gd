@@ -313,15 +313,20 @@ func cover(val):
 func target(val):
 	stateLocal['target']=val
 
+
+
+const land_types = ["empty","orb","land","lake","tree","hill","sand","well"]
 func hex_owner(val):
 	if stateLocal['hex_owner']>=0:
-		gameNode.player[stateLocal['hex_owner']].modLands(land_types[hex.stateLocal['hex_type']],-1)
+		gameNode.player[stateLocal['hex_owner']].modLands(land_types[stateLocal['hex_type']],-1)
 	stateLocal['hex_owner']=val
-	gameNode.player[val].modLands(land_types[hex.stateLocal['hex_type']],1)
+	gameNode.player[val].modLands(land_types[stateLocal['hex_type']],1)
 	if val == 1:
-		$hexType.child.modulate=enemy_modulate
+		#$hexType.child.modulate=enemy_modulate
+		pass
 	elif val==0:
-		$hexType.child.modulate=Color(0,0,0,0)
+		#$hexType.child.modulate=Color(0,0,0,0)
+		pass
 	
 
 func hex_type(val):
