@@ -166,11 +166,11 @@ func on_turn_end():
 
 func attack(target):
 	for effectNode in $on_attack.get_children():
-		effectNode.activate(get_parent().Game,get_parent(), target)
+		effectNode.activate(get_parent().Game,get_parent(), target.id)
 
 func move(target):
 	for effectNode in $on_move.get_children():
-		effectNode.activate(get_parent().Game,get_parent(), target )
+		effectNode.activate(get_parent().Game,get_parent(), target.id )
 
 func collect():
 	for effectNode in $on_collect.get_children():

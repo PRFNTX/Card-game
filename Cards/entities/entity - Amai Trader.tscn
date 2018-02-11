@@ -9,7 +9,7 @@
 [ext_resource path="res://abilities/move/move owner resources.tscn" type="PackedScene" id=7]
 [ext_resource path="res://abilities/damage/protection.tscn" type="PackedScene" id=8]
 
-[node name="Unit" type="Node2D"]
+[node name="Unit" type="Node2D" index="0"]
 
 position = Vector2( 30, 30 )
 script = ExtResource( 1 )
@@ -40,11 +40,11 @@ collect = false
 attack = false
 abilities = false
 on_play = false
-on_production = true
+on_production = false
 on_attack = 0
 on_move = true
 on_collect = 0
-on_damage = 0
+on_damage = true
 on_death = false
 on_clock = false
 on_action = false
