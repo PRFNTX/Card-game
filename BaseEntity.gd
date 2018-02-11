@@ -146,35 +146,35 @@ func on_select(Game,hex):
 
 func play():
 	for effectNode in $on_play.get_children():
-		return effectNode.activate()
+		return effectNode.activate(get_parent().Game,get_parent(),"")
 		
 
 func production():
 	if on_production:
 		for effectNode in $on_production.get_children():
-			effectNode.activate()
+			effectNode.activate(get_parent().Game,get_parent(),"")
 
 func action():
 	if on_action:
 		for effectNode in $on_production.get_children():
-			effectNode.activate()
+			effectNode.activate(get_parent().Game,get_parent(),"") ##this one is wrong
 
 func on_turn_end():
 	if on_turn_end:
 		for effectNode in $on_production.get_children():
-			effectNode.activate()
+			effectNode.activate(get_parent().Game,get_parent(),"")
 
-func attack():
+func attack(target):
 	for effectNode in $on_attack.get_children():
-		effectNode.activate()
+		effectNode.activate(get_parent().Game,get_parent(), target)
 
-func move():
+func move(target):
 	for effectNode in $on_move.get_children():
-		effectNode.activate()
+		effectNode.activate(get_parent().Game,get_parent(), target )
 
 func collect():
 	for effectNode in $on_collect.get_children():
-		effectNode.activate()
+		effectNode.activate(get_parent().Game,get_parent(),"")
 
 func damage(in_damage):
 	var dmg = in_damage

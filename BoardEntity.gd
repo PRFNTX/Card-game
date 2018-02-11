@@ -40,6 +40,8 @@ func possess(entity, hex, player, game):
 	actionList = Unit.get_actions()
 	Hex = hex
 	Game= game
+	Game.connect('TurnStart', self, 'sig_turn_start')
+	Game.connect('UpdateState', self, 'sig_update_state')
 	return Unit.play()
 
 func receive_attack(val_damage):
@@ -96,14 +98,14 @@ func on_play():
 		Unit.play()
 
 func on_attack(target):
-	Unit.attack()
+	Unit.attack(target)
 	target.receive_attack(Unit.current_attack)
 
 func on_move(target):
 	get_parent().remove_child(self)
 	target.add_child(self)
 	if Unit.on_move:
-		Unit.move()
+		Unit.move(target)
 	
 func on_collect():
 	if Unit.on_collect:
