@@ -90,7 +90,9 @@ func current_turn(newVal):
 ####VALUE CONTROLLS
 
 func modLands(s_type,mod):
-	lands[s_type]+=mod
+	var keys =  ['lake','tree','hill','sand']
+	if keys.has(s_type):
+		lands[s_type]+=mod
 
 func useAction(num):
 	
