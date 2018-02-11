@@ -138,7 +138,7 @@ func drawCard():
 		curr_Deck.remove(card)
 		modCards(-1)
 		hand_object.update()
-	lbl_hand.text = Hand.size()
+	lbl_hand.text = str(Hand.size())
 	
 
 func discard_hand(card=-1):
