@@ -171,7 +171,7 @@ func _on_Save_pressed():
 		for i in deck_lists[state['current_deck']][key]:
 			list.append(key)
 	
-	globals.authenticated_server_request("/decks/"+deck_name,HTTPClient.METHOD_POST,{'cards':list})
+	globals.authenticated_server_request("/decks/"+deck_name.replace(" ","\\ "),HTTPClient.METHOD_POST,{'cards':list})
 	
 	globals.set_deck_list(globals.authenticated_server_request("/decks",HTTPClient.METHOD_GET,{}))
 	initialize_decks()

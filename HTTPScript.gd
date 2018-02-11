@@ -12,6 +12,7 @@ func _ready():
 
 #### HTTP REUQESTS
 func authenticated_server_request(endpoint,method,body):
+	print('request', endpoint)
 	var err = 0
 	var http = HTTPClient.new()
 	http.set_blocking_mode(true)
