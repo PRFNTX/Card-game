@@ -68,7 +68,8 @@ func complete(target, set_state=null):
 	entity.Hex=hex_target
 	entity.use_energy()
 	if local:
-		Game.send_action('delegate',45-target,{'delegate_id':entity.Hex.id,'delegate_node':get_path()})
+		var send_State = {'delegate_id':entity.Hex.id,'delegate_node':str(get_path())}
+		Game.send_action('delegate',45-target,{'delegate_id':entity.Hex.id,'delegate_node':str(get_path())})
 	
 	
 	if Game.check_valid_action(entity.Unit.get_action_name('Attack')):
