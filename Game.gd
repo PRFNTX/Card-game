@@ -145,7 +145,7 @@ func change_turns(none,unused):
 	emit_signal("TurnEnd", state['current_turn'])
 	var current_time = state['clock_time']
 	###TESTING
-	if true:
+	if false:
 		setState({'current_turn':(state['current_turn']+1)%1,'action':"",'active_unit':null,'clock_time':(current_time+1)%3})
 	else:
 		setState({'current_turn':(state['current_turn']+1)%2,'action':"",'active_unit':null,'clock_time':(current_time+1)%3})
