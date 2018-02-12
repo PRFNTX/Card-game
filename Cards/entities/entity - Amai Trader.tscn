@@ -229,6 +229,8 @@ _sections_unfolded = [ "Visibility" ]
 
 [node name="move owner resources" parent="on_move" index="0" instance=ExtResource( 7 )]
 
+value = 2
+
 [node name="on_collect" type="Node" parent="." index="11"]
 
 [node name="on_damage" type="Node" parent="." index="12"]
