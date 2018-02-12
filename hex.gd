@@ -35,8 +35,11 @@ func activePlayerCanAffect(by, strict=false):
 func hex_is_empty():
 	return !($hexEntity.has_node('BoardEntity'))
 
-func hex_is_empty_or_self():
-	return !($hexEntity.has_node('BoardEntity')) or $hexEntity.get_node('BoardEntity')==stateLocal['active_unit']
+func hex_is_empty_or_self(loc=null):
+	if loc!=null:
+		return (!has_unit() or loc==id)
+	else:
+		return (!has_unit() or get_unit()==stateLocal['active_unit'])
 	
 
 func has_opposing_unit(friendly=0):
@@ -204,7 +207,7 @@ func action(type,by,test=false):
 			if test:
 				return false
 	elif type=="moveAir":
-		if hexType.child.moveAir and hex_is_empty():
+		if hexType.child.moveAir and hex_is_empty_or_self() and is_adjacent_or_equal_to(stateLocal['active_unit'].Hex):
 			if !test:
 				setState({'cover':move,'target':true})
 			else:
@@ -214,7 +217,7 @@ func action(type,by,test=false):
 			if test:
 				return false
 	elif type=="moveLand":
-		if hexType.child.moveWater and hex_is_empty():
+		if hexType.child.moveWater and hex_is_empty_or_self() and is_adjacent_or_equal_to(stateLocal['active_unit'].Hex):
 			if !test:
 				setState({'cover':move,'target':true})
 			else:

@@ -3,13 +3,13 @@ extends Node
 export(int,'None','Aquatic','Flying') var method = 0
 
 
-func start_action(Game):
+func start_action(entity):
 	if method == 0:
-		Game.start_unit_action('moveBase')
+		entity.Game.start_unit_action('moveBase')
 	elif method == 1:
-		Game.start_unit_action('moveAquatic')
+		entity.Game.start_unit_action('moveAquatic')
 	elif method == 2:
-		Game.start_unit_action('moveFlying')
+		entity.Game.start_unit_action('moveFlying')
 
 func get_action_type():
 	if method == 0:

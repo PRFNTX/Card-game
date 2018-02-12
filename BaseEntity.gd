@@ -28,16 +28,23 @@ func set_mod_att(val):
 
 
 func set_attack(val):
-	intermediate_attack = val
+	
+	current_attack = val
+	"""
 	for modifier in mod_att:
 		current_attack += modifier
-	get_node('Unit/A').text=str(current_attack)
+	"""
+	current_attack = current_attack+intermediate_attack
+	get_node('Unit/A').text=str(current_attack+intermediate_attack)
 	modulate_colors()
 
 func set_health(val):
-	current_health = val
-	get_node('Unit/H').text=str(current_health)
-	modulate_colors()
+	if is_building:
+		set_val(val)
+	else:
+		current_health = val
+		get_node('Unit/H').text=str(current_health)
+		modulate_colors()
 
 func set_val(val):
 	current_val = val
@@ -130,7 +137,7 @@ func _ready():
 	
 
 func turn_start(stun):
-	print(stun)
+	
 	if current_energy<max_energy and !stun:
 		add_one_energy()
 	if on_production:
@@ -142,7 +149,7 @@ func start_attack(Game):
 
 func on_select(Game,hex):
 	if $Movement.get_child_count()>0:
-		$Movement.get_children()[0].start_action(Game)
+		$Movement.get_children()[0].start_action(get_parent())
 
 func play():
 	for effectNode in $on_play.get_children():

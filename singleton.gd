@@ -12,6 +12,8 @@ var deck_list=null
 var user
 var websocket
 
+var socket_on = true
+
 func set_deck_list(parsedjson):
 	deck_list={}
 	for deck in parsedjson:
@@ -19,6 +21,11 @@ func set_deck_list(parsedjson):
 	
 
 var currentScene
+
+##TESTING
+func start_solo_game():
+	set_scene('game')
+	
 
 func _ready():
 	load_cards()
@@ -84,7 +91,8 @@ func set_scene(scene):
 #ACTIONS
 #actions
 func send_msg(value):
-	websocket.send(value)
+	if socket_on:
+		websocket.send(value)
 
 func _on_message_recieved(msg):
 

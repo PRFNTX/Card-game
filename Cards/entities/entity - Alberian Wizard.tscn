@@ -27,7 +27,7 @@ ENERGY_INACTIVE = Color( 0.652344, 0.642151, 0.642151, 1 )
 is_unit = true
 is_building = false
 is_event = 0
-move = false
+move = true
 charge = 0
 jump = 0
 aquatic = 0
@@ -36,8 +36,8 @@ conquest = 0
 convoke = 0
 radiate = 0
 auto_collect = 0
-collect = false
-attack = false
+collect = true
+attack = true
 abilities = true
 on_play = 0
 on_production = false
@@ -227,6 +227,7 @@ faeria_cost = 1
 energy_cost = 1
 damage = 2
 target_type = 1
+adjacent_only = 0
 
 [node name="discard" parent="Abilities" index="1" instance=ExtResource( 8 )]
 

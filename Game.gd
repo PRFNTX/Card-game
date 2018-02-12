@@ -4,6 +4,8 @@ extends Node2D
 # member variables here, example:
 # var a=2
 # var b="textvar"
+
+
 onready var globals = get_node('/root/master')
 
 var BoardEntity = load('res://BoardEntity.tscn')
@@ -28,7 +30,7 @@ func set_player(val):
 
 
 ###### current_turn will be set to 0 during local players turn and 1 during remote players turn
-var state={"action":"", 'current_turn':0,'active_unit':null,'clock_time':0,'hovered':null,'building_card':null, 'delegate_id':null, 'hand_cast':null}
+var state={"action":"", 'current_turn':0,'active_unit':null,'clock_time':0,'hovered':null,'building_card':null, 'delegate_id':null,'delegate_node':null, 'hand_cast':null}
 
 var actionTimer
 
@@ -58,8 +60,6 @@ func delegate_res(val):
 	state['delegate_res'] = val
 
 func active_unit(unit_hex_id):
-	
-	
 	state['active_unit']=unit_hex_id
 	if !(unit_hex_id==null):
 		var unit = get_unit_by_hex(get_hex_by_id(unit_hex_id))
@@ -85,6 +85,9 @@ func hand_cast(card_name):
 
 func delegate_id(val):
 	state['delegate_id'] = val
+
+func delegate_node(path):
+	state['delegate_node'] = path
 
 ################
 
@@ -141,7 +144,11 @@ func change_turns(none,unused):
 	cancelAction()
 	emit_signal("TurnEnd", state['current_turn'])
 	var current_time = state['clock_time']
-	setState({'current_turn':(state['current_turn']+1)%2,'action':"",'active_unit':null,'clock_time':(current_time+1)%3})
+	###TESTING
+	if true:
+		setState({'current_turn':(state['current_turn']+1)%1,'action':"",'active_unit':null,'clock_time':(current_time+1)%3})
+	else:
+		setState({'current_turn':(state['current_turn']+1)%2,'action':"",'active_unit':null,'clock_time':(current_time+1)%3})
 	emit_signal("TurnStart", state['current_turn'])
 	emit_signal("ActionPhase", state['current_turn'])
 	
@@ -197,14 +204,15 @@ var building_card_ind
 #func get_hand_card(ind):
 #	return players[state['current_turn']].Hand[ind]
 
-func delegate_action(delegate):
+func delegate_action(delegate,nodepath):
 	startBasictimeout()
 	if actionReady:
 		actionReady=false
 		complete = false
 		startTimer()
-		setState({"action":'delegate','delegate_id':delegate})
-		delegate.targeting()
+		setState({"action":'delegate','delegate_id':delegate,'delegate_node':nodepath})
+		### how to find activating script
+		get_node(state['delegate_node']).targeting()
 
 func start_unit_action(type):
 	startBasictimeout()
@@ -236,11 +244,11 @@ func completeAction(target):
 
 func actionDone():
 	
-	setState({"action":"",'active_unit':null, 'hand_cast':null, 'delegate_id':null})
+	setState({"action":"",'active_unit':null, 'hand_cast':null, 'delegate_id':null,"delegate_node":null})
 	complete = true
 
 func cancelAction():
-	setState({"action":"",'active_unit':null, 'hand_cast':null, 'delegate_id':null})
+	setState({"action":"",'active_unit':null, 'hand_cast':null, 'delegate_id':null,'delegate_node':null})
 	complete = true
 
 
@@ -281,6 +289,60 @@ func moveBase(target, set_state=null):
 	unit.use_energy()
 	if local:
 		send_action('moveBase',45-target,{'active_unit':45-state['active_unit']})
+		unit.setState({'active':false})
+		setState({'active_unit':target})
+	
+	
+	if check_valid_action(unit.Unit.get_action_name('Attack')):
+		actionReady=true
+		unit.Unit.start_attack(self)
+	else:
+		
+		actionDone()
+
+func moveAquatic(target, set_state=null):
+	var local = true
+	var state = get_state()
+	if set_state!=null:
+		state=set_state
+		local=false
+	var hex_target = get_hex_by_id(target)
+	startBasictimeout()
+	var unit = get_unit_by_hex(get_hex_by_id(state['active_unit']))
+	unit.on_move(hex_target.get_node('hexEntity'))
+	
+	#unit.rect_position = target.get_node('hexEntity/pos').position
+	unit.Hex=hex_target
+	unit.use_energy()
+	if local:
+		send_action('moveAquatic',45-target,{'active_unit':45-state['active_unit']})
+		unit.setState({'active':false})
+		setState({'active_unit':target})
+	
+	
+	if check_valid_action(unit.Unit.get_action_name('Attack')):
+		actionReady=true
+		unit.Unit.start_attack(self)
+	else:
+		
+		actionDone()
+
+func moveAir(target, set_state=null):
+	var local = true
+	var state = get_state()
+	if set_state!=null:
+		state=set_state
+		local=false
+	var hex_target = get_hex_by_id(target)
+	startBasictimeout()
+	var unit = get_unit_by_hex(get_hex_by_id(state['active_unit']))
+	unit.on_move(hex_target.get_node('hexEntity'))
+	
+	#unit.rect_position = target.get_node('hexEntity/pos').position
+	unit.Hex=hex_target
+	unit.use_energy()
+	if local:
+		send_action('moveAir',45-target,{'active_unit':45-state['active_unit']})
 		unit.setState({'active':false})
 		setState({'active_unit':target})
 	
@@ -614,7 +676,7 @@ func delegate(target, set_state=null):
 		state=set_state
 		local= false
 	
-	if (get_unit_by_hex(get_hex_by_id(state['delegate_id'])).complete(target, set_state)):
+	if (get_node(state['delegate_node']).complete(target, set_state)):
 		actionDone()
 
 ###############

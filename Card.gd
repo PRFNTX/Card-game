@@ -15,7 +15,7 @@ export(bool) var is_event = false
 export(Texture) var art
 export(Texture) var base
 
-var costIcons=["", load('res://icon.png'),load('res://icon.png'),load('res://icon.png'),load('res://icon.png')]
+var costIcons=["", load('res://Assets/Icon_lake.png'),load('res://Assets/Icon_tree.png'),load('res://Assets/Icon_hill.png'),load('res://Assets/Icon_sand.png')]
 
 export(PackedScene) var board_entity
 
@@ -27,6 +27,7 @@ func _ready():
 	$Attack.text = str(base_attack)
 	$Faeria.text = str(cost_faeria)
 	$Gold.text = str(cost_gold)
+	$Name.text = card_name
 	
 	var land_children = $Lands.get_children()
 	var ith = 0

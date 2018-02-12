@@ -6,7 +6,7 @@ export(bool) var affect_empty = true
 
 
 func activate(Game, entity, unused):
-	for hex in Game.get_hex_by_id(entity.Hex).adjacent:
+	for hex in entity.Hex.adjacent:
 		if change_owner and affect_empty:
 			hex.setState({'hex_type':newType+2,'hex_owner':entity.Owner})
 			

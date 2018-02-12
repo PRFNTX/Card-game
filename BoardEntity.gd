@@ -26,7 +26,8 @@ var actionList={}
 
 var state={
 	'active':false,
-	'clock_time':0
+	'clock_time':0,
+	'delegate':null
 }
 
 func _ready():
@@ -101,11 +102,11 @@ func on_attack(target):
 	Unit.attack(target)
 	target.receive_attack(Unit.current_attack)
 
-func on_move(target):
+func on_move(target): #hexEntity
 	get_parent().remove_child(self)
 	target.add_child(self)
 	if Unit.on_move:
-		Unit.move(target)
+		Unit.move(target.get_parent())
 	
 func on_collect():
 	if Unit.on_collect:
@@ -150,11 +151,16 @@ func clock_time(time):
 	if Unit.on_clock:
 		Unit.clock(time)
 
+func delegate(nodepath):
+	state['delegate'] = nodepath
+
+func get_delegate():
+	return Unit.get_node(state['delegate'])
 
 ### SIGNAL FUNCTIONS
 
 func sig_turn_start(player):
-	if int(player)==int(Owner):
+	if player==Owner:
 		Unit.turn_start(stunned)
 	stunned = false
 
