@@ -676,7 +676,7 @@ func delegate(target, set_state=null):
 		state=set_state
 		local= false
 	
-	if (get_node(state['delegate_node'].replace("_"," ")).complete(target, set_state)):
+	if (get_node(str(state['delegate_node']).replace("_"," ")).complete(target, set_state)):
 		actionDone()
 
 ###############
