@@ -145,7 +145,7 @@ func change_turns(none,unused):
 	emit_signal("TurnEnd", state['current_turn'])
 	var current_time = state['clock_time']
 	###TESTING
-	if false:
+	if true:
 		setState({'current_turn':(state['current_turn']+1)%1,'action':"",'active_unit':null,'clock_time':(current_time+1)%3})
 	else:
 		setState({'current_turn':(state['current_turn']+1)%2,'action':"",'active_unit':null,'clock_time':(current_time+1)%3})
@@ -676,19 +676,23 @@ func delegate(target, set_state=null):
 		state=set_state
 		local= false
 	
-	if (get_node(state['delegate_node']).complete(target, set_state)):
+	if (get_node(state['delegate_node'].replace("_"," ")).complete(target, set_state)):
 		actionDone()
 
 ###############
 ### MESSAGE FUNCTIONS
 
 func send_action(type,target, loc_state):
-	globals.send_msg({'game_action':{
+	var send = {'game_action':{
 		'player':global_player_num,
 		'type':type,
 		'target':target,
 		'state':loc_state
-	}})
+	}}
+	print(send)
+	var jsn = to_json(send)
+	var nojsn = parse_json(jsn)
+	globals.send_msg(send)
 
 func deck_cards(val):
 	players[1].deck_init(val)
