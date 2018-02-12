@@ -2,7 +2,7 @@ extends Node
 
 export(bool) var morning = 0
 export(bool) var evening = 0
-export(bool) var night = 0
+export(bool) var night = 1
 
 export(int,"GOLD","FAERIA","ACTIONS","CARDS") var type = 0
 export(int, "OWNER","OPPONENT") var player = 0
@@ -20,9 +20,9 @@ const STATE_WELL=7
 """
 
 
-const MORNING=0
-const EVENING=1
-const NIGHT=2
+var MORNING=0
+var EVENING=1
+var NIGHT=2
 
 var Game
 var entity
@@ -36,12 +36,12 @@ func activate(_Game,_entity,_time):
 	if time==MORNING and morning:
 		fisherman()
 	if time==EVENING and evening:
-		entity.spawn_faeria()
+		fisherman()
 	if time==NIGHT and night:
-		entity.spawn_faeria()
+		fisherman()
 
 func fisherman():
-	if Game.state['current_time']==2 and entity.Hex.stateLocal['hex_type'] == land_occupied:
+	if entity.Hex.stateLocal['hex_type'] == land_occupied:
 		if type==0:
 			Game.players[entity.Owner+player].modCoin(gained)
 		elif type==1:

@@ -247,7 +247,7 @@ identifier = "Alchilor"
 
 [node name="modify attack" parent="on_end_turn" index="0" instance=ExtResource( 8 )]
 
-mod = -2
+mod = 0
 identifier = "Alchilor"
 
 [node name="on_action" type="Node" parent="." index="17"]

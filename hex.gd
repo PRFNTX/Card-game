@@ -216,7 +216,7 @@ func action(type,by,test=false):
 			setState({'cover':Color(0,0,0,0), 'target':false})
 			if test:
 				return false
-	elif type=="moveLand":
+	elif type=="moveWater":
 		if hexType.child.moveWater and hex_is_empty_or_self() and is_adjacent_or_equal_to(stateLocal['active_unit'].Hex):
 			if !test:
 				setState({'cover':move,'target':true})

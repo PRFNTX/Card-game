@@ -24,18 +24,18 @@ var mod_att = {}
 var intermediate_attack
 
 func set_mod_att(val):
-	mod_att[val.source]=val.effect
+	mod_att[val['identifier']]=val['mod']
 
 
 func set_attack(val):
 	
 	current_attack = val
-	"""
-	for modifier in mod_att:
-		current_attack += modifier
-	"""
-	current_attack = current_attack+intermediate_attack
-	get_node('Unit/A').text=str(current_attack+intermediate_attack)
+	
+	for modifier in mod_att.keys():
+		current_attack += mod_att[modifier]
+	
+	
+	get_node('Unit/A').text=str(current_attack)
 	modulate_colors()
 
 func set_health(val):
