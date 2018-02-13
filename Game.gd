@@ -271,6 +271,7 @@ func hardMove(target, set_state=null):
 	var unit = get_unit_by_hex(get_hex_by_id(state['active_unit']))
 	unit.on_move(hex_target.get_node('hexEntity'))
 	unit.Hex=hex_target
+	unit.use_energy()
 
 
 func moveBase(target, set_state=null):
