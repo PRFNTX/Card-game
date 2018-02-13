@@ -91,8 +91,8 @@ func set_scene(scene):
 #ACTIONS
 #actions
 func send_msg(value):
-	if socket_on:
-		websocket.send(value)
+	#if socket_on:
+	websocket.send(value)
 
 func _on_message_recieved(msg):
 

@@ -212,7 +212,7 @@ func delegate_action(delegate,nodepath):
 		startTimer()
 		setState({"action":'delegate','delegate_id':delegate,'delegate_node':nodepath})
 		### how to find activating script
-		get_node(state['delegate_node']).targeting()
+		get_hex_by_id(state['delegate_id']).get_unit().get_node(state['delegate_node']).targeting()
 
 func start_unit_action(type):
 	startBasictimeout()
@@ -676,7 +676,7 @@ func delegate(target, set_state=null):
 		state=set_state
 		local= false
 	
-	if (get_node(state['delegate_node']).complete(target, set_state)):
+	if (get_hex_by_id(state['delegate_id']).get_unit().get_node(state['delegate_node']).complete(target, set_state)):
 		actionDone()
 
 ###############
