@@ -69,7 +69,7 @@ func complete(target, set_state=null):
 	entity.use_energy()
 	if local:
 		#Game.send_action('dee',45-target,{'delegate_node':str(get_path()).replace("/","~")})
-		Game.send_action('delegate',45-target,{'delegate_node':'Movement/moveLine','delegate_id':entity.Hex.id})
+		Game.send_action('delegate',45-target,{'delegate_node':'Movement/moveLine','delegate_id':45-entity.Hex.id})
 	
 	
 	if Game.check_valid_action(entity.Unit.get_action_name('Attack')):

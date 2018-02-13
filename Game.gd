@@ -672,10 +672,11 @@ func actionCard(target, set_state=null):
 func delegate(target, set_state=null):
 	var local = true
 	var state = get_state()
-	if not set_state==null:
+	print(set_state)
+	if set_state!=null:
 		state=set_state
 		local= false
-	
+	print(state)
 	if (get_hex_by_id(state['delegate_id']).get_unit().get_node(state['delegate_node']).complete(target, set_state)):
 		actionDone()
 
@@ -699,7 +700,7 @@ func deck_cards(val):
 
 func game_action(val):
 	print("TO ACTION")
-	call(val.type,val.target,val.state)
+	call(val.type, val.target, val.state)
 	print("END STATE")
 	print(state)
 
