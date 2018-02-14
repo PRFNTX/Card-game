@@ -3,20 +3,27 @@ extends Node2D
 var current_card
 
 var card_entity
+var board_entity
+var base_entity
 var actions = {}
 
+onready var globals = get_node('/root/master')
 
-func set_card(card, from='hand'):
-	if from == 'hand':
-		card_entity = card.duplicate(true)
-		add_child(card_entity)
-		card_entity.position = self.position
-		actions['cast'] = Button.new()
-		actions['cast'].connect('pressed', self, 'on_cast')
+
+func set_card(card_name, from='hand'):
+	pass
+		
+
+func get_abilities():
+	pass
 
 func on_cast():
-	get_parent().delegate()
+	pass
 	
+
+func empty():
+	for child in get_children():
+		child.queue_free()
 
 func _ready():
 	

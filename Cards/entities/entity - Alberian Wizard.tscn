@@ -26,29 +26,29 @@ ENERGY_ACTIVE = Color( 0, 1, 0.554688, 1 )
 ENERGY_INACTIVE = Color( 0.652344, 0.642151, 0.642151, 1 )
 is_unit = true
 is_building = false
-is_event = 0
+is_event = false
 move = true
-charge = 0
-jump = 0
-aquatic = 0
-flying = 0
-conquest = 0
-convoke = 0
-radiate = 0
-auto_collect = 0
+charge = false
+jump = false
+aquatic = false
+flying = false
+conquest = false
+convoke = false
+radiate = false
+auto_collect = false
 collect = true
 attack = true
 abilities = true
-on_play = 0
+on_play = false
 on_production = false
-on_attack = 0
-on_move = 0
-on_collect = 0
-on_damage = 0
-on_death = 0
+on_attack = false
+on_move = false
+on_collect = false
+on_damage = false
+on_death = false
 on_clock = false
 on_action = true
-on_turn_end = 0
+on_turn_end = false
 frame_alt = null
 
 [node name="Frame" type="Sprite" parent="." index="0"]
@@ -225,9 +225,9 @@ _sections_unfolded = [ "Visibility" ]
 
 faeria_cost = 1
 energy_cost = 1
-damage = 2
+damage = -2
 target_type = 1
-adjacent_only = 0
+adjacent_only = false
 
 [node name="discard" parent="Abilities" index="1" instance=ExtResource( 8 )]
 

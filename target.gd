@@ -6,8 +6,12 @@ export(int,"Unit","Creature","Building") var type = 1
 
 export(bool) var then_free = true
 
-var Game
 var entity
+var Game
+func init(_entity):
+	entity = _entity
+	Game = entity.Game
+
 var val
 
 func activate(_Game, _entity, _val):
@@ -15,7 +19,7 @@ func activate(_Game, _entity, _val):
 		Game = _Game
 		entity = _entity
 		val=_val
-		Game.delegate_action(entity.Hex.id)
+		Game.delegate_action(entity.Hex.id,'on_play/target')
 
 
 func conditions(hex):

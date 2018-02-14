@@ -1,10 +1,16 @@
 extends Node
 
+var entity
+var Game
+func init(_entity):
+	entity = _entity
+	Game = entity.Game
+
 func activate(Game, entity, unused):
 	for ent in get_tree().get_nodes_in_group("entities"):
-		if ent.Owner==(Game['current_turn']+1)%2:
+		if ent.Owner!=entity.Owner:
 			ent.stunned = true
-	entity.queue_free()
+	
 	return null
 
 func _ready():

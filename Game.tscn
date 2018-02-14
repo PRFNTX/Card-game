@@ -17,13 +17,14 @@
 [ext_resource path="res://Clock.tscn" type="PackedScene" id=15]
 [ext_resource path="res://DisplayFrame.gd" type="Script" id=16]
 
-[node name="Game" type="Node2D" index="0"]
+[node name="Game" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="board" type="Node2D" parent="." index="0"]
 
+editor/display_folded = true
 position = Vector2( 748.755, -134.923 )
 rotation = 1.5708
 scale = Vector2( 0.751495, 1 )
@@ -32,6 +33,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="back" type="Sprite" parent="board" index="0"]
 
+editor/display_folded = true
 position = Vector2( 507.593, 241.133 )
 scale = Vector2( 0.720365, 0.73331 )
 texture = ExtResource( 3 )
@@ -420,6 +422,7 @@ visible = false
 position = Vector2( 509.985, 235.287 )
 scale = Vector2( 6.44462, 5.94225 )
 texture = ExtResource( 13 )
+_sections_unfolded = [ "Visibility" ]
 
 [node name="RichTextLabel" type="Label" parent="." index="3"]
 
@@ -504,12 +507,13 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 14 )
 _sections_unfolded = [ "Rect", "Transform" ]
+selected_color = Color( 0.367569, 0.851663, 0.863281, 1 )
 
 [node name="Clock" parent="." index="10" instance=ExtResource( 15 )]
 
 position = Vector2( 887.117, 459.1 )
 scale = Vector2( 2, 2 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Transform", "Visibility" ]
 
 [node name="DisplayFrame" type="Node2D" parent="." index="11"]
 

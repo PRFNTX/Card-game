@@ -12,6 +12,10 @@ export(int,'Charge', 'jump') var method = 0
 
 var entity
 var Game
+func init(_entity):
+	entity = _entity
+	Game = entity.Game
+
 var val
 
 func start_action(entity):
@@ -22,9 +26,10 @@ func activate(_Game, _entity, _val):
 	entity = _entity
 	val=_val
 	var del_path = get_path()
-	Game.delegate_action(entity.Hex.id,del_path)
+	Game.delegate_action(entity.Hex.id,'Movement/moveLine')
 
-
+func verify_costs():
+	return entity.get_energy()>=1
 
 func targeting():
 	#first ring
@@ -56,7 +61,7 @@ func targeting():
 
 
 func complete(target, set_state=null):
-	
+	## REMOTE HAS NO ACCESS TO GAME OR ENTITY
 	var local = true
 	var state = Game.get_state()
 	if not set_state==null:
@@ -67,7 +72,7 @@ func complete(target, set_state=null):
 	var hex_target = Game.get_hex_by_id(target)
 	entity.on_move(hex_target.get_node('hexEntity'))
 	
-	entity.use_energy()
+	entity.use_energy(1)
 	if local:
 		#Game.send_action('dee',45-target,{'delegate_node':str(get_path()).replace("/","~")})
 		#Game.send_action('delegate',45-target,{'delegate_node':'Movement/moveLine','delegate_id':45-entity.Hex.id})

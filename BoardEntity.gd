@@ -5,6 +5,8 @@ var Game setget set_game
 var Hex
 var Owner setget set_owner
 
+var card_name
+
 var stunned = false
 
 export(Color, RGBA) var enemy_modulate = Color(0,0,0,0)
@@ -33,14 +35,18 @@ var state={
 func _ready():
 	pass
 
-func possess(entity, hex, player, game):
+func possess(entity, hex, player, game,_card_name):
 	Owner = player
 	set_process_input(true)
+	card_name=_card_name
+	
 	Unit = entity.instance()
 	add_child(Unit)
+	Game= game
+	Unit.init()
 	actionList = Unit.get_actions()
 	Hex = hex
-	Game= game
+	
 	Game.connect('TurnStart', self, 'sig_turn_start')
 	Game.connect('UpdateState', self, 'sig_update_state')
 	return Unit.play()
@@ -72,7 +78,7 @@ func receive_damage(val_damage):
 func life_change(val):
 	if val<0:
 		on_damage(val)
-	Unit.set_health(Unit.current_health + val)
+	
 	if Unit.is_unit:
 		Unit.set_health(Unit.current_health+val)
 		if Unit.current_health <=0:
@@ -87,8 +93,11 @@ func actions_populate():
 	#	$Actions.add_item(act)
 	pass
 
-func use_energy():
-	Unit.current_energy-=1
+func activate(ability):
+	actionList[ability].activate(Game, self, null)
+
+func use_energy(num=1):
+	Unit.current_energy-=num
 
 func get_energy():
 	return Unit.current_energy
@@ -177,7 +186,7 @@ func sig_update_state(newState,keys):
 ######
 
 func _gui_input(event):
-	if event.is_action('click') and event.is_action_released('click') and Unit.current_energy>0:
+	if event.is_action('click') and event.is_action_released('click') and (Unit.current_energy>0 or Unit.abilities==true):
 		#Unit.on_select(Game,Hex)
 		Game.activate(self)
 

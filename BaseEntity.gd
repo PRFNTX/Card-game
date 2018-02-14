@@ -79,36 +79,44 @@ func add_one_faeria():
 		$Faeria.get_children()[current_faeria-1].show()
 
 
-export(bool) var is_unit = 0
-export(bool) var is_building=0
-export(bool) var is_event=0
+export(bool) var is_unit = false
+export(bool) var is_building=false
+export(bool) var is_event=false
 
-export(bool) var move = 0
-export(bool) var charge = 0
-export(bool) var jump = 0
-export(bool) var aquatic = 0
-export(bool) var flying = 0
-export(bool) var conquest = 0
-export(bool) var convoke = 0
-export(bool) var radiate = 0
-export(bool) var auto_collect = 0
+export(bool) var move = false
+export(bool) var charge = false
+export(bool) var jump = false
+export(bool) var aquatic = false
+export(bool) var flying = false
+export(bool) var conquest = false
+export(bool) var convoke = false
+export(bool) var radiate = false
+export(bool) var auto_collect = false
 
-export(bool) var collect = 0
-export(bool) var attack = 0
-export(bool) var abilities = 0
+export(bool) var collect = false
+export(bool) var attack = false
+export(bool) var abilities = false
 
-export(bool) var on_play = 0
-export(bool) var on_production = 0
-export(bool) var on_attack = 0
-export(bool) var on_move = 0
-export(bool) var on_collect = 0
-export(bool) var on_damage = 0
-export(bool) var on_death = 0
-export(bool) var on_clock = 0
-export(bool) var on_action = 0
-export(bool) var on_turn_end = 0
+export(bool) var on_play = false
+export(bool) var on_production = false
+export(bool) var on_attack = false
+export(bool) var on_move = false
+export(bool) var on_collect = false
+export(bool) var on_damage = false
+export(bool) var on_death = false
+export(bool) var on_clock = false
+export(bool) var on_action = false
+export(bool) var on_turn_end = false
 
 export(Texture) var frame_alt = null
+
+func init():
+	var children = get_children()
+	var parent = get_parent()
+	for child in children:
+		for ability in child.get_children():
+			if ability.has_method('init'):
+				ability.call('init',get_parent())
 
 func _ready():
 	if frame_alt != null:
@@ -148,8 +156,10 @@ func start_attack(Game):
 		$Attack.get_children()[0].start_action(Game)
 
 func on_select(Game,hex):
-	if $Movement.get_child_count()>0:
+	if $Movement.get_child_count()>0 and current_energy>0:
 		$Movement.get_children()[0].start_action(get_parent())
+	if abilities:
+		Game.setState({'frame_card':get_parent().card_name})
 
 func play():
 	for effectNode in $on_play.get_children():
@@ -197,8 +207,8 @@ func get_actions():
 	var ret = {}
 	#for move in $Movement.get_children():
 	#	ret[move.get_name()]=move
-	#for ability in $Abilities.get_children():
-#		ret[ability.description]=ability
+	for ability in $Abilities.get_children():
+		ret[ability.get_name()]=ability
 	
 	return(ret)
 

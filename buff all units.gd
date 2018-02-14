@@ -6,8 +6,12 @@ export(int,"All","Creature","Building") var type = 1
 export(int,"All","Owner","Opponent") var player = 1
 
 
-var Game
 var entity
+var Game
+func init(_entity):
+	entity = _entity
+	Game = entity.Game
+
 func activate(_Game, _entity, unused):
 	Game = _Game
 	entity = _entity

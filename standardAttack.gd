@@ -1,5 +1,11 @@
 extends Node
 
+var entity
+var Game
+func init(_entity):
+	entity=_entity
+	Game=_entity.Game
+
 func start_action(Game):
 	if get_parent().get_parent().collect:
 		Game.start_unit_action('AttackAdjOrCollect')
@@ -11,6 +17,9 @@ func get_action_type():
 		return('AttackAdjOrCollect')
 	else:
 		return('AttackAdj')
+
+func verify_costs():
+	return entity.get_energy()>=1
 
 func _ready():
 	# Called every time the node is added to the scene.

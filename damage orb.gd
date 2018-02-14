@@ -31,7 +31,7 @@ func activate(_Game, _entity, unsused):
 
 func verify_costs():
 	var ret = true
-	if entity.get_energy()>=energy_cost and Game.players[entity.Owner].has_resource(gold_cost,faeria_cost,0) and Game.players[entity.Owner].actions>=action_cost:
+	if entity.get_energy()>=energy_cost and Game.players[entity.Owner].has_resource(gold_cost,faeria_cost,{0:0}) and Game.players[entity.Owner].actions>=action_cost:
 		return true
 	else:
 		return false

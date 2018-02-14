@@ -155,7 +155,15 @@ func discard_hand(card=-1):
 
 func discard_by_name(card):
 	Hand.erase(card)
+	hand_object.update()
 	lbl_hand.text = str(Hand.size())
+
+func discard_selected():
+	if hand_object.state['selected_card']!=null:
+		Hand.remove(hand_object.state['selected_card'])
+		hand_object.setState({'selected_card':null})
+		hand_object.update()
+		lbl_hand.text = str(Hand.size())
 
 func discard_deck():
 	if !is_dummy:

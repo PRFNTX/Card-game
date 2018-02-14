@@ -10,13 +10,17 @@ export(int, 'Any', 'Owner', 'Opponent') var target_player = 0
 
 var entity
 var Game
+func init(_entity):
+	entity = _entity
+	Game = entity.Game
+
 var val
 
 func activate(_Game, _entity, _val):
 	Game = _Game
 	entity = _entity
 	val=_val
-	Game.delegate_action(entity.Hex.id)
+	Game.delegate_action(entity.Hex.id,'on_play/target/teleport')
 
 
 

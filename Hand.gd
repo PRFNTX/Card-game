@@ -6,8 +6,17 @@ var player_object
 
 var card_nodes = []
 
+func _ready():
+	get_parent().connect('UpdateState', self , 'updateState')
+
+
+func updateState(newState):
+	if newState.keys().has('frame_card'):
+		if newState['frame_card']==null:
+			setState({'slected_card':null})
+
 ### STATE
-var state = {'hovered':0,'num_cards':0}
+var state = {'hovered':0,'num_cards':0, 'selected_card':null}
 
 func setState(newState):
 	for key in newState.keys():
@@ -25,6 +34,15 @@ func num_cards(num):
 	state['num_cards'] = num
 	arrange_cards()
 
+export(Color,RGB) var selected_color = Color(0,0,0)
+var base_col
+func selected_card(num):
+	state['selected_card']=num
+	var children = get_children()
+	for child in children:
+		modulate = base_col
+	if num!=null:
+		children[num].modulate=selected_color
 ###
 
 func arrange_cards():
@@ -49,6 +67,7 @@ func arrange_cards():
 
 func assign_player(node):
 	player_object = node
+	
 
 func update():
 	for node in card_nodes:
@@ -63,13 +82,12 @@ func update():
 		newCardNode.connect('mouse_button',self,'on_mouse_button')
 		card_nodes.push_back(newCardNode)
 		add_child(newCardNode)
+		base_col = newCardNode.modulate
 		ind+=1
 	
 	setState({'num_cards':card_nodes.size()})
 	
 
-func _ready():
-	pass
 
 func on_mouse_enter(num):
 	if num!=state['hovered']:
@@ -78,8 +96,9 @@ func on_mouse_enter(num):
 var buildTypes=['buildAny','buildLake', 'buildTree','buildHill','buildSand']
 func on_mouse_button(num):
 	var card = card_nodes[num].get_node('Card')
-	if card.is_event:
-		## .duplicate node
+	setState({'selected_card':num})
+	if card.is_event and game.state['current_turn']==0:
+		game.setState({'frame_card':card.card_name,'action':'hand_card'})
 		## add to cast box
 		## for each possible action add a button to do that thing
 		##if that thing is an action, start it as an action

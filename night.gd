@@ -18,14 +18,17 @@ const STATE_HILL=5
 const STATE_SAND=6
 const STATE_WELL=7
 """
-
+var entity
+var Game
+func init(_entity):
+	entity = _entity
+	Game = entity.Game
 
 var MORNING=0
 var EVENING=1
 var NIGHT=2
 
-var Game
-var entity
+
 var time 
 
 func activate(_Game,_entity,_time):
