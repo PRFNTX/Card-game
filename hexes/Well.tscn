@@ -20,5 +20,7 @@ buildHill = false
 actionHill = false
 buildLake = false
 actionLake = false
+darkened = null
+light = null
 
 

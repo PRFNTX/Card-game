@@ -94,6 +94,11 @@ func modLands(s_type,mod):
 	if keys.has(s_type):
 		lands[s_type]+=mod
 
+func setLands(obj):
+	var keys =  ['land','lake','tree','hill','sand']
+	for type in 5:
+		lands[keys[type]] = obj[type]
+
 func useAction(num):
 	
 	if actions>0:

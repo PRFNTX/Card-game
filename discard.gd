@@ -33,7 +33,7 @@ func verify_costs():
 
 func pay_costs():
 	entity.use_energy(energy_cost)
-	Game.players[entity.Owner].pay_resource(gold_cost,faeria_cost)
+	Game.players[entity.Owner].pay_costs(gold_cost,faeria_cost)
 	Game.players[entity.Owner].useAction(action_cost)
 	
 
@@ -61,12 +61,12 @@ func complete(target, set_state=null):
 		local= false
 	
 	if random:
-		Game.players[(state['current_turn']+target_player)%2].discard_hand()
+		Game.players[(entity.Owner+target_player)%2].discard_hand()
 	else:
 		## implement selected discard
 		pass
 	if local:
-		send_action('delegate',1,{'current_turn':0,'delegate':entity.Hex.id})
+		send_action('delegate',0,{'delegate_id':entity.Hex.id,'delegate_node':'Abilities/discard'})
 	
 
 

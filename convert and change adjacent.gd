@@ -18,6 +18,7 @@ func activate(Game, entity, unused):
 		else:
 			if hex.stateLocal['hex_type']>=2 and hex.stateLocal['hex_type']<=6:
 				hex.setState({'hex_type':newType+2})
+	Game.update_lands_owned()
 	return null
 
 func _ready():

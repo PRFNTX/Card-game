@@ -125,18 +125,24 @@ func frame_card(card_name):
 			buttons = []
 
 ##NOT STATE
-func frame_activate(ability_name):
-
+func frame_activate(ability_name, set_state=null):
+	var local = true
+	var state = get_state()
+	if set_state!=null:
+		state=set_state
+		local=false
 	startBasictimeout()
 	if ability_name=='cast' and actionReady:
 		#also activate
 		var this_unit = BoardEntity.instance()
-		add_child(this_unit)
+		$hex0.add_child(this_unit)
 		this_unit.hide()
 		var to_instance = globals.card_instances[state['frame_card']].get_node('Card').board_entity
 		if this_unit.possess(to_instance, 0, 0, self,state['frame_card'])==null:
+			send_action('frame_activate', ability_name ,{'frame_card':state['frame_card']})
 			this_unit.queue_free()
 			actionDone()
+		
 	else:
 		get_hex_by_id(state['active_unit']).get_unit().activate(ability_name) #make this function
 ##STATE AGAIN
@@ -643,8 +649,9 @@ func actionLand(target, set_state=null):
 		local = false
 	
 	if (players[state['current_turn']].useAction(1)):
-		get_hex_by_id(target).affectState({'hex_type':2}, state['current_turn'])
-		players[state['current_turn']].modLands('land',1)
+		get_hex_by_id(target).affectState({'hex_type':2,'hex_owner':state['current_turn']}, state['current_turn'])
+		#t_turn']].modLands('land',1)
+		update_lands_owned()
 	if local:
 		send_action('actionLand', 45-target,{'empty':true, 'current_turn':(state['current_turn']+1)%2})
 	actionDone()
@@ -655,8 +662,9 @@ func actionLake(target, set_state=null):
 		var state=set_state
 		local = false
 	if (players[state['current_turn']].useAction(1)):
-		get_hex_by_id(target).affectState({'hex_type':3}, state['current_turn'])
-		players[state['current_turn']].modLands('lake',1)
+		get_hex_by_id(target).affectState({'hex_type':3,'hex_owner':state['current_turn']}, state['current_turn'])
+		#players[state['current_turn']].modLands('lake',1)
+		update_lands_owned()
 	if local:
 		send_action('actionLake', 45-target,{'empty':true,'current_turn':(state['current_turn']+1)%2})
 	actionDone()
@@ -667,8 +675,9 @@ func actionTree(target, set_state=null):
 		var state=set_state
 		local = false
 	if (players[state['current_turn']].useAction(1)):
-		get_hex_by_id(target).affectState({'hex_type':4}, state['current_turn'])
-		players[state['current_turn']].modLands('tree',1)
+		get_hex_by_id(target).affectState({'hex_type':4,'hex_owner':state['current_turn']}, state['current_turn'])
+		#players[state['current_turn']].modLands('tree',1)
+		update_lands_owned()
 	if local:
 		send_action('actionTree', 45-target,{'empty':true, 'current_turn':(state['current_turn']+1)%2})
 	actionDone()
@@ -679,8 +688,9 @@ func actionHill(target, set_state=null):
 		var state=set_state
 		local = false
 	if (players[state['current_turn']].useAction(1)):
-		get_hex_by_id(target).affectState({'hex_type':5}, state['current_turn'])
-		players[state['current_turn']].modLands('hill',1)
+		get_hex_by_id(target).affectState({'hex_type':5,'hex_owner':state['current_turn']}, state['current_turn'])
+		#players[state['current_turn']].modLands('hill',1)
+		update_lands_owned()
 	if local:
 		send_action('actionHill', 45-target,{'empty':true, 'current_turn':(state['current_turn']+1)%2})
 	actionDone()
@@ -691,8 +701,9 @@ func actionSand(target, set_state=null):
 		var state=set_state
 		local = false
 	if (players[state['current_turn']].useAction(1)):
-		get_hex_by_id(target).affectState({'hex_type':6}, state['current_turn'])
-		players[state['current_turn']].modLands('sand',1)
+		get_hex_by_id(target).affectState({'hex_type':6,'hex_owner':state['current_turn']}, state['current_turn'])
+		#players[state['current_turn']].modLands('sand',1)
+		update_lands_owned()
 	if local:
 		send_action('actionSand', 45-target,{'empty':true, 'current_turn':(state['current_turn']+1)%2})
 	actionDone()
@@ -769,7 +780,16 @@ func get_hex_by_id(id):
 
 func get_unit_by_hex(hex):
 	return hex.get_unit()
+	
 
+#land, lake, tree, hill, sand
+func update_lands_owned():
+	var mods = [{0:0,1:0,2:0,3:0,4:0},{0:0,1:0,2:0,3:0,4:0}]
+	for hex in get_tree().get_nodes_in_group('Hex'):
+		if hex.stateLocal['hex_owner']>=0 and hex.stateLocal['hex_type']>1 and hex.stateLocal['hex_type']<7:
+			mods[hex.stateLocal['hex_owner']][hex.stateLocal['hex_type']-2]+=1
+	players[0].setLands(mods[0])
+	players[1].setLands(mods[1])
 """ added instances to globals
 func get_card_properties_by_name(card,props):
 	var card_instance = globals.card_resources[name].instance()

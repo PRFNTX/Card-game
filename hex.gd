@@ -324,12 +324,10 @@ func hex_owner(val):
 		gameNode.players[stateLocal['hex_owner']].modLands(land_types[stateLocal['hex_type']],-1)
 	stateLocal['hex_owner']=val
 	gameNode.players[val].modLands(land_types[stateLocal['hex_type']],1)
-	if val == 1:
-		#$hexType.child.modulate=enemy_modulate
-		pass
-	elif val==0:
-		#$hexType.child.modulate=Color(0,0,0,0)
-		pass
+	if val == 1 and $hexType.child.darkened!=null:
+		$hexType.child.texture = $hexType.child.darkened 
+	elif val==0 and $hexType.child.light!=null:
+		$hexType.child.texture = $hexType.child.light
 	
 
 func hex_type(val):

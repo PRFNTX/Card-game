@@ -98,7 +98,7 @@ func on_mouse_button(num):
 	var card = card_nodes[num].get_node('Card')
 	setState({'selected_card':num})
 	if card.is_event and game.state['current_turn']==0:
-		game.setState({'frame_card':card.card_name,'action':'hand_card'})
+		game.setState({'frame_card':card.card_name,'action':'hand_card','active_unit':null})
 		## add to cast box
 		## for each possible action add a button to do that thing
 		##if that thing is an action, start it as an action

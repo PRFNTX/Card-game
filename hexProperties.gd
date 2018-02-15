@@ -17,6 +17,9 @@ export(bool) var actionHill=false
 export(bool) var buildLake=false
 export(bool) var actionLake=false
 
+export(Texture) var darkened
+export(Texture) var light
+
 func ActionLand(hex,by):
 	if !actionLand or !hex.activePlayerCanAffect(by):
 		return false
