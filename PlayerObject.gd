@@ -147,7 +147,7 @@ func drawCard():
 	
 
 func discard_hand(card=-1):
-	if !is_dummy:
+	if !is_dummy and Hand.size()>0:
 		if card < 0:
 			var discard = floor(rand_range(0,Hand.size()))
 			Discard.push_back(Hand[discard])

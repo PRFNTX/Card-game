@@ -138,8 +138,9 @@ func frame_activate(ability_name, set_state=null):
 		$hex0.add_child(this_unit)
 		this_unit.hide()
 		var to_instance = globals.card_instances[state['frame_card']].get_node('Card').board_entity
-		if this_unit.possess(to_instance, 0, 0, self,state['frame_card'])==null:
-			send_action('frame_activate', ability_name ,{'frame_card':state['frame_card']})
+		if this_unit.possess(to_instance, 0, state['current_turn'], self,state['frame_card'])==null:
+			if local:
+				send_action('frame_activate', ability_name ,{'frame_card':state['frame_card'],'current_turn':(state['current_turn']+1)%2})
 			this_unit.queue_free()
 			actionDone()
 		
