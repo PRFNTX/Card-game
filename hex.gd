@@ -92,6 +92,8 @@ func is_adjacent_or_equal_to(hex):
 ### ACTION HIGHLIGHTING AND TARGET VERIFICATION
 
 func action(type,by,test=false):
+	if id==0:
+		return false
 	if type=="":
 		setState({'cover':Color(0,0,0,0)})
 	##make lands
