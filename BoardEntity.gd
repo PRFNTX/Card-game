@@ -49,6 +49,7 @@ func possess(entity, hex, player, game,_card_name):
 	
 	Game.connect('TurnStart', self, 'sig_turn_start')
 	Game.connect('UpdateState', self, 'sig_update_state')
+	print(Owner)
 	return Unit.play()
 
 func receive_attack(val_damage):
