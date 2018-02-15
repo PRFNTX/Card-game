@@ -186,7 +186,7 @@ func sig_update_state(newState,keys):
 ######
 
 func _gui_input(event):
-	if event.is_action('click') and event.is_action_released('click') and (Unit.current_energy>0 or Unit.abilities==true):
+	if event.is_action('click') and event.is_action_released('click') and (Unit.current_energy>0 or int(Unit.abilities)==int(true)):
 		#Unit.on_select(Game,Hex)
 		Game.activate(self)
 

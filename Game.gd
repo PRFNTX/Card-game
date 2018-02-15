@@ -209,7 +209,7 @@ func change_turns(none,unused):
 	emit_signal("TurnEnd", state['current_turn'])
 	var current_time = state['clock_time']
 	###TESTING
-	if true:
+	if false:
 		setState({'current_turn':(state['current_turn']+1)%1,'action':"",'active_unit':null,'clock_time':(current_time+1)%3})
 	else:
 		setState({'current_turn':(state['current_turn']+1)%2,'action':"",'active_unit':null,'clock_time':(current_time+1)%3})
@@ -649,7 +649,7 @@ func actionLand(target, set_state=null):
 		local = false
 	
 	if (players[state['current_turn']].useAction(1)):
-		get_hex_by_id(target).affectState({'hex_type':2,'hex_owner':state['current_turn']}, state['current_turn'])
+		get_hex_by_id(target).setState({'hex_type':2,'hex_owner':state['current_turn']})
 		#t_turn']].modLands('land',1)
 		update_lands_owned()
 	if local:
@@ -662,7 +662,7 @@ func actionLake(target, set_state=null):
 		var state=set_state
 		local = false
 	if (players[state['current_turn']].useAction(1)):
-		get_hex_by_id(target).affectState({'hex_type':3,'hex_owner':state['current_turn']}, state['current_turn'])
+		get_hex_by_id(target).setState({'hex_type':3,'hex_owner':state['current_turn']})
 		#players[state['current_turn']].modLands('lake',1)
 		update_lands_owned()
 	if local:
@@ -675,7 +675,7 @@ func actionTree(target, set_state=null):
 		var state=set_state
 		local = false
 	if (players[state['current_turn']].useAction(1)):
-		get_hex_by_id(target).affectState({'hex_type':4,'hex_owner':state['current_turn']}, state['current_turn'])
+		get_hex_by_id(target).setState({'hex_type':4,'hex_owner':state['current_turn']})
 		#players[state['current_turn']].modLands('tree',1)
 		update_lands_owned()
 	if local:
@@ -688,7 +688,7 @@ func actionHill(target, set_state=null):
 		var state=set_state
 		local = false
 	if (players[state['current_turn']].useAction(1)):
-		get_hex_by_id(target).affectState({'hex_type':5,'hex_owner':state['current_turn']}, state['current_turn'])
+		get_hex_by_id(target).setState({'hex_type':5,'hex_owner':state['current_turn']})
 		#players[state['current_turn']].modLands('hill',1)
 		update_lands_owned()
 	if local:
@@ -701,7 +701,7 @@ func actionSand(target, set_state=null):
 		var state=set_state
 		local = false
 	if (players[state['current_turn']].useAction(1)):
-		get_hex_by_id(target).affectState({'hex_type':6,'hex_owner':state['current_turn']}, state['current_turn'])
+		get_hex_by_id(target).setState({'hex_type':6,'hex_owner':state['current_turn']})
 		#players[state['current_turn']].modLands('sand',1)
 		update_lands_owned()
 	if local:
