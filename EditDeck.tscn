@@ -5,7 +5,7 @@
 [ext_resource path="res://Collection.gd" type="Script" id=3]
 [ext_resource path="res://UI/CardRow.tscn" type="PackedScene" id=4]
 
-[node name="EditDeck" type="Node2D" index="0"]
+[node name="EditDeck" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]

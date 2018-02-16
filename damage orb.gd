@@ -12,6 +12,9 @@ export(int,"Owner","Opponent") var target = 1
 var Game
 var entity
 
+func init(_entity):
+	entity = _entity
+	Game = entity.Game
 
 func activate(_Game, _entity, unsused):
 	Game=_Game
@@ -38,7 +41,7 @@ func verify_costs():
 
 func pay_costs():
 	entity.use_energy(energy_cost)
-	Game.players[entity.Owner].pay_resource(gold_cost,faeria_cost)
+	Game.players[entity.Owner].pay_costs(gold_cost,faeria_cost)
 	Game.players[entity.Owner].useAction(action_cost)
 	
 

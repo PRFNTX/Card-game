@@ -17,7 +17,7 @@
 [ext_resource path="res://Clock.tscn" type="PackedScene" id=15]
 [ext_resource path="res://DisplayFrame.gd" type="Script" id=16]
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
@@ -517,8 +517,15 @@ _sections_unfolded = [ "Transform", "Visibility" ]
 
 position = Vector2( 124.001, 214.854 )
 script = ExtResource( 16 )
+activatable = true
 
-[node name="hex0" parent="." index="12" instance=ExtResource( 4 )]
+[node name="PreviewFrame" type="Node2D" parent="." index="12"]
+
+position = Vector2( 820.999, 161.854 )
+script = ExtResource( 16 )
+activatable = false
+
+[node name="hex0" parent="." index="13" instance=ExtResource( 4 )]
 
 [connection signal="timeout" from="actionTimer" to="." method="_on_Timer_timeout"]
 

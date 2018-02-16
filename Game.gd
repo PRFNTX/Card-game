@@ -6,7 +6,7 @@ extends Node2D
 # var b="textvar"
 
 
-var testing_solo = false
+var testing_solo = true
 
 onready var globals = get_node('/root/master')
 
@@ -32,7 +32,7 @@ func set_player(val):
 
 
 ###### current_turn will be set to 0 during local players turn and 1 during remote players turn
-var state={"action":"", 'current_turn':0,'active_unit':null,'clock_time':0,'hovered':null,'building_card':null, 'delegate_id':null,'delegate_node':null, 'frame_card':null}
+var state={"action":"", 'current_turn':0,'active_unit':null,'clock_time':0,'hovered':null,'building_card':null, 'delegate_id':null,'delegate_node':null, 'frame_card':null,'preview_card':null}
 
 var actionTimer
 
@@ -63,9 +63,11 @@ func delegate_res(val):
 
 func active_unit(unit_hex_id):
 	state['active_unit']=unit_hex_id
-	if !(unit_hex_id==null):
-		var unit = get_unit_by_hex(get_hex_by_id(unit_hex_id))
-		unit.setState({'active':true})
+	if state['active_unit']!=null:
+		print('hey')
+	#if !(unit_hex_id==null):
+	#	var unit = get_hex_by_id(unit_hex_id).get_unit()
+	#	unit.setState({'active':true})
 
 const MORNING=0
 const EVENING=1
@@ -155,6 +157,14 @@ func delegate_id(val):
 func delegate_node(path):
 	state['delegate_node'] = path
 
+func preview_card(card_name):
+	state['preview_card'] = card_name
+	if globals.card_resources.keys().has(card_name):
+		for child in $PreviewFrame.get_children():
+			child.queue_free()
+	
+		$PreviewFrame.add_child(globals.card_resources[card_name].instance())
+
 ################
 
 func create_player(num):
@@ -190,11 +200,11 @@ func _ready():
 		if hex.hexType.child.type==ORB:
 			var starting_entity = BoardEntity.instance()
 			hex.get_node('hexEntity').add_child(starting_entity)
-			starting_entity.possess(OrbEntity,hex.id,hex.initial_owner,self,"orb")
+			starting_entity.possess(OrbEntity,hex,hex.initial_owner,self,"orb")
 		if hex.hexType.child.type==WELL:
 			var starting_entity = BoardEntity.instance()
 			hex.get_node('hexEntity').add_child(starting_entity)
-			starting_entity.possess(WellEntity,hex.id,hex.initial_owner,self,"well")
+			starting_entity.possess(WellEntity,hex,hex.initial_owner,self,"well")
 			#starting_entity.spawn_faeria()
 	
 	set_player(globals.player_num)
@@ -771,6 +781,8 @@ func deck_cards(val):
 
 func game_action(val):
 	print("TO ACTION")
+	if val.state.keys().has('active_unit'):
+		setState({'preview_card':get_hex_by_id(val.state['active_unit']).get_unit().card_name})
 	call(val.type, val.target, val.state)
 	print("END STATE")
 	print(state)
@@ -832,7 +844,7 @@ func cast_from_hand(card_node):
 func check_valid_action(action):
 	var targets = false
 	for hex in get_tree().get_nodes_in_group('Hex'):
-		if hex.action(action,state['current_turn'],true):
+		if hex.id!=0 and hex.action(action,state['current_turn'],true):
 			targets = true
 	print("IS VALID ACTION:")
 	print(targets)

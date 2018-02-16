@@ -1,7 +1,7 @@
 extends Node2D
 
 var current_card
-
+export(bool) var activatable = true
 var card_entity
 var board_entity
 var base_entity

@@ -115,6 +115,7 @@ func on_attack(target):
 func on_move(target): #hexEntity
 	get_parent().remove_child(self)
 	target.add_child(self)
+	Hex = target.get_parent()
 	if Unit.on_move:
 		Unit.move(target.get_parent())
 	
@@ -167,6 +168,12 @@ func delegate(nodepath):
 func get_delegate():
 	return Unit.get_node(state['delegate'])
 
+func active_unit(unit):
+	if unit == Hex.id:
+		active(true)
+	else:
+		active(false)
+	
 ### SIGNAL FUNCTIONS
 
 func sig_turn_start(player):
@@ -177,7 +184,7 @@ func sig_turn_start(player):
 func spawn_faeria():
 	Unit.add_one_faeria()
 
-var watch = ['active','clock_time']
+var watch = ['active','clock_time','active_unit']
 func sig_update_state(newState,keys):
 	for key in keys:
 		if watch.has(key):
@@ -187,6 +194,7 @@ func sig_update_state(newState,keys):
 ######
 
 func _gui_input(event):
+	Game.setState({'preview_card':card_name})
 	if event.is_action('click') and event.is_action_released('click') and (Unit.current_energy>0 or int(Unit.abilities)==int(true)) and Owner==0:
 		#Unit.on_select(Game,Hex)
 		Game.activate(self)

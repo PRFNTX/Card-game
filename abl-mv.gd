@@ -38,7 +38,7 @@ func verify_costs():
 
 func pay_costs():
 	entity.use_energy(energy_cost)
-	Game.players[entity.Owner].pay_resource(gold_cost,faeria_cost)
+	Game.players[entity.Owner].pay_costs(gold_cost,faeria_cost)
 	Game.players[entity.Owner].useAction(action_cost)
 	
 
@@ -63,11 +63,11 @@ func complete(target, set_state=null):
 		state=set_state
 		local= false
 		
-	var hex_target = get_hex_by_id(target)
+	var hex_target = Game.get_hex_by_id(target)
 	entity.on_move(hex_target.get_node('hexEntity'))
 	if local:
-		Game.send_action('delegate',45-target,{'delegate':entity.Hex.id})
-	
+		Game.send_action('hardMove',45-target,{'active_unit':45-entity.Hex.id})
+	Game.actionDone()
 
 
 func _ready():
