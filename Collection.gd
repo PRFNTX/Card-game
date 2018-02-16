@@ -70,7 +70,7 @@ func show_card(card):
 	if (shown_card!=null):
 		shown_card.queue_free()
 	shown_card = par.resources[card].instance()
-	get_parent().add_child(shown_card)
+	top_level.add_child(shown_card)
 	shown_card.rect_scale=Vector2(2,2)
 	var display = "Display"
 	if deck:
