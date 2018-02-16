@@ -19,11 +19,10 @@ func init(_entity):
 var val
 
 func activate(_Game, _entity, _val):
-	if verify_costs():
-		Game = _Game
-		entity = _entity
-		val=_val
-		Game.delegate_action(entity.Hex.id,'on_play/b tar conv')
+	Game = _Game
+	entity = _entity
+	val=_val
+	Game.delegate_action(entity.Hex.id,'on_play/b tar conv')
 
 
 func conditions(hex):
@@ -68,9 +67,10 @@ func complete(target, set_state=null):
 		hex.setState({'hex_owner':entity.Owner})
 	
 	if local:
-		Game.send_action('delegate',45-target,{'delegate':entity.Hex.id})
+		Game.send_action('delegate',45-target,{'delegate_id':45-entity.Hex.id, 'delegate_node':'on_play/b tar conv'})
 	
 	entity.queue_free()
+	Game.actionDone()
 	return true
 
 func _ready():

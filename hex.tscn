@@ -1,12 +1,12 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://hex.gd" type="Script" id=1]
-[ext_resource path="res://Assets/hex.png" type="Texture" id=2]
-[ext_resource path="res://hexType.tscn" type="PackedScene" id=3]
-[ext_resource path="res://hexEntity.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Area2D.gd" type="Script" id=5]
+[ext_resource path="res://Area2D.gd" type="Script" id=2]
+[ext_resource path="res://Assets/hex.png" type="Texture" id=3]
+[ext_resource path="res://hexType.tscn" type="PackedScene" id=4]
+[ext_resource path="res://hexEntity.tscn" type="PackedScene" id=5]
 
-[node name="hex" type="Node2D" groups=[
+[node name="hex" type="Node2D" index="0" groups=[
 "Hex",
 ]]
 
@@ -27,28 +27,9 @@ mouseover_color = Color( 0.996094, 0.996094, 0.996094, 0.5 )
 gather = Color( 1, 0.984375, 0, 0.364392 )
 enemy_modulate = Color( 0.722656, 0.71701, 0.71701, 1 )
 
-[node name="sprite" type="Sprite" parent="." index="0"]
+[node name="Area2D" type="Area2D" parent="." index="0"]
 
-modulate = Color( 1, 1, 1, 0.0441961 )
-position = Vector2( 7.62939e-06, -7.62939e-06 )
-rotation = -1.5708
-scale = Vector2( 0.75, 1 )
-z_index = 2
-texture = ExtResource( 2 )
-_sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
-
-[node name="hexType" parent="." index="1" instance=ExtResource( 3 )]
-
-position = Vector2( -0.358498, 12.3715 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="hexEntity" parent="." index="2" instance=ExtResource( 4 )]
-
-position = Vector2( -0.71698, -10.7546 )
-
-[node name="Area2D" type="Area2D" parent="." index="3"]
-
-position = Vector2( -1.52588e-05, 0.358471 )
+position = Vector2( -1.53184e-05, 0.358471 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -57,12 +38,31 @@ angular_damp = 1.0
 priority = 3.0
 audio_bus_override = false
 audio_bus_name = "Master"
-script = ExtResource( 5 )
+script = ExtResource( 2 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" index="0"]
 
 build_mode = 0
 polygon = PoolVector2Array( -24.3677, -32.7163, 25.4284, -32.2868, 50.1118, -0.734804, 24.7843, 32.7488, -24.368, 32.7486, -49.9099, -0.0912528 )
+
+[node name="sprite" type="Sprite" parent="." index="1"]
+
+modulate = Color( 1, 1, 1, 0.0441961 )
+position = Vector2( 7.62939e-06, -7.62939e-06 )
+rotation = -1.5708
+scale = Vector2( 0.75, 1 )
+z_index = 2
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform", "Visibility", "Z Index" ]
+
+[node name="hexType" parent="." index="2" instance=ExtResource( 4 )]
+
+position = Vector2( -0.358498, 12.3715 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="hexEntity" parent="." index="3" instance=ExtResource( 5 )]
+
+position = Vector2( -0.71698, -10.7546 )
 
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_Area2D_mouse_exited"]
 
