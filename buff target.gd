@@ -23,6 +23,7 @@ func activate(_Game, _entity, _val):
 	entity = _entity
 	val=_val
 	Game.delegate_action(entity.Hex.id,'on_play/b tar conv')
+	return true
 
 
 func conditions(hex):
