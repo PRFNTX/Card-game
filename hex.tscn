@@ -42,8 +42,11 @@ script = ExtResource( 2 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" index="0"]
 
+position = Vector2( 0.540373, 2.92808e-06 )
+z_index = 17
 build_mode = 0
 polygon = PoolVector2Array( -24.3677, -32.7163, 25.4284, -32.2868, 50.1118, -0.734804, 24.7843, 32.7488, -24.368, 32.7486, -49.9099, -0.0912528 )
+_sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="sprite" type="Sprite" parent="." index="1"]
 

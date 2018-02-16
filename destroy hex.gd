@@ -26,7 +26,7 @@ func activate(_Game, _entity, _val):
 		Game = _Game
 		entity = _entity
 		val=_val
-		Game.delegate_action(entity.Hex.id)
+		Game.delegate_action(entity.Hex.id,get_parent().get_name()+"/"+get_name())
 
 func verify_costs():
 	var ret = true
@@ -43,7 +43,7 @@ func pay_costs():
 
 func targeting():
 	for hex in get_tree().get_nodes_in_group("Hex"):
-		if hex.stateLocal['hex_type']!=1 and hex.stateLocal['hex_type']!=7:
+		if hex.stateLocal['hex_type']>1 and hex.stateLocal['hex_type']<7:
 			hex.setState({'cover':hex.targetOther , 'target' :true})
 		else:
 			hex.setState({'cover':Color(0,0,0,0) , 'target' :false})
@@ -57,13 +57,13 @@ func complete(target, set_state=null):
 		state=set_state
 		local= false
 		
-	var hex_target = get_hex_by_id(target)
-	if hex_target.get_children().size()>1:
+	var hex_target = Game.get_hex_by_id(target)
+	if hex_target.has_unit():
 		hex_target.get_unit().on_death()
 	hex_target.setState({'hex_owner':-1,'hex_type':0})
 	if local:
-		Game.send_action('delegate',45-target,{'delegate':entity.Hex.id})
-	
+		Game.send_action('delegate',45-target,{'delegate_id':entity.Hex.id,'delegate_node':get_parent().get_name()+"/"+get_name()})
+	Game.actionDone()
 
 
 func _ready():

@@ -26,14 +26,13 @@ _sections_unfolded = [ "Rect" ]
 position = Vector2( 42, 53.5 )
 scale = Vector2( 0.35, 0.36 )
 _sections_unfolded = [ "Transform" ]
-card_number = 111
+card_number = 112
 card_name = "Lady of Lament"
 base_health = 3
 base_attack = 2
 cost_gold = 3
 lands_num = 2
 lands_type = 2
-is_event = false
 base = ExtResource( 3 )
 board_entity = ExtResource( 4 )
 

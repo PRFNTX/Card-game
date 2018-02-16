@@ -26,14 +26,13 @@ _sections_unfolded = [ "Rect" ]
 position = Vector2( 42, 53.5 )
 scale = Vector2( 0.35, 0.36 )
 _sections_unfolded = [ "Transform" ]
-card_number = 113
+card_number = 115
 card_name = "Lichorus"
 base_health = 3
 cost_gold = 0
 cost_faeria = 3
 lands_num = 2
 lands_type = 1
-is_event = false
 base = ExtResource( 3 )
 board_entity = ExtResource( 4 )
 

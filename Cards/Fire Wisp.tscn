@@ -26,7 +26,7 @@ _sections_unfolded = [ "Rect" ]
 position = Vector2( 42, 53.5 )
 scale = Vector2( 0.35, 0.36 )
 _sections_unfolded = [ "Transform" ]
-card_number = 55
+card_number = 57
 card_name = "Fire Wisp"
 base_health = 2
 base_attack = 0
@@ -34,7 +34,6 @@ cost_gold = 3
 cost_faeria = 0
 lands_num = 2
 lands_type = 3
-is_event = false
 base = ExtResource( 3 )
 board_entity = ExtResource( 4 )
 
