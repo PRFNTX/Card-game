@@ -6,7 +6,7 @@ extends Node2D
 # var b="textvar"
 
 
-var testing_solo = true
+var testing_solo = false
 
 onready var globals = get_node('/root/master')
 
@@ -770,8 +770,6 @@ func send_action(type,target, loc_state, echo=false):
 		'state':loc_state
 	}}
 	print(send)
-	var jsn = to_json(send)
-	var nojsn = parse_json(jsn)
 	globals.send_msg(send)
 	if echo:
 		game_action(send['game_action'])
