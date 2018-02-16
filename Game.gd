@@ -6,7 +6,7 @@ extends Node2D
 # var b="textvar"
 
 
-var testing_solo = true
+var testing_solo = false
 
 onready var globals = get_node('/root/master')
 
@@ -137,10 +137,10 @@ func frame_activate(ability_name, set_state=null):
 	if ability_name=='cast' and actionReady:
 		#also activate
 		var this_unit = BoardEntity.instance()
-		$hex0.add_child(this_unit)
+		$hex0/hexEntity.add_child(this_unit)
 		this_unit.hide()
 		var to_instance = globals.card_instances[state['frame_card']].get_node('Card').board_entity
-		if this_unit.possess(to_instance, 0, state['current_turn'], self,state['frame_card'])==null:
+		if this_unit.possess(to_instance, get_hex_by_id(0), state['current_turn'], self,state['frame_card'])==null:
 			if local:
 				
 				send_action('frame_activate', ability_name ,{'frame_card':state['frame_card'],'current_turn':(state['current_turn']+1)%2})
