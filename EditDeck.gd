@@ -106,6 +106,7 @@ func remove_card(card_name,in_deck=null):
 			deck_lists[deck_name][card_name]-=1
 		else:
 			deck_lists[deck_name].erase(card_name)
+	print(deck_lists[deck_name])
 	update()
 
 func update(t_deck=null):

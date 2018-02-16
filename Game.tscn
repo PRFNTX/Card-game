@@ -17,7 +17,7 @@
 [ext_resource path="res://Clock.tscn" type="PackedScene" id=15]
 [ext_resource path="res://DisplayFrame.gd" type="Script" id=16]
 
-[node name="Game" type="Node2D" index="0"]
+[node name="Game" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]

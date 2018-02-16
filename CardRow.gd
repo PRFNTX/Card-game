@@ -26,7 +26,7 @@ func get(field):
 	return get_node(field).text
 
 func set(field, val):
-	get_node(field).text = val
+	get_node(field).text = str(val)
 
 func _ready():
 	set_process_input(true)

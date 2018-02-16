@@ -27,12 +27,11 @@ position = Vector2( 42, 53.5 )
 scale = Vector2( 0.35, 0.36 )
 _sections_unfolded = [ "Transform" ]
 card_number = 219
-card_name = "Targan Mountaineer"
+card_name = "Thyrian Protector"
 base_health = 5
 cost_gold = 6
 cost_faeria = 0
 lands_type = 2
-is_event = false
 base = ExtResource( 3 )
 board_entity = ExtResource( 4 )
 

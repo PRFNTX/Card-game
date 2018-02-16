@@ -26,11 +26,13 @@ func add_item(card_node):
 	$box.add_child(row)
 	row.set_card(card_node)
 	row.index = $box.get_child_count()-1
+	return row
 
 func get_row_by_name(card_name):
 	for child in $box.get_children():
 		if child.get('Name')==card_name:
 			return child
+	return null
 
 func _ready():
 	# Called every time the node is added to the scene.
@@ -38,15 +40,27 @@ func _ready():
 	pass
 
 func update(in_deck=null):
+	### this is not great
+	var deck_list = top_level.deck_lists[top_level.state['current_deck']]
+	if !deck:
+		for row in $box.get_children():
+			var card_name = row.get('Name')
+			if deck_list.keys().has(card_name):
+				get_row_by_name(card_name).set('Deck',str(deck_list[card_name]))
+			else:
+				get_row_by_name(card_name).set('Deck',str(0))
 	###
-	var deck = top_level.deck_lists[top_level.state['current_deck']]
-	for row in $box.get_children():
-		var card_name = row.get('Name')
-		if deck.keys().has(card_name):
-			get_row_by_name(card_name).set('Deck',str(deck[card_name]))
-		else:
-			get_row_by_name(card_name).set('Deck',str(0))
-	###
+	else:
+		for card in deck_list.keys():
+			print(card)
+			if get_row_by_name(card)==null:
+				var thing = top_level.globals.card_instances[card]
+				add_item(top_level.globals.card_instances[card]).set('Deck',deck_list[card])
+			else:
+				get_row_by_name(card).set('Deck',deck_list[card])
+		for row in $box.get_children():
+			if not deck_list.keys().has(row.get("Name")):
+				row.queue_free()
 
 
 

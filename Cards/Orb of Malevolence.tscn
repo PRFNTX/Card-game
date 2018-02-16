@@ -5,7 +5,7 @@
 [ext_resource path="res://Assets/TownBasic.png" type="Texture" id=3]
 [ext_resource path="res://Cards/entities/entity - Orb of Malevolence.tscn" type="PackedScene" id=4]
 
-[node name="Orb of Malevolence" type="Control" index="0"]
+[node name="Orb of Malevolence" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -34,7 +34,6 @@ cost_gold = 5
 cost_faeria = 2
 lands_num = 0
 lands_type = 4
-is_event = false
 base = ExtResource( 3 )
 board_entity = ExtResource( 4 )
 

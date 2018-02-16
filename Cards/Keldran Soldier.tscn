@@ -5,7 +5,7 @@
 [ext_resource path="res://Assets/TownBasic.png" type="Texture" id=3]
 [ext_resource path="res://Cards/entities/entity - Keldran Soldier.tscn" type="PackedScene" id=4]
 
-[node name="Keldran Soldier" type="Control" index="0"]
+[node name="Keldran Soldier" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -27,13 +27,12 @@ position = Vector2( 42, 53.5 )
 scale = Vector2( 0.35, 0.36 )
 _sections_unfolded = [ "Transform" ]
 card_number = 103
-card_name = "Keldran Envoy"
+card_name = "Keldran Soldier"
 base_health = 2
 base_attack = 2
 cost_gold = 4
 cost_faeria = 0
 lands_type = 4
-is_event = false
 base = ExtResource( 3 )
 board_entity = ExtResource( 4 )
 

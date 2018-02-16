@@ -27,13 +27,12 @@ position = Vector2( 42, 53.5 )
 scale = Vector2( 0.35, 0.36 )
 _sections_unfolded = [ "Transform" ]
 card_number = 229
-card_name = "Timebomb"
+card_name = "Treasure Trove"
 base_health = 2
 base_attack = 0
 cost_faeria = 0
 lands_num = 2
 lands_type = 1
-is_event = false
 base = ExtResource( 3 )
 board_entity = ExtResource( 4 )
 

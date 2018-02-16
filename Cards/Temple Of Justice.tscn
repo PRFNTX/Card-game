@@ -27,13 +27,12 @@ position = Vector2( 42, 53.5 )
 scale = Vector2( 0.35, 0.36 )
 _sections_unfolded = [ "Transform" ]
 card_number = 210
-card_name = "Targan Mountaineer"
+card_name = "Temple of Justice"
 base_health = 3
 base_attack = 0
 cost_gold = 3
 cost_faeria = 0
 lands_type = 4
-is_event = false
 base = ExtResource( 3 )
 board_entity = ExtResource( 4 )
 
