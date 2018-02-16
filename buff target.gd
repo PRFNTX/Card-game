@@ -47,7 +47,7 @@ func conditions(hex):
 
 func targeting():
 	for hex in get_tree().get_nodes_in_group("Hex"):
-		if conditions():
+		if conditions(hex):
 			hex.setState({'cover':hex.targetOther , 'target' :true})
 		else:
 			hex.setState({'cover':Color(0,0,0,0) , 'target' :false})
