@@ -6,7 +6,7 @@ extends Node2D
 # var b="textvar"
 
 
-
+var testing_solo = false
 
 onready var globals = get_node('/root/master')
 
@@ -140,6 +140,7 @@ func frame_activate(ability_name, set_state=null):
 		var to_instance = globals.card_instances[state['frame_card']].get_node('Card').board_entity
 		if this_unit.possess(to_instance, 0, state['current_turn'], self,state['frame_card'])==null:
 			if local:
+				
 				send_action('frame_activate', ability_name ,{'frame_card':state['frame_card'],'current_turn':(state['current_turn']+1)%2})
 			this_unit.queue_free()
 			actionDone()
@@ -210,7 +211,7 @@ func change_turns(none,unused):
 	emit_signal("TurnEnd", state['current_turn'])
 	var current_time = state['clock_time']
 	###TESTING
-	if false:
+	if testing_solo:
 		setState({'current_turn':(state['current_turn']+1)%1,'action':"",'active_unit':null,'clock_time':(current_time+1)%3})
 	else:
 		setState({'current_turn':(state['current_turn']+1)%2,'action':"",'active_unit':null,'clock_time':(current_time+1)%3})
@@ -751,7 +752,7 @@ func delegate(target, set_state=null):
 ###############
 ### MESSAGE FUNCTIONS
 
-func send_action(type,target, loc_state):
+func send_action(type,target, loc_state, echo=false):
 	var send = {'game_action':{
 		'player':global_player_num,
 		'type':type,
@@ -762,6 +763,8 @@ func send_action(type,target, loc_state):
 	var jsn = to_json(send)
 	var nojsn = parse_json(jsn)
 	globals.send_msg(send)
+	if echo:
+		game_action(send['game_action'])
 
 func deck_cards(val):
 	players[1].deck_init(val)

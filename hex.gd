@@ -93,7 +93,7 @@ func is_adjacent_or_equal_to(hex):
 
 func action(type,by,test=false):
 	if id==0:
-		return false
+		return false 
 	if type=="":
 		setState({'cover':Color(0,0,0,0)})
 	##make lands

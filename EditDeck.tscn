@@ -1,336 +1,62 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://EditDeck.gd" type="Script" id=1]
 [ext_resource path="res://Deck_list_edit.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Collection.gd" type="Script" id=3]
+[ext_resource path="res://UI/CardRow.tscn" type="PackedScene" id=4]
 
-[node name="EditDeck" type="Node2D"]
+[node name="EditDeck" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 DeckListEdit = ExtResource( 2 )
 
-[node name="Collection" type="Control" parent="." index="0"]
+[node name="Display" type="Position2D" parent="." index="0"]
 
-editor/display_folded = true
+position = Vector2( 499.934, 358.854 )
+
+[node name="Display2" type="Position2D" parent="." index="1"]
+
+position = Vector2( 684.012, 360.483 )
+
+[node name="Collection" type="ScrollContainer" parent="." index="2"]
+
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
+margin_left = -1.0
+margin_top = 46.0
+margin_right = 447.0
+margin_bottom = 552.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+scroll_horizontal_enabled = true
+scroll_horizontal = 0
+scroll_vertical_enabled = true
+scroll_vertical = 0
 script = ExtResource( 3 )
 deck = false
+row_scene = ExtResource( 4 )
 
-[node name="Gold" type="ItemList" parent="Collection" index="0"]
+[node name="box" type="VBoxContainer" parent="Collection" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 52.0
-margin_right = 27.0
-margin_bottom = 600.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
-focus_mode = 2
-mouse_filter = 0
+mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-items = [  ]
-select_mode = 0
-icon_mode = 1
-fixed_icon_size = Vector2( 0, 0 )
-_sections_unfolded = [ "Columns" ]
+alignment = 0
 
-[node name="Faeria" type="ItemList" parent="Collection" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 27.0
-margin_top = 52.0
-margin_right = 54.0
-margin_bottom = 600.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-items = [  ]
-select_mode = 0
-icon_mode = 1
-fixed_icon_size = Vector2( 0, 0 )
-_sections_unfolded = [ "Columns" ]
-
-[node name="Name" type="ItemList" parent="Collection" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 54.0
-margin_top = 52.0
-margin_right = 236.0
-margin_bottom = 600.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-items = [  ]
-select_mode = 0
-icon_mode = 1
-fixed_icon_size = Vector2( 0, 0 )
-_sections_unfolded = [ "Columns" ]
-
-[node name="Attack" type="ItemList" parent="Collection" index="3"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 236.0
-margin_top = 52.0
-margin_right = 264.0
-margin_bottom = 600.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-items = [  ]
-select_mode = 0
-icon_mode = 1
-fixed_icon_size = Vector2( 0, 0 )
-_sections_unfolded = [ "Columns" ]
-
-[node name="Health" type="ItemList" parent="Collection" index="4"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 264.0
-margin_top = 52.0
-margin_right = 287.0
-margin_bottom = 600.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-items = [  ]
-select_mode = 0
-icon_mode = 1
-fixed_icon_size = Vector2( 0, 0 )
-_sections_unfolded = [ "Columns" ]
-
-[node name="Type" type="ItemList" parent="Collection" index="5"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 287.0
-margin_top = 52.0
-margin_right = 315.0
-margin_bottom = 600.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-items = [  ]
-select_mode = 0
-icon_mode = 1
-fixed_icon_size = Vector2( 0, 0 )
-_sections_unfolded = [ "Columns" ]
-
-[node name="Num" type="ItemList" parent="Collection" index="6"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 315.0
-margin_top = 52.0
-margin_right = 337.0
-margin_bottom = 600.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-items = [  ]
-select_mode = 0
-icon_mode = 1
-fixed_icon_size = Vector2( 0, 0 )
-_sections_unfolded = [ "Columns" ]
-
-[node name="Deck" type="ItemList" parent="Collection" index="7"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 337.0
-margin_top = 52.0
-margin_right = 359.0
-margin_bottom = 600.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-items = [  ]
-select_mode = 0
-icon_mode = 1
-fixed_icon_size = Vector2( 0, 0 )
-_sections_unfolded = [ "Columns" ]
-
-[node name="Quant" type="ItemList" parent="Collection" index="8"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 359.0
-margin_top = 52.0
-margin_right = 381.0
-margin_bottom = 600.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-items = [  ]
-select_mode = 0
-icon_mode = 1
-fixed_icon_size = Vector2( 0, 0 )
-_sections_unfolded = [ "Columns" ]
-
-[node name="top" type="Position2D" parent="Collection" index="9"]
-
-position = Vector2( -0.0714569, 53.2916 )
-
-[node name="add" type="Button" parent="Collection" index="10"]
-
-visible = false
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 383.0
-margin_top = 1.0
-margin_right = 395.0
-margin_bottom = 21.0
-rect_pivot_offset = Vector2( 0, 0 )
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "+"
-flat = false
-align = 1
-_sections_unfolded = [ "Rect" ]
-
-[node name="remove" type="Button" parent="Collection" index="11"]
-
-visible = false
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 407.0
-margin_top = 1.0
-margin_right = 429.0
-margin_bottom = 21.0
-rect_pivot_offset = Vector2( 0, 0 )
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "--"
-flat = false
-align = 1
-
-[node name="Display" type="Position2D" parent="Collection" index="12"]
-
-position = Vector2( 531.72, 375.177 )
-
-[node name="list_name" type="Label" parent="Collection" index="13"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 34.0
-margin_top = 11.0
-margin_right = 98.0
-margin_bottom = 25.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-text = "Collection"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="Columns" type="Label" parent="Collection" index="14"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 1.0
-margin_top = 35.0
-margin_right = 386.0
-margin_bottom = 49.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-text = "Gd  Fae  Name                                    At.  Hp. Typ. N.  D   C"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="Done" type="Button" parent="." index="1"]
+[node name="Done" type="Button" parent="." index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -353,56 +79,6 @@ group = null
 text = "Done"
 flat = false
 align = 1
-
-[node name="Name" type="LineEdit" parent="." index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 880.0
-margin_top = 481.0
-margin_right = 1012.0
-margin_bottom = 508.0
-rect_pivot_offset = Vector2( 0, 0 )
-focus_mode = 2
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-max_length = 20
-focus_mode = 2
-context_menu_enabled = true
-placeholder_text = "Deck Name"
-placeholder_alpha = 0.6
-caret_blink = false
-caret_blink_speed = 0.65
-caret_position = 0
-_sections_unfolded = [ "Placeholder" ]
-
-[node name="Save" type="Button" parent="." index="3"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 930.0
-margin_top = 518.0
-margin_right = 1007.0
-margin_bottom = 538.0
-rect_pivot_offset = Vector2( 0, 0 )
-focus_mode = 2
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Save Deck"
-flat = false
-align = 0
 
 [node name="Main Menu" type="Button" parent="." index="4"]
 
@@ -446,34 +122,61 @@ size_flags_vertical = 1
 tab_align = 1
 tabs_visible = true
 
-[connection signal="item_selected" from="Collection/Gold" to="Collection" method="_on_Gold_item_selected"]
+[node name="Rename" type="LineEdit" parent="." index="6"]
 
-[connection signal="item_selected" from="Collection/Faeria" to="Collection" method="_on_Faeria_item_selected"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 872.0
+margin_top = 412.0
+margin_right = 998.0
+margin_bottom = 436.0
+rect_pivot_offset = Vector2( 0, 0 )
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 1
+size_flags_horizontal = 1
+size_flags_vertical = 1
+focus_mode = 2
+context_menu_enabled = true
+placeholder_text = "Deckname"
+placeholder_alpha = 0.6
+caret_blink = false
+caret_blink_speed = 0.65
+caret_position = 0
+_sections_unfolded = [ "Placeholder" ]
 
-[connection signal="item_selected" from="Collection/Name" to="Collection" method="_on_Name_item_selected"]
+[node name="Save" type="Button" parent="." index="7"]
 
-[connection signal="item_selected" from="Collection/Attack" to="Collection" method="_on_Attack_item_selected"]
-
-[connection signal="item_selected" from="Collection/Health" to="Collection" method="_on_Health_item_selected"]
-
-[connection signal="item_selected" from="Collection/Type" to="Collection" method="_on_Type_item_selected"]
-
-[connection signal="item_selected" from="Collection/Num" to="Collection" method="_on_Num_item_selected"]
-
-[connection signal="item_selected" from="Collection/Deck" to="Collection" method="_on_Deck_item_selected"]
-
-[connection signal="item_selected" from="Collection/Quant" to="Collection" method="_on_Quant_item_selected"]
-
-[connection signal="pressed" from="Collection/add" to="Collection" method="_on_add_pressed"]
-
-[connection signal="pressed" from="Collection/remove" to="Collection" method="_on_remove_pressed"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 954.0
+margin_top = 437.0
+margin_right = 995.0
+margin_bottom = 457.0
+rect_pivot_offset = Vector2( 0, 0 )
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Save"
+flat = false
+align = 1
 
 [connection signal="pressed" from="Done" to="." method="_on_Done_pressed"]
-
-[connection signal="pressed" from="Save" to="." method="_on_Save_pressed"]
 
 [connection signal="pressed" from="Main Menu" to="." method="_on_Main_Menu_pressed"]
 
 [connection signal="tab_changed" from="Tabs" to="." method="_on_Tabs_tab_changed"]
+
+[connection signal="pressed" from="Save" to="Collection" method="_on_Save_pressed"]
 
 

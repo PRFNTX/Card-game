@@ -24,7 +24,6 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="board" type="Node2D" parent="." index="0"]
 
-editor/display_folded = true
 position = Vector2( 748.755, -134.923 )
 rotation = 1.5708
 scale = Vector2( 0.751495, 1 )
@@ -33,7 +32,6 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="back" type="Sprite" parent="board" index="0"]
 
-editor/display_folded = true
 position = Vector2( 507.593, 241.133 )
 scale = Vector2( 0.720365, 0.73331 )
 texture = ExtResource( 3 )

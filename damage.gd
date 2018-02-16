@@ -63,7 +63,7 @@ func complete(target, set_state=null):
 	var unit = Game.get_hex_by_id(target).get_unit()
 	unit.life_change(damage)
 	if local:
-		Game.send_action('delegate',45-target,{'delegate':entity.Hex.id})
+		Game.send_action('delegate',45-target,{'delegate_id':entity.Hex.id,'delegate_node':'Abilities/damage'})
 	Game.actionDone()
 	
 

@@ -30,9 +30,9 @@ func current_deck(deck):
 		deck_lists[deck]={}
 		
 	state['current_deck'] = deck
-	
+	$Rename.text = deck
 	for card in deck_lists[deck].keys():
-		$Collection.update(card)
+		$Collection.update()
 	
 
 
@@ -51,7 +51,7 @@ func initialize_decks(reset=true):
 		deck_lists={}
 		deck_nodes={}
 		for child in $Tabs.get_children():
-			child.free()
+			child.queue_free()
 	deck_list_local = globals.deck_list
 	for deck in deck_list_local.keys():
 		if !$Tabs.has_node(deck):
@@ -63,7 +63,8 @@ func initialize_decks(reset=true):
 			new_deck_tab.set_name(deck)
 			new_deck_tab.top_level = self
 			for card in deck_lists[deck]:
-				update(card, deck)
+				new_deck_tab.add_item(globals.card_instances[card])
+			update()
 	if !$Tabs.has_node("+"):
 		add_blank_tab()
 
@@ -93,6 +94,7 @@ func add_card(card_name,in_deck=null):
 			deck_lists[deck_name][card_name]=3
 	else:
 		deck_lists[deck_name][card_name]=1
+	update()
 
 func remove_card(card_name,in_deck=null):
 	var deck_name = in_deck
@@ -104,14 +106,15 @@ func remove_card(card_name,in_deck=null):
 			deck_lists[deck_name][card_name]-=1
 		else:
 			deck_lists[deck_name].erase(card_name)
+	update()
 
-func update(card, t_deck=null):
+func update(t_deck=null):
 	var deck = t_deck
 	if t_deck==null:
 		deck = state['current_deck']
 	
-	deck_nodes[deck].update(card, deck)
-	$Collection.update(card, deck)
+	deck_nodes[deck].update()
+	$Collection.update()
 
 
 func populate_collection():
@@ -178,12 +181,6 @@ func _on_Save_pressed():
 
 
 func _on_Tabs_tab_changed( tab ):
-	if $Tabs.get_child(tab).get_node('Name').get_item_count()==0:
-		$Tabs.get_child(tab).get_node('add').hide()
-		$Tabs.get_child(tab).get_node('remove').hide()
-	else:
-		$Tabs.get_child(tab).get_node('add').show()
-		$Tabs.get_child(tab).get_node('remove').show()
 	setState({'current_deck':$Tabs.get_child(tab).get_name()})
 
 
