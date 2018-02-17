@@ -6,7 +6,7 @@
 [ext_resource path="res://hexType.tscn" type="PackedScene" id=4]
 [ext_resource path="res://hexEntity.tscn" type="PackedScene" id=5]
 
-[node name="hex" type="Node2D" groups=[
+[node name="hex" type="Node2D" index="0" groups=[
 "Hex",
 ]]
 
@@ -29,7 +29,7 @@ enemy_modulate = Color( 0.722656, 0.71701, 0.71701, 1 )
 
 [node name="Area2D" type="Area2D" parent="." index="0"]
 
-position = Vector2( -1.53184e-05, 0.358471 )
+position = Vector2( -1.54376e-05, 0.358471 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0

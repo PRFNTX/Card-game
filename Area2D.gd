@@ -10,7 +10,8 @@ func _ready():
 	pass
 
 func _input_event(viewport, event, shape_idx):
+	var parent = get_parent()
 	if event is InputEventMouseButton and event.is_action('click'):
-		get_parent().complete_action_click()
-	elif event is InputEventMouseMotion and not get_parent().gameNode.stateLocal['hovered']:
-		get_parent().gameNode.setState({'hovered':get_parent().id})
+		parent.complete_action_click()
+	elif event is InputEventMouseMotion and not parent.stateLocal['hovered']:
+		parent.gameNode.setState({'hovered':parent.id})
