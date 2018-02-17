@@ -771,7 +771,8 @@ func send_action(type,target, loc_state, echo=false):
 	}}
 	print(send)
 	globals.send_msg(send)
-	get_tree().get_nodes_in_group('entities').call('on_action', send['game_action'])
+	for ent in get_tree().get_nodes_in_group('entities'):
+		ent.call('on_action', send['game_action'])
 	if echo:
 		game_action(send['game_action'])
 
