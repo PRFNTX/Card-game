@@ -43,9 +43,10 @@ func possess(entity, hex, player, game,_card_name):
 	Unit = entity.instance()
 	add_child(Unit)
 	Game= game
+	Hex = hex
 	Unit.init()
 	actionList = Unit.get_actions()
-	Hex = hex
+	
 	
 	Game.connect('TurnStart', self, 'sig_turn_start')
 	Game.connect('UpdateState', self, 'sig_update_state')
