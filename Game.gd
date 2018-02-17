@@ -142,10 +142,10 @@ func frame_activate(ability_name, set_state=null):
 		$hex0/hexEntity.add_child(this_unit)
 		this_unit.hide()
 		var to_instance = globals.card_instances[state['frame_card']].get_node('Card').board_entity
+		if local:
+			send_action('frame_activate', ability_name ,{'frame_card':globals.get_id_by_name(state['frame_card']),'current_turn':(state['current_turn']+1)%2})
+			
 		if this_unit.possess(to_instance, get_hex_by_id(0), state['current_turn'], self,state['frame_card'])==null:
-			if local:
-				
-				send_action('frame_activate', ability_name ,{'frame_card':globals.get_id_by_name(state['frame_card']),'current_turn':(state['current_turn']+1)%2})
 			this_unit.queue_free()
 			actionDone()
 		

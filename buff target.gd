@@ -18,11 +18,12 @@ func init(_entity):
 
 var val
 
-func activate(_Game, _entity, _val):
+func activate(_Game, _entity):
 	Game = _Game
 	entity = _entity
 	val=_val
-	Game.delegate_action(entity.Hex.id,'on_play/b tar conv')
+	if entity.Owner==0:
+		Game.delegate_action(entity.Hex.id,'on_play/b tar conv')
 	return true
 
 
