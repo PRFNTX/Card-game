@@ -18,14 +18,21 @@ func init(_entity):
 	entity = _entity
 	Game = entity.Game
 	for hex in entity.Hex.adjacent:
-		_last[hex.id] = hex.get_unit()
+		#if hex.has_unit():
+			_last[hex.id] = hex.get_unit()
+		#else:
+		#	_last[hex.id] = null
 
 func activate(type, target, state=null):
 	var adjs = []
 	for hex in entity.Hex.adjacent:
 		adjs.append(hex.id)
+	
+	
 	if adjs.has(target):
+		
 		for hex in _last.keys():
+			
 			if Game.get_hex_by_id(hex).has_unit():
 				var unit = Game.get_hex_by_id(hex).get_unit()
 				if unit != _last[hex]:

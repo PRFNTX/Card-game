@@ -5,9 +5,9 @@ var land_types = ['empty', 'orb', 'land','lake','tree','hill','sand','well']
 
 
 func activate(Game, entity, unsused):
-	for hex in get_tree().get_nodes_in_group('entities'):
-		if hex.has_friendly_unit(entity.Owner) and hex.stateLocal['hex_owner']!=entity.Owner:
-			hex.setState({'hex_owner':entity.Owner})
+	for ent in get_tree().get_nodes_in_group('entities'):
+		if ent.Hex.has_friendly_unit(entity.Owner) and ent.Hex.stateLocal['hex_owner']!=entity.Owner:
+			ent.Hex.setState({'hex_owner':entity.Owner})
 	Game.update_lands_owned()
 	""" now handled in hexes
 	Game.players[entity.Owner].modLands(land_types[hex.stateLocal['hex_type']],1)

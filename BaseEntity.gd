@@ -174,7 +174,7 @@ func production():
 func action(type,target,state):
 	if on_action:
 		for effectNode in $on_action.get_children():
-			effectNode.activate(type,target,state) ##this one is wrong
+			effectNode.activate(type,target,state) 
 
 func on_turn_end():
 	if on_turn_end:
