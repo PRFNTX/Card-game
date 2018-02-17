@@ -20,9 +20,10 @@ func set_deck_list(parsedjson):
 		deck_list[deck['deck_name']] = deck['cards']
 
 func get_card_by_id(id):
-	for card in card_instances:
-		if card.get_node('Card').card_number==id:
-			return card
+	for card in card_instances.keys():
+		var cn = card_instances[card].get_node('Card')
+		if cn.card_number==int(id):
+			return cn.card_name
 
 func get_id_by_name(name):
 	return card_instances[name].get_node('Card').card_number

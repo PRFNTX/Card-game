@@ -6,7 +6,7 @@ extends Node2D
 # var b="textvar"
 
 
-var testing_solo = false
+var testing_solo = true
 
 onready var globals = get_node('/root/master')
 
@@ -622,7 +622,7 @@ func buildHill(target, set_state=null):
 		entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'],self,child_card.card_name)
 		entity.add_to_group('entities')
 	if local:
-		send_action('buildHill', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])})
+		send_action('buildHill', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])},true)
 	actionDone()
 
 func buildSand(target, set_state=null):
@@ -779,13 +779,13 @@ func deck_cards(val):
 
 func game_action(val):
 	print("TO ACTION")
+	
 	if val.state.keys().has('building_card'):
-		val.state['building_card'] = globals.get_card_by_id(val.state['building_card'])
+		val['state']['building_card'] = globals.get_card_by_id(val.state['building_card'])
 	if val.state.keys().has('frame_card'):
 		val.state['frame_card'] = globals.get_card_by_id(val.state['frame_card'])
 	if val.state.keys().has('active_unit'):
 		setState({'preview_card':get_hex_by_id(val.state['active_unit']).get_unit().card_name})
-	print(val)
 	call(val.type, val.target, val.state)
 	print("END STATE")
 	print(state)
