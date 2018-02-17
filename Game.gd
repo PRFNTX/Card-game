@@ -6,7 +6,7 @@ extends Node2D
 # var b="textvar"
 
 
-var testing_solo = true
+var testing_solo = false
 
 onready var globals = get_node('/root/master')
 
@@ -622,7 +622,7 @@ func buildHill(target, set_state=null):
 		entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'],self,child_card.card_name)
 		entity.add_to_group('entities')
 	if local:
-		send_action('buildHill', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])},true)
+		send_action('buildHill', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])})
 	actionDone()
 
 func buildSand(target, set_state=null):
