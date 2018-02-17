@@ -785,8 +785,12 @@ func game_action(val):
 	
 	if val.state.keys().has('building_card'):
 		val['state']['building_card'] = globals.get_card_by_id(val.state['building_card'])
+		
 	if val.state.keys().has('frame_card'):
 		val.state['frame_card'] = globals.get_card_by_id(val.state['frame_card'])
+		print(val.state)
+		print(val['state'])
+		
 	if val.state.keys().has('active_unit'):
 		setState({'preview_card':get_hex_by_id(val.state['active_unit']).get_unit().card_name})
 	
