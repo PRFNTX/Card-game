@@ -779,12 +779,13 @@ func deck_cards(val):
 
 func game_action(val):
 	print("TO ACTION")
-	if val.keys().has('building_card'):
-		val['building_card'] = globals.get_card_by_id(val['building_card'])
-	if val.keys().has('frame_card'):
-		val['frame_card'] = globals.get_card_by_id(val['frame_card'])
+	if val.state.keys().has('building_card'):
+		val.state['building_card'] = globals.get_card_by_id(val.state['building_card'])
+	if val.state.keys().has('frame_card'):
+		val.state['frame_card'] = globals.get_card_by_id(val.state['frame_card'])
 	if val.state.keys().has('active_unit'):
 		setState({'preview_card':get_hex_by_id(val.state['active_unit']).get_unit().card_name})
+	print(val)
 	call(val.type, val.target, val.state)
 	print("END STATE")
 	print(state)
