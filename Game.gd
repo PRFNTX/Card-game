@@ -772,7 +772,7 @@ func send_action(type,target, loc_state, echo=false):
 	print(send)
 	globals.send_msg(send)
 	for ent in get_tree().get_nodes_in_group('entities'):
-		ent.call('on_action', send['game_action'])
+		ent.call('on_action', send['game_action'].type, 45-send['game_action'].target, send['game_action'].state)
 	if echo:
 		game_action(send['game_action'])
 

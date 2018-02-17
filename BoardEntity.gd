@@ -135,8 +135,8 @@ func on_death():
 	if Unit.is_building or Unit.is_unit:
 		queue_free()
 
-func on_action(msg):
-	Unit.action(msg)
+func on_action(type,target,state):
+	Unit.action(type,target,state)
 
 
 
