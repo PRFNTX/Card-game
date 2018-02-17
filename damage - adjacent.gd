@@ -17,7 +17,8 @@ func _ready():
 func init(_entity):
 	entity = _entity
 	Game = entity.Game
-	
+	for hex in entity.Hex.adjacent:
+		_last[hex.id] = hex.get_unit()
 
 func activate(type, target, state=null):
 	var adjs = []
