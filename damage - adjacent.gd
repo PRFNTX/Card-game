@@ -14,10 +14,9 @@ func _ready():
 	# Initialization here
 	pass
 
-func connect(_Game, _entity):
+func init(_Game, _entity):
 	Game = _Game
 	entity = _entity
-	Game.connect('action', self, 'activate')
 
 func activate(type, target, state=null):
 	if entity.Hex.adjacent.has(Game.get_hex_by_id(target)):

@@ -171,10 +171,10 @@ func production():
 		for effectNode in $on_production.get_children():
 			effectNode.activate(get_parent().Game,get_parent(),"")
 
-func action():
+func action(msg):
 	if on_action:
 		for effectNode in $on_production.get_children():
-			effectNode.activate(get_parent().Game,get_parent(),"") ##this one is wrong
+			effectNode.activate(msg.type,msg.target,msg.state) ##this one is wrong
 
 func on_turn_end():
 	if on_turn_end:
