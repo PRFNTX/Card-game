@@ -18,7 +18,7 @@ func init(_entity):
 
 var val
 
-func activate(_Game, _entity):
+func activate(_Game, _entity,_val):
 	Game = _Game
 	entity = _entity
 	val=_val
