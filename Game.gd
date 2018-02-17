@@ -143,7 +143,7 @@ func frame_activate(ability_name, set_state=null):
 		if this_unit.possess(to_instance, get_hex_by_id(0), state['current_turn'], self,state['frame_card'])==null:
 			if local:
 				
-				send_action('frame_activate', ability_name ,{'frame_card':state['frame_card'],'current_turn':(state['current_turn']+1)%2})
+				send_action('frame_activate', ability_name ,{'frame_card':globals.get_id_by_name(state['frame_card']),'current_turn':(state['current_turn']+1)%2})
 			this_unit.queue_free()
 			actionDone()
 		
@@ -502,7 +502,7 @@ func castAny(target, set_state=null):
 		play_effect = entity.possess(child_card.board_entity,get_hex_by_id(cast_hex),state['current_turn'],self,child_card.card_name)
 		entity.add_to_group('entities')
 	if local:
-		send_action('castAny', 45-cast_hex,{'current_turn':(state['current_turn']+1%2),'building_card':state['building_card']})
+		send_action('castAny', 45-cast_hex,{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])})
 	
 	if play_effect==null:
 		actionDone()
@@ -535,7 +535,7 @@ func buildAny(target, set_state=null):
 		entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'],self,child_card.card_name)
 		entity.add_to_group('entities')
 	if local:
-		send_action('buildAny', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':state['building_card']})
+		send_action('buildAny', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])})
 	actionDone()
 
 func buildLake(target, set_state=null):
@@ -564,7 +564,7 @@ func buildLake(target, set_state=null):
 		entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'],self,child_card.card_name)
 		entity.add_to_group('entities')
 	if local:
-		send_action('buildLake', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':state['building_card']})
+		send_action('buildLake', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])})
 	actionDone()
 
 func buildTree(target, set_state=null):
@@ -593,7 +593,7 @@ func buildTree(target, set_state=null):
 		entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'],self,child_card.card_name)
 		entity.add_to_group('entities')
 	if local:
-		send_action('buildTree', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':state['building_card']})
+		send_action('buildTree', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])})
 	actionDone()
 
 func buildHill(target, set_state=null):
@@ -622,7 +622,7 @@ func buildHill(target, set_state=null):
 		entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'],self,child_card.card_name)
 		entity.add_to_group('entities')
 	if local:
-		send_action('buildHill', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':state['building_card']})
+		send_action('buildHill', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])})
 	actionDone()
 
 func buildSand(target, set_state=null):
@@ -651,7 +651,7 @@ func buildSand(target, set_state=null):
 		entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'],self,child_card.card_name)
 		entity.add_to_group('entities')
 	if local:
-		send_action('buildSand', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':state['building_card']})
+		send_action('buildSand', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])})
 	actionDone()
 
 func actionLand(target, set_state=null):
@@ -779,6 +779,10 @@ func deck_cards(val):
 
 func game_action(val):
 	print("TO ACTION")
+	if val.keys().has('building_card'):
+		val['building_card'] = globals.get_card_by_id(val['building_card'])
+	if val.keys().has('frame_card'):
+		val['frame_card'] = globals.get_card_by_id(val['frame_card'])
 	if val.state.keys().has('active_unit'):
 		setState({'preview_card':get_hex_by_id(val.state['active_unit']).get_unit().card_name})
 	call(val.type, val.target, val.state)

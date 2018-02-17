@@ -18,7 +18,14 @@ func set_deck_list(parsedjson):
 	deck_list={}
 	for deck in parsedjson:
 		deck_list[deck['deck_name']] = deck['cards']
-	
+
+func get_card_by_id(id):
+	for card in card_instances:
+		if card.get_node('Card').card_number==id:
+			return card
+
+func get_id_by_name(name):
+	return card_instances[name].get_node('Card').card_number
 
 var currentScene
 
