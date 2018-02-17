@@ -21,6 +21,8 @@ signal TurnStart
 signal ActionPhase
 signal TurnEnd
 
+signal on_action
+
 var players = [null, null]
 
 var global_player_num = 0
@@ -771,8 +773,7 @@ func send_action(type,target, loc_state, echo=false):
 	}}
 	print(send)
 	globals.send_msg(send)
-	for ent in get_tree().get_nodes_in_group('entities'):  #LOCAL
-		ent.call('on_action', send['game_action'].type, 45-send['game_action'].target, send['game_action'].state)
+	emit_signal('on_action', send['game_action'].type, 45-send['game_action'].target, send['game_action'].state)
 	if echo:
 		game_action(send['game_action'])
 
@@ -789,8 +790,7 @@ func game_action(val):
 	if val.state.keys().has('active_unit'):
 		setState({'preview_card':get_hex_by_id(val.state['active_unit']).get_unit().card_name})
 	
-	for ent in get_tree().get_nodes_in_group('entities'):   #FROM REMOTE
-		ent.call('on_action', send['game_action'].type, send['game_action'].target, send['game_action'].state)
+	emit_signal('on_action', send['game_action'].type, send['game_action'].target, send['game_action'].state)
 	call(val.type, val.target, val.state)
 	print("END STATE")
 	print(state)

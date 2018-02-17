@@ -47,7 +47,8 @@ func possess(entity, hex, player, game,_card_name):
 	Unit.init()
 	actionList = Unit.get_actions()
 	
-	
+	if Unit.on_action:
+		Game.connect('on_action', self, 'on_action')
 	Game.connect('TurnStart', self, 'sig_turn_start')
 	Game.connect('UpdateState', self, 'sig_update_state')
 	print(Owner)
