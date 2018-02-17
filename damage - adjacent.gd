@@ -20,7 +20,10 @@ func init(_entity):
 	
 
 func activate(type, target, state=null):
-	if entity.Hex.adjacent.has(Game.get_hex_by_id(target)):
+	var adjs = []
+	for hex in entity.Hex.adjacent:
+		adjs.append(hex.id)
+	if adjs.has(target):
 		for hex in _last.keys():
 			if not Game.get_hex_by_id(hex).get_unit() == _last[hex]:
 				if player==2:
@@ -28,7 +31,7 @@ func activate(type, target, state=null):
 				elif _last[hex].Owner == (entity.Owner+player)%2:
 					_last[hex].receive_damage(1)
 	_last.clear()
-	for hex in Game.get_hex_by_id(entity.Hex).adjacent:
+	for hex in entity.Hex.adjacent:
 		_last[hex.id] = hex.get_unit()
 	
 	
