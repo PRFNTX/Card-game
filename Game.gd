@@ -373,7 +373,7 @@ func moveBase(target, set_state=null):
 		setState({'active_unit':target})
 	
 	
-	if check_valid_action(unit.Unit.get_action_name('Attack')):
+	if check_valid_action(unit.Unit.get_action_name('Attack')) and unit.Unit.current_health>0:
 		actionReady=true
 		unit.Unit.start_attack(self)
 	else:
@@ -400,7 +400,7 @@ func moveWater(target, set_state=null):
 		setState({'active_unit':target})
 	
 	
-	if check_valid_action(unit.Unit.get_action_name('Attack')):
+	if check_valid_action(unit.Unit.get_action_name('Attack')) and unit.Unit.current_health>0:
 		actionReady=true
 		unit.Unit.start_attack(self)
 	else:
@@ -427,7 +427,7 @@ func moveAir(target, set_state=null):
 		setState({'active_unit':target})
 	
 	
-	if check_valid_action(unit.Unit.get_action_name('Attack')):
+	if check_valid_action(unit.Unit.get_action_name('Attack')) and unit.Unit.current_health>0: ## do this better?
 		actionReady=true
 		unit.Unit.start_attack(self)
 	else:

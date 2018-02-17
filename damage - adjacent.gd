@@ -26,11 +26,13 @@ func activate(type, target, state=null):
 		adjs.append(hex.id)
 	if adjs.has(target):
 		for hex in _last.keys():
-			if not Game.get_hex_by_id(hex).get_unit() == _last[hex]:
-				if player==2:
-					_last[hex].receive_damage(1)
-				elif _last[hex].Owner == (entity.Owner+player)%2:
-					_last[hex].receive_damage(1)
+			if Game.get_hex_by_id(hex).has_unit():
+				var unit = Game.get_hex_by_id(hex).get_unit()
+				if unit != _last[hex]:
+					if player==2:
+						unit.receive_damage(1)
+					elif int(unit.Owner) == (int(entity.Owner)+int(player))%2:
+						unit.receive_damage(1)
 	_last.clear()
 	for hex in entity.Hex.adjacent:
 		_last[hex.id] = hex.get_unit()

@@ -80,7 +80,7 @@ func complete(target, set_state=null):
 	entity.Hex=hex_target
 	
 	
-	if Game.check_valid_action(entity.Unit.get_action_name('Attack')) and local:
+	if Game.check_valid_action(entity.Unit.get_action_name('Attack')) and local and unit.Unit.current_health>0:
 		Game.setState({'active_unit':entity.Hex.id})
 		Game.actionReady=true
 		entity.Unit.start_attack(Game)
