@@ -773,7 +773,7 @@ func send_action(type,target, loc_state, echo=false):
 	}}
 	print(send)
 	globals.send_msg(send)
-	emit_signal('on_action', send['game_action'].type, 45-send['game_action'].target, send['game_action'].state)
+	emit_signal('on_action', send['game_action'].type, 45-int(send['game_action'].target), send['game_action'].state)
 	if echo:
 		game_action(send['game_action'])
 
