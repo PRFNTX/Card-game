@@ -69,7 +69,7 @@ func complete(target, set_state=null):
 		hex.setState({'hex_owner':entity.Owner})
 	
 	if local:
-		Game.send_action('delegate',45-target,{'delegate_id':45-entity.Hex.id, 'delegate_node':'on_play/b tar conv'})
+		Game.send_action('delegate',45-target,{'delegate_id':entity.Hex.id, 'delegate_node':'on_play/b tar conv'})
 	
 	entity.queue_free()
 	Game.actionDone()
