@@ -68,7 +68,9 @@ func complete(target, set_state=null):
 	if local:
 		Game.send_action('hardMove',45-target,{'active_unit':45-entity.Hex.id})
 	Game.actionDone()
-
+	
+func cancel_action():
+	pass
 
 func _ready():
 	# Called every time the node is added to the scene.

@@ -6,6 +6,7 @@ export(int,"Unit","Creature","Building") var type = 1
 
 export(int) var health = 1
 export(int) var attack = 0
+export(int) var energy = 0
 export(bool) var convert_land = 1
 
 export(bool) var then_free = true
@@ -23,7 +24,7 @@ func activate(_Game, _entity,_val):
 	entity = _entity
 	val=_val
 	if entity.Owner==0:
-		Game.delegate_action(entity.Hex.id,'on_play/b tar conv')
+		Game.delegate_action(entity.Hex.id,get_parent().get_name()+'/'+get_name())
 	return true
 
 
@@ -65,15 +66,19 @@ func complete(target, set_state=null):
 	var hex = Game.get_hex_by_id(target)
 	hex.get_unit().life_change(health)
 	hex.get_unit().Unit.current_attack+=attack
+	hex.get_unit().Unit.current_energy+=energy
 	if convert_land:
 		hex.setState({'hex_owner':entity.Owner})
 	
 	if local:
-		Game.send_action('delegate',45-target,{'delegate_id':entity.Hex.id, 'delegate_node':'on_play/b tar conv'})
+		Game.send_action('delegate',45-target,{'delegate_id':45-entity.Hex.id, 'delegate_node':get_parent().get_name()+'/'+get_name()})
 	
 	entity.queue_free()
 	Game.actionDone()
 	return true
+
+func cancel_action():
+	pass
 
 func _ready():
 	# Called every time the node is added to the scene.

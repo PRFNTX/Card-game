@@ -170,6 +170,15 @@ func discard_selected():
 		hand_object.update()
 		lbl_hand.text = str(Hand.size())
 
+func play_selected():
+	if hand_object.state['selected_card']!=null:
+		var costs = hand_object.get_costs(hand_object.state['selected_card'])
+		pay_costs(costs.gold,costs.faeria)
+		Hand.remove(hand_object.state['selected_card'])
+		hand_object.setState({'selected_card':null})
+		hand_object.update()
+		lbl_hand.text = str(Hand.size())
+
 func discard_deck():
 	if !is_dummy:
 		var card = floor(rand_range(0,curr_Deck.size()))

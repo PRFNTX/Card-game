@@ -39,8 +39,9 @@ func targeting():
 	var rings = []
 	rings.append(center_hex.adjacent)
 	for i in range(2,distance+1):
+		var prev_ring = ring(center_hex,i)
 		var curr_ring = []
-		for hex in rings[i-2]:
+		for hex in prev_ring:
 			for adj in hex.adjacent:
 				curr_ring.append(adj)
 		var final_ring = []
@@ -51,13 +52,28 @@ func targeting():
 	rings.append([center_hex])
 	for ring in rings:
 		for hex in ring:
-			print(hex.hex_is_empty_or_self(center_hex.id))
-			print((hex.hexType.child.moveLand and medium==0))
-			print((hex.hexType.child.moveAir and medium==1))
-			print(hex.hexType.child.moveWater and medium==2)
 			if (hex.hex_is_empty_or_self(center_hex.id)) and ((hex.hexType.child.moveLand and medium==0) or (hex.hexType.child.moveAir and medium==1) or (hex.hexType.child.moveWater and medium==2)):
 				hex.setState({'cover':hex.targetOther , 'target' :true})
+
+func ring(hex,n):
+	if n == 0:
+		return hex
+	if n==1:
+		return hex.adjacent
+	var adj=[hex,hex.adjacent]
 	
+	for i in range(2,n):
+		var new = []
+		for hex in adj[i-1]:
+			for ad in hex.adjacent:
+				new.append(ad)
+		var rng = []
+		for j in range(1,i):
+			for hex in new:
+				if adj[j].has(hex) or adj[0]==hex:
+					new.erase(hex)
+		adj.append(new)
+	return adj[n-1]
 
 
 func complete(target, set_state=null):
@@ -76,7 +92,7 @@ func complete(target, set_state=null):
 	if local:
 		#Game.send_action('dee',45-target,{'delegate_node':str(get_path()).replace("/","~")})
 		#Game.send_action('delegate',45-target,{'delegate_node':'Movement/moveLine','delegate_id':45-entity.Hex.id})
-		Game.send_action('hardMove',45-target,{'active_unit':45-entity.Hex.id})
+		Game.send_action('miscMove',45-target,{'active_unit':45-entity.Hex.id})
 	entity.Hex=hex_target
 	
 	
@@ -86,7 +102,9 @@ func complete(target, set_state=null):
 		entity.Unit.start_attack(Game)
 	else:
 		return true
-	
+
+func cancel_action():
+	pass
 
 
 func _ready():

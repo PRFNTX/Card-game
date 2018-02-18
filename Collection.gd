@@ -51,6 +51,7 @@ func update(in_deck=null):
 				get_row_by_name(card_name).set('Deck',str(0))
 	###
 	else:
+		
 		for card in deck_list.keys():
 			print(card)
 			if get_row_by_name(card)==null:
@@ -58,9 +59,14 @@ func update(in_deck=null):
 				add_item(top_level.globals.card_instances[card]).set('Deck',deck_list[card])
 			else:
 				get_row_by_name(card).set('Deck',deck_list[card])
+		
+		var ind = 0
 		for row in $box.get_children():
 			if not deck_list.keys().has(row.get("Name")):
 				row.queue_free()
+			else:
+				row.index = ind
+				ind +=1
 
 
 

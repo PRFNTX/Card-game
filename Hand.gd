@@ -69,6 +69,10 @@ func assign_player(node):
 	player_object = node
 	
 
+func get_costs(card_num):
+	var card = card_nodes[card_num].get_node('Card')
+	return {'gold':card.cost_gold,'faeria':card.cost_faeria}
+
 func update():
 	for node in card_nodes:
 		node.queue_free()

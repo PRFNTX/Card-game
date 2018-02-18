@@ -65,6 +65,8 @@ func complete(target, set_state=null):
 		Game.send_action('delegate',45-target,{'delegate_id':45-entity.Hex.id,'delegate_node':get_parent().get_name()+"/"+get_name()})
 	Game.actionDone()
 
+func cancel_action():
+	pass
 
 func _ready():
 	# Called every time the node is added to the scene.

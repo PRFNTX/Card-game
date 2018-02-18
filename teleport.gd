@@ -20,7 +20,7 @@ func activate(_Game, _entity, _val):
 	Game = _Game
 	entity = _entity
 	val=_val
-	Game.delegate_action(entity.Hex.id,'on_play/target/teleport')
+	Game.delegate_action(get_parent().entity.Hex.id,get_parent().get_parent().get_name()+'/'+get_parent().get_name()+'/'+get_name())
 
 
 
@@ -45,15 +45,17 @@ func complete(target, set_state=null):
 		state=set_state
 		local= false
 		
-	var hex_target = get_hex_by_id(target)
+	var hex_target = Game.get_hex_by_id(target)
 	entity.on_move(hex_target.get_node('hexEntity'))
 	if local:
-		Game.send_action('hardMove',45-target,{'active_unit':entity.Hex.id})
+		Game.send_action('hardMove',45-target,{'active_unit':45-entity.Hex.id})
 	
 	if get_parent().then_free:
 		get_parent().queue_free()
 	return true
-	
+
+func cancel_action():
+	pass
 
 
 func _ready():

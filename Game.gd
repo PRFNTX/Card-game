@@ -6,7 +6,7 @@ extends Node2D
 # var b="textvar"
 
 
-var testing_solo = false
+var testing_solo = true
 
 onready var globals = get_node('/root/master')
 
@@ -146,6 +146,7 @@ func frame_activate(ability_name, set_state=null):
 			send_action('frame_activate', ability_name ,{'frame_card':globals.get_id_by_name(state['frame_card']),'current_turn':(state['current_turn']+1)%2})
 			
 		if this_unit.possess(to_instance, get_hex_by_id(0), state['current_turn'], self,state['frame_card'])==null:
+			players[state['current_turn']].discard_selected() #make this function
 			this_unit.queue_free()
 			actionDone()
 		
@@ -290,7 +291,9 @@ func delegate_action(delegate,nodepath):
 		startTimer()
 		setState({"action":'delegate','delegate_id':delegate,'delegate_node':nodepath})
 		### how to find activating script
-		get_hex_by_id(state['delegate_id']).get_unit().Unit.get_node(state['delegate_node']).targeting()
+		#get_hex_by_id(state['delegate_id']).get_unit().Unit.get_node(state['delegate_node']).targeting()
+		var unit =get_hex_by_id(state['delegate_id']).get_unit().Unit
+		unit.get_node(state['delegate_node']).targeting()
 
 func start_unit_action(type):
 	startBasictimeout()
@@ -321,14 +324,20 @@ func completeAction(target):
 		call(state["action"],target.id)
 
 func actionDone():
-	if state['action']!='hand_card':
-		setState({"action":"",'active_unit':null, 'frame_card':null, 'delegate_id':null,"delegate_node":null})
-	else:
-		players[state['current_turn']].discard_selected() #make this function
-		setState({"action":"",'active_unit':null, 'frame_card':null, 'delegate_id':null,"delegate_node":null})
+	setState({"action":"",'active_unit':null, 'frame_card':null, 'delegate_id':null,"delegate_node":null,'building_card':null})
+	if $hex0.has_unit():
+		$hex0.get_unit().queue_free()
+		print("SHOULD I HAVE FREED THAT? (Game:330)")
 	complete = true
 
+func newAction(set={'action':""}):
+	actionReady=true
+	setState(set)
+
 func cancelAction():
+	
+	if state['action']=='delegate' and get_hex_by_id(state['delegate_id']).get_unit().Unit.get_node(state['delegate_node']).has_method('cancel_action'):
+		get_hex_by_id(state['delegate_id']).get_unit().Unit.get_node(state['delegate_node']).cancel_action()
 	setState({"action":"",'active_unit':null, 'frame_card':null, 'delegate_id':null,'delegate_node':null})
 	complete = true
 
@@ -352,8 +361,32 @@ func hardMove(target, set_state=null):
 	var unit = get_unit_by_hex(get_hex_by_id(state['active_unit']))
 	unit.on_move(hex_target.get_node('hexEntity'))
 	unit.Hex=hex_target
+
+func miscMove(target,set_state=null):
+	var local = false
+	var state = get_state()
+	if set_state!=null:
+		state=set_state
+	
+	var hex_target = get_hex_by_id(target)
+	var unit = get_unit_by_hex(get_hex_by_id(state['active_unit']))
+	unit.on_move(hex_target.get_node('hexEntity'))
+	unit.Hex=hex_target
 	unit.use_energy(1)
 
+func moveHex(target,set_state=null):
+	var local = false
+	var state = get_state()
+	if set_state!=null:
+		state=set_state
+	
+	var from_hex = get_hex_by_id(state['active_unit'])
+	var to_hex = get_hex_by_id(target)
+	to_hex.setState({'hex_type':from_hex.stateLocal['hex_type'],'hex_owner':from_hex.stateLocal['hex_owner']})
+	from_hex.setState({'hex_type':0,'hex_owner':-1})
+	if from_hex.has_unit():
+		from_hex.get_unit().on_move(to_hex.get_node('hexEntity'))
+	
 
 func moveBase(target, set_state=null):
 	var local = true
@@ -772,6 +805,12 @@ func send_action(type,target, loc_state, echo=false):
 		'state':loc_state
 	}}
 	print(send)
+	#once sent actions are final
+	if state['delegate_id']==0 and state['frame_card']:
+		#players[state['current_turn']].discard_selected()
+		players[state['current_turn']].play_selected()
+		setState({'frame_card':null})
+	
 	globals.send_msg(send)
 	emit_signal('on_action', send['game_action'].type, 45-int(send['game_action'].target), send['game_action'].state)
 	if echo:

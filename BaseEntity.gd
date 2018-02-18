@@ -15,7 +15,7 @@ export(Color,RGB) var ENERGY_INACTIVE
 
 var current_faeria = 0 setget set_faeria
 var current_energy = 0 setget set_energy
-var current_attack = 0 setget set_attack
+var current_attack = 0 setget set_attack,get_attack
 var current_health = 0 setget set_health
 var current_val = 0 setget set_val
 
@@ -37,6 +37,12 @@ func set_attack(val):
 	
 	get_node('Unit/A').text=str(current_attack)
 	modulate_colors()
+
+func get_attack():
+	var ret = current_attack
+	for mod in mod_att.keys():
+		ret-=mod_att[mod]
+	return ret
 
 func set_health(val):
 	if is_building:
@@ -162,9 +168,10 @@ func on_select(Game,hex):
 		Game.setState({'frame_card':get_parent().card_name})
 
 func play():
+	var it = null
 	for effectNode in $on_play.get_children():
-		return effectNode.activate(get_parent().Game,get_parent(),"")
-		
+		it = effectNode.activate(get_parent().Game,get_parent(),"")
+	return it
 
 func production():
 	if on_production:

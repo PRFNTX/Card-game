@@ -67,6 +67,8 @@ func complete(target, set_state=null):
 	Game.actionDone()
 	
 
+func cancel_action():
+	pass
 
 func _ready():
 	# Called every time the node is added to the scene.

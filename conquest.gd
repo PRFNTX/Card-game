@@ -1,11 +1,14 @@
 extends Node
 
-export(int, "Morning", "Evening", "Night") var set_time = 0
 
-func activate(Game, entity, unused):
-	Game.setState({'clock_time':0})
-	entity.queue_free()
-	return null
+var Game
+var entity
+func init(_entity):
+	entity=_entity
+	Game=entity.Game
+
+func activate(Game,entity,target):
+	Game.get_hex_by_id(target).setState({'hex_owner':entity.Owner})
 
 func _ready():
 	# Called every time the node is added to the scene.

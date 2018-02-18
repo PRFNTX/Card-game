@@ -19,8 +19,7 @@ func activate(_Game, _entity, unused):
 		if conditions(ent):
 			ent.life_change(health)
 			ent.Unit.current_attack+=attack
-	entity.queue_free()
-	return true
+	return null
 
 func conditions(ent):
 	if player==0:

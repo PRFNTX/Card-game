@@ -2,14 +2,15 @@
 
 [ext_resource path="res://buff target.gd" type="Script" id=1]
 
-[node name="buff target and convert" type="Node" index="0"]
+[node name="bf t conv" type="Node" index="0"]
 
 script = ExtResource( 1 )
 player = 1
 type = 1
 health = 1
 attack = 0
-convert_land = 1
+energy = 0
+convert_land = false
 then_free = true
 
 

@@ -225,6 +225,7 @@ _sections_unfolded = [ "Visibility" ]
 action_cost = 1
 faeria_cost = 0
 energy_cost = 1
+damage = -2
 
 [node name="on_play" type="Node" parent="." index="8"]
 

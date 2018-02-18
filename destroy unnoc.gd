@@ -1,11 +1,9 @@
 extends Node
 
-export(int, "Morning", "Evening", "Night") var set_time = 0
-
-func activate(Game, entity, unused):
-	Game.setState({'clock_time':0})
-	entity.queue_free()
-	return null
+func activate(Game,entity,val):
+	for hex in get_tree().get_nodes_in_group('Hex'):
+		if hex.id>0 and not hex.has_unit():
+			hex.setState({'hex_type':0,'hex_owner':-1})
 
 func _ready():
 	# Called every time the node is added to the scene.

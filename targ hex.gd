@@ -1,10 +1,10 @@
 extends Node
 
 
-export(int, "Any","Owner","Opponent") var player = 1
-export(int,"Unit","Creature","Building") var type = 1
-
-export(bool) var then_free = true
+export(int, "Any","Opponent","Owner") var player = 0
+export(int,"Hex") var type = 0
+export(bool) var empty_only = true
+export(bool) var then_free = false
 
 var entity
 var Game
@@ -19,28 +19,16 @@ func activate(_Game, _entity, _val):
 	entity = _entity
 	val=_val
 	if entity.Owner==0:
-		Game.delegate_action(entity.Hex.id,'on_play/target unit')
+		Game.delegate_action(entity.Hex.id,get_parent().get_name()+'/'+get_name())
 	return true
 
 
 func conditions(hex):
-	
-	if not hex.has_unit():
-		return false
-	if player==0:
-		if type == 0:
+	if hex.stateLocal['hex_type'] >1 and hex.stateLocal['hex_type'] <7 and ( not empty_only or not hex.has_unit() ):
+		if player == 0:
 			return true
-		elif type==1 and hex.unit_is_creature():
+		elif hex.stateLocal['hex_owner']==player%2:
 			return true
-		elif type==2 and hex.unit_is_building():
-			return true
-	else:
-		if type == 0:
-			return (player==1 and hex.has_friendly_unit(entity.Owner)) or (player==2 and hex.has_opposing_unit(entity.Owner))
-		elif type==1 and hex.unit_is_creature():
-			return (player==1 and hex.has_friendly_unit(entity.Owner)) or (player==2 and hex.has_opposing_unit(entity.Owner))
-		elif type==2 and hex.unit_is_building():
-			return (player==1 and hex.has_friendly_unit(entity.Owner)) or (player==2 and hex.has_opposing_unit(entity.Owner))
 	return false
 
 func targeting():
@@ -50,6 +38,9 @@ func targeting():
 		else:
 			hex.setState({'cover':Color(0,0,0,0) , 'target' :false})
 
+
+var iter = 0
+export(int) var max_iter=5
 func complete(target, set_state=null):
 	
 	var local = true
@@ -59,11 +50,25 @@ func complete(target, set_state=null):
 		local= false
 	Game.setState({'active_unit':target})
 	Game.actionReady=true
-	get_children()[0].activate(Game,Game.get_hex_by_id(Game.state['active_unit']).get_unit(),val)
+	get_children()[0].activate(Game,entity,val)
 	return false
 
+func repeat():
+	if iter<max_iter:
+		Game.newAction()
+		activate(Game,entity,val)
+		iter+=1
+		return true
+	else:
+		return false
+
 func cancel_action():
-	pass
+	if iter>0:
+		#remove card and end
+		pass
+	else:
+		#done remove card but end
+		pass
 
 func _ready():
 	# Called every time the node is added to the scene.

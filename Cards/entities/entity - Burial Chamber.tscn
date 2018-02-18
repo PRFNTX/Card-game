@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://BaseEntity.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Round.png" type="Texture" id=2]
 [ext_resource path="res://Assets/energy_small.png" type="Texture" id=3]
 [ext_resource path="res://Assets/faeria.png" type="Texture" id=4]
-[ext_resource path="res://abilities/suicide.tscn" type="PackedScene" id=5]
-[ext_resource path="res://abilities/destroy target.tscn" type="PackedScene" id=6]
+[ext_resource path="res://abilities/destroy target.tscn" type="PackedScene" id=5]
 
 [node name="Unit" type="Node2D"]
 
@@ -16,7 +15,7 @@ max_faeria = 0
 max_energy = 3
 base_attack = 0
 base_health = 3
-base_val = 0
+base_val = 3
 COLOR_GREATER = Color( 0, 0.824219, 0.0128784, 1 )
 COLOR_EQUAL = Color( 0, 0, 0, 1 )
 COLOR_LESS = Color( 0.828125, 0, 0, 1 )
@@ -231,8 +230,6 @@ _sections_unfolded = [ "Visibility" ]
 
 [node name="on_production" type="Node" parent="." index="15"]
 
-[node name="suicide" parent="on_production" index="0" instance=ExtResource( 5 )]
-
-[node name="des targ" parent="on_production" index="1" instance=ExtResource( 6 )]
+[node name="des targ" parent="on_production" index="0" instance=ExtResource( 5 )]
 
 

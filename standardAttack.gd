@@ -21,6 +21,7 @@ func get_action_type():
 func verify_costs():
 	return entity.get_energy()>=1
 
+
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here

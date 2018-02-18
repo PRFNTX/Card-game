@@ -16,7 +16,10 @@ func activate(_Game, _entity, _val):
 		Game = _Game
 		entity = _entity
 		val=_val
-		Game.delegate_action(entity.Hex.id,'Abilities/des targ')
+		Game.delegate_action(entity.Hex.id,get_parent().get_name()+"/"+get_name())
+
+func verify_costs():
+	return entity.get_energy()==3
 
 
 func conditions(hex):
@@ -55,11 +58,13 @@ func complete(target, set_state=null):
 		local= false
 		
 	var hex_target = get_hex_by_id(target).get_unit().on_death()
-	
+	entity.queue_free()
 	if local:
-		Game.send_action('delegate',45-target,{'delegate':entity.Hex.id})
+		Game.send_action('delegate',45-target,{'delegate_id':entity.Hex.id,'delegate_node':get_parent().get_name()+"/"+get_name()})
 	
 
+func cancel_action():
+	entity.queue_free()
 
 
 """

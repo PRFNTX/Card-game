@@ -6,7 +6,7 @@ export(int) var action_cost = 0
 export(int) var faeria_cost = 1
 export(int) var energy_cost = 0
 
-export(int) var damage = 2
+export(int) var damage = -2
 export(int,"Owner","Opponent") var target = 1
 
 var Game
