@@ -113,6 +113,7 @@ func on_play():
 func on_attack(target):
 	Unit.attack(target)
 	target.receive_attack(Unit.current_attack)
+	Unit.end()
 
 func on_move(target): #hexEntity
 	get_parent().remove_child(self)

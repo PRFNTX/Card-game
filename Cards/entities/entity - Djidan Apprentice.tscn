@@ -248,11 +248,6 @@ identifier = "orb"
 
 [node name="on_action" type="Node" parent="." index="15"]
 
-[node name="modify attack" parent="on_action" index="0" instance=ExtResource( 8 )]
-
-mod = 0
-identifier = "orb"
-
 [node name="on_production" type="Node" parent="." index="16"]
 
 [node name="on_turn_end" type="Node" parent="." index="17"]

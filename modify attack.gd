@@ -3,15 +3,22 @@ extends Node
 export(int) var mod = 2
 export(String) var identifier = "misc"
 
-var entity
 var Game
+var entity
 
-func init(_entity):
+func activate(_Game,_entity,target):
 	entity=_entity
-	Game = entity.Game
+	Game=entity.Game
+	
+	if target.Hex.id==1 or target.Hex.id ==44:
+		entity.Unit.current_attack+=2
+		up = true
 
-func activate(type,target,set_state=null):
-	entity.Unit.set_mod_att({'identifier':identifier,'mod':mod})
+var up =false
+func end():
+	if up:
+		entity.Unit.current_attack-=2
+		up = false
 
 func _ready():
 	# Called every time the node is added to the scene.

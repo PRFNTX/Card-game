@@ -229,6 +229,11 @@ func get_action_name(type):
 	else:
 		return ""
 
+func end():
+	for node in get_children():
+		for child in node.get_children():
+			if child.has_method('end'):
+				child.end()
 
 func modulate_colors():
 	if current_attack > base_attack:

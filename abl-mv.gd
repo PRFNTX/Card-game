@@ -27,7 +27,10 @@ func activate(_Game, _entity, _val):
 	val=_val
 	if verify_costs():
 		
-		Game.delegate_action(entity.Hex.id,'Abilities/abl-mv')
+		Game.delegate_action(entity.Hex.id,get_relative_path())
+
+func get_relative_path():
+	return get_parent().get_name()+'/'+get_name()
 
 func verify_costs():
 	var ret = true
