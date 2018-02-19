@@ -6,7 +6,7 @@ extends Node2D
 # var b="textvar"
 
 
-var testing_solo = false
+var testing_solo = true
 
 onready var globals = get_node('/root/master')
 
@@ -150,7 +150,7 @@ func frame_activate(ability_name, set_state=null):
 			this_unit.queue_free()
 			actionDone()
 		
-	else:
+	elif actionReady:
 		get_hex_by_id(state['active_unit']).get_unit().activate(ability_name) #make this function
 ##STATE AGAIN
 
@@ -382,6 +382,8 @@ func moveHex(target,set_state=null):
 	
 	var from_hex = get_hex_by_id(state['active_unit'])
 	var to_hex = get_hex_by_id(target)
+	print(from_hex.id)
+	print(to_hex.id)
 	to_hex.setState({'hex_type':from_hex.stateLocal['hex_type'],'hex_owner':from_hex.stateLocal['hex_owner']})
 	from_hex.setState({'hex_type':0,'hex_owner':-1})
 	if from_hex.has_unit():

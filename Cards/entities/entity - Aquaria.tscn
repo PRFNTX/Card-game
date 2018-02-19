@@ -218,9 +218,6 @@ _sections_unfolded = [ "Visibility" ]
 
 [node name="targ hex" parent="on_play" index="0" instance=ExtResource( 5 )]
 
-player = 0
-empty_only = true
-
 [node name="on_attack" type="Node" parent="." index="9"]
 
 [node name="on_move" type="Node" parent="." index="10"]

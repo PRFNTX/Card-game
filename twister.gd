@@ -28,7 +28,7 @@ func get_relative_path():
 
 func conditions(hex):
 	
-	if not hex.has_unit() and hex.unit_is_creature() and hex.has_opposing_unit():
+	if hex.has_unit() and hex.unit_is_creature() and hex.has_opposing_unit():
 		return true
 	return false
 

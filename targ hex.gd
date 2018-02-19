@@ -55,7 +55,7 @@ func complete(target, set_state=null):
 
 func repeat():
 	if iter<max_iter:
-		Game.newAction()
+		Game.newAction({'action':'','active_unit':null})
 		activate(Game,entity,val)
 		iter+=1
 		return true
