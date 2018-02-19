@@ -71,11 +71,17 @@ func complete(target, set_state=null):
 		hex.setState({'hex_owner':entity.Owner})
 	
 	if local:
-		Game.send_action('delegate',45-target,{'delegate_id':45-entity.Hex.id, 'delegate_node':get_parent().get_name()+'/'+get_name()})
+		Game.send_action('delegate',remote_convert(target),{'delegate_id':remote_convert(entity.Hex.id), 'delegate_node':get_parent().get_name()+'/'+get_name()})
 	
 	entity.queue_free()
 	Game.actionDone()
 	return true
+
+func remote_convert(hex_id):
+	if hex_id==0:
+		return 0
+	else:
+		return 45-hex_id
 
 func cancel_action():
 	pass

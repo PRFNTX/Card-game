@@ -46,10 +46,9 @@ func complete(target, set_state=null):
 		local= false
 		
 	var hex_target = Game.get_hex_by_id(target)
-	entity.on_move(hex_target.get_node('hexEntity'))
 	if local:
 		Game.send_action('hardMove',45-target,{'active_unit':45-entity.Hex.id})
-	
+	entity.on_move(hex_target.get_node('hexEntity'))
 	if get_parent().then_free:
 		get_parent().queue_free()
 	return true

@@ -46,15 +46,21 @@ func complete(target, set_state=null):
 	if not set_state==null:
 		state=set_state
 		local= false
+		
 	Game.get_hex_by_id(target).setState({'hex_type':2+change_to})
 	if local:
-		Game.send_action('delegate',45-target,{'delegate_id':45-state['delegate_id'],'delegate_node':get_parent().get_parent().get_name()+'/'+get_parent().get_name()+'/'+get_name()})
+		Game.send_action('delegate',remote_convert(target),{'delegate_id':remote_convert(state['delegate_id']),'delegate_node':get_parent().get_parent().get_name()+'/'+get_parent().get_name()+'/'+get_name()})
 		if get_parent().repeat():
 			return false
 		else:
 			entity.queue_free()
 			return true
-	
+
+func remote_convert(hex_id):
+	if hex_id==0:
+		return 0
+	else:
+		return 45-hex_id
 
 func cancel_action():
 	Game.newAction()

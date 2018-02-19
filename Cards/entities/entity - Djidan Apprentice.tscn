@@ -10,7 +10,7 @@
 [ext_resource path="res://abilities/modify attack.tscn" type="PackedScene" id=8]
 [ext_resource path="res://abilities/damage/protection.tscn" type="PackedScene" id=9]
 
-[node name="Unit" type="Node2D" index="0"]
+[node name="Unit" type="Node2D"]
 
 position = Vector2( 30, 30 )
 script = ExtResource( 1 )
