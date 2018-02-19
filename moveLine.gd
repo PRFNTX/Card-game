@@ -86,13 +86,14 @@ func complete(target, set_state=null):
 	
 	
 	var hex_target = Game.get_hex_by_id(target)
-	entity.on_move(hex_target.get_node('hexEntity'))
 	
-	entity.use_energy(1)
 	if local:
 		#Game.send_action('dee',45-target,{'delegate_node':str(get_path()).replace("/","~")})
 		#Game.send_action('delegate',45-target,{'delegate_node':'Movement/moveLine','delegate_id':45-entity.Hex.id})
 		Game.send_action('miscMove',45-target,{'active_unit':45-entity.Hex.id})
+	
+	entity.on_move(hex_target.get_node('hexEntity'))
+	entity.use_energy(1)
 	entity.Hex=hex_target
 	
 	

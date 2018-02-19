@@ -6,7 +6,7 @@ extends Node2D
 # var b="textvar"
 
 
-var testing_solo = true
+var testing_solo = false
 
 onready var globals = get_node('/root/master')
 
