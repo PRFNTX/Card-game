@@ -10,7 +10,7 @@
 [ext_resource path="res://abilities/modify attack.tscn" type="PackedScene" id=8]
 [ext_resource path="res://abilities/damage/protection.tscn" type="PackedScene" id=9]
 
-[node name="Unit" type="Node2D"]
+[node name="Unit" type="Node2D" index="0"]
 
 position = Vector2( 30, 30 )
 script = ExtResource( 1 )
@@ -48,7 +48,7 @@ on_collect = false
 on_damage = true
 on_death = false
 on_clock = false
-on_action = false
+on_action = true
 on_turn_end = false
 frame_alt = null
 
@@ -248,13 +248,13 @@ identifier = "orb"
 
 [node name="on_action" type="Node" parent="." index="15"]
 
-[node name="on_production" type="Node" parent="." index="16"]
-
-[node name="on_turn_end" type="Node" parent="." index="17"]
-
-[node name="modify attack" parent="on_turn_end" index="0" instance=ExtResource( 8 )]
+[node name="modify attack" parent="on_action" index="0" instance=ExtResource( 8 )]
 
 mod = 0
 identifier = "orb"
+
+[node name="on_production" type="Node" parent="." index="16"]
+
+[node name="on_turn_end" type="Node" parent="." index="17"]
 
 
