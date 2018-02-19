@@ -119,7 +119,7 @@ func on_move(target): #hexEntity
 	target.add_child(self)
 	Hex = target.get_parent()
 	if Unit.on_move:
-		Unit.move(target.get_parent())
+		Unit.move(Hex.id)
 	
 func on_collect():
 	if Unit.on_collect:

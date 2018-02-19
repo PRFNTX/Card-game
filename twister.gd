@@ -19,8 +19,11 @@ func activate(_Game, _entity, _val):
 	entity = _entity
 	val=_val
 	if entity.Owner==0:
-		Game.delegate_action(entity.Hex.id,'on_play/target unit')
+		Game.delegate_action(entity.Hex.id,get_relative_path())
 	return true
+
+func get_relative_path():
+	return get_parent().get_name()+'/'+get_name()
 
 
 func conditions(hex):
