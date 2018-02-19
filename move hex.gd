@@ -53,7 +53,7 @@ func complete(target, set_state=null):
 	if from_hex.has_unit():
 		from_hex.get_unit().on_move(to_hex.get_node('hexEntity'))
 	if local:
-		Game.send_action('moveHex',45-target,{'actve_unit':45-state['active_unit']},true)
+		Game.send_action('moveHex',45-target,{'active_unit':45-state['active_unit']})
 		if get_parent().repeat():
 			return false
 		else:
