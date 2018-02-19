@@ -79,8 +79,8 @@ func receive_damage(val_damage):
 
 ## as above but damage is not reduced
 func life_change(val):
-	if val<0:
-		on_damage(val)
+	#if val<0:
+		#on_damage(val)
 	
 	if Unit.is_unit:
 		Unit.set_health(Unit.current_health+val)
