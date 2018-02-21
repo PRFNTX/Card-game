@@ -6,7 +6,7 @@ extends Node2D
 # var b="textvar"
 
 
-var testing_solo = false
+var testing_solo = true
 
 onready var globals = get_node('/root/master')
 
@@ -832,7 +832,7 @@ func game_action(val):
 		print(val.state)
 		print(val['state'])
 		
-	if val.state.keys().has('active_unit'):
+	if val.state.keys().has('active_unit') and get_hex_by_id(val.state['active_unit']).has_unit():
 		setState({'preview_card':get_hex_by_id(val.state['active_unit']).get_unit().card_name})
 	
 	

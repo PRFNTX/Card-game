@@ -59,6 +59,8 @@ func set_val(val):
 
 func set_energy(val):
 	current_energy=val
+	if current_energy<0:
+		current_energy=0
 	var children = $Energy.get_children()
 	for symb in children.size():
 		if symb<current_energy:

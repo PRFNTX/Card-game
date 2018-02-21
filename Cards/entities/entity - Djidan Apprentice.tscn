@@ -7,10 +7,10 @@
 [ext_resource path="res://abilities/Movement/Move.tscn" type="PackedScene" id=5]
 [ext_resource path="res://abilities/Attacks/standardAttack.tscn" type="PackedScene" id=6]
 [ext_resource path="res://abilities/abilities/ability - move.tscn" type="PackedScene" id=7]
-[ext_resource path="res://abilities/modify attack.tscn" type="PackedScene" id=8]
+[ext_resource path="res://abilities/mod att orb.tscn" type="PackedScene" id=8]
 [ext_resource path="res://abilities/damage/protection.tscn" type="PackedScene" id=9]
 
-[node name="Unit" type="Node2D"]
+[node name="Unit" type="Node2D" index="0"]
 
 position = Vector2( 30, 30 )
 script = ExtResource( 1 )
@@ -231,8 +231,6 @@ target_type = 6
 [node name="on_attack" type="Node" parent="." index="9"]
 
 [node name="modify attack" parent="on_attack" index="0" instance=ExtResource( 8 )]
-
-identifier = "orb"
 
 [node name="on_move" type="Node" parent="." index="10"]
 

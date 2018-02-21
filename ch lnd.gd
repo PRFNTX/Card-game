@@ -6,6 +6,7 @@ export(int,"Hex") var type = 0 #unused
 export(int, "land",'lake','tree','hill','sand') var change_to = 0
 
 
+
 export(bool) var then_free = false
 
 var entity

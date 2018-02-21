@@ -1,11 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://BaseEntity.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Round.png" type="Texture" id=2]
 [ext_resource path="res://Assets/energy_small.png" type="Texture" id=3]
 [ext_resource path="res://Assets/faeria.png" type="Texture" id=4]
+[ext_resource path="res://abilities/Movement/moveLine.tscn" type="PackedScene" id=5]
+[ext_resource path="res://abilities/Attacks/standardAttack.tscn" type="PackedScene" id=6]
+[ext_resource path="res://abilities/move/cr land adj.tscn" type="PackedScene" id=7]
 
-[node name="Unit" type="Node2D" index="0"]
+[node name="Unit" type="Node2D"]
 
 position = Vector2( 30, 30 )
 script = ExtResource( 1 )
@@ -23,24 +26,28 @@ ENERGY_INACTIVE = Color( 0.652344, 0.642151, 0.642151, 1 )
 is_unit = true
 is_building = false
 is_event = false
-move = false
+move = true
 charge = true
 jump = false
-aquatic = 0
+aquatic = false
 flying = false
 conquest = false
-collect = false
-attack = false
+convoke = false
+radiate = false
+auto_collect = false
+collect = true
+attack = true
 abilities = false
 on_play = false
 on_production = false
 on_attack = false
 on_move = true
-on_collect = 0
+on_collect = false
 on_damage = false
 on_death = false
 on_clock = false
 on_action = false
+on_turn_end = false
 frame_alt = null
 
 [node name="Frame" type="Sprite" parent="." index="0"]
@@ -205,7 +212,11 @@ _sections_unfolded = [ "Visibility" ]
 
 [node name="Movement" type="Node" parent="." index="5"]
 
+[node name="moveLine" parent="Movement" index="0" instance=ExtResource( 5 )]
+
 [node name="Attack" type="Node" parent="." index="6"]
+
+[node name="standardAttack" parent="Attack" index="0" instance=ExtResource( 6 )]
 
 [node name="Abilities" type="Node" parent="." index="7"]
 
@@ -214,6 +225,8 @@ _sections_unfolded = [ "Visibility" ]
 [node name="on_attack" type="Node" parent="." index="9"]
 
 [node name="on_move" type="Node" parent="." index="10"]
+
+[node name="cr land adj" parent="on_move" index="0" instance=ExtResource( 7 )]
 
 [node name="on_collect" type="Node" parent="." index="11"]
 

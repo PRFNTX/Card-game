@@ -7,7 +7,8 @@
 [ext_resource path="res://abilities/Movement/Move.tscn" type="PackedScene" id=5]
 [ext_resource path="res://abilities/Attacks/standardAttack.tscn" type="PackedScene" id=6]
 [ext_resource path="res://abilities/death/adjacent - health.tscn" type="PackedScene" id=7]
-[ext_resource path="res://abilities/modify attack.tscn" type="PackedScene" id=8]
+[ext_resource path="res://abilities/mod att orb.tscn" type="PackedScene" id=8]
+
 
 [node name="Unit" type="Node2D"]
 
