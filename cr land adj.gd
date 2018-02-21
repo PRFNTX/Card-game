@@ -10,7 +10,7 @@ func init(_entity):
 
 func activate(Game,entity,loc):
 	var try = false
-	for hex in Game.entity.Hex.adjacent:
+	for hex in entity.Hex.adjacent:
 		if hex.stateLocal['hex_type']==0:
 			try=true
 	if try and entity.Owner==0:

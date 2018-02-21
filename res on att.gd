@@ -3,7 +3,7 @@ extends Node
 export(int,'All','Orb','Unit') var on_target = 1
 export(int,'Gold','Faeria','Cards','Actions') var res = 2
 export(bool) var val_by_damage = false
-export(int) var val
+export(int) var val = 3
 
 var Game
 var entity

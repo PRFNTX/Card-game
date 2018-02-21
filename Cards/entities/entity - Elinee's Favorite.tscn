@@ -226,6 +226,8 @@ _sections_unfolded = [ "Visibility" ]
 
 [node name="res on att" parent="on_attack" index="0" instance=ExtResource( 7 )]
 
+val = 3
+
 [node name="on_move" type="Node" parent="." index="10"]
 
 [node name="on_collect" type="Node" parent="." index="11"]

@@ -2,7 +2,7 @@ extends Node
 
 func activate(Game,entity,none):
 	for hex in get_tree().get_nodes_in_group('Hex'):
-		Game.players[entity.Owner].modFaeria(hex.get_unit.Unit.current_faeria)
+		Game.players[entity.Owner].modFaeria(hex.get_unit().Unit.current_faeria)
 		hex.get_unit.Unit.current_faeria=0
 		
 
