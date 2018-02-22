@@ -3,6 +3,10 @@ extends Node
 
 onready var HTTP = get_node('/root/HTTP')
 
+onready var frame = load('res://Assets/Round.png')
+onready var card_img_ld = load('res://Assets/TownBasic.png')
+onready var farmermer = load('res://Cards/Farmer.tscn')
+
 var scenes = {'game':"res://Game.tscn",'title':'res://Title.tscn', 'deck':'res://EditDeck.tscn','login':'res://Login.tscn','browse_games':'res://GameBrowser.tscn'}
 var card_resources = {}
 var card_instances = {}
@@ -36,7 +40,10 @@ func start_solo_game():
 	
 
 func _ready():
-	load_cards()
+	var cards_script = get_node('/root/card_loader')
+	card_resources = cards_script.cards
+	for card in card_resources.keys():
+		card_instances[card]= card_resources[card].instance()
 	websocket = preload('res://Godot-Websocket/websocket.gd').new(self)
 	#get_tree().change_scene(scenes['login'])
 
@@ -54,6 +61,8 @@ func socket_start():
 		socket_active=true
 
 
+
+###NEVER RUNS
 const dirPath='res://cards/'
 func load_cards():
 	var dir = Directory.new()
@@ -67,8 +76,7 @@ func load_cards():
 		else:
 			card_resources[file_name.split('.')[0]]=load(dirPath+file_name)
 		file_name = dir.get_next()
-	for card in card_resources.keys():
-		card_instances[card]= card_resources[card].instance()
+####
 
 
 #### GET GAME LIST

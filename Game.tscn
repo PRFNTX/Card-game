@@ -17,7 +17,7 @@
 [ext_resource path="res://Clock.tscn" type="PackedScene" id=15]
 [ext_resource path="res://DisplayFrame.gd" type="Script" id=16]
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
@@ -526,6 +526,8 @@ script = ExtResource( 16 )
 activatable = false
 
 [node name="hex0" parent="." index="13" instance=ExtResource( 4 )]
+
+visible = false
 
 [connection signal="timeout" from="actionTimer" to="." method="_on_Timer_timeout"]
 

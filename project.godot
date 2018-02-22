@@ -16,6 +16,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
+card_loader="*res://card_loader.gd"
 master="*res://singleton.gd"
 HTTP="*res://HTTPScript.gd"
 
