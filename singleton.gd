@@ -55,7 +55,7 @@ var socket_active = false
 
 func socket_start():
 	if !socket_active:
-		websocket.start('54.244.61.234',443)
+		websocket.start('52.42.185.78',443)
 		websocket.set_reciever(self,'_on_message_recieved')
 		websocket.send({'greeting':user.username})
 		socket_active=true
