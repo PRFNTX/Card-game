@@ -17,7 +17,7 @@ func authenticated_server_request(endpoint,method,body):
 	var http = HTTPClient.new()
 	http.set_blocking_mode(true)
 	
-	err = http.connect_to_host('52.42.185.78',80)
+	err = http.connect_to_host('34.217.176.206',80)
 	
 	while( http.get_status()==HTTPClient.STATUS_CONNECTING or http.get_status()==HTTPClient.STATUS_RESOLVING):
 		http.poll()
