@@ -36,7 +36,7 @@ var currentScene
 
 ##TESTING
 func start_solo_game():
-	set_scene('game')
+	var scene = set_scene('game', true)
 	
 
 func _ready():
@@ -55,7 +55,7 @@ var socket_active = false
 
 func socket_start():
 	if !socket_active:
-		websocket.start('34.217.176.206',443)
+		websocket.start('34.217.125.226',443)
 		websocket.set_reciever(self,'_on_message_recieved')
 		websocket.send({'greeting':user.username})
 		socket_active=true
@@ -85,8 +85,29 @@ func get_games():
 	send_msg({"game_list":""})
 
 ### SCENES
-func set_scene(scene):
+"""
+func change_scene(scene_path, solo=false):
+	call_deferred("change_scene_deferred", scene_path, solo) # waits until an idle period when nodes can be removed safely
+
+
+onready var current_scene = get_tree().get_root().get_node("Login")
+func change_scene_deferred(scene_path, solo=false):
+	# remove current scene
+	current_scene.free()
+
+	# instance new scene
+	var s = load(scene_path)
+	current_scene = s.instance()
+
+	# add new scene to main node
+	get_tree().get_root().add_child(current_scene)
+	if solo:
+		current_scene.testing_solo = true
+	return current_scene
+"""
+func set_scene(scene, solo=false):
 	get_tree().change_scene(scenes[scene])
+
 
 
 
@@ -116,7 +137,7 @@ func _on_message_recieved(msg):
 	print(event)
 	var action = event.keys()[0]
 	call(action,event[action])
-
+	print(get_tree().get_current_scene())
 	if get_tree().get_current_scene().has_method(action):
 		get_tree().get_current_scene().call(action,event[action])
 
@@ -129,7 +150,6 @@ func invalid(val):
 	print("UNRECOGNIZED MESSAGE ID")
 
 func game_list(val):
-	
 	open_games = val
 
 func game_action(val):
