@@ -5,7 +5,7 @@
 [ext_resource path="res://Assets/energy_small.png" type="Texture" id=3]
 [ext_resource path="res://Assets/faeria.png" type="Texture" id=4]
 
-[node name="Unit" type="Node2D" index="0"]
+[node name="Unit" type="Node2D"]
 
 position = Vector2( 30, 30 )
 script = ExtResource( 1 )
@@ -31,7 +31,7 @@ flying = false
 conquest = false
 convoke = false
 radiate = false
-auto_collect = 0
+auto_collect = false
 collect = true
 attack = true
 abilities = false
