@@ -5,7 +5,7 @@
 [ext_resource path="res://Assets/TownBasic.png" type="Texture" id=3]
 [ext_resource path="res://Cards/entities/entity - Alberian Fortification.tscn" type="PackedScene" id=4]
 
-[node name="Alberian Fortification" type="Control" index="0"]
+[node name="Alberian Fortification" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -34,7 +34,6 @@ cost_gold = 5
 cost_faeria = 0
 lands_num = 3
 lands_type = 3
-is_event = false
 base = ExtResource( 3 )
 board_entity = ExtResource( 4 )
 

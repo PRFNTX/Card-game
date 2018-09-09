@@ -117,10 +117,10 @@ func update(t_deck=null):
 	deck_nodes[deck].update()
 	$Collection.update()
 
-
+"""
 func populate_collection():
 	resources.forEach
-
+"""
 var shown_card = null
 func show_card(card):
 	remove_child(shown_card)
@@ -134,8 +134,13 @@ func _ready():
 	for card in resources.keys():
 		var newCard = resources[card].instance()
 		cards[card] = newCard
-		$Collection.add_item(cards[card])
-		$Collection.top_level=self
+		var cardIsDone = false
+		for child in globals.card_instances[card].get_node("Card").board_entity.get_children():
+			if child.has_child():
+				cardIsDone = true
+		if cardIsDone:
+			$Collection.add_item(cards[card])
+			$Collection.top_level=self
 	
 	if !globals.deck_list==null and globals.deck_list.keys().size()>0:
 		initialize_decks()
