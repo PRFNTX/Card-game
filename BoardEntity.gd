@@ -49,6 +49,8 @@ func possess(entity, hex, player, game,_card_name):
 	
 	if Unit.on_action:
 		Game.connect('on_action', self, 'on_action')
+	if Unit.on_collect:
+		Game.connect('on_collect', self, 'on_collect')
 	Game.connect('TurnStart', self, 'sig_turn_start')
 	Game.connect('UpdateState', self, 'sig_update_state')
 	print(Owner)
@@ -122,9 +124,9 @@ func on_move(target): #hexEntity
 	if Unit.on_move:
 		Unit.move(Hex.id)
 	
-func on_collect():
+func on_collect(by, val):
 	if Unit.on_collect:
-		Unit.collect()
+		Unit.collect(Game, self, by, val)
 
 func on_damage(val_damage):
 	if Unit.on_damage:

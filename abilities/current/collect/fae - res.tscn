@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://abilities/current/scripts/fae - res.gd" type="Script" id=1]
+
+[node name="fae - res" type="Node" index="0"]
+
+script = ExtResource( 1 )
+gain_type = 1
+value_by_faeria = true
+value = 0
+instead = false
+
+

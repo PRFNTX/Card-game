@@ -1,13 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://BaseEntity.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Round.png" type="Texture" id=2]
 [ext_resource path="res://Assets/energy_small.png" type="Texture" id=3]
 [ext_resource path="res://Assets/faeria.png" type="Texture" id=4]
 [ext_resource path="res://abilities/current/Play/targ hex.tscn" type="PackedScene" id=5]
+[ext_resource path="res://abilities/current/Play/movehex.tscn" type="PackedScene" id=6]
 
-
-[node name="Unit" type="Node2D"]
+[node name="Unit" type="Node2D" index="0"]
 
 position = Vector2( 30, 30 )
 script = ExtResource( 1 )
@@ -218,6 +218,8 @@ _sections_unfolded = [ "Visibility" ]
 [node name="on_play" type="Node" parent="." index="8"]
 
 [node name="targ hex" parent="on_play" index="0" instance=ExtResource( 5 )]
+
+[node name="movehex" parent="on_play/targ hex" index="0" instance=ExtResource( 6 )]
 
 [node name="on_attack" type="Node" parent="." index="9"]
 

@@ -4,12 +4,6 @@ extends Node
 # var a = 2
 # var b = "textvar"
 
-func activate(Game, entity,unsued):
-	var val = entity.Unit.current_faeria
-	entity.Unit.current_faeria = 0
-	Game.players[Game.state['current_turn']].modFaeria(val)
-	Game.emit_signal('on_collect', game.state.active_unit, val)
-
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here

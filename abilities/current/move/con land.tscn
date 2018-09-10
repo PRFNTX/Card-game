@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://abilities/current/scripts/mv con ALL.gd" type="Script" id=1]
+
+[node name="con land" type="Node" index="0"]
+
+script = ExtResource( 1 )
+emtpy = false
+orb = false
+well = false
+land = false
+lake = false
+tree = false
+hill = false
+sand = false
+
+

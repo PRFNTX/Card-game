@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://abilities/current/move/con en health.gd" type="Script" id=1]
+
+[node name="con en health" type="Node" index="0"]
+
+script = ExtResource( 1 )
+health_max = 5
+max_inclusive = true
+health_min = 0
+min_inclusive = true
+
+

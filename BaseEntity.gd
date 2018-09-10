@@ -198,9 +198,9 @@ func move(target):
 	for effectNode in $on_move.get_children():
 		effectNode.activate(get_parent().Game,get_parent(), target )
 
-func collect():
+func collect(Game, entity, by, val):
 	for effectNode in $on_collect.get_children():
-		effectNode.activate(get_parent().Game,get_parent(),"")
+		effectNode.activate(Game,entity,by,val)
 
 func damage(in_damage):
 	var dmg = in_damage

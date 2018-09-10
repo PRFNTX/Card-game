@@ -1,14 +1,12 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://abilities/current/scripts/targ hex.gd" type="Script" id=1]
+[ext_resource path="res://abilities/current/scripts/move hex.gd" type="Script" id=1]
 
-[node name="targ hex" type="Node" index="0"]
+[node name="movehex" type="Node" index="0"]
 
 script = ExtResource( 1 )
-player = 0
+player = 1
 type = 0
-empty_only = true
 then_free = false
-max_iter = 2
 
 

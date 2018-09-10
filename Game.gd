@@ -24,6 +24,8 @@ signal TurnEnd
 
 signal on_action
 
+signal on_collect
+
 var players = [null, null]
 
 var global_player_num = 0
