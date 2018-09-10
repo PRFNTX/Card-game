@@ -22,6 +22,7 @@ func load_cards():
 		if dir.current_is_dir():
 			pass
 		else:
+			print(file_name)
 			new_script.store_line('	cards["'+file_name.split('.')[0]+'"] = preload("'+dirPath+file_name.c_escape()+'")')
 			new_script.store_line('	print("'+file_name.split('.')[0]+', loaded")')
 		file_name = dir.get_next()

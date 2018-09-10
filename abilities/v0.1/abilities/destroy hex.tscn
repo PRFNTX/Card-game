@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://abilities/current/scripts/destroy hex.gd" type="Script" id=1]
+
+
+[node name="destroy hex" type="Node" index="0"]
+
+script = ExtResource( 1 )
+gold_cost = 0
+action_cost = 0
+faeria_cost = 0
+energy_cost = 1
+target_type = 8
+target_player = 0
+
+

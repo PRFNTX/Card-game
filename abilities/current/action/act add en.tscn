@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://abilities/current/action/act add en.gd" type="Script" id=1]
+
+[node name="act add en" type="Node" index="0"]
+
+script = ExtResource( 1 )
+add_ability = null
+add_to = "on_damage"
+
+

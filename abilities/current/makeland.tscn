@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://abilities/current/makeland.gd" type="Script" id=1]
+
+[node name="makeland" type="Node" index="0"]
+
+script = ExtResource( 1 )
+require_valid_placement = true
+require_plain_for_special = false
+owner = 0
+type = 2
+
+

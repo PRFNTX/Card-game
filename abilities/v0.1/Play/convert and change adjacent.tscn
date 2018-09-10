@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://abilities/current/scripts/convert and change adjacent.gd" type="Script" id=1]
+
+
+[node name="convert and change adjacent" type="Node" index="0"]
+
+script = ExtResource( 1 )
+newType = 2
+change_owner = true
+
+

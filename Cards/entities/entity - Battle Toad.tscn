@@ -4,9 +4,9 @@
 [ext_resource path="res://Assets/Round.png" type="Texture" id=2]
 [ext_resource path="res://Assets/energy_small.png" type="Texture" id=3]
 [ext_resource path="res://Assets/faeria.png" type="Texture" id=4]
-[ext_resource path="res://abilities/Movement/moveLine.tscn" type="PackedScene" id=5]
-[ext_resource path="res://abilities/Attacks/standardAttack.tscn" type="PackedScene" id=6]
-[ext_resource path="res://abilities/haste.tscn" type="PackedScene" id=7]
+[ext_resource path="res://abilities/current/Movement/moveLine.tscn" type="PackedScene" id=5]
+[ext_resource path="res://abilities/current/Attacks/standardAttack.tscn" type="PackedScene" id=6]
+[ext_resource path="res://abilities/current/haste.tscn" type="PackedScene" id=7]
 
 [node name="Unit" type="Node2D" index="0"]
 
@@ -15,8 +15,8 @@ script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 max_faeria = 0
 max_energy = 1
-base_attack = 3
-base_health = 2
+base_attack = 2
+base_health = 3
 base_val = 0
 COLOR_GREATER = Color( 0, 0.824219, 0.0128784, 1 )
 COLOR_EQUAL = Color( 0, 0, 0, 1 )

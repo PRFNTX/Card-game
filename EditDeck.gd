@@ -47,6 +47,7 @@ func cards_array_to_dict(arr):
 	return dict_ret
 
 func initialize_decks(reset=true):
+	print("ran")
 	if reset:
 		deck_lists={}
 		deck_nodes={}
@@ -63,7 +64,10 @@ func initialize_decks(reset=true):
 			new_deck_tab.set_name(deck)
 			new_deck_tab.top_level = self
 			for card in deck_lists[deck]:
-				new_deck_tab.add_item(globals.card_instances[card])
+				if globals.card_instances.has(card):
+					new_deck_tab.add_item(globals.card_instances[card])
+				else:
+					deck_lists[deck].erase(card)
 			update()
 	if !$Tabs.has_node("+"):
 		add_blank_tab()
@@ -134,13 +138,8 @@ func _ready():
 	for card in resources.keys():
 		var newCard = resources[card].instance()
 		cards[card] = newCard
-		var cardIsDone = false
-		for child in globals.card_instances[card].get_node("Card").board_entity.get_children():
-			if child.has_child():
-				cardIsDone = true
-		if cardIsDone:
-			$Collection.add_item(cards[card])
-			$Collection.top_level=self
+		$Collection.add_item(cards[card])
+		$Collection.top_level=self
 	
 	if !globals.deck_list==null and globals.deck_list.keys().size()>0:
 		initialize_decks()

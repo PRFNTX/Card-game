@@ -4,9 +4,9 @@
 [ext_resource path="res://Assets/Round.png" type="Texture" id=2]
 [ext_resource path="res://Assets/energy_small.png" type="Texture" id=3]
 [ext_resource path="res://Assets/faeria.png" type="Texture" id=4]
-[ext_resource path="res://abilities/Movement/Move.tscn" type="PackedScene" id=5]
-[ext_resource path="res://abilities/Attacks/standardAttack.tscn" type="PackedScene" id=6]
-[ext_resource path="res://abilities/abilities/ability - move.tscn" type="PackedScene" id=7]
+[ext_resource path="res://abilities/current/Movement/Move.tscn" type="PackedScene" id=5]
+[ext_resource path="res://abilities/current/Attacks/standardAttack.tscn" type="PackedScene" id=6]
+[ext_resource path="res://abilities/current/abilities/ability - move.tscn" type="PackedScene" id=7]
 
 [node name="Unit" type="Node2D" index="0"]
 
@@ -16,7 +16,7 @@ _sections_unfolded = [ "Transform" ]
 max_faeria = 0
 max_energy = 1
 base_attack = 2
-base_health = 3
+base_health = 2
 base_val = 0
 COLOR_GREATER = Color( 0, 0.824219, 0.0128784, 1 )
 COLOR_EQUAL = Color( 0, 0, 0, 1 )
@@ -224,6 +224,7 @@ method = 1
 
 [node name="abl-mv" parent="Abilities" index="0" instance=ExtResource( 7 )]
 
+faeria_cost = 2
 target_type = 3
 
 [node name="on_play" type="Node" parent="." index="8"]

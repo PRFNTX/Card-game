@@ -6,13 +6,14 @@ extends Node2D
 # var b="textvar"
 
 
-var testing_solo = false
+var testing_solo = true
+var god_mode = true
 
 onready var globals = get_node('/root/master')
 
-var BoardEntity = load('res://BoardEntity.tscn')
-var OrbEntity = load('res://Cards/entities/orb_entity.tscn')
-var WellEntity = load('res://Cards/entities/well_entity.tscn')
+export(PackedScene) var BoardEntity = load('res://BoardEntity.tscn')
+export(PackedScene) var OrbEntity = load('res://Cards/entities/orb_entity.tscn')
+export(PackedScene) var WellEntity = load('res://Cards/entities/well_entity.tscn')
 
 #signal SpawnFaeria
 signal UpdateState
@@ -44,6 +45,10 @@ func _init(initial_state={}):
 
 #STATE 
 func setState(obj):
+	if god_mode:
+		players[state['current_turn']].setActions(3)
+		players[state['current_turn']].setFaeria(20)
+		players[state['current_turn']].setGold(20)
 	for key in obj.keys():
 		call(key, obj[key])
 		#call 'setters' instead?
@@ -762,9 +767,7 @@ func actionCoin(target, set_state=null):
 	if not set_state==null:
 		var state=set_state
 		local = false
-	print('coin')
 	if (players[state['current_turn']].useAction(1)):
-		print('coin 2')
 		players[state['current_turn']].modCoin(1)
 		complete=true
 	if local:

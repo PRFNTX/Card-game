@@ -121,6 +121,14 @@ func setActions(val):
 	actions=val
 	lbl_actions.text=str(actions)
 
+func setGold(val):
+	gold=val
+	lbl_gold.text=str(gold)
+
+func setFaeria(val):
+	faeria=val
+	lbl_faeria.text=str(faeria)
+
 func modActions(mod):
 	actions+=mod
 	lbl_actions.text=str(actions)

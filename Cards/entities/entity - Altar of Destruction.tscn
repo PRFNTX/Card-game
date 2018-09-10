@@ -4,9 +4,9 @@
 [ext_resource path="res://Assets/Round.png" type="Texture" id=2]
 [ext_resource path="res://Assets/energy_small.png" type="Texture" id=3]
 [ext_resource path="res://Assets/faeria.png" type="Texture" id=4]
-[ext_resource path="res://abilities/death/all - life.tscn" type="PackedScene" id=5]
+[ext_resource path="res://abilities/current/Play/dmg all.tscn" type="PackedScene" id=5]
 
-[node name="Unit" type="Node2D"]
+[node name="Unit" type="Node2D" index="0"]
 
 position = Vector2( 30, 30 )
 script = ExtResource( 1 )
@@ -230,10 +230,14 @@ _sections_unfolded = [ "Visibility" ]
 
 [node name="on_production" type="Node" parent="." index="15"]
 
-[node name="all - life" parent="on_production" index="0" instance=ExtResource( 5 )]
+[node name="dmg all" parent="on_production" index="0" instance=ExtResource( 5 )]
 
-[node name="on_end_turn" type="Node" parent="." index="16"]
+type = 0
+effect = -1
+players = 1
 
-[node name="on_action" type="Node" parent="." index="17"]
+[node name="on_action" type="Node" parent="." index="16"]
+
+[node name="on_end_turn" type="Node" parent="." index="17"]
 
 

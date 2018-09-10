@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://abilities/current/scripts/ded rem abs.gd" type="Script" id=1]
+
+
+[node name="ded rem abs" type="Node" index="0"]
+
+script = ExtResource( 1 )
+rem_name = "on_damage/set redir"
+
+

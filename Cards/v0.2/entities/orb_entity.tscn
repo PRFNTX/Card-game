@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Cards/entities/Empty_entity.tscn" type="PackedScene" id=1]
+[ext_resource path="res://abilities/LoseGame.tscn" type="PackedScene" id=2]
+
+[node name="Unit" instance=ExtResource( 1 )]
+
+max_energy = 0
+base_attack = 0
+base_health = 0
+base_val = 20
+COLOR_LESS = Color( 0, 0, 0, 1 )
+is_building = true
+is_event = 0
+conquest = 0
+convoke = 0
+radiate = 0
+auto_collect = 0
+on_production = 0
+on_death = true
+on_action = 0
+on_turn_end = 0
+
+[node name="LoseGame" parent="on_death" index="0" instance=ExtResource( 2 )]
+
+

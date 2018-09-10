@@ -27,10 +27,17 @@ func get_unit():
 	if $hexEntity.get_children().size()>1:
 		return $hexEntity.get_children()[1]
 
-func activePlayerCanAffect(by, strict=false):
+func activePlayerCanAffect(by, strict=false, allow_convoke=false):
 	if stateLocal['hex_owner']==int(by):
-		print('here')
-	return( (stateLocal['hex_owner']==-1 and !strict) or stateLocal['hex_owner']==0)
+		#print('here')
+		pass
+	if allow_convoke and has_friendly_unit(by):
+		if get_unit().Unit.convoke:
+			return true
+	return (
+		(stateLocal['hex_owner']==-1 and !strict)
+		or stateLocal['hex_owner']==0
+	)
 
 func hex_is_empty():
 	return !($hexEntity.has_node('BoardEntity'))
@@ -335,6 +342,9 @@ func hex_owner(val):
 func hex_type(val):
 	hexType.setState(val)
 	stateLocal['hex_type']=val
+	if has_unit():
+		destroy_aquatic_on_land()
+		destroy_land_on_aquatic()
 
 func active_unit(unit):
 	if unit==null:
@@ -375,6 +385,21 @@ func update_active_unit(val, by):
 
 func update_hovered(val,by):
 	hovered(val==self.id)
+
+
+# CLEANERS
+
+func destroy_aquatic_on_land():
+	if stateLocal.hex_type!=STATE_EMPTY and stateLocal.hex_type!=STATE_LAKE:
+		var unit = hex.get_unit()
+		if unit.aquatic:
+			unit.kill()
+
+func destroy_land_on_aquatic():
+	if stateLocal.hex_type==STATE_EMPTY and stateLocal.hex_type==STATE_LAKE:
+		var unit = hex.get_unit()
+		if !unit.aquatic and !unit.flying:
+			unit.kill()
 
 
 ### INPUT SECTION

@@ -1,23 +1,22 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://BaseEntity.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Round.png" type="Texture" id=2]
 [ext_resource path="res://Assets/energy_small.png" type="Texture" id=3]
 [ext_resource path="res://Assets/faeria.png" type="Texture" id=4]
-[ext_resource path="res://abilities/Movement/Move.tscn" type="PackedScene" id=5]
-[ext_resource path="res://abilities/Attacks/standardAttack.tscn" type="PackedScene" id=6]
-[ext_resource path="res://abilities/move/cr land adj.tscn" type="PackedScene" id=7]
-[ext_resource path="res://abilities/move/conquest.tscn" type="PackedScene" id=8]
+[ext_resource path="res://abilities/current/Movement/Move.tscn" type="PackedScene" id=5]
+[ext_resource path="res://abilities/current/Attacks/standardAttack.tscn" type="PackedScene" id=6]
+[ext_resource path="res://abilities/current/move/cr land adj.tscn" type="PackedScene" id=7]
 
-[node name="Unit" type="Node2D"]
+[node name="Unit" type="Node2D" index="0"]
 
 position = Vector2( 30, 30 )
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 max_faeria = 0
 max_energy = 1
-base_attack = 2
-base_health = 3
+base_attack = 1
+base_health = 4
 base_val = 0
 COLOR_GREATER = Color( 0, 0.824219, 0.0128784, 1 )
 COLOR_EQUAL = Color( 0, 0, 0, 1 )
@@ -27,22 +26,22 @@ ENERGY_INACTIVE = Color( 0.652344, 0.642151, 0.642151, 1 )
 is_unit = true
 is_building = false
 is_event = false
-move = false
+move = true
 charge = false
 jump = false
 aquatic = false
 flying = false
-conquest = true
+conquest = false
 convoke = false
 radiate = false
 auto_collect = false
 collect = true
 attack = true
-abilities = false
-on_play = true
+abilities = true
+on_play = false
 on_production = false
 on_attack = false
-on_move = true
+on_move = false
 on_collect = false
 on_damage = false
 on_death = false
@@ -221,15 +220,13 @@ _sections_unfolded = [ "Visibility" ]
 
 [node name="Abilities" type="Node" parent="." index="7"]
 
-[node name="on_play" type="Node" parent="." index="8"]
+[node name="cr land adj" parent="Abilities" index="0" instance=ExtResource( 7 )]
 
-[node name="cr land adj" parent="on_play" index="0" instance=ExtResource( 7 )]
+[node name="on_play" type="Node" parent="." index="8"]
 
 [node name="on_attack" type="Node" parent="." index="9"]
 
 [node name="on_move" type="Node" parent="." index="10"]
-
-[node name="conquest" parent="on_move" index="0" instance=ExtResource( 8 )]
 
 [node name="on_collect" type="Node" parent="." index="11"]
 

@@ -4,8 +4,8 @@
 [ext_resource path="res://Assets/Round.png" type="Texture" id=2]
 [ext_resource path="res://Assets/energy_small.png" type="Texture" id=3]
 [ext_resource path="res://Assets/faeria.png" type="Texture" id=4]
-[ext_resource path="res://abilities/damage/protection.tscn" type="PackedScene" id=5]
-[ext_resource path="res://abilities/action/adjacent - damage.tscn" type="PackedScene" id=6]
+[ext_resource path="res://abilities/current/damage/protection.tscn" type="PackedScene" id=5]
+[ext_resource path="res://abilities/current/action/adjacent - damage.tscn" type="PackedScene" id=6]
 
 [node name="Unit" type="Node2D" index="0"]
 
@@ -16,7 +16,7 @@ max_faeria = 0
 max_energy = 1
 base_attack = 0
 base_health = 0
-base_val = 7
+base_val = 5
 COLOR_GREATER = Color( 0, 0.824219, 0.0128784, 1 )
 COLOR_EQUAL = Color( 0, 0, 0, 1 )
 COLOR_LESS = Color( 0.828125, 0, 0, 1 )
@@ -237,6 +237,7 @@ _sections_unfolded = [ "Visibility" ]
 
 [node name="damage - adjacent" parent="on_action" index="0" instance=ExtResource( 6 )]
 
+damage = 2
 player = 1
 
 [node name="on_end_turn" type="Node" parent="." index="17"]

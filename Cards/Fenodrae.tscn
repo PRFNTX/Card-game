@@ -28,10 +28,13 @@ scale = Vector2( 0.35, 0.36 )
 _sections_unfolded = [ "Transform" ]
 card_number = 54
 card_name = "Fenodrae"
-base_attack = 2
+base_health = 3
+cost_gold = 2
 cost_faeria = 0
-lands_num = 0
 lands_type = 1
+play_morning = false
+play_evening = false
+play_night = true
 base = ExtResource( 3 )
 board_entity = ExtResource( 4 )
 
