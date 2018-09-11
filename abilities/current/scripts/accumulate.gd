@@ -1,8 +1,5 @@
 extends Node
 
-export(int,"Any","Owner","Opponent") var player = 2
-export(int,"Unit","Creature","Building") var type = 1
-
 var entity
 var Game
 func init(_entity):

@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://abilities/current/scripts/col health.gd" type="Script" id=1]
+
+[node name="col health" type="Node" index="0"]
+
+script = ExtResource( 1 )
+gain_type = 0
+value_by_faeria = false
+value = 1
+instead = false
+lose_collect_at = 0
+
+

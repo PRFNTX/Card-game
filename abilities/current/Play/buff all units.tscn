@@ -2,12 +2,12 @@
 
 [ext_resource path="res://abilities/current/scripts/buff all units.gd" type="Script" id=1]
 
-
 [node name="buff all units" type="Node" index="0"]
 
 script = ExtResource( 1 )
 health = 0
 attack = 1
+energy = 0
 type = 1
 player = 1
 

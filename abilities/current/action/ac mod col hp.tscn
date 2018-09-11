@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://abilities/current/scripts/ac mod col hp.gd" type="Script" id=1]
+
+[node name="ac mod col hp" type="Node" index="0"]
+
+script = ExtResource( 1 )
+health_level = 4
+inclusive = false
+greater_than = false
+on_condition_set = false
+
+

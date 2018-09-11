@@ -34,7 +34,6 @@ func set_attack(val):
 	for modifier in mod_att.keys():
 		current_attack += mod_att[modifier]
 	
-	
 	get_node('Unit/A').text=str(current_attack)
 	modulate_colors()
 

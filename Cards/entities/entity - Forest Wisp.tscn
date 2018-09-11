@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://BaseEntity.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Round.png" type="Texture" id=2]
 [ext_resource path="res://Assets/energy_small.png" type="Texture" id=3]
 [ext_resource path="res://Assets/faeria.png" type="Texture" id=4]
+[ext_resource path="res://abilities/current/Movement/Move.tscn" type="PackedScene" id=5]
+[ext_resource path="res://abilities/current/Attacks/standardAttack.tscn" type="PackedScene" id=6]
+[ext_resource path="res://abilities/current/collect/col health.tscn" type="PackedScene" id=7]
+[ext_resource path="res://abilities/current/action/act-land-buff.tscn" type="PackedScene" id=8]
+[ext_resource path="res://abilities/current/action/ac mod col hp.tscn" type="PackedScene" id=9]
 
 [node name="Unit" type="Node2D" index="0"]
 
@@ -12,8 +17,8 @@ script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 max_faeria = 0
 max_energy = 1
-base_attack = 2
-base_health = 2
+base_attack = 1
+base_health = 1
 base_val = 0
 COLOR_GREATER = Color( 0, 0.824219, 0.0128784, 1 )
 COLOR_EQUAL = Color( 0, 0, 0, 1 )
@@ -26,24 +31,24 @@ is_event = false
 move = true
 charge = false
 jump = false
-aquatic = 0
+aquatic = false
 flying = false
 conquest = false
 convoke = false
 radiate = false
-auto_collect = 0
+auto_collect = false
 collect = true
 attack = true
 abilities = false
 on_play = false
 on_production = false
 on_attack = false
-on_move = true
-on_collect = 0
+on_move = false
+on_collect = true
 on_damage = false
 on_death = false
 on_clock = false
-on_action = false
+on_action = true
 on_turn_end = false
 frame_alt = null
 
@@ -209,7 +214,11 @@ _sections_unfolded = [ "Visibility" ]
 
 [node name="Movement" type="Node" parent="." index="5"]
 
+[node name="Move" parent="Movement" index="0" instance=ExtResource( 5 )]
+
 [node name="Attack" type="Node" parent="." index="6"]
+
+[node name="standardAttack" parent="Attack" index="0" instance=ExtResource( 6 )]
 
 [node name="Abilities" type="Node" parent="." index="7"]
 
@@ -221,6 +230,8 @@ _sections_unfolded = [ "Visibility" ]
 
 [node name="on_collect" type="Node" parent="." index="11"]
 
+[node name="col health" parent="on_collect" index="0" instance=ExtResource( 7 )]
+
 [node name="on_damage" type="Node" parent="." index="12"]
 
 [node name="on_death" type="Node" parent="." index="13"]
@@ -228,6 +239,10 @@ _sections_unfolded = [ "Visibility" ]
 [node name="on_clock" type="Node" parent="." index="14"]
 
 [node name="on_action" type="Node" parent="." index="15"]
+
+[node name="act-land-buff" parent="on_action" index="0" instance=ExtResource( 8 )]
+
+[node name="ac mod col hp" parent="on_action" index="1" instance=ExtResource( 9 )]
 
 [node name="on_production" type="Node" parent="." index="16"]
 

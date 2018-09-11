@@ -40,7 +40,8 @@ func targeting():
 
 
 func complete(target, set_state=null):
-	
+	if get_parent().has_method('pay_costs'):
+		get_parent().pay_costs()
 	var local = true
 	var state = Game.get_state()
 	if not set_state==null:
@@ -56,10 +57,12 @@ func complete(target, set_state=null):
 		Game.send_action('moveHex',45-target,{'active_unit':45-state['active_unit']},true)
 		if get_parent().repeat():
 			return false
-		else:
+		elif then_free:
 			entity.queue_free()
 			return true
-	
+		else:
+			return true
+
 
 func cancel_action():
 	Game.newAction()

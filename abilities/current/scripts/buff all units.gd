@@ -2,6 +2,7 @@ extends Node
 
 export(int) var health = 0
 export(int) var attack = 1
+export(int) var energy = 0
 export(int,"All","Creature","Building") var type = 1
 export(int,"All","Owner","Opponent") var player = 1
 
@@ -19,6 +20,8 @@ func activate(_Game, _entity, unused):
 		if conditions(ent):
 			ent.life_change(health)
 			ent.Unit.current_attack+=attack
+			for i in range(0, energy):
+				ent.Unit.add_one_energy()
 	return null
 
 func conditions(ent):

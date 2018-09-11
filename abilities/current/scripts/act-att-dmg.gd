@@ -3,8 +3,6 @@ extends Node
 export(int) var life = -1
 export(int,"Orb") var target = 0
 
-
-
 var Game
 var entity
 func init(_entity):

@@ -5,13 +5,13 @@ extends Node
 # var a = 2
 # var b = "textvar"
 export(int) var gold_cost = 0
-export(int) var action_cost = 0
-export(int) var faeria_cost = 1
+export(int) var action_cost = 1
+export(int) var faeria_cost = 0
 export(int) var energy_cost = 0
+export(bool) var single_use = true
 
 
-export(int, 'empty', 'orb', 'land','lake','tree','hill','sand','well') var target_type = 0
-export(int, 'Any', 'Owner', 'Opponent') var target_player = 0
+export(int, 'empty', 'orb', 'land','lake','tree','hill','sand','well') var make_type = 0
 
 var entity
 var Game
@@ -46,16 +46,14 @@ func pay_costs():
 	
 
 func targeting():
-	for hex in get_tree().get_nodes_in_group("Hex"):
-		if target_player==0:
-			if hex.stateLocal['hex_type']==target_type and not hex.has_unit():
-				hex.setState({'cover':hex.targetOther , 'target' :true})
-			else:
-				hex.setState({'cover':Color(0,0,0,0) , 'target' :false})
-		elif (target_player==1 and hex.stateLocal['hex_owner']==entity.Owner) or (target_player==2 and hex.stateLocal['hex_owner']!=entity.Owner) and hex.stateLocal['hex_type']==target_type and not hex.has_unit():
-			hex.setState({'cover':hex.targetOther , 'target' :true})
-		else:
-			hex.setState({'cover':Color(0,0,0,0) , 'target' :false})
+	for hex in entity.hex.adjacent:
+		if (
+			hex.current_player_can_affect(entity.Owner)
+			and (hex.stateLocal.hex_type == hex.TYPE_EMPTY or hex.stateLocal.hex_type == hex.TYPE_LAND)
+		):
+			hex.setState({
+				'cover':summon, 'target':true
+			})
 
 
 func complete(target, set_state=null):
@@ -69,8 +67,12 @@ func complete(target, set_state=null):
 	var hex_target = Game.get_hex_by_id(target)
 	if local:
 		Game.send_action('hardMove',45-target,{'active_unit':45-entity.Hex.id})
-	entity.on_move(hex_target.get_node('hexEntity'))
+	hex_target.setState({
+		'hex_type': make_type,
+		'hex_owner': entity.Owner
+	})
 	Game.actionDone()
+	queue_free()
 	
 func cancel_action():
 	pass

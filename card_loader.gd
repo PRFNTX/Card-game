@@ -33,6 +33,8 @@ func _ready():
 	print("Edolin Safeguard, loaded")
 	cards["Edolin Sentinel"] = preload("res://Cards/Edolin Sentinel.tscn")
 	print("Edolin Sentinel, loaded")
+	cards["Eldritz Fine Lame"] = preload("res://Cards/Eldritz Fine Lame.tscn")
+	print("Eldritz Fine Lame, loaded")
 	cards["Elinee's Favorite"] = preload("res://Cards/Elinee\'s Favorite.tscn")
 	print("Elinee's Favorite, loaded")
 	cards["Emerald Dragaon"] = preload("res://Cards/Emerald Dragaon.tscn")

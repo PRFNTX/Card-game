@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://abilities/current/change all hexes.gd" type="Script" id=1]
+
+[node name="change all hexes" type="Node" index="0"]
+
+script = ExtResource( 1 )
+to_type = 1
+affect_empty = false
+
+

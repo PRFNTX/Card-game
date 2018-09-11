@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://abilities/current/scripts/act-land-buff.gd" type="Script" id=1]
+
+[node name="act-land-buff" type="Node" index="0"]
+
+script = ExtResource( 1 )
+land_type = 3
+
+

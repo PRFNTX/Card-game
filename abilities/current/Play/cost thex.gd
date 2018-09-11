@@ -7,6 +7,11 @@ export(bool) var empty_only = true
 export(bool) var then_free = false
 export(bool) var adjacent_only = false
 
+export(int) var gold_cost = 0
+export(int) var action_cost = 1
+export(int) var faeria_cost = 0
+export(int) var energy_cost = 0
+
 var entity
 var Game
 func init(_entity):
@@ -23,6 +28,17 @@ func activate(_Game, _entity, _val):
 		Game.delegate_action(entity.Hex.id,get_parent().get_name()+'/'+get_name())
 	return true
 
+func verify_costs():
+	var ret = true
+	if entity.get_energy()>=energy_cost and Game.players[entity.Owner].has_resource(gold_cost,faeria_cost,{0:0}) and Game.players[entity.Owner].actions>=action_cost:
+		return true
+	else:
+		return false
+
+func pay_costs():
+	entity.use_energy(energy_cost)
+	Game.players[entity.Owner].pay_costs(gold_cost,faeria_cost)
+	Game.players[entity.Owner].useAction(action_cost)
 
 func conditions(hex):
 	if hex.stateLocal['hex_type'] >1 and hex.stateLocal['hex_type'] <7 and ( not empty_only or not hex.has_unit() ):

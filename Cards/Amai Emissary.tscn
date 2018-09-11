@@ -3,9 +3,9 @@
 [ext_resource path="res://Cards/scripts/hand_card.gd" type="Script" id=1]
 [ext_resource path="res://Card.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/TownBasic.png" type="Texture" id=3]
-[ext_resource path="res://Cards/entities/entity - Amai Trader.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Cards/entities/entity - Amai Emissary.tscn" type="PackedScene" id=4]
 
-[node name="Amai Trader" type="Control" index="0"]
+[node name="Amai Emissary" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -32,6 +32,9 @@ base_health = 3
 cost_gold = 4
 cost_faeria = 0
 lands_type = 4
+play_morning = true
+play_evening = true
+play_night = true
 base = ExtResource( 3 )
 board_entity = ExtResource( 4 )
 

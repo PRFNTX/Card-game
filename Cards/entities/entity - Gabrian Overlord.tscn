@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://BaseEntity.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Round.png" type="Texture" id=2]
 [ext_resource path="res://Assets/energy_small.png" type="Texture" id=3]
 [ext_resource path="res://Assets/faeria.png" type="Texture" id=4]
+[ext_resource path="res://abilities/current/Movement/moveLine.tscn" type="PackedScene" id=5]
+[ext_resource path="res://abilities/current/Attacks/standardAttack.tscn" type="PackedScene" id=6]
+[ext_resource path="res://abilities/current/action/adjacent -buff.tscn" type="PackedScene" id=7]
 
 [node name="Unit" type="Node2D" index="0"]
 
@@ -13,7 +16,7 @@ _sections_unfolded = [ "Transform" ]
 max_faeria = 0
 max_energy = 1
 base_attack = 2
-base_health = 5
+base_health = 3
 base_val = 0
 COLOR_GREATER = Color( 0, 0.824219, 0.0128784, 1 )
 COLOR_EQUAL = Color( 0, 0, 0, 1 )
@@ -31,7 +34,7 @@ flying = false
 conquest = false
 convoke = false
 radiate = false
-auto_collect = 0
+auto_collect = false
 collect = false
 attack = true
 abilities = true
@@ -209,7 +212,11 @@ _sections_unfolded = [ "Visibility" ]
 
 [node name="Movement" type="Node" parent="." index="5"]
 
+[node name="moveLine" parent="Movement" index="0" instance=ExtResource( 5 )]
+
 [node name="Attack" type="Node" parent="." index="6"]
+
+[node name="standardAttack" parent="Attack" index="0" instance=ExtResource( 6 )]
 
 [node name="Abilities" type="Node" parent="." index="7"]
 
@@ -228,6 +235,10 @@ _sections_unfolded = [ "Visibility" ]
 [node name="on_clock" type="Node" parent="." index="14"]
 
 [node name="on_action" type="Node" parent="." index="15"]
+
+[node name="adj buff" parent="on_action" index="0" instance=ExtResource( 7 )]
+
+value = 1
 
 [node name="on_production" type="Node" parent="." index="16"]
 
