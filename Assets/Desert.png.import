@@ -7,10 +7,7 @@ path="res://.import/Desert.png-976676211f6f1a654cc6bcd57f4bee2b.stex"
 [deps]
 
 source_file="res://Assets/Desert.png"
-source_md5="f640c07cec553a81233d46db28e4fe59"
-
 dest_files=[ "res://.import/Desert.png-976676211f6f1a654cc6bcd57f4bee2b.stex" ]
-dest_md5="2df8eaefa99174b61ea6766a2d8756e9"
 
 [params]
 

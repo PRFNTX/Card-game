@@ -7,10 +7,7 @@ path="res://.import/TownBasic.png-57d3f46bc94527fae13d5be033aca7e1.stex"
 [deps]
 
 source_file="res://Assets/TownBasic.png"
-source_md5="8c767d63e1cff833816a9ee66d0b09cf"
-
 dest_files=[ "res://.import/TownBasic.png-57d3f46bc94527fae13d5be033aca7e1.stex" ]
-dest_md5="2bb8234c69251338fbe0e7adb2eaaafa"
 
 [params]
 

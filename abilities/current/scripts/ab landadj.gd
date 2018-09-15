@@ -52,7 +52,7 @@ func targeting():
 			and (hex.stateLocal.hex_type == hex.TYPE_EMPTY or hex.stateLocal.hex_type == hex.TYPE_LAND)
 		):
 			hex.setState({
-				'cover':summon, 'target':true
+				'cover':hex.summon, 'target':true
 			})
 
 

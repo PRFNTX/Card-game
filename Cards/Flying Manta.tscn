@@ -14,6 +14,7 @@ anchor_bottom = 0.0
 margin_right = 83.0
 margin_bottom = 107.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
@@ -34,6 +35,9 @@ cost_gold = 4
 cost_faeria = 0
 lands_num = 2
 lands_type = 4
+play_morning = true
+play_evening = true
+play_night = true
 base = ExtResource( 3 )
 board_entity = ExtResource( 4 )
 

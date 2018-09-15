@@ -7,10 +7,7 @@ path="res://.import/well.png-d465ef61f4f28a84b1d5894679275356.stex"
 [deps]
 
 source_file="res://Assets/well.png"
-source_md5="46eff1daea364c75072c3c17c5f37089"
-
 dest_files=[ "res://.import/well.png-d465ef61f4f28a84b1d5894679275356.stex" ]
-dest_md5="2c966f335614ffe448e9cb7fb16bed45"
 
 [params]
 

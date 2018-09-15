@@ -7,10 +7,7 @@ path="res://.import/RoundEnemy.png-cf14f08178d9184d84fc4ab9df940d01.stex"
 [deps]
 
 source_file="res://Assets/RoundEnemy.png"
-source_md5="f1e1a61549bc753175a339171b338c97"
-
 dest_files=[ "res://.import/RoundEnemy.png-cf14f08178d9184d84fc4ab9df940d01.stex" ]
-dest_md5="9965143a2360a43abaecc75c57444ee2"
 
 [params]
 

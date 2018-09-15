@@ -7,10 +7,7 @@ path="res://.import/SizedSmith.png-2067a341936db537a744fdb4fd5ba7b9.stex"
 [deps]
 
 source_file="res://Assets/SizedSmith.png"
-source_md5="b8a595a151ad6d2a5521291912694f51"
-
 dest_files=[ "res://.import/SizedSmith.png-2067a341936db537a744fdb4fd5ba7b9.stex" ]
-dest_md5="f8a587e8fd6aa0ce3ad950f193210c59"
 
 [params]
 

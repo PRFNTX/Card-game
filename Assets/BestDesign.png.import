@@ -7,10 +7,7 @@ path="res://.import/BestDesign.png-ab2c4bd11b34d927e4904de695610515.stex"
 [deps]
 
 source_file="res://Assets/BestDesign.png"
-source_md5="4651e16dd83a93b442ac2177e13451b9"
-
 dest_files=[ "res://.import/BestDesign.png-ab2c4bd11b34d927e4904de695610515.stex" ]
-dest_md5="6f7a0620afc539b02774038c8940c6ec"
 
 [params]
 

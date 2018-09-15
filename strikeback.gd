@@ -1,6 +1,8 @@
 extends Node
 
 export(int) var value = 1
+var entity
+var Game
 
 func init(_entity):
 	entity = _entity

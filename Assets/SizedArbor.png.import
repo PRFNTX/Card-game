@@ -7,10 +7,7 @@ path="res://.import/SizedArbor.png-b7707afc764eb7b7be8a0c2ae76c787f.stex"
 [deps]
 
 source_file="res://Assets/SizedArbor.png"
-source_md5="5f6c9efc900c9b5dd59960b780237e23"
-
 dest_files=[ "res://.import/SizedArbor.png-b7707afc764eb7b7be8a0c2ae76c787f.stex" ]
-dest_md5="e9c058dc04e0ef7b546aa5af2efe102b"
 
 [params]
 

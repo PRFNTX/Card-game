@@ -7,10 +7,7 @@ path="res://.import/border-box.png-97a8325cf6002e7f2be8d23a68707504.stex"
 [deps]
 
 source_file="res://Assets/border-box.png"
-source_md5="41c8ef2128fc0a7ee703a75aa1669ed3"
-
 dest_files=[ "res://.import/border-box.png-97a8325cf6002e7f2be8d23a68707504.stex" ]
-dest_md5="6878f36d3921b8b70cfb4e02603aa18c"
 
 [params]
 

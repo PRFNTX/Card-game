@@ -7,10 +7,7 @@ path="res://.import/SizedMine.png-0734970ae40df4155ae73c112176d7c6.stex"
 [deps]
 
 source_file="res://Assets/SizedMine.png"
-source_md5="c3db9a81abedd12f0d50d84a98536620"
-
 dest_files=[ "res://.import/SizedMine.png-0734970ae40df4155ae73c112176d7c6.stex" ]
-dest_md5="12e43864239f87836f4e68eb1220867a"
 
 [params]
 

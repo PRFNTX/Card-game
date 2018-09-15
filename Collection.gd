@@ -54,10 +54,10 @@ func update(in_deck=null):
 		
 		for card in deck_list.keys():
 			print(card)
-			if get_row_by_name(card)==null:
-				var thing = top_level.globals.card_instances[card]
-				add_item(top_level.globals.card_instances[card]).set('Deck',deck_list[card])
-			else:
+			if get_row_by_name(card)==null and top_level.globals.card_instances.has(card):
+				var the_card = top_level.globals.card_instances[card]
+				add_item(the_card).set('Deck',deck_list[card])
+			elif top_level.globals.card_instances.has(card):
 				get_row_by_name(card).set('Deck',deck_list[card])
 		
 		var ind = 0

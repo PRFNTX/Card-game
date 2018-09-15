@@ -132,6 +132,7 @@ margin_top = 12.0
 margin_right = 27.0
 margin_bottom = 26.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
@@ -153,6 +154,7 @@ margin_top = 12.0
 margin_right = 38.0
 margin_bottom = 26.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
@@ -174,6 +176,7 @@ margin_top = 12.0
 margin_right = 45.0
 margin_bottom = 26.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
@@ -200,6 +203,7 @@ margin_top = 12.0
 margin_right = 31.0
 margin_bottom = 26.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
@@ -221,6 +225,9 @@ _sections_unfolded = [ "Visibility" ]
 [node name="Abilities" type="Node" parent="." index="7"]
 
 [node name="ability - move" parent="Abilities" index="0" instance=ExtResource( 7 )]
+
+target_type = 0
+target_player = 0
 
 [node name="on_play" type="Node" parent="." index="8"]
 

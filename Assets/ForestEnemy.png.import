@@ -7,10 +7,7 @@ path="res://.import/ForestEnemy.png-bfec195dff7ece4a1dbcf9869e1ae769.stex"
 [deps]
 
 source_file="res://Assets/ForestEnemy.png"
-source_md5="163fc573175051c58a8b3622c7d8a77c"
-
 dest_files=[ "res://.import/ForestEnemy.png-bfec195dff7ece4a1dbcf9869e1ae769.stex" ]
-dest_md5="2e61e048f6d5bf540793a79fab1494d5"
 
 [params]
 

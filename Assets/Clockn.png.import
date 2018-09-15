@@ -7,10 +7,7 @@ path="res://.import/Clockn.png-c541375ebe415df715583a944b8b086e.stex"
 [deps]
 
 source_file="res://Assets/Clockn.png"
-source_md5="3b41c4f8fa46e91cc63ee5ad04ec9b6d"
-
 dest_files=[ "res://.import/Clockn.png-c541375ebe415df715583a944b8b086e.stex" ]
-dest_md5="aa07519e320065c8c807290834083b51"
 
 [params]
 

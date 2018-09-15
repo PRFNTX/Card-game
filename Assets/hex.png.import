@@ -7,10 +7,7 @@ path="res://.import/hex.png-171b988e93331acce848abe20a342a1f.stex"
 [deps]
 
 source_file="res://Assets/hex.png"
-source_md5="2062d61234a60b4ddec52ce624ff7123"
-
 dest_files=[ "res://.import/hex.png-171b988e93331acce848abe20a342a1f.stex" ]
-dest_md5="90559b6746cb7131584a70b5ee9d9960"
 
 [params]
 

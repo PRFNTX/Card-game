@@ -7,10 +7,7 @@ path="res://.import/lake-action.png-a2ff67a57145991c145e81bf15cfe88f.stex"
 [deps]
 
 source_file="res://Assets/lake-action.png"
-source_md5="165baf5e09689d07fc625f66312fe497"
-
 dest_files=[ "res://.import/lake-action.png-a2ff67a57145991c145e81bf15cfe88f.stex" ]
-dest_md5="79717d90c8267dee231a80999cc0cc50"
 
 [params]
 

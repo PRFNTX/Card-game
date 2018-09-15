@@ -2,7 +2,7 @@ extends Node
 
 export(bool) var require_valid_placement = true
 export(bool) var require_plain_for_special = false
-export(int,"Owner","Opponent") var owner = 0
+export(int,"Owner","Opponent") var targ_owner = 0
 export(int,"Plains","Lake","Tree","Hill", "Sand") var type = 0
 
 var type_convert = [2,3,4,5,6]
@@ -28,7 +28,7 @@ func conditions(hex):
 	
 	if hex.hexType.child.ActionLand(self, entity.Owner):
 		return true
-	if hexType.child.actionTree and activePlayerCanAffect(entity.Owner):
+	if hex.hexType.child.actionTree and activePlayerCanAffect(entity.Owner):
 		return true
 
 func targeting():
@@ -42,7 +42,7 @@ func complete(target, set_state=null):
 	
 	var local = true
 	var state = Game.get_state()
-	setState({'cover':gather, 'target':true, 'hex_owner':entity.owner})
+	setState({'cover': entity.Hex.gather, 'target':true, 'hex_owner':entity.Owner})
 	
 	if local:
 		Game.send_action('delegate',remote_convert(target),{'delegate_id':remote_convert(entity.Hex.id), 'delegate_node':get_parent().get_name()+'/'+get_name()})

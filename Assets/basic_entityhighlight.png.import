@@ -7,10 +7,7 @@ path="res://.import/basic_entityhighlight.png-52737cb80de9c2f396baba9d8b1dd74e.s
 [deps]
 
 source_file="res://Assets/basic_entityhighlight.png"
-source_md5="a779c77b29ea7553c6bcf434e5529a88"
-
 dest_files=[ "res://.import/basic_entityhighlight.png-52737cb80de9c2f396baba9d8b1dd74e.stex" ]
-dest_md5="aa05e201e9bf63f67764ac0d6d8cfdaf"
 
 [params]
 

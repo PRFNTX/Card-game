@@ -7,10 +7,7 @@ path="res://.import/Icon_hill.png-c17a9a320ad0bf50b46492836a9c043e.stex"
 [deps]
 
 source_file="res://Assets/Icon_hill.png"
-source_md5="2a64af5bc4b2918253220823a4debb2a"
-
 dest_files=[ "res://.import/Icon_hill.png-c17a9a320ad0bf50b46492836a9c043e.stex" ]
-dest_md5="a6893330328972c34b8bcc0ead5ef3a8"
 
 [params]
 

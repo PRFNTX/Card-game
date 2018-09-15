@@ -1,6 +1,6 @@
 extends Node
 
-export(bool) var emtpy = false
+export(bool) var empty = false
 export(bool) var orb = false
 export(bool) var well = false
 export(bool) var land = false
@@ -21,4 +21,4 @@ var conds = [
 ]
 
 func activate(Game, entity, target):
-	return conds[game.get_hex_by_id(target).stateLocal.hex_type]
+	return conds[Game.get_hex_by_id(target).stateLocal.hex_type]

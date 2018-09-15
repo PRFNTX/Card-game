@@ -7,10 +7,7 @@ path="res://.import/Clockall.png-6a855d66d767f6aef6765e11a1b0b419.stex"
 [deps]
 
 source_file="res://Assets/Clockall.png"
-source_md5="ef056f2ab372204a607229be750b573c"
-
 dest_files=[ "res://.import/Clockall.png-6a855d66d767f6aef6765e11a1b0b419.stex" ]
-dest_md5="471691a1304d70585406df32fc982ac0"
 
 [params]
 

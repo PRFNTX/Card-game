@@ -7,10 +7,7 @@ path="res://.import/White hex 2.png-6029c4662cfba45d17cc3a5a3441a080.stex"
 [deps]
 
 source_file="res://Assets/White hex 2.png"
-source_md5="dec4fe9983a3ed85825dc634cc24440f"
-
 dest_files=[ "res://.import/White hex 2.png-6029c4662cfba45d17cc3a5a3441a080.stex" ]
-dest_md5="4a965d6bf238ab4bf792e85182c4d1e5"
 
 [params]
 
