@@ -7,7 +7,10 @@ path="res://.import/border-line.png-89c47b62c4d52e3d65f308c6734465a9.stex"
 [deps]
 
 source_file="res://Assets/border-line.png"
+source_md5="2dcefee30881d552632500664c306f6e"
+
 dest_files=[ "res://.import/border-line.png-89c47b62c4d52e3d65f308c6734465a9.stex" ]
+dest_md5="71ce453f3ee78b066513ac55d054a822"
 
 [params]
 

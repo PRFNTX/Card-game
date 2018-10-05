@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://BaseEntity.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Round.png" type="Texture" id=2]
@@ -6,8 +6,7 @@
 [ext_resource path="res://Assets/faeria.png" type="Texture" id=4]
 [ext_resource path="res://abilities/current/Movement/moveLine.tscn" type="PackedScene" id=5]
 [ext_resource path="res://abilities/current/Attacks/standardAttack.tscn" type="PackedScene" id=6]
-[ext_resource path="res://abilities/current/on_attack/res on att.tscn" type="PackedScene" id=7]
-[ext_resource path="res://abilities/current/production/newland.tscn" type="PackedScene" id=8]
+[ext_resource path="res://abilities/current/production/newland.tscn" type="PackedScene" id=7]
 
 [node name="Unit" type="Node2D" index="0"]
 
@@ -227,10 +226,6 @@ medium = 1
 
 [node name="on_attack" type="Node" parent="." index="9"]
 
-[node name="res on att" parent="on_attack" index="0" instance=ExtResource( 7 )]
-
-val = 3
-
 [node name="on_move" type="Node" parent="." index="10"]
 
 [node name="on_collect" type="Node" parent="." index="11"]
@@ -245,6 +240,8 @@ val = 3
 
 [node name="on_production" type="Node" parent="." index="16"]
 
-[node name="newland" parent="on_production" index="0" instance=ExtResource( 8 )]
+[node name="newland" parent="on_production" index="0" instance=ExtResource( 7 )]
+
+type = 2
 
 

@@ -7,7 +7,10 @@ path="res://.import/SizedChurch.png-fdf3d00031615619181f2a3aee5ea7d1.stex"
 [deps]
 
 source_file="res://Assets/SizedChurch.png"
+source_md5="8956ee1a0c82fb051cf22ec3ff038328"
+
 dest_files=[ "res://.import/SizedChurch.png-fdf3d00031615619181f2a3aee5ea7d1.stex" ]
+dest_md5="a0037b7fade1bc30c74856264fc214f3"
 
 [params]
 

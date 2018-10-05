@@ -7,7 +7,10 @@ path="res://.import/Mountain.png-fcec10ab274d5f02708fa97455dc672e.stex"
 [deps]
 
 source_file="res://Assets/Mountain.png"
+source_md5="11d27d32d41d10312973605f2713ce3f"
+
 dest_files=[ "res://.import/Mountain.png-fcec10ab274d5f02708fa97455dc672e.stex" ]
+dest_md5="273cc7336993ca1188902b316c8313dd"
 
 [params]
 

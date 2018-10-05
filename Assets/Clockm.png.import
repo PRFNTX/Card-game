@@ -7,7 +7,10 @@ path="res://.import/Clockm.png-002774b284a2fa4ed21047735dfb8ce0.stex"
 [deps]
 
 source_file="res://Assets/Clockm.png"
+source_md5="74af2dec4e778907f7f1e9170608d3cc"
+
 dest_files=[ "res://.import/Clockm.png-002774b284a2fa4ed21047735dfb8ce0.stex" ]
+dest_md5="5598422b926380df7858f434668f970a"
 
 [params]
 

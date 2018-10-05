@@ -7,7 +7,10 @@ path="res://.import/gold-action.png-12b59b49a5b7c27cf1133709e6e12fcf.stex"
 [deps]
 
 source_file="res://Assets/gold-action.png"
+source_md5="698e8f5384616ffd7f732d949f1649bd"
+
 dest_files=[ "res://.import/gold-action.png-12b59b49a5b7c27cf1133709e6e12fcf.stex" ]
+dest_md5="51b3582d753b50cee7a312bd3905e68d"
 
 [params]
 

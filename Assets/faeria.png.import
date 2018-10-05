@@ -7,7 +7,10 @@ path="res://.import/faeria.png-6bcea9799b0cf047655fb86c50ff03ad.stex"
 [deps]
 
 source_file="res://Assets/faeria.png"
+source_md5="b61f8d69454fccf242a7d5e5bdcb06b8"
+
 dest_files=[ "res://.import/faeria.png-6bcea9799b0cf047655fb86c50ff03ad.stex" ]
+dest_md5="43e4ee3ffb81c62d568be93c2a92d2a0"
 
 [params]
 

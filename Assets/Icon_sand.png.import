@@ -7,7 +7,10 @@ path="res://.import/Icon_sand.png-ca9818954f3c540f1a91cfc91247de4d.stex"
 [deps]
 
 source_file="res://Assets/Icon_sand.png"
+source_md5="f06a0ad919f8a1b032cda1baa6e6e093"
+
 dest_files=[ "res://.import/Icon_sand.png-ca9818954f3c540f1a91cfc91247de4d.stex" ]
+dest_md5="a85d71a3101af479b5dc7c475c7b6034"
 
 [params]
 

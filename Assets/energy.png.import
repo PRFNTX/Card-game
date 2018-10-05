@@ -7,7 +7,10 @@ path="res://.import/energy.png-3ce5bc2965e855d3e24ae2cc0fe99362.stex"
 [deps]
 
 source_file="res://Assets/energy.png"
+source_md5="d92c6353baa8f1c07eb21dfbc355fcfe"
+
 dest_files=[ "res://.import/energy.png-3ce5bc2965e855d3e24ae2cc0fe99362.stex" ]
+dest_md5="881ac444d7fa076b7f659495fa4c4429"
 
 [params]
 

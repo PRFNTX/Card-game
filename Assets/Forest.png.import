@@ -7,7 +7,10 @@ path="res://.import/Forest.png-eddaee8f19864cc1447d680b075b0ba5.stex"
 [deps]
 
 source_file="res://Assets/Forest.png"
+source_md5="3a4495a941860df541cc6a3eadd7bfe4"
+
 dest_files=[ "res://.import/Forest.png-eddaee8f19864cc1447d680b075b0ba5.stex" ]
+dest_md5="1eff497b1ed24fa1ddb509237fb9ca91"
 
 [params]
 

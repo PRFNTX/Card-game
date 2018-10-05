@@ -7,7 +7,10 @@ path="res://.import/LakeEnemy.png-8c383f6f04978bf3160c7cc9e87fef71.stex"
 [deps]
 
 source_file="res://Assets/LakeEnemy.png"
+source_md5="1d2fabbef4e4522076bd80c2cc10bff2"
+
 dest_files=[ "res://.import/LakeEnemy.png-8c383f6f04978bf3160c7cc9e87fef71.stex" ]
+dest_md5="cf9c88468288bbfb35925b3b5bad768f"
 
 [params]
 

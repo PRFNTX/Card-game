@@ -7,7 +7,10 @@ path="res://.import/Round.png-7e920f2b18ee2b89bb50506a5ff1c040.stex"
 [deps]
 
 source_file="res://Assets/Round.png"
+source_md5="33735536f23ea9d1b151eb2f37243565"
+
 dest_files=[ "res://.import/Round.png-7e920f2b18ee2b89bb50506a5ff1c040.stex" ]
+dest_md5="b7656a36ae231822c276570b59312741"
 
 [params]
 

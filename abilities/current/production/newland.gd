@@ -8,7 +8,7 @@ func activate(Game,entity,unused):
 	if entity.Hex.stateLocal.hex_type==0:
 		entity.Hex.setState({
 			'hex_type': change_type[type],
-			'hex_owner': entity.owner
+			'hex_owner': entity.Owner
 		})
 
 func _ready():

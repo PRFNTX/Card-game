@@ -7,7 +7,10 @@ path="res://.import/land-action.png-34d9e52d6a5de16fe8c3f24a78c7ea55.stex"
 [deps]
 
 source_file="res://Assets/land-action.png"
+source_md5="30bc3c6f9b8d8042644cba1f8fabcf21"
+
 dest_files=[ "res://.import/land-action.png-34d9e52d6a5de16fe8c3f24a78c7ea55.stex" ]
+dest_md5="7d5453d6f820e667c412818eb20fbb1b"
 
 [params]
 

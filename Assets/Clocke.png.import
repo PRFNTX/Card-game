@@ -7,7 +7,10 @@ path="res://.import/Clocke.png-b5f3366949e593253bf10d1556ecaa94.stex"
 [deps]
 
 source_file="res://Assets/Clocke.png"
+source_md5="e483c6aea04fb4ff7749bfd5c0fe5ae2"
+
 dest_files=[ "res://.import/Clocke.png-b5f3366949e593253bf10d1556ecaa94.stex" ]
+dest_md5="948a41c6e8ec78f04412c3244720d7a9"
 
 [params]
 

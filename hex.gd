@@ -392,13 +392,13 @@ func update_hovered(val,by):
 func destroy_aquatic_on_land():
 	if stateLocal.hex_type!=STATE_EMPTY and stateLocal.hex_type!=STATE_LAKE:
 		var unit = get_unit()
-		if unit.aquatic:
+		if unit.Unit.aquatic:
 			unit.kill()
 
 func destroy_land_on_aquatic():
 	if stateLocal.hex_type==STATE_EMPTY and stateLocal.hex_type==STATE_LAKE:
 		var unit = get_unit()
-		if !unit.aquatic and !unit.flying:
+		if !unit.Unit.aquatic and !unit.Unit.flying:
 			unit.kill()
 
 

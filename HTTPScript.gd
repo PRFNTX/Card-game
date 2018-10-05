@@ -71,6 +71,7 @@ func authenticated_server_request(endpoint,method,body):
 				else:
 					rb = rb+chunk
 		var tryreturn = parse_json(str((rb.get_string_from_utf8())))
+		print(tryreturn)
 	
 	#arrays of objects are arrays of dictionaries
 		return parse_json(str((rb.get_string_from_utf8())))

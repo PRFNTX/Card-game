@@ -9,7 +9,7 @@
 [ext_resource path="res://abilities/current/move/conquest.tscn" type="PackedScene" id=7]
 [ext_resource path="res://abilities/current/damage/protection.tscn" type="PackedScene" id=8]
 
-[node name="Unit" type="Node2D" index="0"]
+[node name="Unit" type="Node2D"]
 
 position = Vector2( 30, 30 )
 script = ExtResource( 1 )

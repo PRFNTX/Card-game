@@ -7,7 +7,10 @@ path="res://.import/Plains.png-6d84444b79b6b9c83d5233199dfa47a0.stex"
 [deps]
 
 source_file="res://Assets/Plains.png"
+source_md5="e78538e6f4ad021bcf187c6244970c7f"
+
 dest_files=[ "res://.import/Plains.png-6d84444b79b6b9c83d5233199dfa47a0.stex" ]
+dest_md5="6b1d7b5c0923ef1687b866bbcfd7dce6"
 
 [params]
 

@@ -8,7 +8,7 @@
 [ext_resource path="res://abilities/current/Attacks/standardAttack.tscn" type="PackedScene" id=6]
 [ext_resource path="res://abilities/current/action/adjacent -buff.tscn" type="PackedScene" id=7]
 
-[node name="Unit" type="Node2D" index="0"]
+[node name="Unit" type="Node2D"]
 
 position = Vector2( 30, 30 )
 script = ExtResource( 1 )
@@ -239,6 +239,7 @@ _sections_unfolded = [ "Visibility" ]
 [node name="adj buff" parent="on_action" index="0" instance=ExtResource( 7 )]
 
 value = 1
+player = 2
 
 [node name="on_production" type="Node" parent="." index="16"]
 

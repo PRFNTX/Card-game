@@ -7,7 +7,10 @@ path="res://.import/DesertEnemy.png-fe5449601ce7f933d24ece30aa7c9ad1.stex"
 [deps]
 
 source_file="res://Assets/DesertEnemy.png"
+source_md5="8aca2132aef933c074ee99b5d499a72a"
+
 dest_files=[ "res://.import/DesertEnemy.png-fe5449601ce7f933d24ece30aa7c9ad1.stex" ]
+dest_md5="4e98430da8cb50b08cd84df7a0efca78"
 
 [params]
 

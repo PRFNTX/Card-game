@@ -7,7 +7,10 @@ path="res://.import/SizedTown.png-7ab502b69272b97e3632c3964141e03c.stex"
 [deps]
 
 source_file="res://Assets/SizedTown.png"
+source_md5="5ecc614f790aea5feb27ad80ee77c4d0"
+
 dest_files=[ "res://.import/SizedTown.png-7ab502b69272b97e3632c3964141e03c.stex" ]
+dest_md5="10305b83ce7e80c92f722dd385844fe5"
 
 [params]
 

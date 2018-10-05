@@ -6,7 +6,7 @@
 [ext_resource path="res://Assets/faeria.png" type="Texture" id=4]
 [ext_resource path="res://abilities/current/Play/dmg all.tscn" type="PackedScene" id=5]
 
-[node name="Unit" type="Node2D" index="0"]
+[node name="Unit" type="Node2D"]
 
 position = Vector2( 30, 30 )
 script = ExtResource( 1 )
@@ -234,7 +234,7 @@ _sections_unfolded = [ "Visibility" ]
 
 type = 0
 effect = -1
-players = 1
+players = 0
 
 [node name="on_action" type="Node" parent="." index="16"]
 

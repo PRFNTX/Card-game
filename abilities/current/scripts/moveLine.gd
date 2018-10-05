@@ -9,6 +9,12 @@ export(int) var distance = 2
 export(int,"None","Flying","Aquatic") var medium = 0
 export(int,'Charge', 'jump') var method = 0
 
+const MEDIUM_NONE = 0
+const MEDIUM_FLYING = 1
+const MEDIUM_AQUATIC = 2
+
+const METHOD_CHARGE = 0
+const METHOD_JUMP = 1
 
 var entity
 var Game
