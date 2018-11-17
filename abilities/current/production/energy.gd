@@ -2,7 +2,7 @@ extends Node
 
 
 func activate(Game,entity,unused):
-	entity.unit.add_one_energy()
+	entity.Unit.add_one_energy()
 
 func _ready():
 	# Called every time the node is added to the scene.

@@ -26,7 +26,6 @@ func activate(_Game, _entity, _val):
 	entity = _entity
 	val=_val
 	if verify_costs():
-		
 		Game.delegate_action(entity.Hex.id,get_relative_path())
 
 func get_relative_path():
@@ -44,7 +43,9 @@ func pay_costs():
 	Game.players[entity.Owner].pay_costs(gold_cost,faeria_cost)
 	Game.players[entity.Owner].useAction(action_cost)
 	
-
+#for thing in array
+# if (anything is true)
+# set target = true
 func targeting():
 	for hex in get_tree().get_nodes_in_group("Hex"):
 		if target_player==0:
