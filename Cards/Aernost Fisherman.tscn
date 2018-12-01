@@ -5,7 +5,7 @@
 [ext_resource path="res://Assets/TownBasic.png" type="Texture" id=3]
 [ext_resource path="res://Cards/entities/entity - Aernost Fisherman.tscn" type="PackedScene" id=4]
 
-[node name="Aernost Fisherman" type="Control" index="0"]
+[node name="Aernost Fisherman" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0

@@ -5,6 +5,8 @@ onready var globals = get_node("/root/master")
 func _ready():
 	for deck in globals.deck_list.keys():
 		$decks.add_item(deck)
+	
+	curr_deck = $decks.get_item_text(0)
 
 func _on_game_pressed():
 	globals.set_scene('browse_games')
