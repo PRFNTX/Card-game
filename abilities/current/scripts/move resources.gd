@@ -4,8 +4,6 @@ export(int) var value = 1
 export(int, "Gold", "Faeria", "Actions", "Cards") var type = 0
 
 
-
-
 func activate(Game, entity, target):
 	if Game.get_hex_by_id(target).stateLocal['hex_owner']!=entity.Owner:
 		if type == 0:

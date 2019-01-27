@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://abilities/current/clock/clk-buff.gd" type="Script" id=1]
+
+[node name="clk-buff" type="Node" index="0"]
+
+script = ExtResource( 1 )
+value = 1
+night = true
+evening = false
+morning = false
+modName = "lunarMochi"
+
+

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://abilities/current/action/act-merking.gd" type="Script" id=1]
+
+[node name="act-merking" type="Node" index="0"]
+
+script = ExtResource( 1 )
+damage = 1
+gold_gain = 1
+
+

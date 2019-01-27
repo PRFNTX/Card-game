@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://abilities/current/abilities/abl-dowser.gd" type="Script" id=1]
+
+[node name="abl-dowser" type="Node" index="0"]
+
+script = ExtResource( 1 )
+gold_cost = 0
+action_cost = 0
+faeria_cost = 1
+energy_cost = 0
+structureDamage = 2
+make_type = 3
+
+

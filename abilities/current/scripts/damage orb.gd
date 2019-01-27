@@ -33,7 +33,6 @@ func activate(_Game, _entity, unsused):
 			hex.get_unit().life_change(damage)
 			print("doin")
 
-
 func verify_costs():
 	var ret = true
 	if entity.get_energy()>=energy_cost and Game.players[entity.Owner].has_resource(gold_cost,faeria_cost,{0:0}) and Game.players[entity.Owner].actions>=action_cost:
@@ -45,14 +44,3 @@ func pay_costs():
 	entity.use_energy(energy_cost)
 	Game.players[entity.Owner].pay_costs(gold_cost,faeria_cost)
 	Game.players[entity.Owner].useAction(action_cost)
-	
-
-func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-	pass
-
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass

@@ -56,7 +56,10 @@ func possess(entity, hex, player, game,_card_name):
 	print(Owner)
 	return Unit.play()
 
-func receive_attack(val_damage):
+func receive_attack(val_damage, source=-1):
+	var can_attack = Unit.on_receive_attack(source)
+	if not can_attack:
+		return false
 	var mod_damage = on_damage(val_damage)
 	if Unit.is_unit:
 		Unit.set_health(Unit.current_health-mod_damage)
@@ -66,6 +69,7 @@ func receive_attack(val_damage):
 		Unit.set_val(Unit.current_val-mod_damage)
 		if Unit.current_val <=0:
 			on_death()
+	return true
 
 ## currently identical to above
 func receive_damage(val_damage):
@@ -113,8 +117,9 @@ func on_play():
 		Unit.play()
 
 func on_attack(target):
-	Unit.attack(target)
-	target.receive_attack(Unit.current_attack)
+	var can_attack = target.receive_attack(Unit.current_attack, Hex.id)
+	if can_attack:
+		Unit.attack(target)
 	Unit.end()
 
 func on_move(target): #hexEntity

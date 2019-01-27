@@ -87,7 +87,6 @@ func _ready():
 	print("Grumpy Porcupine, loaded")
 	cards["Gust of Hope"] = preload("res://Cards/Gust of Hope.tscn")
 	print("Gust of Hope, loaded")
-	"""
 	cards["Imperial Assassin"] = preload("res://Cards/Imperial Assassin.tscn")
 	print("Imperial Assassin, loaded")
 	cards["Imperial Disruptor"] = preload("res://Cards/Imperial Disruptor.tscn")
@@ -106,8 +105,10 @@ func _ready():
 	print("Knight's Praise, loaded")
 	cards["Lady of Lament"] = preload("res://Cards/Lady of Lament.tscn")
 	print("Lady of Lament, loaded")
+	"""
 	cards["Land Renewal"] = preload("res://Cards/Land Renewal.tscn")
 	print("Land Renewal, loaded")
+	"""
 	cards["Leviathan"] = preload("res://Cards/Leviathan.tscn")
 	print("Leviathan, loaded")
 	cards["Lichorus"] = preload("res://Cards/Lichorus.tscn")
@@ -128,8 +129,11 @@ func _ready():
 	print("Meroval Stables, loaded")
 	cards["Might And Guts"] = preload("res://Cards/Might And Guts.tscn")
 	print("Might And Guts, loaded")
+	"""
 	cards["Mindstorm Dragon"] = preload("res://Cards/Mindstorm Dragon.tscn")
 	print("Mindstorm Dragon, loaded")
+	"""
+	"""
 	cards["Mirabilite Dolmen"] = preload("res://Cards/Mirabilite Dolmen.tscn")
 	print("Mirabilite Dolmen, loaded")
 	cards["Mirnast Engineer"] = preload("res://Cards/Mirnast Engineer.tscn")

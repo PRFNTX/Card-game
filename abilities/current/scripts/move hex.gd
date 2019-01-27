@@ -24,7 +24,6 @@ func activate(_Game, _entity, _val):
 		Game.delegate_action(entity.Hex.id,get_parent().get_parent().get_name()+'/'+get_parent().get_name()+'/'+get_name())
 	return true
 
-
 func conditions(hex):
 	if hex.stateLocal['hex_type']==0 and not hex.has_unit():
 		return true
@@ -36,8 +35,6 @@ func targeting():
 			hex.setState({'cover':hex.targetOther , 'target' :true})
 		else:
 			hex.setState({'cover':Color(0,0,0,0) , 'target' :false})
-
-
 
 func complete(target, set_state=null):
 	if get_parent().has_method('pay_costs'):
@@ -63,18 +60,7 @@ func complete(target, set_state=null):
 		else:
 			return true
 
-
 func cancel_action():
 	Game.newAction()
 	get_parent().iter-=1
 	get_parent().activate(Game,entity,val)
-
-func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-	pass
-
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass

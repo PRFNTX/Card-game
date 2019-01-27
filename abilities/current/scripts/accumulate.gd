@@ -18,9 +18,6 @@ func activate(_Game, _entity, _val):
 		entity.on_death()
 
 
-
-
-
 func _ready():
 	pass
 

@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://abilities/current/abilities/abl_add_abl.gd" type="Script" id=1]
+
+[node name="abl_add_abl" type="Node" index="0"]
+
+script = ExtResource( 1 )
+gold_cost = 0
+action_cost = 0
+faeria_cost = 0
+energy_cost = 1
+ability = null
+ability_type = "Movement"
+attributes = null
+target_type = 1
+target_player = 0
+adjacent_only = false
+free_after_turn = true
+
+

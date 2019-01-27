@@ -29,7 +29,7 @@ enemy_modulate = Color( 0.722656, 0.71701, 0.71701, 1 )
 
 [node name="Area2D" type="Area2D" parent="." index="0"]
 
-position = Vector2( -1.54376e-05, 0.358471 )
+position = Vector2( -1.54376e-005, 0.358471 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -42,7 +42,7 @@ script = ExtResource( 2 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" index="0"]
 
-position = Vector2( 0.540373, 2.92808e-06 )
+position = Vector2( 0.540373, 2.92808e-006 )
 z_index = 17
 build_mode = 0
 polygon = PoolVector2Array( -24.3677, -32.7163, 25.4284, -32.2868, 50.1118, -0.734804, 24.7843, 32.7488, -24.368, 32.7486, -49.9099, -0.0912528 )
@@ -51,7 +51,7 @@ _sections_unfolded = [ "Transform", "Z Index" ]
 [node name="sprite" type="Sprite" parent="." index="1"]
 
 modulate = Color( 1, 1, 1, 0.0441961 )
-position = Vector2( 7.62939e-06, -7.62939e-06 )
+position = Vector2( 7.62939e-006, -7.62939e-006 )
 rotation = -1.5708
 scale = Vector2( 0.75, 1 )
 z_index = 2

@@ -6,7 +6,7 @@
 [ext_resource path="res://Assets/faeria.png" type="Texture" id=4]
 [ext_resource path="res://abilities/current/Play/dmg all.tscn" type="PackedScene" id=5]
 
-[node name="Unit" type="Node2D"]
+[node name="Unit" type="Node2D" index="0"]
 
 position = Vector2( 30, 30 )
 script = ExtResource( 1 )
@@ -16,6 +16,9 @@ max_energy = 1
 base_attack = 0
 base_health = 0
 base_val = 3
+isTargetable = true
+isImmune = false
+isAttackable = true
 COLOR_GREATER = Color( 0, 0.824219, 0.0128784, 1 )
 COLOR_EQUAL = Color( 0, 0, 0, 1 )
 COLOR_LESS = Color( 0.828125, 0, 0, 1 )
@@ -45,6 +48,7 @@ on_damage = false
 on_death = false
 on_clock = false
 on_action = false
+on_receive_attack = false
 on_turn_end = false
 frame_alt = null
 
@@ -130,6 +134,7 @@ margin_top = 12.0
 margin_right = 27.0
 margin_bottom = 26.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
@@ -151,6 +156,7 @@ margin_top = 12.0
 margin_right = 38.0
 margin_bottom = 26.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
@@ -172,6 +178,7 @@ margin_top = 12.0
 margin_right = 45.0
 margin_bottom = 26.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
@@ -198,6 +205,7 @@ margin_top = 12.0
 margin_right = 31.0
 margin_bottom = 26.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
@@ -239,5 +247,7 @@ players = 0
 [node name="on_action" type="Node" parent="." index="16"]
 
 [node name="on_end_turn" type="Node" parent="." index="17"]
+
+[node name="on_receive_attack" type="Node" parent="." index="18"]
 
 

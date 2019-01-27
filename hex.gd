@@ -57,6 +57,15 @@ func has_opposing_unit(friendly=0):
 			else:
 				return false
 
+func has_attackable_opposing_unit(friendly=0):
+	if $hexEntity.get_children().size()>1:
+		var hexUnit = $hexEntity.get_children()[1]
+		if hexUnit.Owner>=0:
+			if hexUnit.Owner!=friendly and hexUnit.isAttackable:
+				return true
+			else:
+				return false
+
 func has_friendly_unit(friendly=0):
 	if $hexEntity.get_children().size()>1:
 		if $hexEntity.get_children()[1].Owner>=0:
@@ -236,7 +245,7 @@ func action(type,by,test=false):
 			if test:
 				return false
 	elif type=="AttackAdj":
-		if is_adjacent_to(stateLocal['active_unit'].Hex) and (has_opposing_unit()):
+		if is_adjacent_to(stateLocal['active_unit'].Hex) and (has_attackable_opposing_unit()):
 			if !test:
 				setState({'cover':attack,'target':true})
 			else:
@@ -246,7 +255,7 @@ func action(type,by,test=false):
 			if test:
 				return false
 	elif type=="AttackAdjOrCollect":
-		if is_adjacent_to(stateLocal['active_unit'].Hex) and has_opposing_unit():
+		if is_adjacent_to(stateLocal['active_unit'].Hex) and has_attackable_opposing_unit():
 			if !test:
 				setState({'cover':attack,'target':true})
 			else:

@@ -5,6 +5,7 @@ export(int) var attack = 1
 export(int) var energy = 0
 export(int,"All","Creature","Building") var type = 1
 export(int,"All","Owner","Opponent") var player = 1
+export(PackedScene) var unbuffer = null
 
 
 var entity
@@ -19,7 +20,13 @@ func activate(_Game, _entity, unused):
 	for ent in  get_tree().get_nodes_in_group("entities"):
 		if conditions(ent):
 			ent.life_change(health)
-			ent.Unit.current_attack+=attack
+			var modName = ent.Unit.set_mod_att('kingsPraise', attack, true)
+			if unbuffer != null:
+				var attach_unbuffer = unbuffer.instance()
+				attach_unbuffer.set_name(modName)
+				attach_unbuffer.init(ent)
+				ent.Unit.get_node("on_end_turn").add_child(attach_unbuffer)
+				ent.Unit.on_end_turn = true
 			for i in range(0, energy):
 				ent.Unit.add_one_energy()
 	return null

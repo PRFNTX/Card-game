@@ -5,6 +5,9 @@ export(int) var max_energy = 1
 export(int) var base_attack = 1
 export(int) var base_health = 1
 export(int) var base_val = 1
+export(int) var isTargetable = true
+export(int) var isImmune = false
+export(int) var isAttackable = true
 
 export(Color,RGB) var COLOR_GREATER
 export(Color,RGB) var COLOR_EQUAL
@@ -23,8 +26,24 @@ var mod_att = {}
 
 var intermediate_attack
 
-func set_mod_att(val):
-	mod_att[val['identifier']]=val['mod']
+func set_mod_att(iden, val, stacks=false):
+	if mod_att.keys().has(iden):
+		if stacks:
+			var num = 1
+			while mod_att.keys().has(iden+str(num)):
+				num+=1
+			mod_att[iden+str(num)] = val
+		else:
+			return null
+	else:
+		mod_att[iden] = val
+		return iden
+
+func unmod_att(iden):
+	if mod_att.keys().has(iden):
+		mod_att.erase(iden)
+		return true
+	return false
 
 
 func set_attack(val):
@@ -40,7 +59,7 @@ func set_attack(val):
 func get_attack():
 	var ret = current_attack
 	for mod in mod_att.keys():
-		ret-=mod_att[mod]
+		ret+=mod_att[mod]
 	return ret
 
 func set_health(val):
@@ -113,7 +132,8 @@ export(bool) var on_damage = false
 export(bool) var on_death = false
 export(bool) var on_clock = false
 export(bool) var on_action = false
-export(bool) var on_turn_end = false
+export(bool) var on_receive_attack = false
+export(bool) var on_end_turn = false
 
 export(Texture) var frame_alt = null
 
@@ -148,11 +168,8 @@ func _ready():
 	set_health(base_health)
 	set_attack(base_attack)
 	set_val(base_val)
-	
-	
 
 func turn_start(stun):
-	
 	if current_energy<max_energy and !stun:
 		add_one_energy()
 	if on_production:
@@ -182,11 +199,19 @@ func production():
 func action(type,target,state):
 	if on_action:
 		for effectNode in $on_action.get_children():
-			effectNode.activate(type,target,state) 
+			effectNode.activate(type,target,state)
 
-func on_turn_end():
+func on_receive_attack(source):
+	var complete = true
+	if on_receive_attack:
+		for effectNode in $on_receive_attack.get_children():
+			if complete:
+				complete = effectNode.activate(source)
+	return complete
+
+func on_end_turn():
 	if on_turn_end:
-		for effectNode in $on_turn_end.get_children():
+		for effectNode in $on_end_turn.get_children():
 			effectNode.activate(get_parent().Game,get_parent(),"")
 
 func attack(target):

@@ -6,8 +6,8 @@ extends Node2D
 # var b="textvar"
 
 
-var testing_solo = true
-var god_mode = true
+var testing_solo = false
+var god_mode = false
 
 onready var globals = get_node('/root/master')
 
@@ -37,7 +37,18 @@ func set_player(val):
 
 
 ###### current_turn will be set to 0 during local players turn and 1 during remote players turn
-var state={"action":"", 'current_turn':0,'active_unit':null,'clock_time':0,'hovered':null,'building_card':null, 'delegate_id':null,'delegate_node':null, 'frame_card':null,'preview_card':null}
+var state={
+	"action":"",
+	'current_turn':0,
+	'active_unit':null,
+	'clock_time':0,
+	'hovered':null,
+	'building_card':null,
+	'delegate_id':null,
+	'delegate_node':null,
+	'frame_card':null,
+	'preview_card':null
+}
 
 var actionTimer
 

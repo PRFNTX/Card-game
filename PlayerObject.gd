@@ -27,6 +27,9 @@ var lbl_hand
 
 var Deck setget deck_init
 
+func get_orb():
+	GameNode.get_hex_by_id(0).get_unit()
+
 func deck_init(val):
 	if !is_dummy:
 	
