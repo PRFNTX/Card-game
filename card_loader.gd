@@ -93,10 +93,8 @@ func _ready():
 	print("Imperial Disruptor, loaded")
 	cards["Irregular Dawn"] = preload("res://Cards/Irregular Dawn.tscn")
 	print("Irregular Dawn, loaded")
-	"""
 	cards["Jelly Wisp"] = preload("res://Cards/Jelly Wisp.tscn")
 	print("Jelly Wisp, loaded")
-	"""
 	cards["Kappa Dowser"] = preload("res://Cards/Kappa Dowser.tscn")
 	print("Kappa Dowser, loaded")
 	cards["Kappa Emperor"] = preload("res://Cards/Kappa Emperor.tscn")
@@ -134,7 +132,6 @@ func _ready():
 	"""
 	cards["Mindstorm Dragon"] = preload("res://Cards/Mindstorm Dragon.tscn")
 	print("Mindstorm Dragon, loaded")
-	"""
 	"""
 	cards["Mirabilite Dolmen"] = preload("res://Cards/Mirabilite Dolmen.tscn")
 	print("Mirabilite Dolmen, loaded")
@@ -182,6 +179,10 @@ func _ready():
 	print("Shrine of Blossom, loaded")
 	cards["Shrine of Tribute"] = preload("res://Cards/Shrine of Tribute.tscn")
 	print("Shrine of Tribute, loaded")
+	cards["Silvermoon Dragon"] = preload("res://Cards/Silvermoon Dragon.tscn")
+	print("Silvermoon Dragon, loaded")
+	cards["Singing Tipi"] = preload("res://Cards/Singing Tipi.tscn")
+	print("Singing Tipi, loaded")
 	cards["Soaken Luduan"] = preload("res://Cards/Soaken Luduan.tscn")
 	print("Soaken Luduan, loaded")
 	cards["Spirit of Agony"] = preload("res://Cards/Spirit of Agony.tscn")
@@ -190,6 +191,7 @@ func _ready():
 	print("Spring Mochi, loaded")
 	cards["Stained Boar"] = preload("res://Cards/Stained Boar.tscn")
 	print("Stained Boar, loaded")
+	"""
 	cards["Steam Forge"] = preload("res://Cards/Steam Forge.tscn")
 	print("Steam Forge, loaded")
 	cards["Storehouse"] = preload("res://Cards/Storehouse.tscn")
