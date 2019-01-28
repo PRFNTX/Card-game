@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://BaseEntity.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Round.png" type="Texture" id=2]
 [ext_resource path="res://Assets/energy_small.png" type="Texture" id=3]
 [ext_resource path="res://Assets/faeria.png" type="Texture" id=4]
+[ext_resource path="res://abilities/current/Movement/MoveOrRanged.tscn" type="PackedScene" id=5]
+[ext_resource path="res://abilities/current/Attacks/standardAttack.tscn" type="PackedScene" id=6]
+[ext_resource path="res://abilities/current/on_attack/land-on-att.tscn" type="PackedScene" id=7]
+[ext_resource path="res://abilities/current/action/strikeback.tscn" type="PackedScene" id=8]
 
 [node name="Unit" type="Node2D" index="0"]
 
@@ -13,8 +17,11 @@ _sections_unfolded = [ "Transform" ]
 max_faeria = 0
 max_energy = 1
 base_attack = 2
-base_health = 3
+base_health = 4
 base_val = 0
+isTargetable = true
+isImmune = false
+isAttackable = true
 COLOR_GREATER = Color( 0, 0.824219, 0.0128784, 1 )
 COLOR_EQUAL = Color( 0, 0, 0, 1 )
 COLOR_LESS = Color( 0.828125, 0, 0, 1 )
@@ -31,20 +38,21 @@ flying = false
 conquest = false
 convoke = false
 radiate = false
-auto_collect = 0
+auto_collect = false
 collect = true
-attack = true
+attack = false
 abilities = false
 on_play = false
 on_production = false
-on_attack = false
+on_attack = true
 on_move = false
 on_collect = false
 on_damage = false
 on_death = false
 on_clock = false
-on_action = false
-on_turn_end = false
+on_action = true
+on_receive_attack = false
+on_end_turn = false
 frame_alt = null
 
 [node name="Frame" type="Sprite" parent="." index="0"]
@@ -129,6 +137,7 @@ margin_top = 12.0
 margin_right = 27.0
 margin_bottom = 26.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
@@ -150,6 +159,7 @@ margin_top = 12.0
 margin_right = 38.0
 margin_bottom = 26.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
@@ -171,6 +181,7 @@ margin_top = 12.0
 margin_right = 45.0
 margin_bottom = 26.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
@@ -197,6 +208,7 @@ margin_top = 12.0
 margin_right = 31.0
 margin_bottom = 26.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
@@ -209,13 +221,22 @@ _sections_unfolded = [ "Visibility" ]
 
 [node name="Movement" type="Node" parent="." index="5"]
 
+[node name="MoveOrRanged" parent="Movement" index="0" instance=ExtResource( 5 )]
+
 [node name="Attack" type="Node" parent="." index="6"]
+
+[node name="standardAttack" parent="Attack" index="0" instance=ExtResource( 6 )]
 
 [node name="Abilities" type="Node" parent="." index="7"]
 
 [node name="on_play" type="Node" parent="." index="8"]
 
 [node name="on_attack" type="Node" parent="." index="9"]
+
+[node name="land-on-att" parent="on_attack" index="0" instance=ExtResource( 7 )]
+
+change_type = false
+convert_land = true
 
 [node name="on_move" type="Node" parent="." index="10"]
 
@@ -228,6 +249,8 @@ _sections_unfolded = [ "Visibility" ]
 [node name="on_clock" type="Node" parent="." index="14"]
 
 [node name="on_action" type="Node" parent="." index="15"]
+
+[node name="strikeback" parent="on_action" index="0" instance=ExtResource( 8 )]
 
 [node name="on_production" type="Node" parent="." index="16"]
 

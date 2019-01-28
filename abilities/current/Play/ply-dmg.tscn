@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://abilities/current/Play/ply-dmg.gd" type="Script" id=1]
+
+[node name="ply-dmg" type="Node" index="0"]
+
+script = ExtResource( 1 )
+damage = -1
+target_type = 0
+target_player = 1
+adjacent_only = false
+
+

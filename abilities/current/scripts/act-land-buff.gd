@@ -15,4 +15,4 @@ func activate(type,target,set_state=null):
 	if not up and entity.Hex.stateLocal.hex_type == conv_type[land_type]:
 		entity.Unit.current_attack += val
 	elif up and not entity.Hex.stateLocal.hex_type == conv_type[land_type]:
-		entity.Unit.current_attack += val
+		entity.Unit.current_attack -= val

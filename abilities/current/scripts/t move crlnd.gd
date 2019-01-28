@@ -89,6 +89,7 @@ func complete(target,set_state=null):
 		hex_targ()
 	else:
 		Game.get_hex_by_id(target).setState({'hex_type':4})
+		Game.update_lands_owned()
 		if local:
 			Game.send_action('actionTree', remote_convert(target),{'current_turn':(state['current_turn']+1)%2,'active_unit':remote_convert(state['active_unit'])})
 		Game.actionDone()
@@ -98,13 +99,3 @@ func remote_convert(hex_id):
 		return 0
 	else:
 		return 45-hex_id
-
-func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-	pass
-
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass

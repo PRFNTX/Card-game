@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://abilities/current/death/ded_orb_dmg.gd" type="Script" id=1]
+
+[node name="ded_orb_dmg" type="Node" index="0"]
+
+script = ExtResource( 1 )
+value = -3
+player = 0
+
+

@@ -11,6 +11,7 @@ var conv_land = [
 func activate(Game, entity, target):
 	hex = Game.get_hex_by_id(target)
 	hex.setState({"hex_type": conv_land[to_type]})
+	Game.update_lands_owned()
 
 
 #func _process(delta):

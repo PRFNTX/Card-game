@@ -7,7 +7,7 @@
 script = ExtResource( 1 )
 require_valid_placement = true
 require_plain_for_special = false
-owner = 0
+targ_owner = 0
 type = 2
 
 

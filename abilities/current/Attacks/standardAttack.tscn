@@ -2,9 +2,9 @@
 
 [ext_resource path="res://abilities/current/scripts/standardAttack.gd" type="Script" id=1]
 
-
-[node name="standardAttack" type="Node"]
+[node name="standardAttack" type="Node" index="0"]
 
 script = ExtResource( 1 )
+collect_only = false
 
 

@@ -14,3 +14,4 @@ func activate(Game,entity,val):
 				hex.setState({'hex_type':conv_type[to_type]})
 				if to_type==0:
 					hex.setState({'hex_owner': -1})
+	Game.update_lands_owned()

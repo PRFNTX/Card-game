@@ -49,6 +49,7 @@ func complete(target, set_state=null):
 		local= false
 		
 	Game.get_hex_by_id(target).setState({'hex_type':2+change_to})
+	Game.update_lands_owned()
 	if local:
 		Game.send_action('delegate',remote_convert(target),{'delegate_id':remote_convert(state['delegate_id']),'delegate_node':get_parent().get_parent().get_name()+'/'+get_parent().get_name()+'/'+get_name()})
 		if get_parent().repeat():
@@ -68,12 +69,3 @@ func cancel_action():
 	get_parent().iter-=1
 	get_parent().activate(Game,entity,val)
 
-func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-	pass
-
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass

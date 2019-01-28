@@ -71,6 +71,7 @@ func complete(target, set_state=null):
 		'hex_type': make_type,
 		'hex_owner': entity.Owner
 	})
+	Game.update_lands_owned()
 	Game.actionDone()
 	queue_free()
 	

@@ -5,5 +5,7 @@
 [node name="haunt" type="Node" index="0"]
 
 script = ExtResource( 1 )
+by_power = true
+value = 1
 
 

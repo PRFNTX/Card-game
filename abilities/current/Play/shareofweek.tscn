@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://shareofweek.gd" type="Script" id=1]
+
+[node name="shareofweek" type="Node" index="0"]
+
+script = ExtResource( 1 )
+health = 2
+max_target_health = 2
+target_type = 1
+player = 1
+
+

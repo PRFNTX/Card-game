@@ -1,6 +1,6 @@
 extends Node
 
-export(int,'Cards','Actions','Energy','Gold') var gain_type = 1
+export(int,'Cards','Actions','Energy','Gold', 'faeria') var gain_type = 1
 export(bool) var value_by_faeria = true
 export(int) var value = 0
 export(bool) var instead = false
@@ -19,6 +19,8 @@ func activate(Game, entity, by, val):
 			Game.get_hex_by_id(by).get_unit().add_one_energy()
 	if gain_type==3:
 		Game.players[Game.get_hex_by_id(by).get_unit().Owner].modCoin(gain)
+	if gain_type==4:
+		Game.players[Game.get_hex_by_id(by).get_unit().Owner].modFaeria(value)
 	if instead:
 		Game.players[Game.get_hex_by_id(by).get_unit().Owner].modFaeria(-1*val)
 

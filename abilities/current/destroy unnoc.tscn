@@ -2,8 +2,7 @@
 
 [ext_resource path="res://abilities/current/scripts/destroy unnoc.gd" type="Script" id=1]
 
-
-[node name="destroy unnoc" type="Node"]
+[node name="destroy unnoc" type="Node" index="0"]
 
 script = ExtResource( 1 )
 

@@ -8,6 +8,6 @@ script = ExtResource( 1 )
 value = 2
 resource = 0
 type = 5
-owner = 0
+player = 0
 
 

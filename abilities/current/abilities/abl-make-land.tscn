@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://abilities/current/abilities/abl-make-land.gd" type="Script" id=1]
+
+[node name="abl-make-land" type="Node" index="0"]
+
+script = ExtResource( 1 )
+gold_cost = 0
+action_cost = 1
+faeria_cost = 1
+energy_cost = 0
+type = 2
+
+

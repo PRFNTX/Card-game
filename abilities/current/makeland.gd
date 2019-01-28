@@ -43,7 +43,7 @@ func complete(target, set_state=null):
 	var local = true
 	var state = Game.get_state()
 	setState({'cover': entity.Hex.gather, 'target':true, 'hex_owner':entity.Owner})
-	
+	Game.update_lands_owned()
 	if local:
 		Game.send_action('delegate',remote_convert(target),{'delegate_id':remote_convert(entity.Hex.id), 'delegate_node':get_parent().get_name()+'/'+get_name()})
 	

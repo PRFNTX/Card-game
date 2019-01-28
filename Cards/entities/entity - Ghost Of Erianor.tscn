@@ -52,7 +52,7 @@ on_death = false
 on_clock = false
 on_action = false
 on_receive_attack = false
-on_turn_end = false
+on_end_turn = false
 frame_alt = null
 
 [node name="Frame" type="Sprite" parent="." index="0"]
@@ -233,9 +233,9 @@ _sections_unfolded = [ "Visibility" ]
 
 [node name="on_attack" type="Node" parent="." index="9"]
 
-[node name="on_move" type="Node" parent="." index="10"]
+[node name="haunt" parent="on_attack" index="0" instance=ExtResource( 7 )]
 
-[node name="haunt" parent="on_move" index="0" instance=ExtResource( 7 )]
+[node name="on_move" type="Node" parent="." index="10"]
 
 [node name="on_collect" type="Node" parent="." index="11"]
 
@@ -248,8 +248,6 @@ _sections_unfolded = [ "Visibility" ]
 [node name="on_action" type="Node" parent="." index="15"]
 
 [node name="act-land-buff" parent="on_action" index="0" instance=ExtResource( 8 )]
-
-val = 1
 
 [node name="on_production" type="Node" parent="." index="16"]
 

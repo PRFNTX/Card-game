@@ -1,12 +1,5 @@
 extends Node
 
-
-export(int, "Any","Opponent","Owner") var player = 0
-export(int,"Hex") var type = 0
-export(bool) var empty_only = true
-export(bool) var then_free = false
-export(bool) var adjacent_only = false
-
 var entity
 var Game
 func init(_entity):

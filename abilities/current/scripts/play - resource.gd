@@ -2,6 +2,7 @@ extends Node
 
 export(int,"Gold","Faeria","Actions","Cards") var type = 3
 export(int) var value = 1
+export(bool) var then_free = true
 
 func activate(Game, entity, unused):
 	if type == 0:
@@ -13,7 +14,8 @@ func activate(Game, entity, unused):
 	elif type==3:
 		for i in value:
 			Game.players[entity.Owner].drawCard()
-	entity.queue_free()
+	if then_free:
+		entity.queue_free()
 	return null
 
 func _ready():

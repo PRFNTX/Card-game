@@ -61,6 +61,7 @@ func complete(target, set_state=null):
 	if hex_target.has_unit():
 		hex_target.get_unit().on_death()
 	hex_target.setState({'hex_owner':-1,'hex_type':0})
+	Game.update_lands_owned()
 	if local:
 		Game.send_action('delegate',45-target,{'delegate_id':45-entity.Hex.id,'delegate_node':get_parent().get_name()+"/"+get_name()})
 	Game.actionDone()

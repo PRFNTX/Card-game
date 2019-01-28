@@ -6,5 +6,6 @@
 
 script = ExtResource( 1 )
 land_type = 3
+val = 1
 
 

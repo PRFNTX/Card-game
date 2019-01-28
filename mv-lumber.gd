@@ -30,4 +30,5 @@ func activate(_game, _entity, hexNum):
 			elif type==3:
 				for i in value:
 					Game.players[entity.Owner].drawCard()
+	Game.update_lands_owned()
 	

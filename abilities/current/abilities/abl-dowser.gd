@@ -56,6 +56,8 @@ func targeting():
 			hex.setState({
 				'cover':hex.summon, 'target':true
 			})
+		else:
+			hex.setState({'cover':Color(0,0,0,0) , 'target' :false})
 
 func complete(target, set_state=null):
 	pay_costs()
@@ -71,7 +73,7 @@ func complete(target, set_state=null):
 	if hex_target.unit_is_building():
 		$hexEntity.get_children()[1].receive_damage(structureDamage)
 	if local:
-		Game.send_action('delegate',45-target,{'delegate_id':entity.Hex.id,'delegate_node':'Abilities/damage'})
+		Game.send_action('delegate',45-target,{'delegate_id':entity.Hex.id,'delegate_node':get_relative_path()})
 	Game.actionDone()
 	queue_free()
 

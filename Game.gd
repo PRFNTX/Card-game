@@ -58,6 +58,7 @@ func _init(initial_state={}):
 
 #STATE 
 func setState(obj):
+	$noTargets.hide()
 	if god_mode:
 		players[state['current_turn']].setActions(3)
 		players[state['current_turn']].setFaeria(20)
@@ -492,7 +493,6 @@ func moveAir(target, set_state=null):
 		actionReady=true
 		unit.Unit.start_attack(self)
 	else:
-		
 		actionDone()
 
 func AttackAdjOrCollect(target, set_state=null):
@@ -922,10 +922,13 @@ func check_valid_action(action):
 	for hex in get_tree().get_nodes_in_group('Hex'):
 		if hex.id!=0 and hex.action(action,state['current_turn'],true):
 			targets = true
-	print("IS VALID ACTION:")
-	print(targets)
+	if not targets:
+		no_valid_targets()
 	return targets
 
+func no_valid_targets():
+	cancelAction()
+	$noTargets.show()
 
 func startTimer():
 	#actionTimer.wait_time=0.4

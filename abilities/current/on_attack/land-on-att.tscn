@@ -6,6 +6,7 @@
 
 script = ExtResource( 1 )
 type = 1
+change_type = true
 convert_land = false
 
 

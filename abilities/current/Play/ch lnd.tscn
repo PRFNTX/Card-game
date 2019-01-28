@@ -2,12 +2,12 @@
 
 [ext_resource path="res://abilities/current/scripts/ch lnd.gd" type="Script" id=1]
 
-
 [node name="ch lnd" type="Node" index="0"]
 
 script = ExtResource( 1 )
 player = 1
 type = 0
+change_to = 0
 then_free = false
 
 

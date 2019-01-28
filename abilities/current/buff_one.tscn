@@ -1,5 +1,13 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://abilities/current/buff_one.gd" type="Script" id=1]
 
 [node name="buff_one" type="Node" index="0"]
+
+script = ExtResource( 1 )
+power = 1
+unbuffer = null
+buff_name = "NaturesGrowth"
+owner = 0
 
 

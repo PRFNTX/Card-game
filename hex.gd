@@ -114,9 +114,9 @@ func action(type,by,test=false):
 		setState({'cover':Color(0,0,0,0)})
 	##make lands
 	elif type=="actionLand":
-		if hexType.child.ActionLand(self, by):
+		if hexType.child.ActionLand(self, by) and hex_is_empty():
 			if !test:
-				setState({'cover':land, 'target':true, 'hex_owner':by})
+				setState({'cover':land, 'target':true})
 			else:
 				return true
 		else:
@@ -124,7 +124,7 @@ func action(type,by,test=false):
 			if test:
 				return false
 	elif type=="actionSand":
-		if hexType.child.actionSand and activePlayerCanAffect(by):
+		if hexType.child.actionSand and activePlayerCanAffect(by) and hex_is_empty():
 			if !test:
 				setState({'cover':move, 'target':true})
 			else:
@@ -134,7 +134,7 @@ func action(type,by,test=false):
 			if test:
 				return false
 	elif type=="actionLake":
-		if hexType.child.actionLake and activePlayerCanAffect(by):
+		if hexType.child.actionLake and activePlayerCanAffect(by) and hex_is_empty():
 			if !test:
 				setState({'cover':summon, 'target':true})
 			else:
@@ -144,7 +144,7 @@ func action(type,by,test=false):
 			if test:
 				return false
 	elif type=="actionTree":
-		if hexType.child.actionTree and activePlayerCanAffect(by):
+		if hexType.child.actionTree and activePlayerCanAffect(by) and hex_is_empty():
 			if !test:
 				setState({'cover':gather, 'target':true})
 			else:
@@ -154,7 +154,7 @@ func action(type,by,test=false):
 			if test:
 				return false
 	elif type=="actionHill":
-		if hexType.child.actionHill and activePlayerCanAffect(by):
+		if hexType.child.actionHill and activePlayerCanAffect(by) and hex_is_empty():
 			if !test:
 				setState({'cover':targetOther, 'target':true})
 			else:

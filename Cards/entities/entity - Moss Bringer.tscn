@@ -21,6 +21,9 @@ max_energy = 1
 base_attack = 2
 base_health = 3
 base_val = 0
+isTargetable = true
+isImmune = false
+isAttackable = true
 COLOR_GREATER = Color( 0, 0.824219, 0.0128784, 1 )
 COLOR_EQUAL = Color( 0, 0, 0, 1 )
 COLOR_LESS = Color( 0.828125, 0, 0, 1 )
@@ -50,7 +53,8 @@ on_damage = false
 on_death = false
 on_clock = false
 on_action = false
-on_turn_end = false
+on_receive_attack = false
+on_end_turn = false
 frame_alt = null
 
 [node name="Frame" type="Sprite" parent="." index="0"]

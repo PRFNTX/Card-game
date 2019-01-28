@@ -421,7 +421,31 @@ position = Vector2( 131.225, 422.835 )
 texture = ExtResource( 15 )
 actionType = "card"
 
-[node name="Sprite" type="Sprite" parent="." index="2"]
+[node name="noTargets" type="Label" parent="." index="2"]
+
+visible = false
+modulate = Color( 1, 0.0117188, 0.0117188, 1 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 821.0
+margin_top = 311.0
+margin_right = 944.0
+margin_bottom = 351.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "NO VALID TARGETS"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Visibility" ]
+
+[node name="Sprite" type="Sprite" parent="." index="3"]
 
 visible = false
 position = Vector2( 509.985, 235.287 )
@@ -429,7 +453,7 @@ scale = Vector2( 6.44462, 5.94225 )
 texture = ExtResource( 16 )
 _sections_unfolded = [ "Visibility" ]
 
-[node name="RichTextLabel" type="Label" parent="." index="3"]
+[node name="RichTextLabel" type="Label" parent="." index="4"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -450,7 +474,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="actionTimer" type="Timer" parent="." index="4"]
+[node name="actionTimer" type="Timer" parent="." index="5"]
 
 process_mode = 1
 wait_time = 0.25
@@ -458,7 +482,7 @@ one_shot = true
 autostart = false
 _sections_unfolded = [ "Pause" ]
 
-[node name="basic_timeout" type="Timer" parent="." index="5"]
+[node name="basic_timeout" type="Timer" parent="." index="6"]
 
 process_mode = 1
 wait_time = 0.1
@@ -466,13 +490,13 @@ one_shot = true
 autostart = false
 _sections_unfolded = [ "Pause" ]
 
-[node name="pointP1" type="Position2D" parent="." index="6"]
+[node name="pointP1" type="Position2D" parent="." index="7"]
 
-[node name="pointP2" type="Position2D" parent="." index="7"]
+[node name="pointP2" type="Position2D" parent="." index="8"]
 
 position = Vector2( 786.46, 0.18672 )
 
-[node name="endturn" type="Button" parent="." index="8"]
+[node name="endturn" type="Button" parent="." index="9"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -497,7 +521,7 @@ text = "End Turn"
 flat = false
 align = 1
 
-[node name="Hand" type="Control" parent="." index="9"]
+[node name="Hand" type="Control" parent="." index="10"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -517,25 +541,25 @@ script = ExtResource( 17 )
 _sections_unfolded = [ "Rect", "Transform" ]
 selected_color = Color( 0.367569, 0.851663, 0.863281, 1 )
 
-[node name="Clock" parent="." index="10" instance=ExtResource( 18 )]
+[node name="Clock" parent="." index="11" instance=ExtResource( 18 )]
 
 position = Vector2( 887.117, 459.1 )
 scale = Vector2( 2, 2 )
 _sections_unfolded = [ "Transform", "Visibility" ]
 
-[node name="DisplayFrame" type="Node2D" parent="." index="11"]
+[node name="DisplayFrame" type="Node2D" parent="." index="12"]
 
 position = Vector2( 124.001, 214.854 )
 script = ExtResource( 19 )
 activatable = true
 
-[node name="PreviewFrame" type="Node2D" parent="." index="12"]
+[node name="PreviewFrame" type="Node2D" parent="." index="13"]
 
 position = Vector2( 820.999, 161.854 )
 script = ExtResource( 19 )
 activatable = false
 
-[node name="hex0" parent="." index="13" instance=ExtResource( 7 )]
+[node name="hex0" parent="." index="14" instance=ExtResource( 7 )]
 
 visible = false
 

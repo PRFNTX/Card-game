@@ -2,7 +2,6 @@
 
 [ext_resource path="res://abilities/current/scripts/add abl.gd" type="Script" id=1]
 
-
 [node name="add abl" type="Node" index="0"]
 
 script = ExtResource( 1 )

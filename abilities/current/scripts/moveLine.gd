@@ -31,7 +31,6 @@ func activate(_Game, _entity, _val):
 	Game = _Game
 	entity = _entity
 	val=_val
-	var del_path = get_path()
 	Game.delegate_action(entity.Hex.id,'Movement/moveLine')
 
 func verify_costs():

@@ -45,9 +45,7 @@ func unmod_att(iden):
 		return true
 	return false
 
-
 func set_attack(val):
-	
 	current_attack = val
 	
 	for modifier in mod_att.keys():

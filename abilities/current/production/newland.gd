@@ -10,6 +10,7 @@ func activate(Game,entity,unused):
 			'hex_type': change_type[type],
 			'hex_owner': entity.Owner
 		})
+		Game.update_lands_owned()
 
 func _ready():
 	# Called every time the node is added to the scene.
