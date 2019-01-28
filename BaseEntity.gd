@@ -88,7 +88,7 @@ func set_energy(val):
 
 func add_one_energy():
 	current_energy+=1
-	$Energy.get_children()[current_energy-1].show()
+	$Energy.get_children()[min( max_energy, current_energy-1)].show()
 
 func set_faeria(val):
 	current_faeria = val

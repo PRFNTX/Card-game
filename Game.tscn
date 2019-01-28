@@ -20,7 +20,7 @@
 [ext_resource path="res://Clock.tscn" type="PackedScene" id=18]
 [ext_resource path="res://DisplayFrame.gd" type="Script" id=19]
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
@@ -372,6 +372,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
@@ -439,6 +440,7 @@ margin_top = 386.0
 margin_right = 78.0
 margin_bottom = 400.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
@@ -481,6 +483,7 @@ margin_top = 567.0
 margin_right = 240.0
 margin_bottom = 587.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 focus_mode = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 0
@@ -505,6 +508,7 @@ margin_top = 477.0
 margin_right = 808.0
 margin_bottom = 587.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
@@ -537,9 +541,9 @@ visible = false
 
 [connection signal="timeout" from="actionTimer" to="." method="_on_Timer_timeout"]
 
-[connection signal="timeout" from="basic_timeout" to="." method="_on_Timer_timeout"]
-
 [connection signal="timeout" from="basic_timeout" to="." method="_on_basic_timeout_timeout"]
+
+[connection signal="timeout" from="basic_timeout" to="." method="_on_Timer_timeout"]
 
 [connection signal="pressed" from="endturn" to="." method="_on_endturn_pressed"]
 

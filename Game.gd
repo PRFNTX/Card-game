@@ -197,6 +197,12 @@ func create_player(num):
 	else:
 		p.position=$pointP2.position
 	p.onCreate(self,num)
+	
+	print('globals.deck_list is')
+	print(globals.deck_list)
+	print('globals.Deck is')
+	print(globals.Deck)
+	
 	if !globals.deck_list==null and globals.deck_list.keys().size()>0 and num==0:
 		p.Deck = globals.deck_list[globals.Deck]
 	return p
