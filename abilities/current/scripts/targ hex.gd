@@ -18,7 +18,7 @@ func activate(_Game, _entity, _val):
 
 
 func conditions(hex):
-	if hex.stateLocal['hex_type'] >1 and hex.stateLocal['hex_type'] <7 and ( not empty_only or not hex.has_unit() ):
+	if hex.stateLocal['hex_type'] >1 and hex.stateLocal['hex_type'] <7 and (not empty_only or not hex.has_unit() ):
 		if player == 0:
 			return true
 		elif hex.stateLocal['hex_owner']==player%2:

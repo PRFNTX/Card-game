@@ -208,7 +208,7 @@ func on_receive_attack(source):
 	return complete
 
 func on_end_turn():
-	if on_turn_end:
+	if on_end_turn:
 		for effectNode in $on_end_turn.get_children():
 			effectNode.activate(get_parent().Game,get_parent(),"")
 
