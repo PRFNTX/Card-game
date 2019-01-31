@@ -7,7 +7,10 @@ path="res://.import/Small.png-794cb001df7478768db8634216f2d4bd.stex"
 [deps]
 
 source_file="res://Assets/portraits/M - Evgeniy Petlya - 01/Small.png"
+source_md5="d997e5f0970191ca8c4298dac02058a7"
+
 dest_files=[ "res://.import/Small.png-794cb001df7478768db8634216f2d4bd.stex" ]
+dest_md5="00589ccece342247c93087ed2f21fd13"
 
 [params]
 

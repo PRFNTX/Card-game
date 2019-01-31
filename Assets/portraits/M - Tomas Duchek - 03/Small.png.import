@@ -7,7 +7,10 @@ path="res://.import/Small.png-51cddf1ef1f621765d8179e34ecf450b.stex"
 [deps]
 
 source_file="res://Assets/portraits/M - Tomas Duchek - 03/Small.png"
+source_md5="c19a42ec90b42746fa8af9459d5bb4c4"
+
 dest_files=[ "res://.import/Small.png-51cddf1ef1f621765d8179e34ecf450b.stex" ]
+dest_md5="54319c71458a505ae64c00a86968010f"
 
 [params]
 

@@ -7,7 +7,10 @@ path="res://.import/Small.png-9cca49bceb04d9ce7e98c4cc8c6c7839.stex"
 [deps]
 
 source_file="res://Assets/portraits/F - Anna Pavleeva - 01/Small.png"
+source_md5="0232cf0544584eb5fb35ded52f7ea19b"
+
 dest_files=[ "res://.import/Small.png-9cca49bceb04d9ce7e98c4cc8c6c7839.stex" ]
+dest_md5="be6d783ac5bd769dcf07d326ac07a675"
 
 [params]
 

@@ -7,7 +7,10 @@ path="res://.import/Small.png-87da68467896a87a7d1d8f0bf254e586.stex"
 [deps]
 
 source_file="res://Assets/portraits/F - Elena Berezina 01/Small.png"
+source_md5="716fdd8484105d6019eb7d13a079925c"
+
 dest_files=[ "res://.import/Small.png-87da68467896a87a7d1d8f0bf254e586.stex" ]
+dest_md5="41cd2a32aaacc3e9bfd56fdba2aa52bd"
 
 [params]
 

@@ -7,7 +7,10 @@ path="res://.import/Small.png-3fd2ba22bab5fb48fde4c0746c4f6b6b.stex"
 [deps]
 
 source_file="res://Assets/portraits/M - Igor Sid - 02/Small.png"
+source_md5="6b1c75031a7920e973ba77a1cb234c71"
+
 dest_files=[ "res://.import/Small.png-3fd2ba22bab5fb48fde4c0746c4f6b6b.stex" ]
+dest_md5="044f5da04f42318ea8ba026bc1a14bfe"
 
 [params]
 

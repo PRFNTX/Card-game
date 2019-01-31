@@ -7,7 +7,10 @@ path="res://.import/Small.png-69a9e56f3471f6f748685eadd705e073.stex"
 [deps]
 
 source_file="res://Assets/portraits/F - Anna Helme - 01/Small.png"
+source_md5="b9e23aee7000bf55930a33badce04594"
+
 dest_files=[ "res://.import/Small.png-69a9e56f3471f6f748685eadd705e073.stex" ]
+dest_md5="52f9207b9be366e34800e6dea68c1de5"
 
 [params]
 

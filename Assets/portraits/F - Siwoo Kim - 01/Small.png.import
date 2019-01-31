@@ -7,7 +7,10 @@ path="res://.import/Small.png-92d92ebd899efbc7bb1036fa8c0ff99f.stex"
 [deps]
 
 source_file="res://Assets/portraits/F - Siwoo Kim - 01/Small.png"
+source_md5="7a34013371c2672f788e66e78ea6a0f4"
+
 dest_files=[ "res://.import/Small.png-92d92ebd899efbc7bb1036fa8c0ff99f.stex" ]
+dest_md5="77c46cde0f5b435a562de252025d2c7a"
 
 [params]
 

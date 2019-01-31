@@ -7,7 +7,10 @@ path="res://.import/Small.png-6e60ae0efcd8a6bd383af7334d1394a7.stex"
 [deps]
 
 source_file="res://Assets/portraits/F - Amazon A - 01/Small.png"
+source_md5="0df5ae4b95a91910dd09e21ec2efbd97"
+
 dest_files=[ "res://.import/Small.png-6e60ae0efcd8a6bd383af7334d1394a7.stex" ]
+dest_md5="67793a7bbe05ad0654dcf8c8c4f84f95"
 
 [params]
 

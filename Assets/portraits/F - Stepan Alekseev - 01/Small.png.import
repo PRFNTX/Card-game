@@ -7,7 +7,10 @@ path="res://.import/Small.png-e4f913458d7eae06bb93f032e99ece24.stex"
 [deps]
 
 source_file="res://Assets/portraits/F - Stepan Alekseev - 01/Small.png"
+source_md5="7d8e12139634ea669ec5d45da7ed3fce"
+
 dest_files=[ "res://.import/Small.png-e4f913458d7eae06bb93f032e99ece24.stex" ]
+dest_md5="87d9034247058428c3edf58c771cb45a"
 
 [params]
 

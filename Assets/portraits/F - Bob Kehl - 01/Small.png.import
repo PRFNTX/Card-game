@@ -7,7 +7,10 @@ path="res://.import/Small.png-9d98af0cee14d32dc2886e6875daffc9.stex"
 [deps]
 
 source_file="res://Assets/portraits/F - Bob Kehl - 01/Small.png"
+source_md5="dfd332836eedd79ed6b86fe110b360b4"
+
 dest_files=[ "res://.import/Small.png-9d98af0cee14d32dc2886e6875daffc9.stex" ]
+dest_md5="8569ff33510ca1444e8d67db314d17be"
 
 [params]
 

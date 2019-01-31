@@ -7,7 +7,10 @@ path="res://.import/Card Back.png-8f7ae5661aeb4d250ede3376f5369747.stex"
 [deps]
 
 source_file="res://Assets/Card Back.png"
+source_md5="0976e9fba2ed5cdb96f10a88615b0c17"
+
 dest_files=[ "res://.import/Card Back.png-8f7ae5661aeb4d250ede3376f5369747.stex" ]
+dest_md5="1b259b7820f322ff3541b2a8444d9f2f"
 
 [params]
 

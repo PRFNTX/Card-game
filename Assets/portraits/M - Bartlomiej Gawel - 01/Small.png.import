@@ -7,7 +7,10 @@ path="res://.import/Small.png-61ccad8134eb3569f172d6d5bac9f93e.stex"
 [deps]
 
 source_file="res://Assets/portraits/M - Bartlomiej Gawel - 01/Small.png"
+source_md5="1008643735301d18bfee22620e813c8e"
+
 dest_files=[ "res://.import/Small.png-61ccad8134eb3569f172d6d5bac9f93e.stex" ]
+dest_md5="f64defff4be3ebbf4dd8ce6492cebaa8"
 
 [params]
 

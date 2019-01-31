@@ -7,7 +7,10 @@ path="res://.import/Small.png-c157ee037dca7d16bc960feacfd2120e.stex"
 [deps]
 
 source_file="res://Assets/portraits/M - Grzegorz Wlazlo - 01/Small.png"
+source_md5="3e4cf5cedf25b68b3426ed846e4e6761"
+
 dest_files=[ "res://.import/Small.png-c157ee037dca7d16bc960feacfd2120e.stex" ]
+dest_md5="8cf5385e64f4ebceda0d1d2c854faf7e"
 
 [params]
 

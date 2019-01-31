@@ -7,7 +7,10 @@ path="res://.import/Small.png-e97e70dc42214cb7557d560a18348e01.stex"
 [deps]
 
 source_file="res://Assets/portraits/F - Li Qian - 01/Small.png"
+source_md5="e7cd10452c2cb124d014be3cc8ced47c"
+
 dest_files=[ "res://.import/Small.png-e97e70dc42214cb7557d560a18348e01.stex" ]
+dest_md5="f77142cb30a4ed933b144a763c19683f"
 
 [params]
 

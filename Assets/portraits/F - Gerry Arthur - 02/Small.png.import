@@ -7,7 +7,10 @@ path="res://.import/Small.png-5c17af2d784ff4d3612a72e925e58d12.stex"
 [deps]
 
 source_file="res://Assets/portraits/F - Gerry Arthur - 02/Small.png"
+source_md5="fdef940096bbb207d5abfc7cc41ae8f7"
+
 dest_files=[ "res://.import/Small.png-5c17af2d784ff4d3612a72e925e58d12.stex" ]
+dest_md5="277a78c24201a534e2f28f0436f5932b"
 
 [params]
 

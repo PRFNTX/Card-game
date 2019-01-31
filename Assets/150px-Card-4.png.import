@@ -7,7 +7,10 @@ path="res://.import/150px-Card-4.png-552f2ce85537dbf9f58f9d87d9a9ad0c.stex"
 [deps]
 
 source_file="res://Assets/150px-Card-4.png"
+source_md5="fb63a929c6f3052ee7d08a9d8e780fa6"
+
 dest_files=[ "res://.import/150px-Card-4.png-552f2ce85537dbf9f58f9d87d9a9ad0c.stex" ]
+dest_md5="6275c101a41d945d8c8d4851a3599d3e"
 
 [params]
 

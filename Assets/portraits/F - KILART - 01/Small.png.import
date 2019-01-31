@@ -7,7 +7,10 @@ path="res://.import/Small.png-ed422cc6d7d2c201ec28a14c787f0beb.stex"
 [deps]
 
 source_file="res://Assets/portraits/F - KILART - 01/Small.png"
+source_md5="50d349755899c39ae8209a9f651e33e4"
+
 dest_files=[ "res://.import/Small.png-ed422cc6d7d2c201ec28a14c787f0beb.stex" ]
+dest_md5="2823b30e6e22dc6f5ab6659a77f7f924"
 
 [params]
 

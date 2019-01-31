@@ -7,7 +7,10 @@ path="res://.import/Small.png-cc2b162e3883ab3653c5d2e144580fe5.stex"
 [deps]
 
 source_file="res://Assets/portraits/F - Sergey Gurskiy - 01/Small.png"
+source_md5="0bf109a27a471904309a4c744707873e"
+
 dest_files=[ "res://.import/Small.png-cc2b162e3883ab3653c5d2e144580fe5.stex" ]
+dest_md5="e06425da250c48b5c86067950d28f5e0"
 
 [params]
 

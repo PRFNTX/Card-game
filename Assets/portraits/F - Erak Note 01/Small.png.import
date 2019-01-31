@@ -7,7 +7,10 @@ path="res://.import/Small.png-e10f76e8244286c8428bd45d5ab84394.stex"
 [deps]
 
 source_file="res://Assets/portraits/F - Erak Note 01/Small.png"
+source_md5="e4aeb01b66afe8c73dc079d74a66fd85"
+
 dest_files=[ "res://.import/Small.png-e10f76e8244286c8428bd45d5ab84394.stex" ]
+dest_md5="46cac8aef6ceb0366d25769053321838"
 
 [params]
 

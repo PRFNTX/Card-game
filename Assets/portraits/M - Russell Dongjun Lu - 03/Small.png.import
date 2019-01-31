@@ -7,7 +7,10 @@ path="res://.import/Small.png-8d59dadbfa452535403cc5e1e534f842.stex"
 [deps]
 
 source_file="res://Assets/portraits/M - Russell Dongjun Lu - 03/Small.png"
+source_md5="7733fb8dfbdbac904b6879706ca26575"
+
 dest_files=[ "res://.import/Small.png-8d59dadbfa452535403cc5e1e534f842.stex" ]
+dest_md5="34b0c486773d60900930fb2103b37029"
 
 [params]
 

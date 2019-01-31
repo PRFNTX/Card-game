@@ -7,7 +7,10 @@ path="res://.import/Small.png-523ac0d8b8c8ac810058b92145ccf54d.stex"
 [deps]
 
 source_file="res://Assets/portraits/F - Selene Regener - 03/Small.png"
+source_md5="eaa926c2e521aafa0343a524299c7fbf"
+
 dest_files=[ "res://.import/Small.png-523ac0d8b8c8ac810058b92145ccf54d.stex" ]
+dest_md5="a2e64087e4638c74f599c2de0d09132e"
 
 [params]
 

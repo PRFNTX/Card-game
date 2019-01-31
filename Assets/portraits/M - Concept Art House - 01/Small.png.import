@@ -7,7 +7,10 @@ path="res://.import/Small.png-8c793cbd8365e368962c55757407e7c6.stex"
 [deps]
 
 source_file="res://Assets/portraits/M - Concept Art House - 01/Small.png"
+source_md5="b5a5f69d9440f9717fbb68d642151e72"
+
 dest_files=[ "res://.import/Small.png-8c793cbd8365e368962c55757407e7c6.stex" ]
+dest_md5="907576c1376012383a067874ce42dcee"
 
 [params]
 

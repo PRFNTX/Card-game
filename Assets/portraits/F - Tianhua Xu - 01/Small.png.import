@@ -7,7 +7,10 @@ path="res://.import/Small.png-18ed1ae3ad527d5f0279107771a2e851.stex"
 [deps]
 
 source_file="res://Assets/portraits/F - Tianhua Xu - 01/Small.png"
+source_md5="14fe412ce67fbf5973c246507816fdd0"
+
 dest_files=[ "res://.import/Small.png-18ed1ae3ad527d5f0279107771a2e851.stex" ]
+dest_md5="76674006841d50e9c20673a65c110cb3"
 
 [params]
 

@@ -7,7 +7,10 @@ path="res://.import/Small.png-23008e5b36b844c922ba29f7cd66bf25.stex"
 [deps]
 
 source_file="res://Assets/portraits/M - Lukasz Jaskolski - 02/Small.png"
+source_md5="f1aaab33a538f510930765fd190b4533"
+
 dest_files=[ "res://.import/Small.png-23008e5b36b844c922ba29f7cd66bf25.stex" ]
+dest_md5="98f935738a6421dc9cb730e207056bcf"
 
 [params]
 

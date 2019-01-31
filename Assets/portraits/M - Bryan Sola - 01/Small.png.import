@@ -7,7 +7,10 @@ path="res://.import/Small.png-ed77ef0fe1f2f0eba8217154146118a6.stex"
 [deps]
 
 source_file="res://Assets/portraits/M - Bryan Sola - 01/Small.png"
+source_md5="7ef6ddc5083309195b8ed2e7e8299823"
+
 dest_files=[ "res://.import/Small.png-ed77ef0fe1f2f0eba8217154146118a6.stex" ]
+dest_md5="e346ef8bc9bb35cfa6113b3fdceeb343"
 
 [params]
 

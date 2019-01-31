@@ -7,7 +7,10 @@ path="res://.import/Small.png-7d9b470ea06ff5fb6a2d5dc28fd5b45b.stex"
 [deps]
 
 source_file="res://Assets/portraits/F - Ina Wong - 01/Small.png"
+source_md5="d76cdff293104170edb707b76479bb37"
+
 dest_files=[ "res://.import/Small.png-7d9b470ea06ff5fb6a2d5dc28fd5b45b.stex" ]
+dest_md5="03be5415a41beaff3c2e7e7b6c8bd7e0"
 
 [params]
 

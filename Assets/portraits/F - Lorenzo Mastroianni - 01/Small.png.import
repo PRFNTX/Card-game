@@ -7,7 +7,10 @@ path="res://.import/Small.png-c0f41f8584c98812f0c2713429d28a85.stex"
 [deps]
 
 source_file="res://Assets/portraits/F - Lorenzo Mastroianni - 01/Small.png"
+source_md5="b453abb9d90dc8435ecca17a4500abb3"
+
 dest_files=[ "res://.import/Small.png-c0f41f8584c98812f0c2713429d28a85.stex" ]
+dest_md5="14546a3cf0a971f19b6f00d1b238c368"
 
 [params]
 

@@ -7,7 +7,10 @@ path="res://.import/Small.png-4e19fc6a0545a49dfc42e1f559d1f616.stex"
 [deps]
 
 source_file="res://Assets/portraits/F - Dongho Kang - 03/Small.png"
+source_md5="1a8d418f69e834467ba4788b682ff627"
+
 dest_files=[ "res://.import/Small.png-4e19fc6a0545a49dfc42e1f559d1f616.stex" ]
+dest_md5="76dc61041a6cc0270a606fb07e4dcbb2"
 
 [params]
 

@@ -7,7 +7,10 @@ path="res://.import/Small.png-ac60a000e990527a33dfba6f18bb6040.stex"
 [deps]
 
 source_file="res://Assets/portraits/F - René Aigner - 03/Small.png"
+source_md5="2b8452bcdda84286389abdb654161cf7"
+
 dest_files=[ "res://.import/Small.png-ac60a000e990527a33dfba6f18bb6040.stex" ]
+dest_md5="163b696930ff53e651cb4fc202db70ec"
 
 [params]
 

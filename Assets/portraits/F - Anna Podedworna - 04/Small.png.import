@@ -7,7 +7,10 @@ path="res://.import/Small.png-8f16e6a0dba24b343d48c5e16aa960a4.stex"
 [deps]
 
 source_file="res://Assets/portraits/F - Anna Podedworna - 04/Small.png"
+source_md5="d4113806c91b622a5b0365af2a95a541"
+
 dest_files=[ "res://.import/Small.png-8f16e6a0dba24b343d48c5e16aa960a4.stex" ]
+dest_md5="6b7fb068cd1db3b46dc7690102b8a734"
 
 [params]
 

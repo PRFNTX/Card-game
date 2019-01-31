@@ -7,7 +7,10 @@ path="res://.import/Small.png-a54a4c65880197570d10feb7cb11b534.stex"
 [deps]
 
 source_file="res://Assets/portraits/F - Vyacheslav Safronov - 01/Small.png"
+source_md5="94bd7b3ed8ebdb65e59936bc9e56e324"
+
 dest_files=[ "res://.import/Small.png-a54a4c65880197570d10feb7cb11b534.stex" ]
+dest_md5="2e3235f716ee92f08b227e86bde0a7d2"
 
 [params]
 

@@ -7,7 +7,10 @@ path="res://.import/Small.png-c9d9c8807c6568ae230e14c73ab01369.stex"
 [deps]
 
 source_file="res://Assets/portraits/M - Cristi Balanescu - 01/Small.png"
+source_md5="4f3eb898e22028b329431ba84d524c77"
+
 dest_files=[ "res://.import/Small.png-c9d9c8807c6568ae230e14c73ab01369.stex" ]
+dest_md5="7ce6f0a259a5e40766bb488d40f5b3de"
 
 [params]
 

@@ -7,7 +7,10 @@ path="res://.import/Small.png-23d1ac8c1aa7ea1262d4cdadbec1830f.stex"
 [deps]
 
 source_file="res://Assets/portraits/F - Elistraie - 03/Small.png"
+source_md5="9c77e0b73a8b760b741d9ead427147ab"
+
 dest_files=[ "res://.import/Small.png-23d1ac8c1aa7ea1262d4cdadbec1830f.stex" ]
+dest_md5="96894d9fbaf54c3fe94599ee25105693"
 
 [params]
 

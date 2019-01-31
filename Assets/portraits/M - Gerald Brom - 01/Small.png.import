@@ -7,7 +7,10 @@ path="res://.import/Small.png-5216665411cd7ace8e8f3f8889ec220f.stex"
 [deps]
 
 source_file="res://Assets/portraits/M - Gerald Brom - 01/Small.png"
+source_md5="ee8c01b5681fdde9b9652fc725c6b9a7"
+
 dest_files=[ "res://.import/Small.png-5216665411cd7ace8e8f3f8889ec220f.stex" ]
+dest_md5="53d16545450954ac913a10f515c1fd90"
 
 [params]
 

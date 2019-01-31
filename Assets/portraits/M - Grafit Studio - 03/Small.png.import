@@ -7,7 +7,10 @@ path="res://.import/Small.png-97ae8a5cf9f6df5b26bd754242c6e4bb.stex"
 [deps]
 
 source_file="res://Assets/portraits/M - Grafit Studio - 03/Small.png"
+source_md5="81f2b903e613ba46161d97af244dba40"
+
 dest_files=[ "res://.import/Small.png-97ae8a5cf9f6df5b26bd754242c6e4bb.stex" ]
+dest_md5="d6e2b0854f456360b20d809abf54aa05"
 
 [params]
 

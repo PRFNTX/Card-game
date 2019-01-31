@@ -7,7 +7,10 @@ path="res://.import/Small.png-a5c94ded06c22e9eb20e362606dc9724.stex"
 [deps]
 
 source_file="res://Assets/portraits/M - Diego de Almeida Peres - 02/Small.png"
+source_md5="6b7f3de89699fa00e2720af088085f44"
+
 dest_files=[ "res://.import/Small.png-a5c94ded06c22e9eb20e362606dc9724.stex" ]
+dest_md5="0508109f8979cea6cd4e42e80442ad2d"
 
 [params]
 

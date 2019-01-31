@@ -7,7 +7,10 @@ path="res://.import/Small.png-fe8e4e56bcbb53d8de578bef8465aadc.stex"
 [deps]
 
 source_file="res://Assets/portraits/F - Arman Akopian - 05/Small.png"
+source_md5="502c6ab5995fea8029f1bc3e1568640f"
+
 dest_files=[ "res://.import/Small.png-fe8e4e56bcbb53d8de578bef8465aadc.stex" ]
+dest_md5="c15c708adc7a4deda7aeb33abb437619"
 
 [params]
 

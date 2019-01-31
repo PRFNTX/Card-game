@@ -7,7 +7,10 @@ path="res://.import/Small.png-6b4cca0936db0dc5af73941387c5d979.stex"
 [deps]
 
 source_file="res://Assets/portraits/F - Ivan Vilmant - 02/Small.png"
+source_md5="1f0ac6d865c46b4c26370fbac540050f"
+
 dest_files=[ "res://.import/Small.png-6b4cca0936db0dc5af73941387c5d979.stex" ]
+dest_md5="347650ac9ccb77d082c2724c4b19db23"
 
 [params]
 

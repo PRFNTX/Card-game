@@ -7,7 +7,10 @@ path="res://.import/Small.png-a4a4a47a831b76e5fe8b0a5385355dd9.stex"
 [deps]
 
 source_file="res://Assets/portraits/F - Laura Sava - 01/Small.png"
+source_md5="bc1142883ba4658cf20888edf8ede2f0"
+
 dest_files=[ "res://.import/Small.png-a4a4a47a831b76e5fe8b0a5385355dd9.stex" ]
+dest_md5="87863e532c68be51f78eb15d099a01a2"
 
 [params]
 

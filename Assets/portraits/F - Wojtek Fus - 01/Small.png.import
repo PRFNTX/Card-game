@@ -7,7 +7,10 @@ path="res://.import/Small.png-53880c42f381ed8c647e654391097235.stex"
 [deps]
 
 source_file="res://Assets/portraits/F - Wojtek Fus - 01/Small.png"
+source_md5="ab92500ddf4723ad149bdc586132f716"
+
 dest_files=[ "res://.import/Small.png-53880c42f381ed8c647e654391097235.stex" ]
+dest_md5="dfd5ac1b08bbe96d29d8337f0e91b003"
 
 [params]
 

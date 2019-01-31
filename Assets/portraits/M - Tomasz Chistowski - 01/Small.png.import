@@ -7,7 +7,10 @@ path="res://.import/Small.png-58870bce4ee54f230fa3ef59229b404d.stex"
 [deps]
 
 source_file="res://Assets/portraits/M - Tomasz Chistowski - 01/Small.png"
+source_md5="0b23a7b06a6e4c13a32dbe0de53faccc"
+
 dest_files=[ "res://.import/Small.png-58870bce4ee54f230fa3ef59229b404d.stex" ]
+dest_md5="f002733023347fd3a559ec354c1858d0"
 
 [params]
 

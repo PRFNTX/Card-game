@@ -7,7 +7,10 @@ path="res://.import/Small.png-7bd945318783f8c288a6216f26533dd0.stex"
 [deps]
 
 source_file="res://Assets/portraits/M - Greg Opalinski - 01/Small.png"
+source_md5="3afa46c33a6a19efe4e10033422ea323"
+
 dest_files=[ "res://.import/Small.png-7bd945318783f8c288a6216f26533dd0.stex" ]
+dest_md5="5fb78c25a3eceaabff4ffd30b4298adc"
 
 [params]
 
