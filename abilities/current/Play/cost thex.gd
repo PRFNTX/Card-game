@@ -1,6 +1,9 @@
 extends Node
 
 
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(int, "Any","Opponent","Owner") var player = 0
 export(int,"Hex") var type = 0
 export(bool) var empty_only = true

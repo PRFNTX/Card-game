@@ -1,5 +1,9 @@
 extends Node
 
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(String) var rem_name = 'on_damage/set redir'
 
 var Game

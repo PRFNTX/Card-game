@@ -3,6 +3,9 @@ extends Node
 # class member variables go here, for example:
 # var a = 2
 # var b = "textvar"
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(int) var gold_cost = 0
 export(int) var action_cost = 1
 export(int) var faeria_cost = 0
@@ -24,6 +27,10 @@ func activate(_Game, _entity, val):
 	if verify_costs():
 		pay_costs()
 		Game.setState({'clock_time':(Game.state['clock_time']+1)%3})
+		Game.send_activation(entity.Hex.id, get_relative_path())
+
+func get_relative_path():
+	return get_parent().get_name()+'/'+get_name()
 
 func verify_costs():
 	var ret = true

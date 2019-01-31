@@ -1,6 +1,9 @@
 extends Node
 
 
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(int, "Any","Opponent","Owner") var player = 0
 export(int, "Unit", "Creature", "Building") var target_type = 1
 export(bool) var then_free = false

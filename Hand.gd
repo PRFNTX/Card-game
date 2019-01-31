@@ -10,10 +10,10 @@ func _ready():
 	get_parent().connect('UpdateState', self , 'updateState')
 
 
-func updateState(newState):
+func updateState(newState, keys):
 	if newState.keys().has('frame_card'):
 		if newState['frame_card']==null:
-			setState({'slected_card':null})
+			setState({'selected_card':null})
 
 ### STATE
 var state = {'hovered':0,'num_cards':0, 'selected_card':null}
@@ -80,6 +80,7 @@ func update():
 	var ind = 0
 	for card in player_object.Hand:
 		var newCardNode = globals.card_resources[card].instance()
+		newCardNode.rect_scale = Vector2(1.3,1.2)
 		newCardNode.set_process_input(true)
 		newCardNode.in_hand(true, ind)
 		newCardNode.connect('mouse_entered',self,'on_mouse_enter')
@@ -102,14 +103,15 @@ func on_mouse_button(num):
 	var card = card_nodes[num].get_node('Card')
 	setState({'selected_card':num})
 	game.setState({'preview_card':card.card_name})
-	if card.is_event and game.state['current_turn']==0:
+	if card.is_event and game.state['current_turn']==0 and game.actionReady:
 		game.setState({'frame_card':card.card_name,'action':'hand_card','active_unit':null})
 		## add to cast box
 		## for each possible action add a button to do that thing
 		##if that thing is an action, start it as an action
 		## use the same process for board entities
 		pass
-	elif game.state['current_turn']==0:
+	elif game.state['current_turn']==0 and game.actionReady:
+		game.setState({'frame_card': card.card_name})
 		game.start_build_action(card.cost_gold,card.cost_faeria,{card.lands_type:card.lands_num},num,card_nodes[num],buildTypes[card.lands_type] )
 
 func _on_cast_pressed():

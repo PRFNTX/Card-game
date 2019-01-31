@@ -1,5 +1,9 @@
 extends Node
 
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(int, "Empty", "Land", "Land", "Tree", "Hill", "Sand") var to_type = 1
 export(bool) var affect_empty = false
 

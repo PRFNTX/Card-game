@@ -5,6 +5,8 @@
 [node name="at_add_abl" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 add_ability = null
 ability_type = "on_death"
 attribute_set = 0

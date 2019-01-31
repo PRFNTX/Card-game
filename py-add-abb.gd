@@ -1,5 +1,9 @@
 extends Node
 
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(PackedScene) var ability
 export(String) var ability_type = "Abilities"
 export(Dictionary) var attributes = {

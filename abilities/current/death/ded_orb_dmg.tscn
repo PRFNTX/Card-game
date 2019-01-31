@@ -5,6 +5,8 @@
 [node name="ded_orb_dmg" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 value = -3
 player = 0
 

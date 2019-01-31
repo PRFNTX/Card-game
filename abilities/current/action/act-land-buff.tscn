@@ -5,6 +5,8 @@
 [node name="act-land-buff" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 land_type = 3
 val = 1
 

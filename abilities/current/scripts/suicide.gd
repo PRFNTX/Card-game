@@ -1,8 +1,8 @@
 extends Node
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
 
 func activate(Game,entity,val):
 	entity.on_death()

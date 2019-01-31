@@ -2,10 +2,10 @@
 
 [ext_resource path="res://Cards/scripts/hand_card.gd" type="Script" id=1]
 [ext_resource path="res://Card.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/TownBasic.png" type="Texture" id=3]
+[ext_resource path="res://Assets/portraits/F - Gerry Arthur - 03/Small.png" type="Texture" id=3]
 [ext_resource path="res://Cards/entities/entity - Gust of Hope.tscn" type="PackedScene" id=4]
 
-[node name="Gust of Hope" type="Control"]
+[node name="Gust of Hope" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -26,18 +26,15 @@ _sections_unfolded = [ "Rect" ]
 
 position = Vector2( 42, 53.5 )
 scale = Vector2( 0.35, 0.36 )
-_sections_unfolded = [ "Transform" ]
 card_number = 87
 card_name = "Gust of Hope"
+card_description = "Every orb, creature and structure gain 1 life."
 base_health = 0
 base_attack = 0
 cost_gold = 2
 lands_num = 0
-play_morning = true
-play_evening = true
-play_night = true
 is_event = true
-base = ExtResource( 3 )
+art = ExtResource( 3 )
 board_entity = ExtResource( 4 )
 
 

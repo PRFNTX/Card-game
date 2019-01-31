@@ -1,7 +1,8 @@
 extends Node
 
-export(PackedScene) var add_ability
-export(String) var add_to = 'on_damage'
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
 
 var Game
 var entity
@@ -12,16 +13,17 @@ func init(_entity):
 const TYPE_WELL = 7
 func activate(type,target,set_state=null):
 	if (
-		(type=="AttackAdjOrCollect" and Game.get_hex_by_id(target).state_local.hex_type!=TYPE_WELL)
+		(type=="AttackAdjOrCollect" and Game.get_hex_by_id(target).stateLocal.hex_type!=TYPE_WELL)
 		or (type=="AttackAdj")
 	):
-		if entity.get_energy()>=2:
-			var state = Game.get_state()
-			if set_state!=null:
-				state=set_state
-			var active = state.active_unit
+		var state = Game.get_state()
+		if set_state!=null:
+			state=set_state
+		var active = state.active_unit
+		var target_unit = Game.get_hex_by_id(active).get_unit()
+		if entity.get_energy()>=2 and entity.Owner == target_unit.Owner:
 			entity.user_energy(2)
-			Game.get_hex_by_id(active).get_unit().Unit.add_one_energy()
+			target_unit.Unit.add_one_energy()
 			
 
 

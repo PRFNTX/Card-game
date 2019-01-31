@@ -11,14 +11,15 @@
 position = Vector2( 30, 30 )
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
+description = "I forgot to write this"
 max_faeria = 0
 max_energy = 3
 base_attack = 0
 base_health = 0
 base_val = 1
-isTargetable = true
-isImmune = false
-isAttackable = true
+is_targetable = true
+is_immune = false
+is_attackable = true
 COLOR_GREATER = Color( 0, 0.824219, 0.0128784, 1 )
 COLOR_EQUAL = Color( 0, 0, 0, 1 )
 COLOR_LESS = Color( 0.828125, 0, 0, 1 )
@@ -224,10 +225,14 @@ _sections_unfolded = [ "Visibility" ]
 
 [node name="abl-make-land" parent="Abilities" index="0" instance=ExtResource( 5 )]
 
+ab_name = "Make Lake"
+ab_description = "1 Energy, 1 action - Create a forest or a lake on target location adjacent to a land you control."
 type = 3
 
 [node name="abl-make-land2" parent="Abilities" index="1" instance=ExtResource( 5 )]
 
+ab_name = "Make Forest"
+ab_description = "1 Energy, 1 action - Create a forest or a lake on target location adjacent to a land you control."
 type = 4
 
 [node name="on_play" type="Node" parent="." index="8"]

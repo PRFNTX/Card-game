@@ -2,11 +2,13 @@
 
 [ext_resource path="res://abilities/current/scripts/convert and change adjacent.gd" type="Script" id=1]
 
-
 [node name="convert and change adjacent" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 newType = 2
 change_owner = true
+affect_empty = true
 
 

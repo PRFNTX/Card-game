@@ -12,14 +12,15 @@
 position = Vector2( 30, 30 )
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
+description = "I forgot to write this"
 max_faeria = 0
 max_energy = 3
 base_attack = 0
 base_health = 0
 base_val = 2
-isTargetable = true
-isImmune = false
-isAttackable = true
+is_targetable = true
+is_immune = false
+is_attackable = true
 COLOR_GREATER = Color( 0, 0.824219, 0.0128784, 1 )
 COLOR_EQUAL = Color( 0, 0, 0, 1 )
 COLOR_LESS = Color( 0.828125, 0, 0, 1 )
@@ -225,6 +226,8 @@ _sections_unfolded = [ "Visibility" ]
 
 [node name="abl_add_abl" parent="Abilities" index="0" instance=ExtResource( 5 )]
 
+ab_name = "Grant Charge"
+ab_description = "1 Energy - Target creature you control gains [Charge 3] until end of turn."
 ability = ExtResource( 6 )
 
 [node name="on_play" type="Node" parent="." index="8"]

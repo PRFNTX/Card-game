@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Cards/scripts/hand_card.gd" type="Script" id=1]
 [ext_resource path="res://Card.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/TownBasic.png" type="Texture" id=3]
+[ext_resource path="res://Assets/portraits/M - Tomas Duchek - 10/Small.png" type="Texture" id=3]
 [ext_resource path="res://Cards/entities/entity - Belier.tscn" type="PackedScene" id=4]
 
 [node name="Belier" type="Control" index="0"]
@@ -26,17 +26,14 @@ _sections_unfolded = [ "Rect" ]
 
 position = Vector2( 42, 53.5 )
 scale = Vector2( 0.35, 0.36 )
-_sections_unfolded = [ "Transform" ]
 card_number = 265
 card_name = "Belier"
+card_description = "Protection 1. Power +3 against structures. Cannot collect faeria."
 base_health = 3
 cost_gold = 5
 cost_faeria = 0
 lands_num = 0
-play_morning = true
-play_evening = true
-play_night = true
-base = ExtResource( 3 )
+art = ExtResource( 3 )
 board_entity = ExtResource( 4 )
 
 

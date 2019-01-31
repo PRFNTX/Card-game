@@ -2,10 +2,11 @@
 
 [ext_resource path="res://abilities/current/scripts/adjacent - health.gd" type="Script" id=1]
 
-
 [node name="adjacent - health" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 target_player = 1
 target_type = 1
 life = 1

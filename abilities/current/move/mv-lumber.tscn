@@ -5,6 +5,8 @@
 [node name="mv-lumber" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 value = 2
 resource = 0
 type = 5

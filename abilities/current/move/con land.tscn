@@ -5,7 +5,9 @@
 [node name="con land" type="Node" index="0"]
 
 script = ExtResource( 1 )
-emtpy = false
+ab_name = ""
+ab_description = ""
+empty = false
 orb = false
 well = false
 land = false

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Cards/scripts/hand_card.gd" type="Script" id=1]
 [ext_resource path="res://Card.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/TownBasic.png" type="Texture" id=3]
+[ext_resource path="res://Assets/portraits/F - Bastien Lecouffe Deharme  - 01/Small.png" type="Texture" id=3]
 [ext_resource path="res://Cards/entities/entity - Gabrian Explorer.tscn" type="PackedScene" id=4]
 
 [node name="Gabrian Explorer" type="Control" index="0"]
@@ -26,17 +26,14 @@ _sections_unfolded = [ "Rect" ]
 
 position = Vector2( 41.2094, 53.5 )
 scale = Vector2( 0.35, 0.36 )
-_sections_unfolded = [ "Transform" ]
 card_number = 256
 card_name = "Gabrian Explorer"
+card_description = "Charge 2, Whenever Gabain explorer comes into play, move its land by one hex."
 base_health = 3
 cost_gold = 5
 cost_faeria = 0
 lands_type = 1
-play_morning = true
-play_evening = true
-play_night = true
-base = ExtResource( 3 )
+art = ExtResource( 3 )
 board_entity = ExtResource( 4 )
 
 

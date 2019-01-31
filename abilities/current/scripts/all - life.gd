@@ -1,5 +1,9 @@
 extends Node
 
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(int) var life = -1
 export(int, "All", "Owner", "Enemy") var target_player = 0
 

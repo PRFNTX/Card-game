@@ -7,6 +7,9 @@ func init(_entity):
 	Game=entity.Game
 
 
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(int) var times=3
 var iter= 1
 

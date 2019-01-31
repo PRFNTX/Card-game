@@ -6,8 +6,8 @@ extends Node2D
 # var b="textvar"
 
 
-var testing_solo = false
-var god_mode = false
+var testing_solo = true
+var god_mode = true
 
 onready var globals = get_node('/root/master')
 
@@ -72,6 +72,7 @@ func setState(obj):
 func action(val):
 	state['action'] = val
 
+
 func current_turn(val):
 	state['current_turn'] = val
 	if val==0:
@@ -112,9 +113,12 @@ func frame_card(card_name):
 		#startTimer()
 		state['frame_card'] = card_name
 		for child in $DisplayFrame.get_children():
-			child.queue_free()
-			buttons = []
-		$DisplayFrame.add_child(globals.card_resources[card_name].instance())
+			if child.get_name()!="CardDetails":
+				child.queue_free()
+		buttons = []
+		var displayCard = globals.card_resources[card_name].instance()
+		displayCard.rect_scale = Vector2(1.5, 1.5)
+		$DisplayFrame.add_child(displayCard)
 		if state['active_unit']!=null:
 			var framed_entity = get_hex_by_id(state['active_unit']).get_unit()
 			var num=0
@@ -137,6 +141,9 @@ func frame_card(card_name):
 			var f_cost = c_instance.cost_faeria
 			var g_cost = c_instance.cost_gold
 			var l_cost = {c_instance.lands_type:c_instance.lands_num}
+			var thing = $DisplayFrame/CardDetails
+			c_instance.scale = Vector2(1.5, 1.5)
+			thing.text = c_instance.card_description
 			if !players[state['current_turn']].has_resource(g_cost,f_cost,l_cost):
 				buttons[0].disabled = true
 			#buttons[0].name = 'cast'
@@ -144,8 +151,9 @@ func frame_card(card_name):
 			buttons[0].connect('pressed', self, 'frame_activate', ['cast'])
 	else:
 		for child in $DisplayFrame.get_children():
-			child.queue_free()
-			buttons = []
+			if child.get_name()!="CardDetails":
+				child.queue_free()
+		buttons = []
 
 ##NOT STATE
 func frame_activate(ability_name, set_state=null):
@@ -162,7 +170,7 @@ func frame_activate(ability_name, set_state=null):
 		this_unit.hide()
 		var to_instance = globals.card_instances[state['frame_card']].get_node('Card').board_entity
 		if local:
-			send_action('frame_activate', ability_name ,{'frame_card':globals.get_id_by_name(state['frame_card']),'current_turn':(state['current_turn']+1)%2})
+			send_action('frame_activate', ability_name ,{'frame_card':globals.get_id_by_name(state['frame_card']),'current_turn':(state['current_turn']+1)%2},state)
 			
 		if this_unit.possess(to_instance, get_hex_by_id(0), state['current_turn'], self,state['frame_card'])==null:
 			players[state['current_turn']].discard_selected() #make this function
@@ -183,9 +191,12 @@ func preview_card(card_name):
 	state['preview_card'] = card_name
 	if globals.card_resources.keys().has(card_name):
 		for child in $PreviewFrame.get_children():
-			child.queue_free()
-	
-		$PreviewFrame.add_child(globals.card_resources[card_name].instance())
+			if child.get_name()!='CardDetails':
+				child.queue_free()
+		var previewCard = globals.card_resources[card_name].instance()
+		get_node('PreviewFrame/CardDetails').text = previewCard.get_node('Card').card_description
+		previewCard.rect_scale = Vector2(1.5, 1.5)
+		$PreviewFrame.add_child(previewCard)
 
 ################
 
@@ -198,11 +209,6 @@ func create_player(num):
 	else:
 		p.position=$pointP2.position
 	p.onCreate(self,num)
-	
-	print('globals.deck_list is')
-	print(globals.deck_list)
-	print('globals.Deck is')
-	print(globals.Deck)
 	
 	if !globals.deck_list==null and globals.deck_list.keys().size()>0 and num==0:
 		p.Deck = globals.deck_list[globals.Deck]
@@ -319,6 +325,7 @@ func delegate_action(delegate,nodepath):
 		#get_hex_by_id(state['delegate_id']).get_unit().Unit.get_node(state['delegate_node']).targeting()
 		var unit =get_hex_by_id(state['delegate_id']).get_unit().Unit
 		unit.get_node(state['delegate_node']).targeting()
+		poll_for_valid_targets()
 
 func start_unit_action(type):
 	startBasictimeout()
@@ -360,8 +367,7 @@ func newAction(set={'action':""}):
 	setState(set)
 
 func cancelAction():
-	
-	if state['action']=='delegate' and get_hex_by_id(state['delegate_id']).get_unit().Unit.get_node(state['delegate_node']).has_method('cancel_action'):
+	if state['action']=='delegate' and get_hex_by_id(state['delegate_id']).has_unit() and get_hex_by_id(state['delegate_id']).get_unit().Unit.get_node(state['delegate_node']).has_method('cancel_action'):
 		get_hex_by_id(state['delegate_id']).get_unit().Unit.get_node(state['delegate_node']).cancel_action()
 	setState({"action":"",'active_unit':null, 'frame_card':null, 'delegate_id':null,'delegate_node':null})
 	complete = true
@@ -385,6 +391,8 @@ func hardMove(target, set_state=null):
 	var hex_target = get_hex_by_id(target)
 	var unit = get_unit_by_hex(get_hex_by_id(state['active_unit']))
 	unit.on_move(hex_target.get_node('hexEntity'))
+	unit.setState({'active':false})
+	setState({'active_unit':target})
 	unit.Hex=hex_target
 
 func miscMove(target,set_state=null):
@@ -396,6 +404,8 @@ func miscMove(target,set_state=null):
 	var hex_target = get_hex_by_id(target)
 	var unit = get_unit_by_hex(get_hex_by_id(state['active_unit']))
 	unit.on_move(hex_target.get_node('hexEntity'))
+	unit.setState({'active':false})
+	setState({'active_unit':target})
 	unit.Hex=hex_target
 	unit.use_energy(1)
 
@@ -407,12 +417,12 @@ func moveHex(target,set_state=null):
 	
 	var from_hex = get_hex_by_id(state['active_unit'])
 	var to_hex = get_hex_by_id(target)
-	print(from_hex.id)
-	print(to_hex.id)
 	to_hex.setState({'hex_type':from_hex.stateLocal['hex_type'],'hex_owner':from_hex.stateLocal['hex_owner']})
 	from_hex.setState({'hex_type':0,'hex_owner':-1})
 	if from_hex.has_unit():
 		from_hex.get_unit().on_move(to_hex.get_node('hexEntity'))
+		from_hex.get_unit().setState({'active':false})
+		setState({'active_unit':target})
 	
 
 func moveBase(target, set_state=null):
@@ -425,12 +435,13 @@ func moveBase(target, set_state=null):
 	startBasictimeout()
 	var unit = get_unit_by_hex(get_hex_by_id(state['active_unit']))
 	unit.on_move(hex_target.get_node('hexEntity'))
+	setState({'active_unit':target})
 	
 	#unit.rect_position = target.get_node('hexEntity/pos').position
 	unit.Hex=hex_target
 	unit.use_energy(1)
 	if local:
-		send_action('moveBase',45-target,{'active_unit':45-state['active_unit']})
+		send_action('moveBase',45-target,{'active_unit':45-state['active_unit']},state)
 		unit.setState({'active':false})
 		setState({'active_unit':target})
 	
@@ -457,7 +468,7 @@ func moveWater(target, set_state=null):
 	unit.Hex=hex_target
 	unit.use_energy(1)
 	if local:
-		send_action('moveAquatic',45-target,{'active_unit':45-state['active_unit']})
+		send_action('moveAquatic',45-target,{'active_unit':45-state['active_unit']},state)
 		unit.setState({'active':false})
 		setState({'active_unit':target})
 	
@@ -479,12 +490,12 @@ func moveAir(target, set_state=null):
 	startBasictimeout()
 	var unit = get_unit_by_hex(get_hex_by_id(state['active_unit']))
 	unit.on_move(hex_target.get_node('hexEntity'))
-	
+	setState({'active_unit': target})
 	#unit.rect_position = target.get_node('hexEntity/pos').position
 	unit.Hex=hex_target
 	unit.use_energy(1)
 	if local:
-		send_action('moveAir',45-target,{'active_unit':45-state['active_unit']})
+		send_action('moveAir',45-target,{'active_unit':45-state['active_unit']},state)
 		unit.setState({'active':false})
 		setState({'active_unit':target})
 	
@@ -504,7 +515,7 @@ func AttackAdjOrCollect(target, set_state=null):
 	var unit = get_unit_by_hex(get_hex_by_id(state['active_unit']))
 	unit.on_attack(get_hex_by_id(target).get_node('hexEntity').get_node('BoardEntity'))
 	if local:
-		send_action('AttackAdjOrCollect',45-target,{'active_unit':45-state['active_unit']})
+		send_action('AttackAdjOrCollect',45-target,{'active_unit':45-state['active_unit']},state)
 		unit.setState({'active':false})
 	
 	actionDone()
@@ -518,7 +529,7 @@ func AttackAdj(target, set_state=null):
 	var unit = get_unit_by_hex(get_hex_by_id(state['active_unit']))
 	unit.on_attack(get_hex_by_id(target).get_node('hexEntity').get_node('BoardEntity'))
 	if local:
-		send_action('AttackAdj',45-target,{'active_unit':45-state['active_unit']})
+		send_action('AttackAdj',45-target,{'active_unit':45-state['active_unit']},state)
 		unit.setState({'active':false})
 	
 	actionDone()
@@ -532,7 +543,7 @@ func Collect(target, set_state=null):
 	var unit = get_unit_by_hex(get_hex_by_id(state['active_unit']))
 	unit.on_attack(target.get_node('hexEntity').get_child())
 	if local:
-		send_action('Collect',45-target,{'active_unit':45-state['active_unit']})
+		send_action('Collect',45-target,{'active_unit':45-state['active_unit']},state)
 		unit.setState({'active':false})
 	
 	actionDone()
@@ -563,7 +574,7 @@ func castAny(target, set_state=null):
 		play_effect = entity.possess(child_card.board_entity,get_hex_by_id(cast_hex),state['current_turn'],self,child_card.card_name)
 		entity.add_to_group('entities')
 	if local:
-		send_action('castAny', 45-cast_hex,{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])})
+		send_action('castAny', 45-cast_hex,{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])}, state)
 	
 	if play_effect==null:
 		actionDone()
@@ -596,7 +607,7 @@ func buildAny(target, set_state=null):
 		entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'],self,child_card.card_name)
 		entity.add_to_group('entities')
 	if local:
-		send_action('buildAny', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])})
+		send_action('buildAny', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])},state)
 	actionDone()
 
 func buildLake(target, set_state=null):
@@ -625,7 +636,7 @@ func buildLake(target, set_state=null):
 		entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'],self,child_card.card_name)
 		entity.add_to_group('entities')
 	if local:
-		send_action('buildLake', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])})
+		send_action('buildLake', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])},state)
 	actionDone()
 
 func buildTree(target, set_state=null):
@@ -654,7 +665,7 @@ func buildTree(target, set_state=null):
 		entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'],self,child_card.card_name)
 		entity.add_to_group('entities')
 	if local:
-		send_action('buildTree', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])})
+		send_action('buildTree', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])},state)
 	actionDone()
 
 func buildHill(target, set_state=null):
@@ -683,7 +694,7 @@ func buildHill(target, set_state=null):
 		entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'],self,child_card.card_name)
 		entity.add_to_group('entities')
 	if local:
-		send_action('buildHill', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])})
+		send_action('buildHill', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])},state)
 	actionDone()
 
 func buildSand(target, set_state=null):
@@ -712,7 +723,7 @@ func buildSand(target, set_state=null):
 		entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'],self,child_card.card_name)
 		entity.add_to_group('entities')
 	if local:
-		send_action('buildSand', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])})
+		send_action('buildSand', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])},state)
 	actionDone()
 
 func actionLand(target, set_state=null):
@@ -726,7 +737,7 @@ func actionLand(target, set_state=null):
 		#t_turn']].modLands('land',1)
 		update_lands_owned()
 	if local:
-		send_action('actionLand', 45-target,{'empty':true, 'current_turn':(state['current_turn']+1)%2})
+		send_action('actionLand', 45-target,{'empty':true, 'current_turn':(state['current_turn']+1)%2},state)
 	actionDone()
 
 func actionLake(target, set_state=null):
@@ -739,7 +750,7 @@ func actionLake(target, set_state=null):
 		#players[state['current_turn']].modLands('lake',1)
 		update_lands_owned()
 	if local:
-		send_action('actionLake', 45-target,{'empty':true,'current_turn':(state['current_turn']+1)%2})
+		send_action('actionLake', 45-target,{'empty':true,'current_turn':(state['current_turn']+1)%2},state)
 	actionDone()
 
 func actionTree(target, set_state=null):
@@ -752,7 +763,7 @@ func actionTree(target, set_state=null):
 		#players[state['current_turn']].modLands('tree',1)
 		update_lands_owned()
 	if local:
-		send_action('actionTree', 45-target,{'empty':true, 'current_turn':(state['current_turn']+1)%2})
+		send_action('actionTree', 45-target,{'empty':true, 'current_turn':(state['current_turn']+1)%2},state)
 	actionDone()
 
 func actionHill(target, set_state=null):
@@ -765,7 +776,7 @@ func actionHill(target, set_state=null):
 		#players[state['current_turn']].modLands('hill',1)
 		update_lands_owned()
 	if local:
-		send_action('actionHill', 45-target,{'empty':true, 'current_turn':(state['current_turn']+1)%2})
+		send_action('actionHill', 45-target,{'empty':true, 'current_turn':(state['current_turn']+1)%2},state)
 	actionDone()
 
 func actionSand(target, set_state=null):
@@ -778,7 +789,7 @@ func actionSand(target, set_state=null):
 		#players[state['current_turn']].modLands('sand',1)
 		update_lands_owned()
 	if local:
-		send_action('actionSand', 45-target,{'empty':true, 'current_turn':(state['current_turn']+1)%2})
+		send_action('actionSand', 45-target,{'empty':true, 'current_turn':(state['current_turn']+1)%2},state)
 	actionDone()
 
 func actionCoin(target, set_state=null):
@@ -790,7 +801,7 @@ func actionCoin(target, set_state=null):
 		players[state['current_turn']].modCoin(1)
 		complete=true
 	if local:
-		send_action('actionCoin', 0,{'empty':true, 'current_turn':(state['current_turn']+1)%2})
+		send_action('actionCoin', 0,{'empty':true, 'current_turn':(state['current_turn']+1)%2},state)
 	actionDone()
 
 func actionCard(target, set_state=null):
@@ -803,42 +814,45 @@ func actionCard(target, set_state=null):
 			players[state['current_turn']].drawCard()
 			complete=true
 	if local:
-		send_action('actionCard', 0,{'empty':true, 'current_turn':(state['current_turn']+1)%2})
+		send_action('actionCard', 0,{'empty':true, 'current_turn':(state['current_turn']+1)%2},state)
 	actionDone()
 
 
 func delegate(target, set_state=null):
 	var local = true
 	var state = get_state()
-	print(set_state)
 	if set_state!=null:
 		state=set_state
 		local= false
-	print(state)
 	if (get_hex_by_id(state['delegate_id']).get_unit().Unit.get_node(state['delegate_node']).complete(target, set_state)):
 		actionDone()
 
 ###############
 ### MESSAGE FUNCTIONS
 
-func send_action(type,target, loc_state, echo=false):
+func send_action(type, target, loc_state, true_state=null, echo=false):
 	var send = {'game_action':{
 		'player':global_player_num,
 		'type':type,
 		'target':target,
 		'state':loc_state
 	}}
-	print(send)
-	#once sent actions are final
+	#once sent, actions are final
 	if state['delegate_id']==0 and state['frame_card']:
 		#players[state['current_turn']].discard_selected()
 		players[state['current_turn']].play_selected()
 		setState({'frame_card':null})
 	
 	globals.send_msg(send)
-	emit_signal('on_action', send['game_action'].type, 45-int(send['game_action'].target), send['game_action'].state)
+	emit_signal('on_action', send['game_action'].type, 45-target, true_state)
 	if echo:
 		game_action(send['game_action'])
+
+func send_activation(hex, relative_path):
+	var send = {'game_activation':{
+		'hex': hex,
+		'node': relative_path,
+	}}
 
 func deck_cards(val):
 	players[1].deck_init(val)
@@ -851,17 +865,19 @@ func game_action(val):
 		
 	if val.state.keys().has('frame_card'):
 		val.state['frame_card'] = globals.get_card_by_id(val.state['frame_card'])
-		print(val.state)
-		print(val['state'])
 		
 	if val.state.keys().has('active_unit') and get_hex_by_id(val.state['active_unit']).has_unit():
 		setState({'preview_card':get_hex_by_id(val.state['active_unit']).get_unit().card_name})
 	
-	
 	call(val.type, val.target, val.state)
 	emit_signal('on_action', val.type, int(val.target), val.state)
-	print("END STATE")
-	print(state)
+
+func game_activation(val):
+	if val.state.keys().has('frame_card'):
+		val.state['frame_card'] = globals.get_card_by_id(val.state['frame_card'])
+		setState({'frame_card': val.state['frame-card']})
+	var entity = get_hex_by_id(val.hex).get_unit()
+	entity.Unit.get_node(val.node).activate(self, entity, null)
 
 ##
 #HELPERS
@@ -923,8 +939,15 @@ func check_valid_action(action):
 		if hex.id!=0 and hex.action(action,state['current_turn'],true):
 			targets = true
 	if not targets:
-		no_valid_targets()
+		#no_valid_targets()
+		pass
 	return targets
+
+func poll_for_valid_targets():
+	for hex in get_tree().get_nodes_in_group('Hex'):
+		if hex.stateLocal.target:
+			return
+	no_valid_targets()
 
 func no_valid_targets():
 	cancelAction()
@@ -941,7 +964,6 @@ func startBasictimeout():
 	$basic_timeout.start()
 
 func _on_Timer_timeout():
-	print('TIMER')
 	if complete:
 		actionReady=true
 	else:

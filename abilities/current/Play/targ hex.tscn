@@ -5,10 +5,11 @@
 [node name="targ hex" type="Node" index="0"]
 
 script = ExtResource( 1 )
-player = 0
-type = 0
+ab_name = ""
+ab_description = ""
 empty_only = true
-then_free = false
+player = 0
+adjacent_only = false
 max_iter = 2
 
 

@@ -1,5 +1,9 @@
 extends Node
 
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(int) var life = -1
 export(int,"Orb") var target = 0
 
@@ -18,13 +22,3 @@ func activate(type,target,set_state=null):
 				elif entity.Owner == 1:
 					Game.get_hex_by_id(1).get_unit().life_change(-1)
 			
-
-func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-	pass
-
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass

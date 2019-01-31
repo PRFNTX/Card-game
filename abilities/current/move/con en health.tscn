@@ -5,6 +5,8 @@
 [node name="con en health" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 health_max = 5
 max_inclusive = true
 health_min = 0

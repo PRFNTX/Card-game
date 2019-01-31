@@ -5,6 +5,8 @@
 [node name="py_buff_adj" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 health = 1
 energy = 0
 adjacent_only = true

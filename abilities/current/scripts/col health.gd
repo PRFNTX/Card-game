@@ -1,5 +1,9 @@
 extends Node
 
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(int,'health') var gain_type = 0
 export(bool) var value_by_faeria = false
 export(int) var value = 1

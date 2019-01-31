@@ -13,14 +13,15 @@
 position = Vector2( 30, 30 )
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
+description = "I forgot to write this"
 max_faeria = 0
 max_energy = 1
 base_attack = 1
 base_health = 1
 base_val = 0
-isTargetable = true
-isImmune = false
-isAttackable = true
+is_targetable = true
+is_immune = false
+is_attackable = true
 COLOR_GREATER = Color( 0, 0.824219, 0.0128784, 1 )
 COLOR_EQUAL = Color( 0, 0, 0, 1 )
 COLOR_LESS = Color( 0.828125, 0, 0, 1 )
@@ -230,10 +231,11 @@ _sections_unfolded = [ "Visibility" ]
 
 [node name="damage" parent="Abilities" index="0" instance=ExtResource( 7 )]
 
+ab_name = "Damage structure"
+ab_description = "1 Energy, 1 Faeria - Target structure loses 1 life."
 faeria_cost = 1
 energy_cost = 1
 target_type = 2
-adjacent_only = false
 
 [node name="on_play" type="Node" parent="." index="8"]
 

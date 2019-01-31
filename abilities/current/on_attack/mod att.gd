@@ -1,5 +1,9 @@
 extends Node
 
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(int) var mod = 2
 export(int,"Structure") var type = 0
 export(String) var identifier = "misc"

@@ -5,6 +5,8 @@
 [node name="target unit" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 player = 1
 type = 1
 on_empty = true

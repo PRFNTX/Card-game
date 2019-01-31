@@ -12,14 +12,15 @@
 position = Vector2( 30, 30 )
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
+description = "Protection 1 \\nWhenever an opponent's creature moves on a hex adjacent to Alberian Fortification, it loses 2 life."
 max_faeria = 0
 max_energy = 1
 base_attack = 0
 base_health = 0
 base_val = 5
-isTargetable = true
-isImmune = false
-isAttackable = true
+is_targetable = true
+is_immune = false
+is_attackable = true
 COLOR_GREATER = Color( 0, 0.824219, 0.0128784, 1 )
 COLOR_EQUAL = Color( 0, 0, 0, 1 )
 COLOR_LESS = Color( 0.828125, 0, 0, 1 )
@@ -50,7 +51,7 @@ on_death = false
 on_clock = false
 on_action = true
 on_receive_attack = false
-on_turn_end = false
+on_end_turn = false
 frame_alt = null
 
 [node name="Frame" type="Sprite" parent="." index="0"]

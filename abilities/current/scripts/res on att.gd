@@ -1,5 +1,9 @@
 extends Node
 
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(int,'All','Orb','Unit') var on_target = 1
 export(int,'Gold','Faeria','Cards','Actions') var res = 2
 export(bool) var val_by_damage = false

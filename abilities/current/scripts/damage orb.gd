@@ -1,5 +1,7 @@
 extends Node
 
+export(String) var ab_name = ""
+export(String) var ab_description = ""
 
 export(int) var gold_cost = 0
 export(int) var action_cost = 0
@@ -32,6 +34,10 @@ func activate(_Game, _entity, unsused):
 		if hex.has_unit():
 			hex.get_unit().life_change(damage)
 			print("doin")
+		Game.send_activation(entity.Hex.id, get_relative_path())
+
+func get_relative_path():
+	return get_parent().get_name()+'/'+get_name()
 
 func verify_costs():
 	var ret = true

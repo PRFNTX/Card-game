@@ -1,5 +1,9 @@
 extends Node
 
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(int) var health = 2
 export(int) var max_target_health = 2
 export(int,"All","Creature","Building") var target_type = 1
@@ -33,17 +37,17 @@ func condition_unit_type(hex):
 
 func targeting():
 	for hex in get_tree().get_nodes_in_group("Hex"):
-		if target_player==0:
+		if player==0:
 			if hex.has_friendly_unit() and condition_unit_type(hex) and condition_health(hex):
 				hex.setState({'cover':hex.targetOther , 'target' :true})
 			else:
 				hex.setState({'cover':Color(0,0,0,0) , 'target' :false})
-		elif target_player==1:
+		elif player==1:
 			if hex.has_opposing_unit() and condition_unit_type(hex) and condition_health(hex):
 				hex.setState({'cover':hex.targetOther , 'target' :true})
 			else:
 				hex.setState({'cover':Color(0,0,0,0) , 'target' :false})
-		elif target_player==2:
+		elif player==2:
 			if hex.has_unit() and  condition_unit_type(hex) and condition_health(hex):
 				hex.setState({'cover':hex.targetOther , 'target' :true})
 			else:

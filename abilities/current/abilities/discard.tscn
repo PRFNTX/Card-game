@@ -2,10 +2,11 @@
 
 [ext_resource path="res://abilities/current/scripts/discard.gd" type="Script" id=1]
 
-
 [node name="discard" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 gold_cost = 0
 action_cost = 0
 faeria_cost = 0

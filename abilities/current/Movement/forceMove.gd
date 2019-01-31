@@ -1,5 +1,10 @@
 extends Node
 
+export(int) var energy_cost = 0
+export(int) var gold_cost = 0
+export(int) var faeria_cost = 0
+export(int) var action_cost = 0
+
 export(int, "None", "Aquatic", "Flying", "As Target") var medium = 0
 
 var entity
@@ -40,17 +45,17 @@ func targeting():
 	for hex in entity.Hex.adjacent:
 		if medium==0:
 			if hex.hexType.child.moveLand and hex.hex_is_empty_or_self() and hex.is_adjacent_or_equal_to(hex.stateLocal['active_unit'].Hex):
-				hex.setState({'cover':move,'target':true})
+				hex.setState({'cover':hex.move,'target':true})
 			else:
 				hex.setState({'cover':Color(0,0,0,0), 'target':false})
-		elif type==2:
+		elif medium==2:
 			if hex.hexType.child.moveAir and hex.hex_is_empty_or_self() and hex.is_adjacent_or_equal_to(hex.stateLocal['active_unit'].Hex):
-					setState({'cover':move,'target':true})
+					setState({'cover':hex.move,'target':true})
 			else:
 				setState({'cover':Color(0,0,0,0), 'target':false})
-		elif type=="moveWater":
+		elif medium==1:
 			if hex.hexType.child.moveWater and hex.hex_is_empty_or_self() and hex.is_adjacent_or_equal_to(hex.stateLocal['active_unit'].Hex):
-				setState({'cover':move,'target':true})
+				setState({'cover':hex.move,'target':true})
 			else:
 				setState({'cover':Color(0,0,0,0), 'target':false})
 

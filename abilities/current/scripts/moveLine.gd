@@ -100,10 +100,11 @@ func complete(target, set_state=null):
 	entity.on_move(hex_target.get_node('hexEntity'))
 	entity.use_energy(1)
 	entity.Hex=hex_target
+	Game.setState({'delegate_id':target})
 	
 	
 	if Game.check_valid_action(entity.Unit.get_action_name('Attack')) and local and entity.Unit.current_health>0:
-		Game.setState({'active_unit':entity.Hex.id})
+		Game.setState({'active_unit':target})
 		Game.actionReady=true
 		entity.Unit.start_attack(Game)
 	else:

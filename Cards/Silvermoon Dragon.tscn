@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Cards/scripts/hand_card.gd" type="Script" id=1]
 [ext_resource path="res://Card.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/TownBasic.png" type="Texture" id=3]
+[ext_resource path="res://Assets/portraits/F - Selene Regener - 02/Small.png" type="Texture" id=3]
 [ext_resource path="res://Cards/entities/entity - Silvermoon Dragon.tscn" type="PackedScene" id=4]
 
 [node name="Silvermoon Dragon" type="Control" index="0"]
@@ -26,19 +26,16 @@ _sections_unfolded = [ "Rect" ]
 
 position = Vector2( 42, 53.5 )
 scale = Vector2( 0.35, 0.36 )
-_sections_unfolded = [ "Transform" ]
 card_number = 260
 card_name = "Silvermoon Dragon"
+card_description = "Charge 4, Flying, Can only move during night."
 base_health = 5
 base_attack = 4
 cost_gold = 6
 cost_faeria = 5
 lands_num = 3
 lands_type = 1
-play_morning = true
-play_evening = true
-play_night = true
-base = ExtResource( 3 )
+art = ExtResource( 3 )
 board_entity = ExtResource( 4 )
 
 

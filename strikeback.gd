@@ -1,6 +1,10 @@
 extends Node
 
 export(int) var value = 1
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 var entity
 var Game
 

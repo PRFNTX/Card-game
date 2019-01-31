@@ -5,6 +5,8 @@
 [node name="makeland" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 require_valid_placement = true
 require_plain_for_special = false
 targ_owner = 0

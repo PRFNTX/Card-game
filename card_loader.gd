@@ -169,8 +169,10 @@ func _ready():
 	print("Sagami Hunter, loaded")
 	cards["Sagami Settler"] = preload("res://Cards/Sagami Settler.tscn")
 	print("Sagami Settler, loaded")
+	"""
 	cards["Samaris Journeyman"] = preload("res://Cards/Samaris Journeyman.tscn")
 	print("Samaris Journeyman, loaded")
+	"""
 	cards["Servant of Alua"] = preload("res://Cards/Servant of Alua.tscn")
 	print("Servant of Alua, loaded")
 	cards["Share of the Weak"] = preload("res://Cards/Share of the Weak.tscn")

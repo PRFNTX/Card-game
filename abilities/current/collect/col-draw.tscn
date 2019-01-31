@@ -5,6 +5,8 @@
 [node name="col-draw" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 max_cards = 3
 type = 0
 

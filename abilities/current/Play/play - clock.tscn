@@ -2,10 +2,11 @@
 
 [ext_resource path="res://abilities/current/Play/play - clock.gd" type="Script" id=1]
 
-
 [node name="play - clock" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 set_time = 0
 
 

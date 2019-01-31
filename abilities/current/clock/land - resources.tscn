@@ -2,10 +2,11 @@
 
 [ext_resource path="res://abilities/current/scripts/night.gd" type="Script" id=1]
 
-
 [node name="land - resources" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 morning = 0
 evening = 0
 night = true

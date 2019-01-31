@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Cards/scripts/hand_card.gd" type="Script" id=1]
 [ext_resource path="res://Card.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/TownBasic.png" type="Texture" id=3]
-[ext_resource path="res://Cards/entities/entity - Alberian Fortification.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Cards/entities/entity - Alberian Fortification.tscn" type="PackedScene" id=3]
 
 [node name="Alberian Fortification" type="Control"]
 
@@ -26,19 +25,15 @@ _sections_unfolded = [ "Rect" ]
 
 position = Vector2( 42, 53.5 )
 scale = Vector2( 0.35, 0.36 )
-_sections_unfolded = [ "Transform" ]
 card_number = 3
 card_name = "Alberian Fortification"
+card_description = "Protection 1 \\nWhenever an opponent's creature moves on a hex adjacent to Alberian Fortification, it loses 2 life."
 base_health = 5
 base_attack = 0
 cost_gold = 7
 cost_faeria = 0
 lands_num = 4
 lands_type = 3
-play_morning = true
-play_evening = true
-play_night = true
-base = ExtResource( 3 )
-board_entity = ExtResource( 4 )
+board_entity = ExtResource( 3 )
 
 

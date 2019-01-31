@@ -5,6 +5,8 @@
 [node name="col health" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 gain_type = 0
 value_by_faeria = false
 value = 1

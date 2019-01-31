@@ -6,6 +6,9 @@ export(bool) var night = 0
 
 
 
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 const MORNING=0
 const EVENING=1
 const NIGHT=2

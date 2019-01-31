@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Cards/scripts/hand_card.gd" type="Script" id=1]
 [ext_resource path="res://Card.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/TownBasic.png" type="Texture" id=3]
+[ext_resource path="res://Assets/portraits/M - Gerry Arthur - 02/Small.png" type="Texture" id=3]
 [ext_resource path="res://Cards/entities/entity - Nautilus Probe.tscn" type="PackedScene" id=4]
 
 [node name="Nautilus Probe" type="Control" index="0"]
@@ -14,6 +14,7 @@ anchor_bottom = 0.0
 margin_right = 83.0
 margin_bottom = 107.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
@@ -25,17 +26,16 @@ _sections_unfolded = [ "Rect" ]
 
 position = Vector2( 42, 53.5 )
 scale = Vector2( 0.35, 0.36 )
-_sections_unfolded = [ "Transform" ]
 card_number = 137
 card_name = "Nautilus Probe"
+card_description = "Auto-collect, 1 energy - Move Nautilus Probe's land by 1 hex. Nautilus Probe is moved as well."
 base_health = 2
 base_attack = 0
 cost_gold = 2
 cost_faeria = 0
 lands_num = 2
 lands_type = 1
-is_event = false
-base = ExtResource( 3 )
+art = ExtResource( 3 )
 board_entity = ExtResource( 4 )
 
 

@@ -5,7 +5,10 @@
 [node name="modify attack" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 mod = 3
+type = 0
 identifier = "misc"
 
 

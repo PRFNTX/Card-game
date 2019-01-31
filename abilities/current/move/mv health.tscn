@@ -5,6 +5,8 @@
 [node name="mv health" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 gain = 1
 
 

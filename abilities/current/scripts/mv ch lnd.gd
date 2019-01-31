@@ -1,5 +1,9 @@
 extends Node
 
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(int, "Empty", "Land", "Lake", "Tree", "Hill", "Sand", "All") var from_type = 6
 export(int, "Empty", "Land", "Lake", "Tree", "Hill", "Sand") var to_type = 0
 export(int, "Any") var player = 0

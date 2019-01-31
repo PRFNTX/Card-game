@@ -2,9 +2,10 @@
 
 [ext_resource path="res://abilities/current/scripts/suicide.gd" type="Script" id=1]
 
-
 [node name="suicide" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 
 

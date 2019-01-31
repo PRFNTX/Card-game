@@ -2,10 +2,11 @@
 
 [ext_resource path="res://abilities/current/scripts/buff target.gd" type="Script" id=1]
 
-
 [node name="bf t conv" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 player = 1
 type = 1
 health = 1

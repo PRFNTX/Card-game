@@ -5,6 +5,8 @@
 [node name="gainResourceByTarget" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 resource = 0
 target_player = 1
 gain_player = 0

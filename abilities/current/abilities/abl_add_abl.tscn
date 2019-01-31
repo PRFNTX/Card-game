@@ -5,6 +5,8 @@
 [node name="abl_add_abl" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 gold_cost = 0
 action_cost = 0
 faeria_cost = 0

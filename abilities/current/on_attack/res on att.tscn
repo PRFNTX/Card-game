@@ -5,6 +5,8 @@
 [node name="res on att" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 on_target = 1
 res = 2
 val_by_damage = false

@@ -1,5 +1,9 @@
 extends Node
 
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(int, "Morning", "Evening", "Night") var set_time = 0
 
 func activate(Game, entity, unused):

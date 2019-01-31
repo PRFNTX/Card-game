@@ -1,5 +1,9 @@
 extends Node
 
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(PackedScene) var add_ability
 export(String) var add_to = "on_production"
 # temp until export dict works
@@ -20,8 +24,8 @@ func activate(Game,entity,unused):
 		target.add_child(replace)
 		if replace.has_method('init'):
 			replace.init(entity)
-			for key in get_attributes.keys():
-				replace.set(key, get_attributes[key])
+			for key in use_attributes.keys():
+				replace.set(key, use_attributes[key])
 	else:
 		replace.queue_free()
 

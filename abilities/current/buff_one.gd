@@ -1,10 +1,14 @@
 extends Node
 
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(int) var power = 1
 export(PackedScene) var unbuffer = null
 export(String) var buff_name = "NaturesGrowth"
 #unbuffer needs to account for enemy units
-export(int, "friendly") var owner = 0
+export(int, "friendly") var player = 0
 
 func activate(game, entity, target):
 	var name = entity.Unit.mod_att(buff_name, power, true)

@@ -1,6 +1,9 @@
 extends Node
 
 
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(int, "Any","Owner","Opponent") var player = 1
 export(int,"Unit","Creature","Building") var type = 1
 export(bool) var on_empty = true
@@ -40,10 +43,9 @@ func activate(_Game, _entity, _val):
 
 var conv_type = [0,6,1,2,3,4,5,6]
 func conditions(hex):
-	
 	if not hex.has_unit():
 		return false
-	if not conv_type(hex.stateLocal.hex_type):
+	if not targ_array[conv_type[hex.stateLocal.hex_type]]:
 		return false
 	if player==0:
 		if type == 0:

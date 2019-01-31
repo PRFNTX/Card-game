@@ -14,14 +14,15 @@
 position = Vector2( 30, 30 )
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
+description = "I forgot to write this"
 max_faeria = 0
 max_energy = 1
 base_attack = 0
 base_health = 3
 base_val = 0
-isTargetable = true
-isImmune = false
-isAttackable = true
+is_targetable = true
+is_immune = false
+is_attackable = true
 COLOR_GREATER = Color( 0, 0.824219, 0.0128784, 1 )
 COLOR_EQUAL = Color( 0, 0, 0, 1 )
 COLOR_LESS = Color( 0.828125, 0, 0, 1 )
@@ -52,7 +53,7 @@ on_death = false
 on_clock = false
 on_action = false
 on_receive_attack = false
-on_turn_end = false
+on_end_turn = false
 frame_alt = null
 
 [node name="Frame" type="Sprite" parent="." index="0"]
@@ -231,7 +232,8 @@ _sections_unfolded = [ "Visibility" ]
 
 [node name="abl-dowser" parent="Abilities" index="0" instance=ExtResource( 7 )]
 
-single_use = true
+ab_name = "Convert to Lake"
+ab_description = "1 Faeria - Turn target adjacent non-lake land into a lake. If a creature or structure occupies that land, it loses 2 life. Use limited to one per turn"
 
 [node name="on_play" type="Node" parent="." index="8"]
 

@@ -2,11 +2,13 @@
 
 [ext_resource path="res://abilities/current/scripts/play - resource.gd" type="Script" id=1]
 
-
 [node name="play - resource" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 type = 3
 value = 1
+then_free = true
 
 

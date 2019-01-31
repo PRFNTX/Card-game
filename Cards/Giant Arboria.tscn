@@ -2,10 +2,10 @@
 
 [ext_resource path="res://Cards/scripts/hand_card.gd" type="Script" id=1]
 [ext_resource path="res://Card.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/TownBasic.png" type="Texture" id=3]
+[ext_resource path="res://Assets/portraits/F - Erak Note 01/Small.png" type="Texture" id=3]
 [ext_resource path="res://Cards/entities/entity - Giant Arboria.tscn" type="PackedScene" id=4]
 
-[node name="Giant Arboria" type="Control"]
+[node name="Giant Arboria" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -26,18 +26,15 @@ _sections_unfolded = [ "Rect" ]
 
 position = Vector2( 42, 53.5 )
 scale = Vector2( 0.35, 0.36 )
-_sections_unfolded = [ "Transform" ]
 card_number = 74
 card_name = "Giant Arboria"
+card_description = "nothing"
 base_health = 5
 base_attack = 3
 cost_gold = 6
 lands_num = 3
 lands_type = 2
-play_morning = true
-play_evening = true
-play_night = true
-base = ExtResource( 3 )
+art = ExtResource( 3 )
 board_entity = ExtResource( 4 )
 
 

@@ -1,5 +1,9 @@
 extends Node
 
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(int,"Land","Lake","Tree","Hill","Sand") var newType = 2
 export(bool) var change_owner = true
 export(bool) var affect_empty = true

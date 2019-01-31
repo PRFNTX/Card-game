@@ -1,5 +1,9 @@
 extends Node
 
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(int, "Land","Lake","Tree","Hill","Sand") var type = 1
 
 var change_type = [2,3,4,5,6]

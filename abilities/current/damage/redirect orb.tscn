@@ -2,10 +2,11 @@
 
 [ext_resource path="res://abilities/current/scripts/redirect orb.gd" type="Script" id=1]
 
-
-[node name="redirect orb" type="Node"]
+[node name="redirect orb" type="Node" index="0"]
 
 script = ExtResource( 1 )
 reduction = 1
+ab_name = ""
+ab_description = ""
 
 

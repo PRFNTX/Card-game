@@ -1,5 +1,9 @@
 extends Node
 
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(int, "friendly", "enemy") var land_owner = 1
 export(int) var val = 1
 

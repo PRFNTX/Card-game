@@ -1,5 +1,9 @@
 extends Node
 
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(int) var max_life = 5
 export(int) var life_gain =1
 export(int) var attack_gain = 1

@@ -61,7 +61,7 @@ func has_attackable_opposing_unit(friendly=0):
 	if $hexEntity.get_children().size()>1:
 		var hexUnit = $hexEntity.get_children()[1]
 		if hexUnit.Owner>=0:
-			if hexUnit.Owner!=friendly and hexUnit.isAttackable:
+			if hexUnit.Owner!=friendly and hexUnit.Unit.is_attackable:
 				return true
 			else:
 				return false

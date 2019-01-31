@@ -1,5 +1,9 @@
 extends Node
 
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(int, "Owner", "Opponent") var player = 1
 export(int) var damage = -1
 export(int, 'Orb') var target = 0 #not implemented

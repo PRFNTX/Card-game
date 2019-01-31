@@ -5,8 +5,10 @@
 [node name="ply-add-abb" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 ability = null
-target = 0
 ability_type = "Abilities"
+attributes = null
 
 

@@ -4,6 +4,9 @@ extends Node
 # class member variables go here, for example:
 # var a = 2
 # var b = "textvar"
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(int) var gold_cost = 0
 export(int) var action_cost = 1
 export(int) var faeria_cost = 0
@@ -66,7 +69,7 @@ func complete(target, set_state=null):
 		
 	var hex_target = Game.get_hex_by_id(target)
 	if local:
-		Game.send_action('hardMove',45-target,{'active_unit':45-entity.Hex.id})
+		Game.send_action('hardMove',45-target,{'active_unit':45-entity.Hex.id},state)
 	hex_target.setState({
 		'hex_type': make_type,
 		'hex_owner': entity.Owner

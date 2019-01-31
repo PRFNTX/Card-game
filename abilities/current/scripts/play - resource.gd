@@ -1,5 +1,9 @@
 extends Node
 
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(int,"Gold","Faeria","Actions","Cards") var type = 3
 export(int) var value = 1
 export(bool) var then_free = true

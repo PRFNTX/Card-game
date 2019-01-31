@@ -1,5 +1,9 @@
 extends Node
 
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(bool) var require_valid_placement = true
 export(bool) var require_plain_for_special = false
 export(int,"Owner","Opponent") var targ_owner = 0

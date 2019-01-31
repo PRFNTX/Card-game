@@ -5,6 +5,8 @@
 [node name="clk-add-abl" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 ability = null
 ability_category = "Abilities"
 attributes = null

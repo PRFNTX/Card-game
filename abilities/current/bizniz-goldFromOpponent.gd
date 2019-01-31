@@ -1,5 +1,9 @@
 extends Node
 
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(int,'Gold','Faeria') var resource=0
 export(int,"Owner","Opponent") var target_player = 1
 export(int,"Owner","Opponent") var gain_player = 0

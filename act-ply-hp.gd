@@ -1,5 +1,9 @@
 extends Node
 
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(int, "unit", "creature", "building") var target_type = 1
 export(int, "friendly", "enemy", "any") var target_player = 0
 export(int) var value = 1
@@ -12,7 +16,7 @@ func init(_entity):
 	entity = _entity
 
 func activate(type,target,set_state=null):
-	if type.to_lower().includes(build) and conditions(target):
+	if type.to_lower().includes('build') and conditions(target):
 		var unit = Game.get_hex_by_id(target).get_unit()
 		unit.life_change(1)
 

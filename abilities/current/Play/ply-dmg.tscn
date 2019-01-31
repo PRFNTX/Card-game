@@ -5,6 +5,8 @@
 [node name="ply-dmg" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 damage = -1
 target_type = 0
 target_player = 1

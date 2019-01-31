@@ -1,5 +1,9 @@
 extends Node
 
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(int) var health_max = 5
 export(bool) var max_inclusive = true
 export(int) var health_min = 0

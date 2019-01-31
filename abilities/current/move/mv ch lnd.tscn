@@ -5,6 +5,8 @@
 [node name="mv ch lnd" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 from_type = 2
 to_type = 0
 player = 0

@@ -1,6 +1,10 @@
 extends Node
 
 #export(int, "All", "Owner", "opposing") var this_unit_only = 0
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 var land_types = ['empty', 'orb', 'land','lake','tree','hill','sand','well']
 
 

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Cards/scripts/hand_card.gd" type="Script" id=1]
 [ext_resource path="res://Card.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/TownBasic.png" type="Texture" id=3]
+[ext_resource path="res://Assets/portraits/F - Selene Regener - 01/Small.png" type="Texture" id=3]
 [ext_resource path="res://Cards/entities/entity - Prophetic Tablet.tscn" type="PackedScene" id=4]
 
 [node name="Prophetic Tablet" type="Control" index="0"]
@@ -14,6 +14,7 @@ anchor_bottom = 0.0
 margin_right = 83.0
 margin_bottom = 107.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
@@ -25,14 +26,13 @@ _sections_unfolded = [ "Rect" ]
 
 position = Vector2( 42, 53.5 )
 scale = Vector2( 0.35, 0.36 )
-_sections_unfolded = [ "Transform" ]
 card_number = 158
 card_name = "Prophetic Tablet"
+card_description = "1 Energy, 1 action - Create a desert or a mountain on target hex adjacent to a land you control."
 base_health = 3
 base_attack = 0
 lands_type = 1
-is_event = false
-base = ExtResource( 3 )
+art = ExtResource( 3 )
 board_entity = ExtResource( 4 )
 
 

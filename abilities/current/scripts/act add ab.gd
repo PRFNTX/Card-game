@@ -1,5 +1,9 @@
 extends Node
 
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(PackedScene) var add_ability
 export(String) var add_to = 'on_damage'
 

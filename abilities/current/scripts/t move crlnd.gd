@@ -1,6 +1,9 @@
 extends Node
 
 
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(int,'empty','null','Land','Lake','Tree','Hill','Sand') var type = 4
 
 var Game

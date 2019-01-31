@@ -5,6 +5,8 @@
 [node name="change all hexes" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 to_type = 1
 affect_empty = false
 

@@ -7,7 +7,7 @@
 [ext_resource path="res://abilities/current/Movement/moveLine.tscn" type="PackedScene" id=5]
 [ext_resource path="res://abilities/current/Attacks/standardAttack.tscn" type="PackedScene" id=6]
 
-[node name="Unit" type="Node2D" index="0"]
+[node name="Unit" type="Node2D"]
 
 position = Vector2( 30, 30 )
 script = ExtResource( 1 )
@@ -50,7 +50,7 @@ on_death = false
 on_clock = false
 on_action = false
 on_receive_attack = false
-on_turn_end = false
+on_end_turn = false
 frame_alt = null
 
 [node name="Frame" type="Sprite" parent="." index="0"]

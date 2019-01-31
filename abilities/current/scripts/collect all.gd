@@ -1,5 +1,9 @@
 extends Node
 
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 func activate(Game,entity,none):
 	for hex in get_tree().get_nodes_in_group('Hex'):
 		Game.players[entity.Owner].modFaeria(hex.get_unit().Unit.current_faeria)

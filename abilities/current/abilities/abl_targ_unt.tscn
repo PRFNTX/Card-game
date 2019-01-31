@@ -5,6 +5,8 @@
 [node name="abl_targ_unt" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 player = 1
 type = 1
 gold_cost = 0

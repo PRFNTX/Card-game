@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Cards/scripts/hand_card.gd" type="Script" id=1]
 [ext_resource path="res://Card.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/TownBasic.png" type="Texture" id=3]
+[ext_resource path="res://Assets/portraits/F - Arman Akopian - 03/Small.png" type="Texture" id=3]
 [ext_resource path="res://Cards/entities/entity - Elinee's Favorite.tscn" type="PackedScene" id=4]
 
 [node name="Elinee's Favorite" type="Control" index="0"]
@@ -26,17 +26,14 @@ _sections_unfolded = [ "Rect" ]
 
 position = Vector2( 42, 53.5 )
 scale = Vector2( 0.35, 0.36 )
-_sections_unfolded = [ "Transform" ]
 card_number = 47
 card_name = "Elinee's Favorite"
+card_description = "Production - Gain one energy if Elinee's Favorite has less than 3 energy"
 cost_gold = 3
 cost_faeria = 0
 lands_num = 2
 lands_type = 2
-play_morning = true
-play_evening = true
-play_night = true
-base = ExtResource( 3 )
+art = ExtResource( 3 )
 board_entity = ExtResource( 4 )
 
 

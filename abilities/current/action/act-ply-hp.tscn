@@ -5,6 +5,8 @@
 [node name="act-ply-hp" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 target_type = 1
 target_player = 0
 value = 1

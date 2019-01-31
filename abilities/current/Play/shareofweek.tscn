@@ -5,6 +5,8 @@
 [node name="shareofweek" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 health = 2
 max_target_health = 2
 target_type = 1

@@ -5,6 +5,8 @@
 [node name="time-property" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 morning = null
 evening = null
 night = null

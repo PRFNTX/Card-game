@@ -1,5 +1,13 @@
 extends Node
 
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
+export(bool) var empty_only = false
+export(int, "friendly", 'enemy', 'any') var player = 0
+export(bool) var adjacent_only = false
+
 var entity
 var Game
 func init(_entity):

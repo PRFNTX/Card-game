@@ -1,5 +1,8 @@
 extends Node
 
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 var free_target = null
 
 func activate():

@@ -1,5 +1,9 @@
 extends Node
 
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(int) var max_cards = 3
 export(int, 'card', 'gold', 'actions') var type = 0
 

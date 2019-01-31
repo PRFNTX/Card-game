@@ -2,11 +2,13 @@
 
 [ext_resource path="res://abilities/current/scripts/changeResourceValue.gd" type="Script" id=1]
 
-
-[node name="modifyResourceValue" type="Node"]
+[node name="modifyResourceValue" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 resource = 0
 add_amount = 0
+target_player = 0
 
 

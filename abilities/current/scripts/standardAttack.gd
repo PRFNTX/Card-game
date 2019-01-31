@@ -10,12 +10,16 @@ func init(_entity):
 
 func start_action(Game):
 	if get_parent().get_parent().collect and get_parent().get_parent().attack and not collect_only:
+		print('att or coll')
 		Game.start_unit_action('AttackAdjOrCollect')
 	elif get_parent().get_parent().collect:
+		print('coll')
 		Game.start_unit_action("Collect")
 	elif not collect_only:
+		print('att')
 		Game.start_unit_action('AttackAdj')
 	else:
+		print('none')
 		return false
 
 func get_action_type():

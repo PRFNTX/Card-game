@@ -1,6 +1,9 @@
 extends Node
 
 
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(int, "Any","Opponent","Owner") var player = 1 #unused
 export(int,"Hex") var type = 0 #unused
 export(int, "land",'lake','tree','hill','sand') var change_to = 0

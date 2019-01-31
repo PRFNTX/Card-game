@@ -7,19 +7,20 @@
 [ext_resource path="res://abilities/current/abilities/cost thex.tscn" type="PackedScene" id=5]
 [ext_resource path="res://abilities/current/Play/movehex.tscn" type="PackedScene" id=6]
 
-[node name="Unit" type="Node2D"]
+[node name="Unit" type="Node2D" index="0"]
 
 position = Vector2( 30, 30 )
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
+description = "I forgot to write this"
 max_faeria = 0
 max_energy = 1
 base_attack = 0
 base_health = 0
 base_val = 2
-isTargetable = true
-isImmune = false
-isAttackable = true
+is_targetable = true
+is_immune = false
+is_attackable = true
 COLOR_GREATER = Color( 0, 0.824219, 0.0128784, 1 )
 COLOR_EQUAL = Color( 0, 0, 0, 1 )
 COLOR_LESS = Color( 0.828125, 0, 0, 1 )
@@ -50,7 +51,7 @@ on_death = false
 on_clock = false
 on_action = false
 on_receive_attack = false
-on_turn_end = false
+on_end_turn = false
 frame_alt = null
 
 [node name="Frame" type="Sprite" parent="." index="0"]
@@ -225,6 +226,7 @@ _sections_unfolded = [ "Visibility" ]
 
 [node name="cost thex" parent="Abilities" index="0" instance=ExtResource( 5 )]
 
+ab_name = "Move Hex"
 empty_only = false
 action_cost = 0
 faeria_cost = 1
@@ -233,6 +235,8 @@ max_iter = 1
 
 [node name="movehex" parent="Abilities/cost thex" index="0" instance=ExtResource( 6 )]
 
+ab_name = ""
+ab_description = ""
 player = 0
 
 [node name="on_play" type="Node" parent="." index="8"]

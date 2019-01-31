@@ -2,10 +2,11 @@
 
 [ext_resource path="res://abilities/current/scripts/move resources.gd" type="Script" id=1]
 
-
 [node name="move owner resources" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 value = 1
 type = 0
 

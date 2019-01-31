@@ -1,5 +1,9 @@
 extends Node
 
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(Dictionary) var morning = {
 	'isAttackable': true,
 }

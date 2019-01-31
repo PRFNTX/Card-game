@@ -2,11 +2,13 @@
 
 [ext_resource path="res://abilities/current/scripts/dmg all.gd" type="Script" id=1]
 
-
-[node name="dmg all" type="Node"]
+[node name="dmg all" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 type = 1
 effect = -2
+players = 1
 
 

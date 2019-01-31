@@ -1,12 +1,13 @@
 extends Node
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
 
 func activate(Game, entity,unsued):
 	var val = entity.Unit.current_faeria
 	entity.Unit.current_faeria = 0
+	print('collected')
 	Game.players[Game.state['current_turn']].modFaeria(val)
 	Game.emit_signal('on_collect', Game.state.active_unit, val)
 

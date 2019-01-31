@@ -2,10 +2,11 @@
 
 [ext_resource path="res://abilities/current/scripts/all - life.gd" type="Script" id=1]
 
-
 [node name="all - life" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 life = -1
 target_player = 0
 

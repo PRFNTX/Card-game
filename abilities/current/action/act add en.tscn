@@ -5,7 +5,7 @@
 [node name="act add en" type="Node" index="0"]
 
 script = ExtResource( 1 )
-add_ability = null
-add_to = "on_damage"
+ab_name = ""
+ab_description = ""
 
 

@@ -1,8 +1,8 @@
 extends Node
 
 
-#export(int, "Any","Owner","Opponent") var player = 1
-#export(int,"Unit","Creature","Building") var type = 1
+export(String) var ab_name = ""
+export(String) var ab_description = ""
 
 export(bool) var then_free = true
 

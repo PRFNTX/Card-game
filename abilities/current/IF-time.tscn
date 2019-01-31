@@ -5,6 +5,8 @@
 [node name="IF-time" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 night = 0
 evening = 0
 morning = 0

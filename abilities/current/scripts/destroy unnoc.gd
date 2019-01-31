@@ -1,5 +1,9 @@
 extends Node
 
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 func activate(Game,entity,val):
 	for hex in get_tree().get_nodes_in_group('Hex'):
 		if hex.id>0 and not hex.has_unit():

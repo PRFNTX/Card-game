@@ -6,21 +6,22 @@
 [ext_resource path="res://Assets/faeria.png" type="Texture" id=4]
 [ext_resource path="res://abilities/current/Movement/Move.tscn" type="PackedScene" id=5]
 [ext_resource path="res://abilities/current/Attacks/standardAttack.tscn" type="PackedScene" id=6]
-[ext_resource path="res://abilities/current/abilities/ab buy nrg.tscn" type="PackedScene" id=7]
+[ext_resource path="res://abilities/current/abilities/abl-nrg.tscn" type="PackedScene" id=7]
 
 [node name="Unit" type="Node2D" index="0"]
 
 position = Vector2( 30, 30 )
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
+description = "I forgot to write this"
 max_faeria = 0
 max_energy = 1
 base_attack = 1
 base_health = 3
 base_val = 0
-isTargetable = true
-isImmune = false
-isAttackable = true
+is_targetable = true
+is_immune = false
+is_attackable = true
 COLOR_GREATER = Color( 0, 0.824219, 0.0128784, 1 )
 COLOR_EQUAL = Color( 0, 0, 0, 1 )
 COLOR_LESS = Color( 0.828125, 0, 0, 1 )
@@ -51,7 +52,7 @@ on_death = false
 on_clock = false
 on_action = false
 on_receive_attack = false
-on_turn_end = false
+on_end_turn = false
 frame_alt = null
 
 [node name="Frame" type="Sprite" parent="." index="0"]
@@ -228,10 +229,10 @@ _sections_unfolded = [ "Visibility" ]
 
 [node name="Abilities" type="Node" parent="." index="7"]
 
-[node name="ability - move" parent="Abilities" index="0" instance=ExtResource( 7 )]
+[node name="abl-nrg" parent="Abilities" index="0" instance=ExtResource( 7 )]
 
-target_type = 0
-target_player = 0
+ab_name = "Gain Energy"
+ab_description = "2 action - Eldritz Fine Lame gains 1 energy"
 
 [node name="on_play" type="Node" parent="." index="8"]
 

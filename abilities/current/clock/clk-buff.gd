@@ -1,5 +1,9 @@
 extends Node
 
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(int) var value = 1
 export(bool) var night = true
 export(bool) var evening = false

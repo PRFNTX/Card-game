@@ -1,5 +1,9 @@
 extends Node
 
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(int, "self", "enemy", "any") var adj_owner = 0
 export(int) var value
 export(bool) var buff_self = true

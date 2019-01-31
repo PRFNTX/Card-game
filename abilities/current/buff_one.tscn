@@ -5,9 +5,11 @@
 [node name="buff_one" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 power = 1
 unbuffer = null
 buff_name = "NaturesGrowth"
-owner = 0
+player = 0
 
 

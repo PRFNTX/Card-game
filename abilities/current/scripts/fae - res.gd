@@ -1,5 +1,9 @@
 extends Node
 
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(int,'Cards','Actions','Energy','Gold', 'faeria') var gain_type = 1
 export(bool) var value_by_faeria = true
 export(int) var value = 0

@@ -2,10 +2,11 @@
 
 [ext_resource path="res://abilities/current/scripts/gain life max.gd" type="Script" id=1]
 
-
 [node name="gain stats capped" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 max_life = 5
 life_gain = 1
 attack_gain = 1

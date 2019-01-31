@@ -2,6 +2,10 @@ extends Node
 
 export(int,'empty','null','land','lake','tree','hill','sand') var type = 2
 
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 var Game
 var entity
 func init(_entity):

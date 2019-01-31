@@ -1,5 +1,9 @@
 extends Node
 
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(int) var health = 1
 export(int) var energy = 0
 export(bool) var adjacent_only = true

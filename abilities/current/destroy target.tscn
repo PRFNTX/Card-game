@@ -2,11 +2,11 @@
 
 [ext_resource path="res://abilities/current/scripts/des targ.gd" type="Script" id=1]
 
-
-
 [node name="destroy target" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 player = 2
 type = 1
 

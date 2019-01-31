@@ -2,10 +2,11 @@
 
 [ext_resource path="res://abilities/current/scripts/prod - damage.gd" type="Script" id=1]
 
-
 [node name="prod - damage" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 player = 1
 damage = -1
 target = 0

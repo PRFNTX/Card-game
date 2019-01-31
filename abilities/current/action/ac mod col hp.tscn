@@ -5,6 +5,8 @@
 [node name="ac mod col hp" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 health_level = 4
 inclusive = false
 greater_than = false

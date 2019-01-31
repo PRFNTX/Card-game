@@ -1,5 +1,9 @@
 extends Node
 
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 func activate(Game,entity,unused):
 	entity.Unit.add_one_energy()
 

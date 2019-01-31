@@ -5,6 +5,8 @@
 [node name="land-on-att" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 type = 1
 change_type = true
 convert_land = false

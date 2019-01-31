@@ -60,6 +60,7 @@ func will_receive_attack(val_damage, source=-1):
 	var can_attack = Unit.on_receive_attack(source)
 	if not can_attack:
 		return false
+	return true
 
 func receive_attack(val_damage, source=-1):
 	var mod_damage = on_damage(val_damage)
@@ -122,7 +123,7 @@ func on_attack(target):
 	var can_attack = target.will_receive_attack(Unit.current_attack, Hex.id)
 	if can_attack:
 		Unit.attack(target)
-		taget.receive_attack(Unit.current_attack, Hex.id)
+		target.receive_attack(Unit.current_attack, Hex.id)
 	Unit.end()
 
 func on_move(target): #hexEntity

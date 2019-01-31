@@ -13,34 +13,33 @@ func start_action(entity):
 	activate(entity.Game,entity,null)
 
 func activate(_game, _entity, _val):
-	Game = _Game
+	Game = _game
 	entity = _entity
-	val=_val
 	Game.delegate_action(entity.Hex.id,get_parent().get_name()+'/'+get_name())
 
 func targeting_move(hex):
 	if medium==0:
 		if hex.hexType.child.moveLand and hex.hex_is_empty_or_self() and hex.is_adjacent_or_equal_to(hex.stateLocal['active_unit'].Hex):
-			hex.setState({'cover':move,'target':true})
+			hex.setState({'cover':hex.move,'target':true})
 			return true
 		else:
 			hex.setState({'cover':Color(0,0,0,0), 'target':false})
-	elif type==2:
+	elif medium==2:
 		if hex.hexType.child.moveAir and hex.hex_is_empty_or_self() and hex.is_adjacent_or_equal_to(hex.stateLocal['active_unit'].Hex):
-			hex.setState({'cover':move,'target':true})
+			hex.setState({'cover':hex.move,'target':true})
 			return true
 		else:
 			hex.setState({'cover':Color(0,0,0,0), 'target':false})
-	elif type==1:
+	elif medium==1:
 		if hex.hexType.child.moveWater and hex.hex_is_empty_or_self() and hex.is_adjacent_or_equal_to(hex.stateLocal['active_unit'].Hex):
-			hex.setState({'cover':move,'target':true})
+			hex.setState({'cover':hex.move,'target':true})
 			return true
 		else:
 			hex.setState({'cover':Color(0,0,0,0), 'target':false})
 
 func targeting_attack(hex):
 	if (hex.has_attackable_opposing_unit()):
-		hex.setState({'cover':attack,'target':true})
+		hex.setState({'cover':hex.attack,'target':true})
 		return true
 	else:
 		hex.setState({'cover':Color(0,0,0,0), 'target':false})
@@ -50,7 +49,7 @@ var ranged_area = []
 func targeting():
 	adj = entity.Hex.adjacent
 	for hex in adj:
-		if not range_area.has(hex):
+		if not ranged_area.has(hex):
 			ranged_area.append(hex)
 	var found_target = false
 	for hex in adj:

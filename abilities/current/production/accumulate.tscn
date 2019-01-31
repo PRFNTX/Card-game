@@ -2,11 +2,10 @@
 
 [ext_resource path="res://abilities/current/scripts/accumulate.gd" type="Script" id=1]
 
-
 [node name="accumulate" type="Node" index="0"]
 
 script = ExtResource( 1 )
-player = 2
-type = 1
+ab_name = ""
+ab_description = ""
 
 

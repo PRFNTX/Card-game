@@ -20,8 +20,9 @@
 [ext_resource path="res://Clock.tscn" type="PackedScene" id=18]
 [ext_resource path="res://DisplayFrame.gd" type="Script" id=19]
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" index="0"]
 
+scale = Vector2( 1.3, 1.3 )
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 BoardEntity = ExtResource( 2 )
@@ -30,6 +31,7 @@ WellEntity = ExtResource( 4 )
 
 [node name="board" type="Node2D" parent="." index="0"]
 
+editor/display_folded = true
 position = Vector2( 748.755, -134.923 )
 rotation = 1.5708
 scale = Vector2( 0.751495, 1 )
@@ -527,10 +529,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 268.0
-margin_top = 477.0
-margin_right = 808.0
-margin_bottom = 587.0
+margin_left = 248.0
+margin_top = 464.0
+margin_right = 788.0
+margin_bottom = 574.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -549,15 +551,61 @@ _sections_unfolded = [ "Transform", "Visibility" ]
 
 [node name="DisplayFrame" type="Node2D" parent="." index="12"]
 
-position = Vector2( 124.001, 214.854 )
+position = Vector2( 13.0782, 166.718 )
 script = ExtResource( 19 )
+_sections_unfolded = [ "Transform" ]
 activatable = true
+
+[node name="CardDetails" type="Label" parent="DisplayFrame" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 130.0
+margin_top = 9.0
+margin_right = 255.0
+margin_bottom = 135.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "preview box goes right here"
+autowrap = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
 [node name="PreviewFrame" type="Node2D" parent="." index="13"]
 
-position = Vector2( 820.999, 161.854 )
+position = Vector2( 762.398, 158.715 )
 script = ExtResource( 19 )
+_sections_unfolded = [ "Transform" ]
 activatable = false
+
+[node name="CardDetails" type="Label" parent="PreviewFrame" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 112.0
+margin_top = -6.0
+margin_right = 262.0
+margin_bottom = 119.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "Preview box goes right here"
+autowrap = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
 [node name="hex0" parent="." index="14" instance=ExtResource( 7 )]
 
@@ -565,9 +613,9 @@ visible = false
 
 [connection signal="timeout" from="actionTimer" to="." method="_on_Timer_timeout"]
 
-[connection signal="timeout" from="basic_timeout" to="." method="_on_basic_timeout_timeout"]
-
 [connection signal="timeout" from="basic_timeout" to="." method="_on_Timer_timeout"]
+
+[connection signal="timeout" from="basic_timeout" to="." method="_on_basic_timeout_timeout"]
 
 [connection signal="pressed" from="endturn" to="." method="_on_endturn_pressed"]
 

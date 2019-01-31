@@ -2,10 +2,10 @@
 
 [ext_resource path="res://Cards/scripts/hand_card.gd" type="Script" id=1]
 [ext_resource path="res://Card.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/TownBasic.png" type="Texture" id=3]
+[ext_resource path="res://Assets/portraits/F - Arman Akopian - 04/Small.png" type="Texture" id=3]
 [ext_resource path="res://Cards/entities/entity - Emerald Dragon.tscn" type="PackedScene" id=4]
 
-[node name="Emerald Dragon" type="Control"]
+[node name="Emerald Dragon" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -26,19 +26,16 @@ _sections_unfolded = [ "Rect" ]
 
 position = Vector2( 42, 53.5 )
 scale = Vector2( 0.35, 0.36 )
-_sections_unfolded = [ "Transform" ]
 card_number = 269
 card_name = "Emerald Dragon"
+card_description = "Flying, Charge, Production - Create a forest if emerald dragon occupies a water hex."
 base_health = 6
 base_attack = 3
 cost_gold = 7
 cost_faeria = 3
 lands_num = 3
 lands_type = 2
-play_morning = true
-play_evening = true
-play_night = true
-base = ExtResource( 3 )
+art = ExtResource( 3 )
 board_entity = ExtResource( 4 )
 
 

@@ -5,10 +5,13 @@
 [node name="buff all units" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 health = 0
 attack = 1
 energy = 0
 type = 1
 player = 1
+unbuffer = null
 
 

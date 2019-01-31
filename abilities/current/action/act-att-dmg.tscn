@@ -2,10 +2,11 @@
 
 [ext_resource path="res://abilities/current/scripts/act-att-dmg.gd" type="Script" id=1]
 
-
-[node name="act-att-dmg" type="Node"]
+[node name="act-att-dmg" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 life = -1
 target = 0
 

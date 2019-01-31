@@ -1,5 +1,9 @@
 extends Node
 
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(int) var gold_cost = 0
 export(int) var action_cost = 1
 export(int) var faeria_cost = 1

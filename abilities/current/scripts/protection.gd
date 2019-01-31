@@ -2,6 +2,9 @@ extends Node
 
 export(int) var reduction = 1
 
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 func activate(Game,entity,damage):
 	return damage - reduction
 

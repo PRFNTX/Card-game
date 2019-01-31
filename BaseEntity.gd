@@ -1,13 +1,15 @@
 extends Node2D
 
+export(String) var description = "I forgot to write this"
+
 export(int) var max_faeria = 0
 export(int) var max_energy = 1
 export(int) var base_attack = 1
 export(int) var base_health = 1
 export(int) var base_val = 1
-export(int) var isTargetable = true
-export(int) var isImmune = false
-export(int) var isAttackable = true
+export(int) var is_targetable = true
+export(int) var is_immune = false
+export(int) var is_attackable = true
 
 export(Color,RGB) var COLOR_GREATER
 export(Color,RGB) var COLOR_EQUAL
@@ -204,7 +206,9 @@ func on_receive_attack(source):
 	if on_receive_attack:
 		for effectNode in $on_receive_attack.get_children():
 			if complete:
-				complete = effectNode.activate(source)
+				var result = effectNode.activate(source)
+				if result != null:
+					complete = result
 	return complete
 
 func on_end_turn():
@@ -239,7 +243,7 @@ func get_actions():
 	#for move in $Movement.get_children():
 	#	ret[move.get_name()]=move
 	for ability in $Abilities.get_children():
-		ret[ability.get_name()]=ability
+		ret[ability.ab_name]=ability
 	
 	return(ret)
 

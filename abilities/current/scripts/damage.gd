@@ -1,8 +1,9 @@
 extends Node
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
+
+export(String) var ab_name = ""
+export(String) var ab_description = ""
+
 export(int) var gold_cost = 0
 export(int) var action_cost = 0
 export(int) var faeria_cost = 0

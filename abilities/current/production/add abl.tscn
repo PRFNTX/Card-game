@@ -5,7 +5,10 @@
 [node name="add abl" type="Node" index="0"]
 
 script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
 add_ability = null
 add_to = "on_production"
+unit_attributes = 0
 
 
