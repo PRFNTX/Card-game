@@ -440,7 +440,6 @@ func moveBase(target, set_state=null):
 	startBasictimeout()
 	var unit = get_unit_by_hex(get_hex_by_id(state['active_unit']))
 	unit.on_move(hex_target.get_node('hexEntity'))
-	setState({'active_unit':target})
 	
 	#unit.rect_position = target.get_node('hexEntity/pos').position
 	unit.Hex=hex_target
@@ -473,7 +472,7 @@ func moveWater(target, set_state=null):
 	unit.Hex=hex_target
 	unit.use_energy(1)
 	if local:
-		send_action('moveAquatic',45-target,{'active_unit':45-state['active_unit']},state)
+		send_action('moveWater',45-target,{'active_unit':45-state['active_unit']},state)
 		unit.setState({'active':false})
 		setState({'active_unit':target})
 	

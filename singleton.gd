@@ -135,6 +135,7 @@ func send_msg(value):
 func _on_message_recieved(msg):
 
 	var event = parse_json(msg)
+	print(event)
 	if event:
 		var action = event.keys()[0]
 		call(action,event[action])
