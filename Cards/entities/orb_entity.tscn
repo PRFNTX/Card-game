@@ -11,9 +11,8 @@ base_health = 0
 base_val = 20
 COLOR_LESS = Color( 0, 0, 0, 1 )
 is_building = true
+is_orb = false
 on_death = true
-on_receive_attack = false
-on_end_turn = false
 
 [node name="LoseGame" parent="on_death" index="0" instance=ExtResource( 2 )]
 

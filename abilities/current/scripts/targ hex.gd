@@ -36,12 +36,16 @@ func conditions(hex):
 func targeting():
 	if not adjacent_only:
 		for hex in get_tree().get_nodes_in_group("Hex"):
+			if hex.id == 17:
+				print('o look')
 			if conditions(hex):
 				hex.setState({'cover':hex.targetOther , 'target' :true})
 			else:
 				hex.setState({'cover':Color(0,0,0,0) , 'target' :false})
 	else:
 		for hex in entity.Hex.adjacent:
+			if hex.id == 17:
+				print('o look')
 			if conditions(hex):
 				hex.setState({'cover':hex.targetOther , 'target' :true})
 			else:
@@ -51,7 +55,6 @@ func targeting():
 var iter = 0
 export(int) var max_iter=5
 func complete(target, set_state=null):
-	
 	var local = true
 	var state = Game.get_state()
 	if not set_state==null:

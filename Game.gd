@@ -6,8 +6,8 @@ extends Node2D
 # var b="textvar"
 
 
-var testing_solo = true
-var god_mode = true
+var testing_solo = false
+var god_mode = false
 
 onready var globals = get_node('/root/master')
 
@@ -170,7 +170,7 @@ func frame_activate(ability_name, set_state=null):
 		this_unit.hide()
 		var to_instance = globals.card_instances[state['frame_card']].get_node('Card').board_entity
 		if local:
-			send_action('frame_activate', ability_name ,{'frame_card':globals.get_id_by_name(state['frame_card']),'current_turn':(state['current_turn']+1)%2},state)
+			send_action('frame_activate', 0 ,{'frame_card':globals.get_id_by_name(state['frame_card']),'current_turn':(state['current_turn']+1)%2},state)
 			
 		if this_unit.possess(to_instance, get_hex_by_id(0), state['current_turn'], self,state['frame_card'])==null:
 			players[state['current_turn']].discard_selected() #make this function
@@ -179,6 +179,7 @@ func frame_activate(ability_name, set_state=null):
 		
 	elif actionReady:
 		get_hex_by_id(state['active_unit']).get_unit().activate(ability_name) #make this function
+		actionDone()
 ##STATE AGAIN
 
 func delegate_id(val):
@@ -247,8 +248,10 @@ func _ready():
 	emit_signal('ActionPhase', state['current_turn'])
 	ready = true
 
-func change_turns(none,unused):
+func change_turns(none, unused):
+	print('changing')
 	if state['current_turn'] == 0:
+		print('local')
 		send_action('change_turns',0,{'empty':true})
 	print('changing turns')
 	cancelAction()
@@ -259,6 +262,7 @@ func change_turns(none,unused):
 		setState({'current_turn':(state['current_turn']+1)%1,'action':"",'active_unit':null,'clock_time':(current_time+1)%3})
 	else:
 		setState({'current_turn':(state['current_turn']+1)%2,'action':"",'active_unit':null,'clock_time':(current_time+1)%3})
+		print(state)
 	emit_signal("TurnStart", state['current_turn'])
 	emit_signal("ActionPhase", state['current_turn'])
 	
@@ -354,6 +358,7 @@ func activate(unit):
 func completeAction(target):
 	if can_do:
 		call(state["action"],target.id)
+		startBasictimeout()
 
 func actionDone():
 	setState({"action":"",'active_unit':null, 'frame_card':null, 'delegate_id':null,"delegate_node":null,'building_card':null})

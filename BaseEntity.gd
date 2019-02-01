@@ -108,6 +108,7 @@ func add_one_faeria():
 export(bool) var is_unit = false
 export(bool) var is_building=false
 export(bool) var is_event=false
+export(bool) var is_orb=false
 
 export(bool) var move = false
 export(bool) var charge = false

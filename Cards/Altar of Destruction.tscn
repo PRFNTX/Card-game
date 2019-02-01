@@ -5,7 +5,7 @@
 [ext_resource path="res://Assets/portraits/F - Anna Pavleeva - 01/Small.png" type="Texture" id=3]
 [ext_resource path="res://Cards/entities/entity - Altar of Destruction.tscn" type="PackedScene" id=4]
 
-[node name="Altar of Destruction" type="Control" index="0"]
+[node name="Altar of Destruction" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0

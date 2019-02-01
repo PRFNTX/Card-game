@@ -29,6 +29,7 @@ ENERGY_INACTIVE = Color( 0.652344, 0.642151, 0.642151, 1 )
 is_unit = false
 is_building = true
 is_event = false
+is_orb = false
 move = false
 charge = false
 jump = false

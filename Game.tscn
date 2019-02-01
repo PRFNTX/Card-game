@@ -20,7 +20,7 @@
 [ext_resource path="res://Clock.tscn" type="PackedScene" id=18]
 [ext_resource path="res://DisplayFrame.gd" type="Script" id=19]
 
-[node name="Game" type="Node2D" index="0"]
+[node name="Game" type="Node2D"]
 
 scale = Vector2( 1.3, 1.3 )
 script = ExtResource( 1 )

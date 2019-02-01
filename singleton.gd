@@ -135,12 +135,12 @@ func send_msg(value):
 func _on_message_recieved(msg):
 
 	var event = parse_json(msg)
-	print(event)
-	var action = event.keys()[0]
-	call(action,event[action])
-	print(get_tree().get_current_scene())
-	if get_tree().get_current_scene().has_method(action):
-		get_tree().get_current_scene().call(action,event[action])
+	if event:
+		var action = event.keys()[0]
+		call(action,event[action])
+		print(get_tree().get_current_scene())
+		if get_tree().get_current_scene().has_method(action):
+			get_tree().get_current_scene().call(action,event[action])
 
 ###OTHER
 

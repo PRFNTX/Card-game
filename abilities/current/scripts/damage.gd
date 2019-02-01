@@ -43,12 +43,12 @@ func pay_costs():
 func targeting():
 	for hex in get_tree().get_nodes_in_group("Hex"):
 		if target_player==0:
-			if hex.has_friendly_unit() and (target_type==0 or (target_type==1 and hex.unit_is_creature()) or (target_type==1 and hex.unit_is_building())) and (entity.Hex.adjacent.has(hex) or adjacent_only==false):
+			if hex.has_friendly_unit() and (target_type==0 or (target_type==1 and hex.unit_is_creature()) or (target_type==2 and hex.unit_is_building())) and (entity.Hex.adjacent.has(hex) or adjacent_only==false):
 				hex.setState({'cover':hex.targetOther , 'target' :true})
 			else:
 				hex.setState({'cover':Color(0,0,0,0) , 'target' :false})
 		elif target_player==1:
-			if hex.has_opposing_unit() and (target_type==0 or (target_type==1 and hex.unit_is_creature()) or (target_type==1 and hex.unit_is_building())) and (entity.Hex.adjacent.has(hex) or adjacent_only==false):
+			if hex.has_opposing_unit() and (target_type==0 or (target_type==1 and hex.unit_is_creature()) or (target_type==2 and hex.unit_is_building())) and (entity.Hex.adjacent.has(hex) or adjacent_only==false):
 				hex.setState({'cover':hex.targetOther , 'target' :true})
 			else:
 				hex.setState({'cover':Color(0,0,0,0) , 'target' :false})

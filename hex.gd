@@ -88,7 +88,7 @@ func unit_is_creature():
 
 func unit_is_building():
 	if has_unit():
-		if $hexEntity.get_children()[1].Unit.is_building:
+		if $hexEntity.get_children()[1].Unit.is_building and not $hexEntity.get_children()[1].Unit.is_orb:
 			return true
 	return false
 
@@ -124,7 +124,7 @@ func action(type,by,test=false):
 			if test:
 				return false
 	elif type=="actionSand":
-		if hexType.child.actionSand and activePlayerCanAffect(by) and hex_is_empty():
+		if hexType.child.actionSand and activePlayerCanAffect(by):
 			if !test:
 				setState({'cover':move, 'target':true})
 			else:
@@ -134,7 +134,7 @@ func action(type,by,test=false):
 			if test:
 				return false
 	elif type=="actionLake":
-		if hexType.child.actionLake and activePlayerCanAffect(by) and hex_is_empty():
+		if hexType.child.actionLake and activePlayerCanAffect(by):
 			if !test:
 				setState({'cover':summon, 'target':true})
 			else:
@@ -144,7 +144,7 @@ func action(type,by,test=false):
 			if test:
 				return false
 	elif type=="actionTree":
-		if hexType.child.actionTree and activePlayerCanAffect(by) and hex_is_empty():
+		if hexType.child.actionTree and activePlayerCanAffect(by):
 			if !test:
 				setState({'cover':gather, 'target':true})
 			else:
@@ -154,7 +154,7 @@ func action(type,by,test=false):
 			if test:
 				return false
 	elif type=="actionHill":
-		if hexType.child.actionHill and activePlayerCanAffect(by) and hex_is_empty():
+		if hexType.child.actionHill and activePlayerCanAffect(by):
 			if !test:
 				setState({'cover':targetOther, 'target':true})
 			else:
@@ -332,6 +332,8 @@ func cover(val):
 	stateLocal['cover']=val
 
 func target(val):
+	if id==17:
+		print('again')
 	stateLocal['target']=val
 
 
@@ -416,12 +418,11 @@ func destroy_land_on_aquatic():
 func _input(event):
 	if stateCopy["action"]!="" and event.is_action('click') and stateLocal["target"] and false:
 		gameNode.completeAction(self)
-		stateLocal["target"]=false
 
-func complete_action_click():
-	if stateLocal["target"] and stateCopy["action"]!="":
+func complete_action_click(event):
+	if stateLocal["target"] and stateCopy["action"]!="" and event.is_pressed():
 		gameNode.completeAction(self)
-		stateLocal["target"]=false
+
 
 
 

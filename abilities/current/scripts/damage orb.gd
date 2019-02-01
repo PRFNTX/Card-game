@@ -30,10 +30,8 @@ func activate(_Game, _entity, unsused):
 		elif target != entity.Owner:
 			hex = Game.get_hex_by_id(44)
 		
-		print(hex.get_unit())
 		if hex.has_unit():
 			hex.get_unit().life_change(damage)
-			print("doin")
 		Game.send_activation(entity.Hex.id, get_relative_path())
 
 func get_relative_path():
