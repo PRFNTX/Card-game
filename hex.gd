@@ -322,6 +322,7 @@ var stateLocal={"cover":Color(0,0,0,0),"target":false, "hex_type":initial_state,
 func setState(newState):
 	for key in newState.keys():
 		call(key, newState[key])
+	print(newState)
 
 func affectState(newState,by):
 	if activePlayerCanAffect(by):
@@ -332,8 +333,8 @@ func cover(val):
 	stateLocal['cover']=val
 
 func target(val):
-	if id==17:
-		print('again')
+	if (val or stateLocal['target']) and id==7:
+		print(val)
 	stateLocal['target']=val
 
 
@@ -362,8 +363,7 @@ func active_unit(unit):
 		stateLocal['active_unit']
 	else:
 		stateLocal['active_unit']=gameNode.get_unit_by_hex(gameNode.get_hex_by_id(unit))
-		print(stateLocal['active_unit'])
-		print(id)
+
 
 func hovered(val):
 	if val and stateLocal['cover']!=Color(0,0,0,0):
@@ -422,9 +422,6 @@ func _input(event):
 func complete_action_click(event):
 	if stateLocal["target"] and stateCopy["action"]!="" and event.is_pressed():
 		gameNode.completeAction(self)
-
-
-
 
 func _on_Area2D_mouse_exited():
 	gameNode.setState({'hovered':null})

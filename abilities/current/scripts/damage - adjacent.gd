@@ -31,12 +31,8 @@ func activate(type, target, state=null):
 	var adjs = []
 	for hex in entity.Hex.adjacent:
 		adjs.append(hex.id)
-	
-	
-	if adjs.has(target):
-		
+	if not type.find('build') >= 0 and adjs.has(target):
 		for hex in _last.keys():
-			
 			if Game.get_hex_by_id(hex).has_unit():
 				var unit = Game.get_hex_by_id(hex).get_unit()
 				if unit != _last[hex]:

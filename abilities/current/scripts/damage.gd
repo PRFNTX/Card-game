@@ -25,7 +25,10 @@ func activate(_Game, _entity, val):
 	Game = _Game
 	entity = _entity
 	if verify_costs():
-		Game.delegate_action(entity.Hex.id,'Abilities/damage')
+		Game.delegate_action(entity.Hex.id,get_relative_path())
+
+func get_relative_path():
+	return get_parent().get_name()+'/'+get_name()
 
 func verify_costs():
 	var ret = true
@@ -64,7 +67,7 @@ func complete(target, set_state=null):
 	var unit = Game.get_hex_by_id(target).get_unit()
 	unit.life_change(damage)
 	if local:
-		Game.send_action('delegate',45-target,{'delegate_id':entity.Hex.id,'delegate_node':'Abilities/damage'})
+		Game.send_action('delegate',45-target,{'delegate_id':45-entity.Hex.id,'delegate_node':get_relative_path()})
 	Game.actionDone()
 	
 

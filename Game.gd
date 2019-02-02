@@ -6,8 +6,8 @@ extends Node2D
 # var b="textvar"
 
 
-var testing_solo = false
-var god_mode = false
+var testing_solo = true
+var god_mode = true
 
 onready var globals = get_node('/root/master')
 
@@ -179,7 +179,8 @@ func frame_activate(ability_name, set_state=null):
 		
 	elif actionReady:
 		get_hex_by_id(state['active_unit']).get_unit().activate(ability_name) #make this function
-		actionDone()
+		if not get_hex_by_id(state['active_unit']).get_unit().actionList[ability_name].has_method('complete'):
+			actionDone()
 ##STATE AGAIN
 
 func delegate_id(val):
@@ -224,7 +225,12 @@ func _ready():
 	
 	$Hand.assign_player(players[0])
 	players[0].hand_object=$Hand
-	
+	players[0].drawCard()
+	players[0].drawCard()
+	players[0].drawCard()
+	players[0].drawCard()
+	players[0].drawCard()
+	players[0].setGold(3)
 	setState({'current_turn':0})
 	actionTimer = $actionTimer
 	
@@ -249,11 +255,8 @@ func _ready():
 	ready = true
 
 func change_turns(none, unused):
-	print('changing')
 	if state['current_turn'] == 0:
-		print('local')
 		send_action('change_turns',0,{'empty':true})
-	print('changing turns')
 	cancelAction()
 	emit_signal("TurnEnd", state['current_turn'])
 	var current_time = state['clock_time']
@@ -262,7 +265,6 @@ func change_turns(none, unused):
 		setState({'current_turn':(state['current_turn']+1)%1,'action':"",'active_unit':null,'clock_time':(current_time+1)%3})
 	else:
 		setState({'current_turn':(state['current_turn']+1)%2,'action':"",'active_unit':null,'clock_time':(current_time+1)%3})
-		print(state)
 	emit_signal("TurnStart", state['current_turn'])
 	emit_signal("ActionPhase", state['current_turn'])
 	
@@ -364,7 +366,7 @@ func actionDone():
 	setState({"action":"",'active_unit':null, 'frame_card':null, 'delegate_id':null,"delegate_node":null,'building_card':null})
 	if $hex0.has_unit():
 		$hex0.get_unit().queue_free()
-		print("SHOULD I HAVE FREED THAT? (Game:330)")
+		print("SHOULD I HAVE FREED THAT? (Game:363)")
 	complete = true
 
 func newAction(set={'action':""}):
@@ -828,8 +830,8 @@ func delegate(target, set_state=null):
 	if set_state!=null:
 		state=set_state
 		local= false
-	if (get_hex_by_id(state['delegate_id']).get_unit().Unit.get_node(state['delegate_node']).complete(target, set_state)):
-		actionDone()
+	get_hex_by_id(state['delegate_id']).get_unit().Unit.get_node(state['delegate_node']).complete(target, set_state)
+	actionDone()
 
 ###############
 ### MESSAGE FUNCTIONS
@@ -931,10 +933,6 @@ func cast_from_hand(card_node):
 	castAny(0)
 
 
-
-
-
-
 #### VERFIFICATIONS
 
 func check_valid_action(action):
@@ -951,6 +949,7 @@ func poll_for_valid_targets():
 	for hex in get_tree().get_nodes_in_group('Hex'):
 		if hex.stateLocal.target:
 			return
+	print('no target')
 	no_valid_targets()
 
 func no_valid_targets():

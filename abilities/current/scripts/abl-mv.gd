@@ -43,16 +43,12 @@ func pay_costs():
 	Game.players[entity.Owner].pay_costs(gold_cost,faeria_cost)
 	Game.players[entity.Owner].useAction(action_cost)
 	
-#for thing in array
-# if (anything is true)
-# set target = true
+
 func targeting():
 	for hex in get_tree().get_nodes_in_group("Hex"):
 		if target_player==0:
 			if hex.stateLocal['hex_type']==target_type and not hex.has_unit():
 				hex.setState({'cover':hex.targetOther , 'target' :true})
-			else:
-				hex.setState({'cover':Color(0,0,0,0) , 'target' :false})
 		elif (target_player==1 and hex.stateLocal['hex_owner']==entity.Owner) or (target_player==2 and hex.stateLocal['hex_owner']!=entity.Owner) and hex.stateLocal['hex_type']==target_type and not hex.has_unit():
 			hex.setState({'cover':hex.targetOther , 'target' :true})
 		else:
@@ -72,11 +68,3 @@ func complete(target, set_state=null):
 		Game.send_action('hardMove',45-target,{'active_unit':45-entity.Hex.id},state)
 	entity.on_move(hex_target.get_node('hexEntity'))
 	Game.actionDone()
-	
-func cancel_action():
-	pass
-
-func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-	pass

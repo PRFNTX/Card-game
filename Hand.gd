@@ -30,7 +30,6 @@ func hovered(num):
 var area = self.rect_position
 const wid = 540
 func num_cards(num):
-	print(area)
 	state['num_cards'] = num
 	arrange_cards()
 
