@@ -23,8 +23,10 @@ func start_action(Game):
 		return false
 
 func get_action_type():
-	if get_parent().get_parent().collect:
+	if get_parent().get_parent().collect and not collect_only:
 		return('AttackAdjOrCollect')
+	elif get_parent().get_parent().collect and collect_only:
+		return('Collect')
 	else:
 		return('AttackAdj')
 

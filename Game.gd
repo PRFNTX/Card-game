@@ -830,8 +830,10 @@ func delegate(target, set_state=null):
 	if set_state!=null:
 		state=set_state
 		local= false
-	get_hex_by_id(state['delegate_id']).get_unit().Unit.get_node(state['delegate_node']).complete(target, set_state)
-	actionDone()
+	print(state['delegate_id'])
+	var result = get_hex_by_id(state['delegate_id']).get_unit().Unit.get_node(state['delegate_node']).complete(target, set_state)
+	if result == null or result:
+		actionDone()
 
 ###############
 ### MESSAGE FUNCTIONS
@@ -937,8 +939,9 @@ func cast_from_hand(card_node):
 
 func check_valid_action(action):
 	var targets = false
+	var unit
 	for hex in get_tree().get_nodes_in_group('Hex'):
-		if hex.id!=0 and hex.action(action,state['current_turn'],true):
+		if hex.id!=0 and hex.action(action,state['current_turn'], true):
 			targets = true
 	if not targets:
 		#no_valid_targets()

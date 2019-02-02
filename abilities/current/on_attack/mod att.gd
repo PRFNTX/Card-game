@@ -15,7 +15,7 @@ func activate(_Game,_entity,target):
 	entity=_entity
 	Game=entity.Game
 	
-	if target.Unit.is_building and type == 0:
+	if target.Unit.is_building and not target.Unit.is_orb and type == 0:
 		entity.Unit.current_attack+=mod
 		up = true
 

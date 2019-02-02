@@ -322,7 +322,6 @@ var stateLocal={"cover":Color(0,0,0,0),"target":false, "hex_type":initial_state,
 func setState(newState):
 	for key in newState.keys():
 		call(key, newState[key])
-	print(newState)
 
 func affectState(newState,by):
 	if activePlayerCanAffect(by):
@@ -333,8 +332,6 @@ func cover(val):
 	stateLocal['cover']=val
 
 func target(val):
-	if (val or stateLocal['target']) and id==7:
-		print(val)
 	stateLocal['target']=val
 
 
@@ -360,7 +357,7 @@ func hex_type(val):
 
 func active_unit(unit):
 	if unit==null:
-		stateLocal['active_unit']
+		stateLocal['active_unit']=null
 	else:
 		stateLocal['active_unit']=gameNode.get_unit_by_hex(gameNode.get_hex_by_id(unit))
 
@@ -372,9 +369,9 @@ func hovered(val):
 		$sprite.modulate= stateLocal['cover']
 
 #watchState: components of state to track and respond to
-var watchState=["action",'active_unit','hovered']
+var watchState=["action",'active_unit', 'hovered']
 var stateCopy={"action":"",'active_unit':null,'hovered':null}
-var stateCopyMethods={"action":"update_Action",'active_unit':'update_active_unit','hovered':'update_hovered'}
+var stateCopyMethods={"action":"update_Action",'active_unit':'update_active_unit', 'hovered':'update_hovered'}
 
 func connect(game):
 	gameNode=game
