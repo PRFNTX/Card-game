@@ -28,6 +28,7 @@ position = Vector2( 42, 53.5 )
 scale = Vector2( 0.35, 0.36 )
 card_number = 266
 card_name = "Bloom"
+card_description = "Create a forest next to a land you control. Gain 1 action."
 base_health = 0
 base_attack = 0
 cost_gold = 2

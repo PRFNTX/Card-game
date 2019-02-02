@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://abilities/current/abilities/abl land adj.gd" type="Script" id=1]
+
+[node name="abl land adj" type="Node"]
+
+script = ExtResource( 1 )
+type = 2
+ab_name = ""
+ab_description = ""
+energy_cost = 1
+action_cost = 0
+faeria_cost = 0
+gold_cost = 0
+
+

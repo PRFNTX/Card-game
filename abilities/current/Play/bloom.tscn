@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://abilities/current/Play/bloom.gd" type="Script" id=1]
+
+[node name="bloom" type="Node"]
+
+script = ExtResource( 1 )
+ab_name = ""
+ab_description = ""
+require_valid_placement = true
+require_plain_for_special = false
+targ_owner = 0
+type = 0
+resource_type = 3
+value = 1
+
+

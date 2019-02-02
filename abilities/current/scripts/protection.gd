@@ -6,14 +6,7 @@ export(String) var ab_name = ""
 export(String) var ab_description = ""
 
 func activate(Game,entity,damage):
-	return damage - reduction
-
-func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-	pass
-
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+	var newDamage = damage - reduction
+	if newDamage < 0:
+		return 0
+	return newDamage

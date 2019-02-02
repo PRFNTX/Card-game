@@ -129,8 +129,9 @@ func set_scene(scene, solo=false):
 #actions
 #activations
 func send_msg(value):
-	#if socket_on:
-	websocket.send(value)
+	if socket_on:
+		websocket.send(value)
+	pass
 
 func _on_message_recieved(msg):
 
@@ -155,6 +156,9 @@ func game_list(val):
 	open_games = val
 
 func game_action(val):
+	pass
+
+func game_cast(val):
 	pass
 
 func game_activation(val):

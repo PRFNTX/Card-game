@@ -20,7 +20,7 @@ func activate(Game, entity, unused):
 			Game.players[entity.Owner].drawCard()
 	if then_free:
 		entity.queue_free()
-	return null
+	return true
 
 func _ready():
 	# Called every time the node is added to the scene.

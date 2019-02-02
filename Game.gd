@@ -6,8 +6,8 @@ extends Node2D
 # var b="textvar"
 
 
-var testing_solo = true
-var god_mode = true
+var testing_solo = false
+var god_mode = false
 
 onready var globals = get_node('/root/master')
 
@@ -169,22 +169,25 @@ func frame_activate(ability_name, set_state=null):
 		$hex0/hexEntity.add_child(this_unit)
 		this_unit.hide()
 		var to_instance = globals.card_instances[state['frame_card']].get_node('Card').board_entity
-		if local:
-			send_action('frame_activate', 0 ,{'frame_card':globals.get_id_by_name(state['frame_card']),'current_turn':(state['current_turn']+1)%2},state)
-			
 		if this_unit.possess(to_instance, get_hex_by_id(0), state['current_turn'], self,state['frame_card'])==null:
 			players[state['current_turn']].discard_selected() #make this function
 			this_unit.queue_free()
+			if local:
+				send_cast('frame_activate', 'cast' ,{'frame_card':globals.get_id_by_name(state['frame_card']),'current_turn':(state['current_turn']+1)%2},state)
 			actionDone()
-		
+
 	elif actionReady:
 		get_hex_by_id(state['active_unit']).get_unit().activate(ability_name) #make this function
-		if not get_hex_by_id(state['active_unit']).get_unit().actionList[ability_name].has_method('complete'):
+		## if no valid targets end activation
+		if state['action']==null or state['action']=="":
+			actionDone()
+		elif not get_hex_by_id(state['active_unit']).get_unit().actionList[ability_name].has_method('complete'):
 			actionDone()
 ##STATE AGAIN
 
 func delegate_id(val):
 	state['delegate_id'] = val
+	#state['active_unit'] = val
 
 func delegate_node(path):
 	state['delegate_node'] = path
@@ -329,7 +332,7 @@ func delegate_action(delegate,nodepath):
 		setState({"action":'delegate','delegate_id':delegate,'delegate_node':nodepath})
 		### how to find activating script
 		#get_hex_by_id(state['delegate_id']).get_unit().Unit.get_node(state['delegate_node']).targeting()
-		var unit =get_hex_by_id(state['delegate_id']).get_unit().Unit
+		var unit = get_hex_by_id(state['delegate_id']).get_unit().Unit
 		unit.get_node(state['delegate_node']).targeting()
 		poll_for_valid_targets()
 
@@ -827,16 +830,40 @@ func actionCard(target, set_state=null):
 func delegate(target, set_state=null):
 	var local = true
 	var state = get_state()
+	var this_unit
 	if set_state!=null:
 		state=set_state
 		local= false
-	print(state['delegate_id'])
+	if not local and state.delegate_id == 0:
+		this_unit = BoardEntity.instance()
+		$hex0/hexEntity.add_child(this_unit)
+		this_unit.hide()
+		var to_instance = globals.card_instances[state['frame_card']].get_node('Card').board_entity
+		this_unit.possess(to_instance, get_hex_by_id(0), state['current_turn'], self,state['frame_card'])
 	var result = get_hex_by_id(state['delegate_id']).get_unit().Unit.get_node(state['delegate_node']).complete(target, set_state)
 	if result == null or result:
 		actionDone()
+	if not local and set_state.delegate_id == 0:
+		this_unit.queue_free()
 
 ###############
 ### MESSAGE FUNCTIONS
+
+func send_cast(send_state, cancel=false):
+	var send = {'game_cast':{
+		'player':global_player_num,
+		'type':'cast',
+		'state':send_state,
+		'cancel': cancel
+	}}
+	#once sent, actions are final
+	if state['delegate_id']==0 and state['frame_card']:
+		#players[state['current_turn']].discard_selected()
+		players[state['current_turn']].play_selected()
+		setState({'frame_card':null})
+	
+	globals.send_msg(send)
+	emit_signal('on_action', 'cast', 0, state)
 
 func send_action(type, target, loc_state, true_state=null, echo=false):
 	var send = {'game_action':{
@@ -864,6 +891,11 @@ func send_activation(hex, relative_path):
 
 func deck_cards(val):
 	players[1].deck_init(val)
+
+func game_cast(val):
+	if val.cancel:
+		cancelAction()
+	frame_activate('cast', val.state)
 
 func game_action(val):
 	print("TO ACTION")
@@ -944,7 +976,7 @@ func check_valid_action(action):
 		if hex.id!=0 and hex.action(action,state['current_turn'], true):
 			targets = true
 	if not targets:
-		#no_valid_targets()
+		no_valid_targets()
 		pass
 	return targets
 

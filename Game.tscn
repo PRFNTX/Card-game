@@ -551,6 +551,7 @@ _sections_unfolded = [ "Transform", "Visibility" ]
 
 [node name="DisplayFrame" type="Node2D" parent="." index="12"]
 
+editor/display_folded = true
 position = Vector2( 13.0782, 166.718 )
 script = ExtResource( 19 )
 _sections_unfolded = [ "Transform" ]
@@ -580,6 +581,7 @@ max_lines_visible = -1
 
 [node name="PreviewFrame" type="Node2D" parent="." index="13"]
 
+editor/display_folded = true
 position = Vector2( 762.398, 158.715 )
 script = ExtResource( 19 )
 _sections_unfolded = [ "Transform" ]

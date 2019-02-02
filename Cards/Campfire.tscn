@@ -5,7 +5,7 @@
 [ext_resource path="res://Assets/portraits/M - Tomas Duchek - 08/Small.png" type="Texture" id=3]
 [ext_resource path="res://Cards/entities/entity - Campfire.tscn" type="PackedScene" id=4]
 
-[node name="Campfire" type="Control" index="0"]
+[node name="Campfire" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0

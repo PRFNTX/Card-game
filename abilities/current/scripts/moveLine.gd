@@ -105,6 +105,7 @@ func complete(target, set_state=null):
 	if Game.check_valid_action(entity.Unit.get_action_name('Attack')) and local and entity.Unit.current_health>0:
 		Game.actionReady=true
 		entity.Unit.start_attack(Game)
+		return false
 	else:
 		return true
 

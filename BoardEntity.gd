@@ -35,7 +35,7 @@ var state={
 func _ready():
 	pass
 
-func possess(entity, hex, player, game,_card_name):
+func possess(entity, hex, player, game, _card_name):
 	Owner = player
 	set_process_input(true)
 	card_name=_card_name
@@ -53,7 +53,6 @@ func possess(entity, hex, player, game,_card_name):
 		Game.connect('on_collect', self, 'on_collect')
 	Game.connect('TurnStart', self, 'sig_turn_start')
 	Game.connect('UpdateState', self, 'sig_update_state')
-	print(Owner)
 	return Unit.play()
 
 func will_receive_attack(val_damage, source=-1):

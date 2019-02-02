@@ -189,7 +189,12 @@ func on_select(Game,hex):
 func play():
 	var it = null
 	for effectNode in $on_play.get_children():
-		it = effectNode.activate(get_parent().Game,get_parent(),"")
+		if get_parent().Game.state.current_turn != 0 and effectNode.has_method('complete'):
+			it = true
+		else:
+			var one = effectNode.activate(get_parent().Game,get_parent(),"")
+			if one != null:
+				it = one
 	return it
 
 func production():

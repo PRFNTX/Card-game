@@ -11,7 +11,7 @@ base_health = 0
 base_val = 20
 COLOR_LESS = Color( 0, 0, 0, 1 )
 is_building = true
-is_orb = false
+is_orb = true
 on_death = true
 
 [node name="LoseGame" parent="on_death" index="0" instance=ExtResource( 2 )]

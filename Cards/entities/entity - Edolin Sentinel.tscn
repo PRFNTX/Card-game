@@ -6,9 +6,9 @@
 [ext_resource path="res://Assets/faeria.png" type="Texture" id=4]
 [ext_resource path="res://abilities/current/Movement/Move.tscn" type="PackedScene" id=5]
 [ext_resource path="res://abilities/current/Attacks/standardAttack.tscn" type="PackedScene" id=6]
-[ext_resource path="res://abilities/current/move/cr land adj.tscn" type="PackedScene" id=7]
+[ext_resource path="res://abilities/current/abilities/abl land adj.tscn" type="PackedScene" id=7]
 
-[node name="Unit" type="Node2D" index="0"]
+[node name="Unit" type="Node2D"]
 
 position = Vector2( 30, 30 )
 script = ExtResource( 1 )
@@ -30,6 +30,7 @@ ENERGY_INACTIVE = Color( 0.652344, 0.642151, 0.642151, 1 )
 is_unit = true
 is_building = false
 is_event = false
+is_orb = false
 move = true
 charge = false
 jump = false
@@ -229,10 +230,10 @@ _sections_unfolded = [ "Visibility" ]
 
 [node name="Abilities" type="Node" parent="." index="7"]
 
-[node name="cr land adj" parent="Abilities" index="0" instance=ExtResource( 7 )]
+[node name="abl land adj" parent="Abilities" index="0" instance=ExtResource( 7 )]
 
-ab_name = "Create Forest"
-ab_description = "1 energy, Create an adjacent forest"
+type = 4
+ab_name = "Make Adj Forest"
 
 [node name="on_play" type="Node" parent="." index="8"]
 
