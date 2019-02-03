@@ -9,10 +9,6 @@ func in_hand(boo, num):
 	set_process_input(boo)
 	me = num
 
-func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-	pass
 
 func can_play():
 	pass

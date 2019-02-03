@@ -4,7 +4,7 @@ extends Node
 export(String) var ab_name = ""
 export(String) var ab_description = ""
 
-func activate(Game, entity,unsued):
+func activate(Game, entity, _unused):
 	var val = entity.Unit.current_faeria
 	entity.Unit.current_faeria = 0
 	print('collected')

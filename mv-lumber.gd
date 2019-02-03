@@ -22,8 +22,8 @@ func activate(_game, _entity, hexNum):
 	if hexEntity.stateLocal.hexType == type or type == 8:
 		if (
 			player == 2
-			or (hexEntity.stateLocal.hex_owner == entity.owner and owner==0)
-			or (hexEntity.stateLocal.hex_owner != entity.owner and owner==1)
+			or (hexEntity.stateLocal.hex_owner == entity.Owner and player==0)
+			or (hexEntity.stateLocal.hex_owner != entity.Owner and player==1)
 		):
 			if type == 0:
 				Game.players[entity.Owner].modCoin(value)

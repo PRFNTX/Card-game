@@ -58,8 +58,11 @@ func gain_resource():
 func complete(target, set_state=null):
 	var local = true
 	var state = Game.get_state()
+	if set_state!=null:
+		local=false
+		state=set_state
 	var target_hex = Game.get_hex_by_id(target)
-	target_hex.setState({'cover': entity.Hex.gather, 'hex_type': type, 'hex_owner':entity.Owner})
+	target_hex.setState({'hex_type': type, 'hex_owner':entity.Owner})
 	gain_resource()
 	Game.update_lands_owned()
 	if local:

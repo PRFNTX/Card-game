@@ -11,12 +11,12 @@ export(int) var is_targetable = true
 export(int) var is_immune = false
 export(int) var is_attackable = true
 
-export(Color,RGB) var COLOR_GREATER
-export(Color,RGB) var COLOR_EQUAL
-export(Color,RGB) var COLOR_LESS
+export(Color,RGB) var COLOR_GREATER = Color(0,255,0)
+export(Color,RGB) var COLOR_EQUAL = Color(0,0,0)
+export(Color,RGB) var COLOR_LESS = Color(255,0,0)
 
-export(Color,RGB) var ENERGY_ACTIVE
-export(Color,RGB) var ENERGY_INACTIVE
+export(Color,RGB) var ENERGY_ACTIVE = Color(100,220, 80)
+export(Color,RGB) var ENERGY_INACTIVE = Color(180,180,180)
 
 var current_faeria = 0 setget set_faeria
 var current_energy = 0 setget set_energy
@@ -164,11 +164,11 @@ func _ready():
 		get_node('Unit/H').hide()
 		get_node('Unit/div').hide()
 		get_node('Building/Val').hide()
-	
-	set_energy(0)
-	set_health(base_health)
-	set_attack(base_attack)
-	set_val(base_val)
+	if not is_event:
+		set_energy(0)
+		set_health(base_health)
+		set_attack(base_attack)
+		set_val(base_val)
 
 func turn_start(stun):
 	if current_energy<max_energy and !stun:

@@ -49,7 +49,7 @@ func fill_adj(grid):
 			iSet.append(grid[get_i([pos[0]+1,pos[1]+1])]) if (pos[0]<6) else 0
 		ret[i]=iSet
 		grid[i].adjacent=iSet
-		grid[i].call('connect',parent)
+		grid[i].call('do_connect',parent)
 	
 	return ret
 

@@ -39,6 +39,13 @@ func activePlayerCanAffect(by, strict=false, allow_convoke=false):
 		or stateLocal['hex_owner']==0
 	)
 
+func buildableByConvoke(by):
+	for hex in adjacent:
+		if hex.has_unit():
+			if hex.get_unit().Unit.convoke and hex.get_unit().Owner == by:
+				return true
+	return false
+
 func hex_is_empty():
 	return !($hexEntity.has_node('BoardEntity'))
 
@@ -165,7 +172,7 @@ func action(type,by,test=false):
 				return false
 	#make things
 	elif type=="buildAny":
-		if hexType.child.buildAny and activePlayerCanAffect(by) and hex_is_empty():
+		if (hexType.child.buildAny or (stateLocal.hex_type==0 and buildableByConvoke(by))) and (activePlayerCanAffect(by) or buildableByConvoke(by)) and hex_is_empty():
 			if !test:
 				setState({'cover':summon, 'target':true})
 			else:
@@ -175,7 +182,7 @@ func action(type,by,test=false):
 			if test:
 				return false
 	elif type=="buildSand":
-		if hexType.child.buildSand and activePlayerCanAffect(by) and hex_is_empty():
+		if hexType.child.buildSand and (activePlayerCanAffect(by) or buildableByConvoke(by)) and hex_is_empty():
 			if !test:
 				setState({'cover':summon, 'target':true})
 			else:
@@ -185,7 +192,7 @@ func action(type,by,test=false):
 			if test:
 				return false
 	elif type=="buildLake":
-		if hexType.child.buildLake and activePlayerCanAffect(by) and hex_is_empty():
+		if hexType.child.buildLake and (activePlayerCanAffect(by) or buildableByConvoke(by)) and hex_is_empty():
 			if !test:
 				setState({'cover':summon, 'target':true})
 			else:
@@ -195,7 +202,7 @@ func action(type,by,test=false):
 			if test:
 				return false
 	elif type=="buildTree":
-		if hexType.child.buildTree and activePlayerCanAffect(by) and hex_is_empty():
+		if hexType.child.buildTree and (activePlayerCanAffect(by) or buildableByConvoke(by)) and hex_is_empty():
 			if !test:
 				setState({'cover':summon, 'target':true})
 			else:
@@ -205,7 +212,7 @@ func action(type,by,test=false):
 			if test:
 				return false
 	elif type=="buildHill":
-		if hexType.child.buildHill and activePlayerCanAffect(by) and hex_is_empty():
+		if hexType.child.buildHill and (activePlayerCanAffect(by) or buildableByConvoke(by)) and hex_is_empty():
 			if !test:
 				setState({'cover':summon, 'target':true})
 			else:
@@ -373,7 +380,7 @@ var watchState=["action",'active_unit', 'hovered']
 var stateCopy={"action":"",'active_unit':null,'hovered':null}
 var stateCopyMethods={"action":"update_Action",'active_unit':'update_active_unit', 'hovered':'update_hovered'}
 
-func connect(game):
+func do_connect(game):
 	gameNode=game
 	game.connect("UpdateState",self,"state_update")
 

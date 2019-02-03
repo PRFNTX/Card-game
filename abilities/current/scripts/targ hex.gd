@@ -27,25 +27,21 @@ func activate(_Game, _entity, _val):
 
 func conditions(hex):
 	if hex.stateLocal['hex_type'] >1 and hex.stateLocal['hex_type'] <7 and (not empty_only or not hex.has_unit() ):
-		if player == 0:
+		if player == 2:
 			return true
-		elif hex.stateLocal['hex_owner']==player%2:
+		elif (hex.stateLocal['hex_owner']==entity.Owner and player == 0) or (hex.stateLocal['hex_owner']!=entity.Owner and player == 1):
 			return true
 	return false
 
 func targeting():
 	if not adjacent_only:
 		for hex in get_tree().get_nodes_in_group("Hex"):
-			if hex.id == 17:
-				print('o look')
 			if conditions(hex):
 				hex.setState({'cover':hex.targetOther , 'target' :true})
 			else:
 				hex.setState({'cover':Color(0,0,0,0) , 'target' :false})
 	else:
 		for hex in entity.Hex.adjacent:
-			if hex.id == 17:
-				print('o look')
 			if conditions(hex):
 				hex.setState({'cover':hex.targetOther , 'target' :true})
 			else:
@@ -81,13 +77,3 @@ func cancel_action():
 	else:
 		#done remove card but end
 		pass
-
-func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-	pass
-
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass

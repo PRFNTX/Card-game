@@ -11,7 +11,6 @@
 [ext_resource path="res://hexes/Well.tscn" type="PackedScene" id=9]
 
 [node name="hexType" type="Node2D"]
-
 script = ExtResource( 1 )
 Empty = ExtResource( 2 )
 Orb = ExtResource( 3 )
@@ -21,5 +20,4 @@ _Tree = ExtResource( 6 )
 Hill = ExtResource( 7 )
 Sand = ExtResource( 8 )
 Well = ExtResource( 9 )
-
 

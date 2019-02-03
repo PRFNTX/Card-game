@@ -20,7 +20,7 @@ func activate(type,target,set_state=null):
 	elif up and not conditions():
 		entity.Unit.current_attack -= val
 
-func condition():
+func conditions():
 	if land_owner==0 and entity.Hex.stateLocal.hex_owner == entity.Owner:
 		return true
 	if land_owner==1 and not entity.Hex.stateLocal.hex_owner == entity.Owner:

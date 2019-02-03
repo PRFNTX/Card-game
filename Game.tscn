@@ -15,37 +15,31 @@
 [ext_resource path="res://Assets/sand-action.png" type="Texture" id=13]
 [ext_resource path="res://Assets/hill-action.png" type="Texture" id=14]
 [ext_resource path="res://Assets/card-action.png" type="Texture" id=15]
-[ext_resource path="res://Assets/hex.png" type="Texture" id=16]
-[ext_resource path="res://Hand.gd" type="Script" id=17]
+[ext_resource path="res://Hand.gd" type="Script" id=16]
+[ext_resource path="res://Assets/hex.png" type="Texture" id=17]
 [ext_resource path="res://Clock.tscn" type="PackedScene" id=18]
 [ext_resource path="res://DisplayFrame.gd" type="Script" id=19]
 
 [node name="Game" type="Node2D"]
-
 scale = Vector2( 1.3, 1.3 )
 script = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
 BoardEntity = ExtResource( 2 )
 OrbEntity = ExtResource( 3 )
 WellEntity = ExtResource( 4 )
 
-[node name="board" type="Node2D" parent="." index="0"]
-
-editor/display_folded = true
+[node name="board" type="Node2D" parent="."]
 position = Vector2( 748.755, -134.923 )
 rotation = 1.5708
 scale = Vector2( 0.751495, 1 )
 script = ExtResource( 5 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="back" type="Sprite" parent="board" index="0"]
-
+[node name="back" type="Sprite" parent="board"]
+editor/display_folded = true
 position = Vector2( 507.593, 241.133 )
 scale = Vector2( 0.720365, 0.73331 )
 texture = ExtResource( 6 )
 
-[node name="hex 1" parent="board/back" index="0" instance=ExtResource( 7 )]
-
+[node name="hex 1" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( 193.61, 251.512 )
 z_index = 11
 initial_state = 1
@@ -53,312 +47,262 @@ id = 1
 initial_owner = 0
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 2" parent="board/back" index="1" instance=ExtResource( 7 )]
-
+[node name="hex 2" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( 97.1367, 251.512 )
 z_index = 9
 id = 2
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 3" parent="board/back" index="2" instance=ExtResource( 7 )]
-
+[node name="hex 3" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( 0.36145, 252.134 )
 z_index = 7
 id = 3
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 4" parent="board/back" index="3" instance=ExtResource( 7 )]
-
+[node name="hex 4" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( -96.0186, 251.763 )
 z_index = 5
 id = 4
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 5" parent="board/back" index="4" instance=ExtResource( 7 )]
-
+[node name="hex 5" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( -193.059, 251.535 )
 z_index = 3
 initial_state = 7
 id = 5
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 6" parent="board/back" index="5" instance=ExtResource( 7 )]
-
+[node name="hex 6" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( 241.347, 167.939 )
 z_index = 12
 id = 6
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 7" parent="board/back" index="6" instance=ExtResource( 7 )]
-
+[node name="hex 7" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( 145.328, 167.939 )
 z_index = 10
 id = 7
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 8" parent="board/back" index="7" instance=ExtResource( 7 )]
-
+[node name="hex 8" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( 47.9833, 167.939 )
 z_index = 8
 id = 8
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 9" parent="board/back" index="8" instance=ExtResource( 7 )]
-
+[node name="hex 9" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( -48.0364, 167.451 )
 z_index = 6
 id = 9
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 10" parent="board/back" index="9" instance=ExtResource( 7 )]
-
+[node name="hex 10" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( -144.718, 167.451 )
 z_index = 4
 id = 10
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 11" parent="board/back" index="10" instance=ExtResource( 7 )]
-
+[node name="hex 11" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( -240.738, 167.451 )
 z_index = 2
 id = 11
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 12" parent="board/back" index="11" instance=ExtResource( 7 )]
-
+[node name="hex 12" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( 289.688, 84.3437 )
 z_index = 13
 id = 12
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 13" parent="board/back" index="12" instance=ExtResource( 7 )]
-
+[node name="hex 13" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( 193.006, 84.344 )
 z_index = 11
 id = 13
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 14" parent="board/back" index="13" instance=ExtResource( 7 )]
-
+[node name="hex 14" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( 96.3239, 84.3443 )
 z_index = 9
 id = 14
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 15" parent="board/back" index="14" instance=ExtResource( 7 )]
-
+[node name="hex 15" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( 0.304108, 84.8334 )
 z_index = 7
 id = 15
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 16" parent="board/back" index="15" instance=ExtResource( 7 )]
-
+[node name="hex 16" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( -95.7156, 84.3448 )
 z_index = 5
 id = 16
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 17" parent="board/back" index="16" instance=ExtResource( 7 )]
-
+[node name="hex 17" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( -193.06, 83.8562 )
 z_index = 3
 id = 17
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 18" parent="board/back" index="17" instance=ExtResource( 7 )]
-
+[node name="hex 18" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( -289.08, 84.8342 )
 z_index = 1
-_sections_unfolded = [ "Rect", "Transform", "Visibility", "Z Index" ]
 id = 18
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 19" parent="board/back" index="18" instance=ExtResource( 7 )]
-
+[node name="hex 19" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( 338.028, 0.748657 )
 z_index = 14
-_sections_unfolded = [ "Rect", "Transform", "Visibility", "Z Index" ]
 initial_state = 7
 id = 19
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 20" parent="board/back" index="19" instance=ExtResource( 7 )]
-
+[node name="hex 20" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( 242.009, 0.260071 )
 z_index = 12
 id = 20
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 21" parent="board/back" index="20" instance=ExtResource( 7 )]
-
+[node name="hex 21" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( 145.327, 0.749207 )
 z_index = 10
 id = 21
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 22" parent="board/back" index="21" instance=ExtResource( 7 )]
-
+[node name="hex 22" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( 48.6447, 0.749512 )
 z_index = 8
 id = 22
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 23" parent="board/back" index="22" instance=ExtResource( 7 )]
-
+[node name="hex 23" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( -48.0373, 0.749695 )
 z_index = 6
 id = 23
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 24" parent="board/back" index="23" instance=ExtResource( 7 )]
-
+[node name="hex 24" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( -144.719, 0.261108 )
 z_index = 4
 id = 24
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 25" parent="board/back" index="24" instance=ExtResource( 7 )]
-
+[node name="hex 25" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( -240.077, 0.750244 )
 z_index = 2
 id = 25
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 26" parent="board/back" index="25" instance=ExtResource( 7 )]
-
+[node name="hex 26" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( -336.759, 0.750488 )
-_sections_unfolded = [ "Rect", "Transform", "Visibility", "Z Index" ]
 initial_state = 7
 id = 26
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 27" parent="board/back" index="26" instance=ExtResource( 7 )]
-
+[node name="hex 27" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( 289.687, -82.8461 )
 z_index = 13
 id = 27
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 28" parent="board/back" index="27" instance=ExtResource( 7 )]
-
+[node name="hex 28" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( 193.667, -83.3347 )
 z_index = 11
 id = 28
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 29" parent="board/back" index="28" instance=ExtResource( 7 )]
-
+[node name="hex 29" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( 96.9853, -83.3344 )
 z_index = 9
 id = 29
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 30" parent="board/back" index="29" instance=ExtResource( 7 )]
-
+[node name="hex 30" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( 0.303284, -82.8453 )
 z_index = 7
-_sections_unfolded = [ "Rect", "Transform", "Visibility", "Z Index" ]
 id = 30
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 31" parent="board/back" index="30" instance=ExtResource( 7 )]
-
+[node name="hex 31" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( -97.0409, -82.8451 )
 z_index = 5
 id = 31
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 32" parent="board/back" index="31" instance=ExtResource( 7 )]
-
+[node name="hex 32" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( -192.398, -83.3337 )
 z_index = 3
 id = 32
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 33" parent="board/back" index="32" instance=ExtResource( 7 )]
-
+[node name="hex 33" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( -289.08, -82.8445 )
 z_index = 1
-_sections_unfolded = [ "Rect", "Transform", "Visibility", "Z Index" ]
 id = 33
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 34" parent="board/back" index="33" instance=ExtResource( 7 )]
-
+[node name="hex 34" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( 242.008, -166.93 )
 z_index = 12
-_sections_unfolded = [ "Rect", "Transform", "Visibility", "Z Index" ]
 id = 34
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 35" parent="board/back" index="34" instance=ExtResource( 7 )]
-
+[node name="hex 35" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( 144.664, -166.44 )
 z_index = 10
 id = 35
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 36" parent="board/back" index="35" instance=ExtResource( 7 )]
-
+[node name="hex 36" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( 48.6439, -166.44 )
 z_index = 8
 id = 36
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 37" parent="board/back" index="36" instance=ExtResource( 7 )]
-
+[node name="hex 37" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( -47.7337, -166.401 )
 z_index = 6
 id = 37
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 38" parent="board/back" index="37" instance=ExtResource( 7 )]
-
+[node name="hex 38" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( -144.371, -166.359 )
 z_index = 4
 id = 38
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 39" parent="board/back" index="38" instance=ExtResource( 7 )]
-
+[node name="hex 39" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( -241.276, -166.626 )
 z_index = 2
 id = 39
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 40" parent="board/back" index="39" instance=ExtResource( 7 )]
-
+[node name="hex 40" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( 193.134, -250.455 )
 z_index = 11
-_sections_unfolded = [ "Rect", "Transform", "Visibility", "Z Index" ]
 initial_state = 7
 id = 40
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 41" parent="board/back" index="40" instance=ExtResource( 7 )]
-
+[node name="hex 41" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( 96.7432, -250.207 )
 z_index = 9
 id = 41
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 42" parent="board/back" index="41" instance=ExtResource( 7 )]
-
+[node name="hex 42" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( 0.303741, -250.14 )
 z_index = 7
 id = 42
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 43" parent="board/back" index="42" instance=ExtResource( 7 )]
-
+[node name="hex 43" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( -95.9407, -250.418 )
 z_index = 5
 id = 43
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="hex 44" parent="board/back" index="43" instance=ExtResource( 7 )]
-
+[node name="hex 44" parent="board/back" instance=ExtResource( 7 )]
 position = Vector2( -192.655, -250.17 )
 z_index = 3
 initial_state = 1
@@ -366,259 +310,128 @@ id = 44
 initial_owner = 1
 enemy_modulate = Color( 0, 0, 0, 0 )
 
-[node name="Control" type="Control" parent="." index="1"]
-
+[node name="Control" type="Control" parent="."]
 editor/display_folded = true
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-_sections_unfolded = [ "Rect" ]
 
-[node name="actionTree" parent="Control" index="0" instance=ExtResource( 8 )]
-
+[node name="actionTree" parent="Control" instance=ExtResource( 8 )]
 position = Vector2( 66.3413, 521.253 )
 texture = ExtResource( 9 )
 actionType = "tree"
 
-[node name="actionCoin" parent="Control" index="1" instance=ExtResource( 8 )]
-
+[node name="actionCoin" parent="Control" instance=ExtResource( 8 )]
 position = Vector2( 193.921, 457.099 )
 texture = ExtResource( 10 )
 actionType = "coin"
 
-[node name="actionLake" parent="Control" index="2" instance=ExtResource( 8 )]
-
+[node name="actionLake" parent="Control" instance=ExtResource( 8 )]
 position = Vector2( 67.0704, 455.641 )
 texture = ExtResource( 11 )
 actionType = "lake"
 
-[node name="actionLand" parent="Control" index="3" instance=ExtResource( 8 )]
-
+[node name="actionLand" parent="Control" instance=ExtResource( 8 )]
 position = Vector2( 129.767, 487.718 )
 texture = ExtResource( 12 )
 actionType = "land"
 
-[node name="actionSand" parent="Control" index="4" instance=ExtResource( 8 )]
-
+[node name="actionSand" parent="Control" instance=ExtResource( 8 )]
 position = Vector2( 193.192, 520.524 )
 texture = ExtResource( 13 )
 actionType = "sand"
 
-[node name="actionHill" parent="Control" index="5" instance=ExtResource( 8 )]
-
+[node name="actionHill" parent="Control" instance=ExtResource( 8 )]
 position = Vector2( 129.767, 552.601 )
 texture = ExtResource( 14 )
 actionType = "hill"
 
-[node name="actionCard" parent="Control" index="6" instance=ExtResource( 8 )]
-
+[node name="actionCard" parent="Control" instance=ExtResource( 8 )]
 position = Vector2( 131.225, 422.835 )
 texture = ExtResource( 15 )
 actionType = "card"
 
-[node name="noTargets" type="Label" parent="." index="2"]
+[node name="Hand" type="Control" parent="."]
+margin_left = 246.757
+margin_top = 459.0
+margin_right = 715.757
+margin_bottom = 585.0
+script = ExtResource( 16 )
+selected_color = Color( 0.367569, 0.851663, 0.863281, 1 )
 
+[node name="noTargets" type="Label" parent="."]
 visible = false
 modulate = Color( 1, 0.0117188, 0.0117188, 1 )
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 821.0
 margin_top = 311.0
 margin_right = 944.0
 margin_bottom = 351.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
 text = "NO VALID TARGETS"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "Visibility" ]
 
-[node name="Sprite" type="Sprite" parent="." index="3"]
-
+[node name="Sprite" type="Sprite" parent="."]
 visible = false
 position = Vector2( 509.985, 235.287 )
 scale = Vector2( 6.44462, 5.94225 )
-texture = ExtResource( 16 )
-_sections_unfolded = [ "Visibility" ]
+texture = ExtResource( 17 )
 
-[node name="RichTextLabel" type="Label" parent="." index="4"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="RichTextLabel" type="Label" parent="."]
 margin_left = 32.0
 margin_top = 386.0
 margin_right = 78.0
 margin_bottom = 400.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
 text = "actions"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="actionTimer" type="Timer" parent="." index="5"]
-
-process_mode = 1
+[node name="actionTimer" type="Timer" parent="."]
 wait_time = 0.25
 one_shot = true
-autostart = false
-_sections_unfolded = [ "Pause" ]
 
-[node name="basic_timeout" type="Timer" parent="." index="6"]
-
-process_mode = 1
+[node name="basic_timeout" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
-autostart = false
-_sections_unfolded = [ "Pause" ]
 
-[node name="pointP1" type="Position2D" parent="." index="7"]
+[node name="pointP1" type="Position2D" parent="."]
 
-[node name="pointP2" type="Position2D" parent="." index="8"]
-
+[node name="pointP2" type="Position2D" parent="."]
 position = Vector2( 786.46, 0.18672 )
 
-[node name="endturn" type="Button" parent="." index="9"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="endturn" type="Button" parent="."]
 margin_left = 173.0
 margin_top = 567.0
 margin_right = 240.0
 margin_bottom = 587.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "End Turn"
-flat = false
-align = 1
 
-[node name="Hand" type="Control" parent="." index="10"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 248.0
-margin_top = 464.0
-margin_right = 788.0
-margin_bottom = 574.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-script = ExtResource( 17 )
-_sections_unfolded = [ "Rect", "Transform" ]
-selected_color = Color( 0.367569, 0.851663, 0.863281, 1 )
-
-[node name="Clock" parent="." index="11" instance=ExtResource( 18 )]
-
+[node name="Clock" parent="." instance=ExtResource( 18 )]
 position = Vector2( 887.117, 459.1 )
 scale = Vector2( 2, 2 )
-_sections_unfolded = [ "Transform", "Visibility" ]
 
-[node name="DisplayFrame" type="Node2D" parent="." index="12"]
-
-editor/display_folded = true
+[node name="DisplayFrame" type="Node2D" parent="."]
 position = Vector2( 13.0782, 166.718 )
 script = ExtResource( 19 )
-_sections_unfolded = [ "Transform" ]
-activatable = true
 
-[node name="CardDetails" type="Label" parent="DisplayFrame" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 130.0
-margin_top = 9.0
-margin_right = 255.0
-margin_bottom = 135.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
+[node name="CardDetails" type="Label" parent="DisplayFrame"]
+margin_left = 126.505
+margin_top = 10.7477
+margin_right = 251.505
+margin_bottom = 136.748
 text = "preview box goes right here"
 autowrap = true
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="PreviewFrame" type="Node2D" parent="." index="13"]
-
+[node name="PreviewFrame" type="Node2D" parent="."]
 editor/display_folded = true
 position = Vector2( 762.398, 158.715 )
 script = ExtResource( 19 )
-_sections_unfolded = [ "Transform" ]
 activatable = false
 
-[node name="CardDetails" type="Label" parent="PreviewFrame" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="CardDetails" type="Label" parent="PreviewFrame"]
 margin_left = 112.0
 margin_top = -6.0
 margin_right = 262.0
 margin_bottom = 119.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
 text = "Preview box goes right here"
 autowrap = true
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
-[node name="hex0" parent="." index="14" instance=ExtResource( 7 )]
-
+[node name="hex0" parent="." instance=ExtResource( 7 )]
 visible = false
 
 [connection signal="timeout" from="actionTimer" to="." method="_on_Timer_timeout"]
-
 [connection signal="timeout" from="basic_timeout" to="." method="_on_basic_timeout_timeout"]
-
 [connection signal="timeout" from="basic_timeout" to="." method="_on_Timer_timeout"]
-
 [connection signal="pressed" from="endturn" to="." method="_on_endturn_pressed"]
-
-

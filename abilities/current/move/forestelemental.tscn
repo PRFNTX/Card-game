@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://abilities/current/move/forestelemental.gd" type="Script" id=1]
+
+[node name="forestelemental" type="Node"]
+script = ExtResource( 1 )
+

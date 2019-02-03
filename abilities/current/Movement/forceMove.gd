@@ -50,14 +50,14 @@ func targeting():
 				hex.setState({'cover':Color(0,0,0,0), 'target':false})
 		elif medium==2:
 			if hex.hexType.child.moveAir and hex.hex_is_empty_or_self() and hex.is_adjacent_or_equal_to(hex.stateLocal['active_unit'].Hex):
-					setState({'cover':hex.move,'target':true})
+				hex.setState({'cover':hex.move,'target':true})
 			else:
-				setState({'cover':Color(0,0,0,0), 'target':false})
+				hex.setState({'cover':Color(0,0,0,0), 'target':false})
 		elif medium==1:
 			if hex.hexType.child.moveWater and hex.hex_is_empty_or_self() and hex.is_adjacent_or_equal_to(hex.stateLocal['active_unit'].Hex):
-				setState({'cover':hex.move,'target':true})
+				hex.setState({'cover':hex.move,'target':true})
 			else:
-				setState({'cover':Color(0,0,0,0), 'target':false})
+				hex.setState({'cover':Color(0,0,0,0), 'target':false})
 
 
 func complete(target, set_state=null):

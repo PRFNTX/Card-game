@@ -2,19 +2,6 @@
 
 [ext_resource path="res://abilities/current/scripts/target.gd" type="Script" id=1]
 
-[node name="target unit" type="Node" index="0"]
-
+[node name="target unit" type="Node"]
 script = ExtResource( 1 )
-ab_name = ""
-ab_description = ""
-player = 1
-type = 1
-on_empty = true
-on_plain = true
-on_lake = true
-on_tree = true
-on_hill = true
-on_sand = true
-then_free = true
-
 

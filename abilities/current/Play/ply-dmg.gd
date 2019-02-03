@@ -41,7 +41,6 @@ func targeting():
 				hex.setState({'cover':Color(0,0,0,0) , 'target' :false})
 
 func complete(target, set_state=null):
-	pay_costs()
 	var local = true
 	var state = Game.get_state()
 	if not set_state==null:

@@ -53,7 +53,12 @@ func possess(entity, hex, player, game, _card_name):
 		Game.connect('on_collect', self, 'on_collect')
 	Game.connect('TurnStart', self, 'sig_turn_start')
 	Game.connect('UpdateState', self, 'sig_update_state')
-	return Unit.play()
+	if Game.state.current_turn==0:
+		var free_if_null = Unit.play()
+		if Unit.is_event and free_if_null==null:
+			self.queue_free()
+		return free_if_null
+	return
 
 func will_receive_attack(val_damage, source=-1):
 	var can_attack = Unit.on_receive_attack(source)

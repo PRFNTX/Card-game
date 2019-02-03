@@ -144,7 +144,11 @@ func frame_card(card_name):
 			var thing = $DisplayFrame/CardDetails
 			c_instance.scale = Vector2(1.5, 1.5)
 			thing.text = c_instance.card_description
-			if !players[state['current_turn']].has_resource(g_cost,f_cost,l_cost):
+			if (!players[state['current_turn']].has_resource(g_cost,f_cost,l_cost)
+					or (not displayCard.get_node('Card').play_morning) and state.clock_time==0
+					or (not displayCard.get_node('Card').play_evening) and state.clock_time==1
+					or (not displayCard.get_node('Card').play_night) and state.clock_time==2
+			):
 				buttons[0].disabled = true
 			#buttons[0].name = 'cast'
 			
@@ -173,7 +177,7 @@ func frame_activate(ability_name, set_state=null):
 			players[state['current_turn']].discard_selected() #make this function
 			this_unit.queue_free()
 			if local:
-				send_cast('frame_activate', 'cast' ,{'frame_card':globals.get_id_by_name(state['frame_card']),'current_turn':(state['current_turn']+1)%2},state)
+				send_cast({'frame_card':globals.get_id_by_name(state['frame_card']),'current_turn':(state['current_turn']+1)%2})
 			actionDone()
 
 	elif actionReady:
@@ -228,6 +232,7 @@ func _ready():
 	
 	$Hand.assign_player(players[0])
 	players[0].hand_object=$Hand
+	print(players[0])
 	players[0].drawCard()
 	players[0].drawCard()
 	players[0].drawCard()
@@ -369,7 +374,6 @@ func actionDone():
 	setState({"action":"",'active_unit':null, 'frame_card':null, 'delegate_id':null,"delegate_node":null,'building_card':null})
 	if $hex0.has_unit():
 		$hex0.get_unit().queue_free()
-		print("SHOULD I HAVE FREED THAT? (Game:363)")
 	complete = true
 
 func newAction(set={'action':""}):
@@ -380,6 +384,9 @@ func cancelAction():
 	if state['action']=='delegate' and get_hex_by_id(state['delegate_id']).has_unit() and get_hex_by_id(state['delegate_id']).get_unit().Unit.get_node(state['delegate_node']).has_method('cancel_action'):
 		get_hex_by_id(state['delegate_id']).get_unit().Unit.get_node(state['delegate_node']).cancel_action()
 	setState({"action":"",'active_unit':null, 'frame_card':null, 'delegate_id':null,'delegate_node':null})
+	
+	if $hex0.has_unit():
+		$hex0.get_unit().queue_free()
 	complete = true
 
 
@@ -453,13 +460,12 @@ func moveBase(target, set_state=null):
 		send_action('moveBase',45-target,{'active_unit':45-state['active_unit']},state)
 		unit.setState({'active':false})
 		setState({'active_unit':target})
-	
-	
-	if check_valid_action(unit.Unit.get_action_name('Attack')) and unit.Unit.current_health>0:
-		actionReady=true
-		unit.Unit.start_attack(self)
+		if check_valid_action(unit.Unit.get_action_name('Attack')) and unit.Unit.current_health>0:
+			actionReady=true
+			unit.Unit.start_attack(self)
+		else:
+			actionDone()
 	else:
-		
 		actionDone()
 
 func moveWater(target, set_state=null):
@@ -480,13 +486,12 @@ func moveWater(target, set_state=null):
 		send_action('moveWater',45-target,{'active_unit':45-state['active_unit']},state)
 		unit.setState({'active':false})
 		setState({'active_unit':target})
-	
-	
-	if check_valid_action(unit.Unit.get_action_name('Attack')) and unit.Unit.current_health>0:
-		actionReady=true
-		unit.Unit.start_attack(self)
+		if check_valid_action(unit.Unit.get_action_name('Attack')) and unit.Unit.current_health>0:
+			actionReady=true
+			unit.Unit.start_attack(self)
+		else:
+			actionDone()
 	else:
-		
 		actionDone()
 
 func moveAir(target, set_state=null):
@@ -499,7 +504,6 @@ func moveAir(target, set_state=null):
 	startBasictimeout()
 	var unit = get_unit_by_hex(get_hex_by_id(state['active_unit']))
 	unit.on_move(hex_target.get_node('hexEntity'))
-	setState({'active_unit': target})
 	#unit.rect_position = target.get_node('hexEntity/pos').position
 	unit.Hex=hex_target
 	unit.use_energy(1)
@@ -507,11 +511,11 @@ func moveAir(target, set_state=null):
 		send_action('moveAir',45-target,{'active_unit':45-state['active_unit']},state)
 		unit.setState({'active':false})
 		setState({'active_unit':target})
-	
-	
-	if check_valid_action(unit.Unit.get_action_name('Attack')) and unit.Unit.current_health>0: ## do this better?
-		actionReady=true
-		unit.Unit.start_attack(self)
+		if check_valid_action(unit.Unit.get_action_name('Attack')) and unit.Unit.current_health>0: ## do this better?
+			actionReady=true
+			unit.Unit.start_attack(self)
+		else:
+			actionDone()
 	else:
 		actionDone()
 
@@ -519,6 +523,7 @@ func AttackAdjOrCollect(target, set_state=null):
 	var local = true
 	var state = get_state()
 	if not set_state==null:
+		state.active_unit = set_state.active_unit #for collect
 		state=set_state
 		local= false
 	var unit = get_unit_by_hex(get_hex_by_id(state['active_unit']))
@@ -526,6 +531,7 @@ func AttackAdjOrCollect(target, set_state=null):
 	if local:
 		send_action('AttackAdjOrCollect',45-target,{'active_unit':45-state['active_unit']},state)
 		unit.setState({'active':false})
+	
 	
 	actionDone()
 
@@ -547,6 +553,7 @@ func Collect(target, set_state=null):
 	var local = true
 	var state= get_state()
 	if not set_state==null:
+		state.active_unit = set_state.active_unit #for collect
 		state=set_state
 		local = false
 	var unit = get_unit_by_hex(get_hex_by_id(state['active_unit']))
@@ -832,19 +839,22 @@ func delegate(target, set_state=null):
 	var state = get_state()
 	var this_unit
 	if set_state!=null:
-		state=set_state
+		#state=set_state
 		local= false
-	if not local and state.delegate_id == 0:
+	if not local and set_state.delegate_id == 0:
 		this_unit = BoardEntity.instance()
 		$hex0/hexEntity.add_child(this_unit)
 		this_unit.hide()
-		var to_instance = globals.card_instances[state['frame_card']].get_node('Card').board_entity
-		this_unit.possess(to_instance, get_hex_by_id(0), state['current_turn'], self,state['frame_card'])
-	var result = get_hex_by_id(state['delegate_id']).get_unit().Unit.get_node(state['delegate_node']).complete(target, set_state)
-	if result == null or result:
+		var to_instance = globals.card_instances[set_state['frame_card']].get_node('Card').board_entity.duplicate()
+		this_unit.possess(to_instance, get_hex_by_id(0), state['current_turn'], self,set_state['frame_card'])
+		var result = get_hex_by_id(set_state['delegate_id']).get_unit().Unit.get_node(set_state['delegate_node']).complete(target, set_state)
 		actionDone()
-	if not local and set_state.delegate_id == 0:
-		this_unit.queue_free()
+	else:
+		if not local:
+			state = set_state
+		var result = get_hex_by_id(state['delegate_id']).get_unit().Unit.get_node(state['delegate_node']).complete(target, set_state)
+		if result == null or result:
+			actionDone()
 
 ###############
 ### MESSAGE FUNCTIONS
@@ -904,7 +914,7 @@ func game_action(val):
 		val['state']['building_card'] = globals.get_card_by_id(val.state['building_card'])
 		
 	if val.state.keys().has('frame_card'):
-		val.state['frame_card'] = globals.get_card_by_id(val.state['frame_card'])
+		setState({'preview_card':val.state.frame_card})
 		
 	if val.state.keys().has('active_unit') and get_hex_by_id(val.state['active_unit']).has_unit():
 		setState({'preview_card':get_hex_by_id(val.state['active_unit']).get_unit().card_name})
@@ -963,7 +973,7 @@ var temp_card
 func cast_from_hand(card_node):
 	## CHECK COSTS
 	var card_name = card_node.get_node('Card').card_name
-	set_state({'building_Card':card_name})
+	setState({'building_Card':card_name})
 	castAny(0)
 
 

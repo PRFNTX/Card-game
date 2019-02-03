@@ -44,21 +44,49 @@ func _ready():
 	card_resources = cards_script.cards
 	for card in card_resources.keys():
 		card_instances[card]= card_resources[card].instance()
-	websocket = preload('res://Godot-Websocket/websocket.gd').new(self)
-	#get_tree().change_scene(scenes['login'])
+	websocket = WebSocketClient.new()
+	websocket.transfer_mode = websocket.TRANSFER_MODE_RELIABLE
+
 
 func init_user():
 	set_deck_list(HTTP.authenticated_server_request("/decks",HTTPClient.METHOD_GET,{}))
 	socket_start()
 
 var socket_active = false
+###
+func send_data(data):
+	websocket.get_peer(1).set_write_mode(0)
+	var data_to_write = data.to_utf8()
+	websocket.get_peer(1).put_packet(data_to_write)
 
+func _get_data():
+	var data = ""
+	while websocket.get_peer(1).get_available_packet_count()>0:
+		data+= websocket.get_peer(1).get_packet().get_string_from_utf8()
+	_on_message_recieved(data)
+##
 func socket_start():
+	print('starting socket')
 	if !socket_active:
-		websocket.start('34.217.125.226',443)
-		websocket.set_reciever(self,'_on_message_recieved')
-		websocket.send({'greeting':user.username})
-		socket_active=true
+		set_process(true)
+		websocket.connect_to_url('34.217.125.226:443')
+		websocket.connect('data_received', self, '_get_data')
+		websocket.connect('connection_established', self, '_on_socket_ready')
+		websocket.connect('connection_error', self, '_on_error')
+
+func on_error():
+	print('there was an error!')
+
+func _on_socket_ready(protocol):
+	print(protocol)
+	print('connected')
+	send_msg({'greeting':user.username})
+	socket_active=true
+
+func _process(delta):
+	if websocket.get_connection_status() == WebSocketClient.CONNECTION_DISCONNECTED:
+		return
+	websocket.poll()
 
 
 
@@ -129,12 +157,12 @@ func set_scene(scene, solo=false):
 #actions
 #activations
 func send_msg(value):
+	var json_value = JSON.print(value)
 	if socket_on:
-		websocket.send(value)
+		send_data(json_value)
 	pass
 
 func _on_message_recieved(msg):
-
 	var event = parse_json(msg)
 	print(event)
 	if event:

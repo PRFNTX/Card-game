@@ -153,7 +153,7 @@ func drawCard():
 		Hand.push_back(curr_Deck[card])
 		curr_Deck.remove(card)
 		modCards(-1)
-		hand_object.update()
+		hand_object.do_update()
 	lbl_hand.text = str(Hand.size())
 	
 
@@ -166,19 +166,19 @@ func discard_hand(card=-1):
 		else:
 			Discard.append(Hand[card])
 			Hand.remove(card)
-		hand_object.update()
+		hand_object.do_update()
 	lbl_hand.text = str(Hand.size())
 
 func discard_by_name(card):
 	Hand.erase(card)
-	hand_object.update()
+	hand_object.do_update()
 	lbl_hand.text = str(Hand.size())
 
 func discard_selected():
 	if hand_object.state['selected_card']!=null:
 		Hand.remove(hand_object.state['selected_card'])
 		hand_object.setState({'selected_card':null})
-		hand_object.update()
+		hand_object.do_update()
 		lbl_hand.text = str(Hand.size())
 
 func play_selected():
@@ -187,7 +187,7 @@ func play_selected():
 		pay_costs(costs.gold,costs.faeria)
 		Hand.remove(hand_object.state['selected_card'])
 		hand_object.setState({'selected_card':null})
-		hand_object.update()
+		hand_object.do_update()
 		lbl_hand.text = str(Hand.size())
 
 func discard_deck():

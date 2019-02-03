@@ -51,17 +51,17 @@ func arrange_cards():
 	for card in card_nodes:
 		if num <6:
 			card.rect_position.x = ind*dx
-			card.rect_position.y = area.y
+			card.rect_position.y = 0
 		else:
 			if ind<state['hovered']:
 				card.rect_position.x=ind*floor((5*90)/num)
-				card.rect_position.y=area.y
+				card.rect_position.y=0
 			elif ind==state['hovered']:
 				card.rect_position.x=(ind-1)*floor((5*90)/(num))+85
-				card.rect_position.y=area.y
+				card.rect_position.y=0
 			else:
 				card.rect_position.x=(ind-2)*floor((5*90)/num)+170
-				card.rect_position.y=area.y
+				card.rect_position.y=0
 		ind+=1
 
 func assign_player(node):
@@ -72,7 +72,7 @@ func get_costs(card_num):
 	var card = card_nodes[card_num].get_node('Card')
 	return {'gold':card.cost_gold,'faeria':card.cost_faeria}
 
-func update():
+func do_update():
 	for node in card_nodes:
 		node.queue_free()
 	card_nodes = []
@@ -102,16 +102,30 @@ func on_mouse_button(num):
 	var card = card_nodes[num].get_node('Card')
 	setState({'selected_card':num})
 	game.setState({'preview_card':card.card_name})
-	if card.is_event and game.state['current_turn']==0 and game.actionReady:
+	if (card.is_event and game.state['current_turn']==0 and game.actionReady
+		and (
+			(card.play_morning and game.state.clock_time==0)
+			or (card.play_evening and game.state.clock_time==1)
+			or (card.play_night and game.state.clock_time==2)
+		)
+	):
 		game.setState({'frame_card':card.card_name,'action':'hand_card','active_unit':null})
 		## add to cast box
 		## for each possible action add a button to do that thing
 		##if that thing is an action, start it as an action
 		## use the same process for board entities
 		pass
-	elif game.state['current_turn']==0 and game.actionReady:
+	elif (game.state['current_turn']==0 and game.actionReady
+		and (
+			(card.play_morning and game.state.clock_time==0)
+			or (card.play_evening and game.state.clock_time==1)
+			or (card.play_night and game.state.clock_time==2)
+		)
+	):
 		game.setState({'frame_card': card.card_name})
 		game.start_build_action(card.cost_gold,card.cost_faeria,{card.lands_type:card.lands_num},num,card_nodes[num],buildTypes[card.lands_type] )
+	else:
+		game.setState({'frame_card': card.card_name})
 
 func _on_cast_pressed():
 	pass
