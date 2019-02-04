@@ -1,277 +1,161 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Card.gd" type="Script" id=1]
 [ext_resource path="res://Assets/portraits/F - Amazon A - 01/Small.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Card Back.png" type="Texture" id=3]
 [ext_resource path="res://Assets/coin.png" type="Texture" id=4]
 [ext_resource path="res://Assets/faeria.png" type="Texture" id=5]
-[ext_resource path="res://Fonts/OpenDyslexic-Regular.otf" type="DynamicFontData" id=6]
-[ext_resource path="res://Fonts/OpenDyslexicAlta-Bold.otf" type="DynamicFontData" id=7]
-[ext_resource path="res://Fonts/OpenDyslexicAlta-Regular.otf" type="DynamicFontData" id=8]
-[ext_resource path="res://Assets/Icon_lake.png" type="Texture" id=9]
+[ext_resource path="res://Fonts/OpenDyslexic-Bold.otf" type="DynamicFontData" id=6]
+[ext_resource path="res://Fonts/OpenDyslexic-Regular.otf" type="DynamicFontData" id=7]
+[ext_resource path="res://Fonts/OpenDyslexicAlta-Bold.otf" type="DynamicFontData" id=8]
+[ext_resource path="res://Fonts/OpenDyslexicAlta-Regular.otf" type="DynamicFontData" id=9]
+[ext_resource path="res://Assets/Icon_lake.png" type="Texture" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 
-size = 40
-use_mipmaps = false
-use_filter = false
+size = 42
 font_data = ExtResource( 6 )
-_sections_unfolded = [ "Font", "Settings" ]
 
 [sub_resource type="DynamicFont" id=2]
 
-size = 30
-use_mipmaps = false
-use_filter = true
+size = 42
 font_data = ExtResource( 6 )
-_sections_unfolded = [ "Font", "Settings" ]
 
 [sub_resource type="DynamicFont" id=3]
 
-resource_name = "Folk"
-size = 26
-use_mipmaps = false
-use_filter = false
+size = 30
+use_filter = true
 font_data = ExtResource( 7 )
-_sections_unfolded = [ "Extra Spacing", "Font", "Resource", "Settings" ]
 
 [sub_resource type="DynamicFont" id=4]
 
-size = 15
-use_mipmaps = false
-use_filter = false
+size = 26
 font_data = ExtResource( 8 )
-_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=5]
+
+size = 15
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=6]
+
+size = 40
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 8 )
 
 [node name="Card" type="Node2D"]
-
 script = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
-card_number = 0
-card_name = ""
-card_description = ""
-base_health = 1
-base_attack = 1
-cost_gold = 1
-cost_faeria = 1
-lands_num = 1
-lands_type = 0
-play_morning = true
-play_evening = true
-play_night = true
-is_event = false
 art = ExtResource( 2 )
 base = ExtResource( 3 )
-board_entity = null
 
-[node name="Art" type="Sprite" parent="." index="0"]
-
+[node name="Art" type="Sprite" parent="."]
 position = Vector2( 0, -20 )
 scale = Vector2( 0.9, 0.8 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="Base" type="Sprite" parent="." index="1"]
-
+[node name="Base" type="Sprite" parent="."]
 scale = Vector2( 1.2, 1.2 )
 texture = ExtResource( 3 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="GoldBase" type="Sprite" parent="." index="2"]
-
+[node name="GoldBase" type="Sprite" parent="."]
 position = Vector2( -69.9137, -143.833 )
 texture = ExtResource( 4 )
 
-[node name="FaeriaBase" type="Sprite" parent="." index="3"]
-
+[node name="FaeriaBase" type="Sprite" parent="."]
 position = Vector2( -38.7309, -149.444 )
 scale = Vector2( 1.2, 1.2 )
 texture = ExtResource( 5 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="Health" type="RichTextLabel" parent="." index="4"]
-
+[node name="Health" type="Label" parent="."]
 modulate = Color( 0.0195313, 0.0102234, 0.0102234, 1 )
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 50.0
-margin_top = 34.0
-margin_right = 164.0
-margin_bottom = 109.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-custom_fonts/normal_font = SubResource( 1 )
-bbcode_enabled = false
-bbcode_text = "H"
-visible_characters = -1
-percent_visible = 1.0
-meta_underlined = true
-tab_size = 4
+margin_left = 28.7643
+margin_top = 56.6464
+margin_right = 142.764
+margin_bottom = 131.646
+custom_fonts/font = SubResource( 1 )
 text = "H"
-scroll_active = true
-scroll_following = false
-selection_enabled = false
-override_selected_font_color = false
-_sections_unfolded = [ "BBCode", "custom_colors", "custom_fonts" ]
 
-[node name="Attack" type="RichTextLabel" parent="." index="5"]
+[node name="Value" type="Label" parent="."]
+modulate = Color( 0.0195313, 0.0102234, 0.0102234, 1 )
+margin_left = -17.203
+margin_top = 57.6486
+margin_right = 96.797
+margin_bottom = 132.649
+custom_fonts/font = SubResource( 1 )
+text = "V"
 
+[node name="Attack" type="Label" parent="."]
 modulate = Color( 0, 0, 0, 1 )
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = -79.0
-margin_top = 35.0
-margin_right = 30.0
-margin_bottom = 107.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-custom_fonts/normal_font = SubResource( 1 )
-bbcode_enabled = false
-bbcode_text = ""
-visible_characters = -1
-percent_visible = 1.0
-meta_underlined = true
-tab_size = 4
+margin_left = -56.1447
+margin_top = 55.6022
+margin_right = 52.8553
+margin_bottom = 129.602
+custom_fonts/font = SubResource( 2 )
 text = "A"
-scroll_active = true
-scroll_following = false
-selection_enabled = false
-override_selected_font_color = false
-_sections_unfolded = [ "custom_fonts" ]
 
-[node name="Faeria" type="RichTextLabel" parent="." index="6"]
-
+[node name="Faeria" type="RichTextLabel" parent="."]
 modulate = Color( 0, 0, 0, 1 )
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = -46.0
 margin_top = -176.0
 margin_right = 127.0
 margin_bottom = -112.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
 mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-custom_fonts/normal_font = SubResource( 2 )
-bbcode_enabled = false
-bbcode_text = ""
-visible_characters = -1
-percent_visible = 1.0
-meta_underlined = true
-tab_size = 4
+custom_fonts/normal_font = SubResource( 3 )
 text = "F"
-scroll_active = true
-scroll_following = false
-selection_enabled = false
-override_selected_font_color = false
-_sections_unfolded = [ "BBCode", "custom_fonts" ]
 
-[node name="Gold" type="RichTextLabel" parent="." index="7"]
-
+[node name="Gold" type="RichTextLabel" parent="."]
 modulate = Color( 0, 0, 0, 1 )
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = -81.0
 margin_top = -168.0
 margin_right = -24.0
 margin_bottom = -116.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
 mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-custom_fonts/normal_font = SubResource( 3 )
-bbcode_enabled = false
-bbcode_text = ""
-visible_characters = -1
-percent_visible = 1.0
-meta_underlined = true
-tab_size = 4
+custom_fonts/normal_font = SubResource( 4 )
 text = "G"
 scroll_active = false
-scroll_following = false
-selection_enabled = false
-override_selected_font_color = false
-_sections_unfolded = [ "custom_fonts" ]
 
-[node name="Name" type="RichTextLabel" parent="." index="8"]
-
+[node name="Name" type="RichTextLabel" parent="."]
 modulate = Color( 0.204742, 1, 0.0117188, 1 )
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = -75.0
 margin_top = -127.0
 margin_right = 127.0
 margin_bottom = 10.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
 mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-custom_fonts/normal_font = SubResource( 4 )
+custom_fonts/normal_font = SubResource( 5 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 custom_colors/selection_color = Color( 1, 1, 1, 1 )
-bbcode_enabled = false
-bbcode_text = ""
-visible_characters = -1
-percent_visible = 1.0
-meta_underlined = true
-tab_size = 4
 text = "LONG NAME FOR A "
 scroll_active = false
-scroll_following = false
-selection_enabled = false
-override_selected_font_color = false
-_sections_unfolded = [ "Visibility", "custom_colors", "custom_constants", "custom_fonts" ]
 
-[node name="Lands" type="Node2D" parent="." index="9"]
+[node name="slash" type="Label" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = -9.33572
+margin_top = 55.7986
+margin_right = 124.664
+margin_bottom = 125.799
+custom_fonts/font = SubResource( 6 )
+text = "/"
 
+[node name="Lands" type="Node2D" parent="."]
 position = Vector2( 12.944, -143.511 )
 scale = Vector2( 0.540155, 0.520117 )
 
-[node name="1" type="Sprite" parent="Lands" index="0"]
-
+[node name="1" type="Sprite" parent="Lands"]
 position = Vector2( 101.311, 11.8418 )
 scale = Vector2( 1.5, 2 )
-texture = ExtResource( 9 )
+texture = ExtResource( 10 )
 
-[node name="2" type="Sprite" parent="Lands" index="1"]
-
+[node name="2" type="Sprite" parent="Lands"]
 position = Vector2( 56.0247, 0.865051 )
 scale = Vector2( 1.5, 2 )
-texture = ExtResource( 9 )
+texture = ExtResource( 10 )
 
-[node name="3" type="Sprite" parent="Lands" index="2"]
-
+[node name="3" type="Sprite" parent="Lands"]
 position = Vector2( 9.11525, -5.50644 )
 scale = Vector2( 1.5, 2 )
-texture = ExtResource( 9 )
+texture = ExtResource( 10 )
 
-[node name="4" type="Sprite" parent="Lands" index="3"]
-
+[node name="4" type="Sprite" parent="Lands"]
 position = Vector2( -36.1026, -10.4096 )
 scale = Vector2( 1.5, 2 )
-texture = ExtResource( 9 )
-
+texture = ExtResource( 10 )
 

@@ -4,11 +4,13 @@ extends Node
 export(String) var ab_name = ""
 export(String) var ab_description = ""
 
+export(String) var modname = "KingsPraise"
 export(int) var health = 0
 export(int) var attack = 1
 export(int) var energy = 0
 export(int,"All","Creature","Building") var type = 1
 export(int,"All","Owner","Opponent") var player = 1
+export(bool) var and_orbs = true
 export(PackedScene) var unbuffer = null
 
 
@@ -24,7 +26,7 @@ func activate(_Game, _entity, unused):
 	for ent in  get_tree().get_nodes_in_group("entities"):
 		if conditions(ent):
 			ent.life_change(health)
-			var modName = ent.Unit.set_mod_att('kingsPraise', attack, true)
+			var modName = ent.Unit.set_mod_att(modname, attack, true)
 			if unbuffer != null:
 				var attach_unbuffer = unbuffer.instance()
 				attach_unbuffer.set_name(modName)
@@ -33,6 +35,8 @@ func activate(_Game, _entity, unused):
 				ent.Unit.on_end_turn = true
 			for i in range(0, energy):
 				ent.Unit.add_one_energy()
+	if and_orbs:
+		then_orbs()
 	return null
 
 func conditions(ent):
@@ -52,12 +56,17 @@ func conditions(ent):
 			return true
 	return false
 
-func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-	pass
-
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+func then_orbs():
+	if player==0:
+		Game.get_hex_by_id(1).get_unit().life_change(health)
+		Game.get_hex_by_id(44).get_unit().life_change(health)
+	elif player == 2:
+		if entity.Owner == 0:
+			Game.get_hex_by_id(44).get_unit().life_change(health)
+		else:
+			Game.get_hex_by_id(1).get_unit().life_change(health)
+	elif player == 1:
+		if entity.Owner == 1:
+			Game.get_hex_by_id(44).get_unit().life_change(health)
+		else:
+			Game.get_hex_by_id(1).get_unit().life_change(health)

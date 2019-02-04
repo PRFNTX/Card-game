@@ -76,12 +76,17 @@ func show_card(card):
 	if (shown_card!=null):
 		shown_card.queue_free()
 	shown_card = par.resources[card].instance()
-	top_level.add_child(shown_card)
 	shown_card.rect_scale=Vector2(2,2)
-	var display = "Display"
 	if deck:
-		display = "Display2"
-	shown_card.rect_position = top_level.get_node(display).position
+		for child in get_parent().get_parent().get_node('Display').get_children():
+			child.queue_free()
+		get_parent().get_parent().get_node('Display').add_child(shown_card)
+		get_parent().get_parent().get_node('Display2/cardDetails').text = shown_card.get_node('Card').card_description
+	else:
+		for child in get_parent().get_node('Display').get_children():
+			child.queue_free()
+		get_parent().get_node('Display').add_child(shown_card)
+		get_parent().get_node('Display2/cardDetails').text = shown_card.get_node('Card').card_description
 	
 
 var active = null

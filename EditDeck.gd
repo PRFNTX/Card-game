@@ -125,6 +125,7 @@ func update(t_deck=null):
 func populate_collection():
 	resources.forEach
 """
+##dont think this function runs
 var shown_card = null
 func show_card(card):
 	remove_child(shown_card)

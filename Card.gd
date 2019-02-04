@@ -16,6 +16,7 @@ export(bool) var play_evening = true
 export(bool) var play_night = true
 
 export(bool) var is_event = false
+export(bool) var is_structure = false
 
 export(Texture) var art
 export(Texture) var base
@@ -33,6 +34,17 @@ func _ready():
 	$Faeria.text = str(cost_faeria)
 	$Gold.text = str(cost_gold)
 	$Name.text = card_name
+	
+	if is_structure:
+		$Health.hide()
+		$Attack.hide()
+		$slash.hide()
+		$Value.show()
+		$Value.text= str(base_health)
+	elif is_event:
+		$Health.hide()
+		$Attack.hide()
+		$slash.hide()
 	
 	var land_children = $Lands.get_children()
 	var ith = 0

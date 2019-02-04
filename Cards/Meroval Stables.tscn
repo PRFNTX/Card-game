@@ -5,25 +5,12 @@
 [ext_resource path="res://Assets/portraits/F - Greg Opalinski - 07/Small.png" type="Texture" id=3]
 [ext_resource path="res://Cards/entities/entity - Meroval Stables.tscn" type="PackedScene" id=4]
 
-[node name="Meroval Stables" type="Control" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Meroval Stables" type="Control"]
 margin_right = 83.0
 margin_bottom = 107.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 script = ExtResource( 1 )
-_sections_unfolded = [ "Rect" ]
 
-[node name="Card" parent="." index="0" instance=ExtResource( 2 )]
-
+[node name="Card" parent="." instance=ExtResource( 2 )]
 position = Vector2( 42, 53.5 )
 scale = Vector2( 0.35, 0.36 )
 card_number = 123
@@ -32,9 +19,9 @@ card_description = "Accumulator 3, 1 Energy - Target creature you control gains 
 base_health = 2
 base_attack = 0
 cost_gold = 3
-cost_faeria = 0
+cost_faeria = 2
 lands_num = 0
+is_structure = true
 art = ExtResource( 3 )
 board_entity = ExtResource( 4 )
-
 

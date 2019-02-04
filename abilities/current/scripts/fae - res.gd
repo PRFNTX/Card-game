@@ -10,6 +10,10 @@ export(int) var value = 0
 export(bool) var instead = false
 
 func activate(Game, entity, by, val):
+	if by==null:
+		by = Game.get_state().active_unit
+	if by== null:
+		by = Game.get_state().delegate_id
 	var gain = val
 	if not value_by_faeria:
 		gain = value

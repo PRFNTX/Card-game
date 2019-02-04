@@ -1,0 +1,215 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://BaseEntity.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Round.png" type="Texture" id=2]
+[ext_resource path="res://Assets/energy_small.png" type="Texture" id=3]
+[ext_resource path="res://Assets/faeria.png" type="Texture" id=4]
+
+[node name="Unit" type="Node2D" index="0"]
+position = Vector2( 30, 30 )
+script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+max_faeria = 0
+max_energy = 1
+base_attack = 1
+base_health = 2
+base_val = 0
+COLOR_GREATER = Color( 0, 0.824219, 0.0128784, 1 )
+COLOR_EQUAL = Color( 0, 0, 0, 1 )
+COLOR_LESS = Color( 0.828125, 0, 0, 1 )
+ENERGY_ACTIVE = Color( 0, 1, 0.554688, 1 )
+ENERGY_INACTIVE = Color( 0.652344, 0.642151, 0.642151, 1 )
+is_unit = true
+is_building = false
+is_event = false
+move = true
+charge = false
+jump = false
+aquatic = false
+flying = false
+conquest = false
+convoke = false
+radiate = false
+auto_collect = 0
+collect = true
+attack = true
+abilities = false
+on_play = false
+on_production = false
+on_attack = false
+on_move = false
+on_collect = true
+on_damage = false
+on_death = false
+on_clock = false
+on_action = false
+on_turn_end = false
+frame_alt = null
+
+[node name="Frame" type="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
+
+[node name="Energy" type="Node2D" parent="." index="1"]
+editor/display_folded = true
+
+[node name="1" type="Sprite" parent="Energy" index="0"]
+modulate = Color( 0, 1, 0.601563, 1 )
+position = Vector2( 23.3951, -31.9015 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Visibility" ]
+
+[node name="2" type="Sprite" parent="Energy" index="1"]
+modulate = Color( 0, 1, 0.601563, 1 )
+position = Vector2( 14.8601, -31.7755 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="3" type="Sprite" parent="Energy" index="2"]
+modulate = Color( 0, 1, 0.601563, 1 )
+position = Vector2( 6.61169, -31.8385 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="4" type="Sprite" parent="Energy" index="3"]
+modulate = Color( 0, 1, 0.601563, 1 )
+position = Vector2( -1.81149, -32.0133 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="5" type="Sprite" parent="Energy" index="4"]
+modulate = Color( 0, 1, 0.601563, 1 )
+position = Vector2( -9.87086, -32.0133 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+
+[node name="Faeria" type="Node2D" parent="." index="2"]
+editor/display_folded = true
+
+[node name="1" type="Sprite" parent="Faeria" index="0"]
+visible = false
+position = Vector2( -11.8913, -7.37262 )
+texture = ExtResource( 4 )
+
+[node name="2" type="Sprite" parent="Faeria" index="1"]
+visible = false
+position = Vector2( 8.08611, -16.6478 )
+texture = ExtResource( 4 )
+
+[node name="3" type="Sprite" parent="Faeria" index="2"]
+visible = false
+position = Vector2( 11.6535, 3.80522 )
+texture = ExtResource( 4 )
+
+[node name="Unit" type="Node2D" parent="." index="3"]
+editor/display_folded = true
+
+[node name="A" type="Label" parent="Unit" index="0"]
+modulate = Color( 0, 0, 0, 1 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -13.0
+margin_top = 12.0
+margin_right = 27.0
+margin_bottom = 26.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "A"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="div" type="Label" parent="Unit" index="1"]
+modulate = Color( 0, 0, 0, 1 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -2.0
+margin_top = 12.0
+margin_right = 38.0
+margin_bottom = 26.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "/"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="H" type="Label" parent="Unit" index="2"]
+modulate = Color( 0, 0, 0, 1 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 5.0
+margin_top = 12.0
+margin_right = 45.0
+margin_bottom = 26.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "H"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Building" type="Node2D" parent="." index="4"]
+editor/display_folded = true
+
+[node name="Val" type="Label" parent="Building" index="0"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -9.0
+margin_top = 12.0
+margin_right = 31.0
+margin_bottom = 26.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "Val"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Visibility" ]
+
+[node name="Movement" type="Node" parent="." index="5"]
+
+[node name="Attack" type="Node" parent="." index="6"]
+
+[node name="Abilities" type="Node" parent="." index="7"]
+
+[node name="on_play" type="Node" parent="." index="8"]
+
+[node name="on_attack" type="Node" parent="." index="9"]
+
+[node name="on_move" type="Node" parent="." index="10"]
+
+[node name="on_collect" type="Node" parent="." index="11"]
+
+[node name="on_damage" type="Node" parent="." index="12"]
+
+[node name="on_death" type="Node" parent="." index="13"]
+
+[node name="on_clock" type="Node" parent="." index="14"]
+
+[node name="on_action" type="Node" parent="." index="15"]
+
+[node name="on_production" type="Node" parent="." index="16"]
+

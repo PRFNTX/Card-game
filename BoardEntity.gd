@@ -53,6 +53,8 @@ func possess(entity, hex, player, game, _card_name):
 		Game.connect('on_collect', self, 'on_collect')
 	Game.connect('TurnStart', self, 'sig_turn_start')
 	Game.connect('UpdateState', self, 'sig_update_state')
+	if Unit.auto_collect:
+		Game.connect('AutoCollect', self, 'auto_collect')
 	if Game.state.current_turn==0:
 		var free_if_null = Unit.play()
 		if Unit.is_event and free_if_null==null:
@@ -65,6 +67,10 @@ func will_receive_attack(val_damage, source=-1):
 	if not can_attack:
 		return false
 	return true
+
+func receive_collect(by):
+	for node in Unit.get_node('on_damage').get_children():
+		node.activate(Game, self, by)
 
 func receive_attack(val_damage, source=-1):
 	var mod_damage = on_damage(val_damage)
@@ -119,9 +125,12 @@ func get_energy():
 	return Unit.current_energy
 
 #### EVENT FUNCTIONS
-func on_play():
-	if Unit.on_play:
-		Unit.play()
+#func on_play():
+#	if Unit.on_play:
+#		Unit.play()
+
+func collect_from_target(target):
+	target.receive_collect(Hex.id)
 
 func on_attack(target):
 	var can_attack = target.will_receive_attack(Unit.current_attack, Hex.id)
@@ -183,6 +192,10 @@ func clock_time(time):
 	state['clock_time']=time
 	if Unit.on_clock:
 		Unit.clock(time)
+	
+func auto_collect():
+	if Unit.auto_collect:
+		Unit.do_auto_collect()
 
 func delegate(nodepath):
 	state['delegate'] = nodepath

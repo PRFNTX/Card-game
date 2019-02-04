@@ -6,8 +6,8 @@ extends Node2D
 # var b="textvar"
 
 
-var testing_solo = false
-var god_mode = false
+var testing_solo = true
+var god_mode = true
 
 onready var globals = get_node('/root/master')
 
@@ -17,6 +17,7 @@ export(PackedScene) var WellEntity = load('res://Cards/entities/well_entity.tscn
 
 #signal SpawnFaeria
 signal UpdateState
+signal AutoCollect
 signal GameStart
 signal TurnStart
 signal ActionPhase
@@ -67,11 +68,11 @@ func setState(obj):
 		call(key, obj[key])
 		#call 'setters' instead?
 	emit_signal("UpdateState",state,obj.keys())
+	emit_signal("AutoCollect")
 
 ######## STATE FUNCTIONS
 func action(val):
 	state['action'] = val
-
 
 func current_turn(val):
 	state['current_turn'] = val
@@ -122,7 +123,8 @@ func frame_card(card_name):
 		if state['active_unit']!=null:
 			var framed_entity = get_hex_by_id(state['active_unit']).get_unit()
 			var num=0
-			for ability in framed_entity.Unit.get_actions().keys():
+			for ability in framed_entity.actionList:
+				print(ability)
 				buttons.append(Button.new())
 				buttons.back().text=ability
 				$DisplayFrame.add_child(buttons.back())
@@ -179,7 +181,7 @@ func frame_activate(ability_name, set_state=null):
 			if local:
 				send_cast({'frame_card':globals.get_id_by_name(state['frame_card']),'current_turn':(state['current_turn']+1)%2})
 			actionDone()
-
+	
 	elif actionReady:
 		get_hex_by_id(state['active_unit']).get_unit().activate(ability_name) #make this function
 		## if no valid targets end activation
@@ -280,6 +282,9 @@ func change_turns(none, unused):
 var actionReady = true
 var complete = true
 func _input(event):
+	if event.is_action("cancel"):
+		cancelAction()
+		startTimer()
 	if state['current_turn']==0 and players[int(state['current_turn'])].actions>0 and actionReady and ready:
 		if event.is_action("card"):
 			actionReady=false
@@ -316,9 +321,6 @@ func _input(event):
 			complete = false
 			startTimer()
 			actionCoin(null)
-	elif event.is_action("cancel"):
-		cancelAction()
-		startTimer()
 
 
 
@@ -384,19 +386,14 @@ func cancelAction():
 	if state['action']=='delegate' and get_hex_by_id(state['delegate_id']).has_unit() and get_hex_by_id(state['delegate_id']).get_unit().Unit.get_node(state['delegate_node']).has_method('cancel_action'):
 		get_hex_by_id(state['delegate_id']).get_unit().Unit.get_node(state['delegate_node']).cancel_action()
 	setState({"action":"",'active_unit':null, 'frame_card':null, 'delegate_id':null,'delegate_node':null})
-	
 	if $hex0.has_unit():
 		$hex0.get_unit().queue_free()
 	complete = true
-
-
-
 
 ##ACTIONS
 #for reasons
 func get_state():
 	return state
-
 
 #currently only for remote
 func hardMove(target, set_state=null):
@@ -531,8 +528,6 @@ func AttackAdjOrCollect(target, set_state=null):
 	if local:
 		send_action('AttackAdjOrCollect',45-target,{'active_unit':45-state['active_unit']},state)
 		unit.setState({'active':false})
-	
-	
 	actionDone()
 
 func AttackAdj(target, set_state=null):
@@ -546,7 +541,6 @@ func AttackAdj(target, set_state=null):
 	if local:
 		send_action('AttackAdj',45-target,{'active_unit':45-state['active_unit']},state)
 		unit.setState({'active':false})
-	
 	actionDone()
 
 func Collect(target, set_state=null):
@@ -561,7 +555,6 @@ func Collect(target, set_state=null):
 	if local:
 		send_action('Collect',45-target,{'active_unit':45-state['active_unit']},state)
 		unit.setState({'active':false})
-	
 	actionDone()
 
 func castAny(target, set_state=null):
@@ -609,7 +602,7 @@ func buildAny(target, set_state=null):
 		'gold': globals.card_instances[state['building_card']].get_node('Card').cost_gold,
 		'faeria':globals.card_instances[state['building_card']].get_node('Card').cost_faeria
 	}
-	
+	var end_if_null
 	if players[state['current_turn']].pay_costs(costs['gold'],costs['faeria']):
 		## replcae with actual board entity
 		var child_card = globals.card_instances[state['building_card']].get_node('Card')
@@ -620,11 +613,16 @@ func buildAny(target, set_state=null):
 			pass
 		var entity = BoardEntity.instance()
 		get_hex_by_id(target).get_node('hexEntity').add_child(entity)
-		entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'],self,child_card.card_name)
+		end_if_null = entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'],self,child_card.card_name)
 		entity.add_to_group('entities')
+	else:
+		end_if_null = null
 	if local:
 		send_action('buildAny', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])},state)
-	actionDone()
+		if end_if_null == null:
+			actionDone()
+	else:
+		actionDone()
 
 func buildLake(target, set_state=null):
 	var local = true
@@ -638,7 +636,7 @@ func buildLake(target, set_state=null):
 		'gold': globals.card_instances[state['building_card']].get_node('Card').cost_gold,
 		'faeria':globals.card_instances[state['building_card']].get_node('Card').cost_faeria
 	}
-	
+	var end_if_null
 	if players[state['current_turn']].pay_costs(costs['gold'],costs['faeria']):
 		## replcae with actual board entity
 		var child_card = globals.card_instances[state['building_card']].get_node('Card')
@@ -649,11 +647,16 @@ func buildLake(target, set_state=null):
 			pass
 		var entity = BoardEntity.instance()
 		get_hex_by_id(target).get_node('hexEntity').add_child(entity)
-		entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'],self,child_card.card_name)
+		end_if_null = entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'],self,child_card.card_name)
 		entity.add_to_group('entities')
+	else:
+		end_if_null = null
 	if local:
 		send_action('buildLake', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])},state)
-	actionDone()
+		if end_if_null == null:
+			actionDone()
+	else:
+		actionDone()
 
 func buildTree(target, set_state=null):
 	var local = true
@@ -667,7 +670,7 @@ func buildTree(target, set_state=null):
 		'gold': globals.card_instances[state['building_card']].get_node('Card').cost_gold,
 		'faeria':globals.card_instances[state['building_card']].get_node('Card').cost_faeria
 	}
-	
+	var end_if_null
 	if players[state['current_turn']].pay_costs(costs['gold'],costs['faeria']):
 		## replcae with actual board entity
 		var child_card = globals.card_instances[state['building_card']].get_node('Card')
@@ -678,11 +681,16 @@ func buildTree(target, set_state=null):
 			pass
 		var entity = BoardEntity.instance()
 		get_hex_by_id(target).get_node('hexEntity').add_child(entity)
-		entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'],self,child_card.card_name)
+		end_if_null = entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'],self,child_card.card_name)
 		entity.add_to_group('entities')
+	else:
+		end_if_null = null
 	if local:
 		send_action('buildTree', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])},state)
-	actionDone()
+		if end_if_null == null:
+			actionDone()
+	else:
+		actionDone()
 
 func buildHill(target, set_state=null):
 	var local = true
@@ -696,7 +704,7 @@ func buildHill(target, set_state=null):
 		'gold': globals.card_instances[state['building_card']].get_node('Card').cost_gold,
 		'faeria':globals.card_instances[state['building_card']].get_node('Card').cost_faeria
 	}
-	
+	var end_if_null
 	if players[state['current_turn']].pay_costs(costs['gold'],costs['faeria']):
 		## replcae with actual board entity
 		var child_card = globals.card_instances[state['building_card']].get_node('Card')
@@ -707,11 +715,16 @@ func buildHill(target, set_state=null):
 			pass
 		var entity = BoardEntity.instance()
 		get_hex_by_id(target).get_node('hexEntity').add_child(entity)
-		entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'],self,child_card.card_name)
+		end_if_null = entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'],self,child_card.card_name)
 		entity.add_to_group('entities')
+	else:
+		end_if_null = null
 	if local:
 		send_action('buildHill', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])},state)
-	actionDone()
+		if end_if_null == null:
+			actionDone()
+	else:
+		actionDone()
 
 func buildSand(target, set_state=null):
 	var local = true
@@ -725,7 +738,7 @@ func buildSand(target, set_state=null):
 		'gold': globals.card_instances[state['building_card']].get_node('Card').cost_gold,
 		'faeria':globals.card_instances[state['building_card']].get_node('Card').cost_faeria
 	}
-	
+	var end_if_null
 	if players[state['current_turn']].pay_costs(costs['gold'],costs['faeria']):
 		## replcae with actual board entity
 		var child_card = globals.card_instances[state['building_card']].get_node('Card')
@@ -736,11 +749,16 @@ func buildSand(target, set_state=null):
 			pass
 		var entity = BoardEntity.instance()
 		get_hex_by_id(target).get_node('hexEntity').add_child(entity)
-		entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'],self,child_card.card_name)
+		end_if_null = entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'],self,child_card.card_name)
 		entity.add_to_group('entities')
+	else:
+		end_if_null = null
 	if local:
 		send_action('buildSand', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])},state)
-	actionDone()
+		if end_if_null == null:
+			actionDone()
+	else:
+		actionDone()
 
 func actionLand(target, set_state=null):
 	var local = true

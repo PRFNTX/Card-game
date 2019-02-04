@@ -189,12 +189,12 @@ func on_select(Game,hex):
 func play():
 	var it = null
 	for effectNode in $on_play.get_children():
-		if get_parent().Game.state.current_turn != 0 and effectNode.has_method('complete'):
-			it = true
-		else:
-			var one = effectNode.activate(get_parent().Game,get_parent(),"")
-			if one != null:
-				it = one
+		#if get_parent().Game.state.current_turn == 0 and effectNode.has_method('complete'):
+		#	it = true
+		#else:
+		var one = effectNode.activate(get_parent().Game,get_parent(),"")
+		if one != null:
+			it = one
 	return it
 
 func production():
@@ -256,6 +256,12 @@ func get_actions():
 func clock(time):
 	for effectNode in $on_clock.get_children():
 		effectNode.activate(get_parent().Game,get_parent(),time)
+
+func do_auto_collect():
+	for hex in get_parent().Hex.adjacent:
+			if hex.has_unit():
+				if hex.get_unit().Unit.current_faeria > 0:
+					get_parent().collect_from_target(hex.get_unit())
 
 func get_action_name(type):
 	if get_node(type).get_child_count()>0:

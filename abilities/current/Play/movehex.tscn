@@ -2,11 +2,6 @@
 
 [ext_resource path="res://abilities/current/scripts/move hex.gd" type="Script" id=1]
 
-[node name="movehex" type="Node" index="0"]
-
+[node name="movehex" type="Node"]
 script = ExtResource( 1 )
-player = 1
-type = 0
-then_free = false
-
 

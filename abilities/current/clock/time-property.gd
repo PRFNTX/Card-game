@@ -5,13 +5,13 @@ export(String) var ab_name = ""
 export(String) var ab_description = ""
 
 export(Dictionary) var morning = {
-	'isAttackable': true,
+	'is_attackable': true,
 }
 export(Dictionary) var evening = {
-	'isAttackable': false,
+	'is_attackable': false,
 }
 export(Dictionary) var night = {
-	'isAttackable': false,
+	'is_attackable': false,
 }
 
 var entity
@@ -41,9 +41,4 @@ func activate(_Game,_entity,_time):
 
 func setProperties(objProps):
 	for property in objProps.keys():
-		entity[property] = objProps[property]
-
-func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-	pass
+		entity.Unit.set(property, objProps[property])

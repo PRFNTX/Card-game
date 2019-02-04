@@ -252,7 +252,7 @@ func action(type,by,test=false):
 			if test:
 				return false
 	elif type=="AttackAdj":
-		if is_adjacent_to(stateLocal['active_unit'].Hex) and (has_attackable_opposing_unit()):
+		if is_adjacent_to(stateLocal['active_unit'].Hex) and (has_attackable_opposing_unit(by)):
 			if !test:
 				setState({'cover':attack,'target':true})
 			else:
@@ -262,7 +262,7 @@ func action(type,by,test=false):
 			if test:
 				return false
 	elif type=="AttackAdjOrCollect":
-		if is_adjacent_to(stateLocal['active_unit'].Hex) and has_attackable_opposing_unit():
+		if is_adjacent_to(stateLocal['active_unit'].Hex) and has_attackable_opposing_unit(by):
 			if !test:
 				setState({'cover':attack,'target':true})
 			else:

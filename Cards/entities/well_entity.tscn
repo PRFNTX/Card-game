@@ -5,7 +5,7 @@
 [ext_resource path="res://abilities/current/collectFaeria.tscn" type="PackedScene" id=3]
 [ext_resource path="res://abilities/current/spawnFaeria.tscn" type="PackedScene" id=4]
 
-[node name="Unit" instance=ExtResource( 1 )]
+[node name="Unit" index="0" instance=ExtResource( 1 )]
 max_faeria = 3
 max_energy = 0
 base_attack = 0

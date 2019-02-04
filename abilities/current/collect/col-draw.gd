@@ -20,5 +20,6 @@ func activate(_Game, _entity,by, _val):
 	Game = _Game
 	entity = _entity
 	val=_val
-	if Game.players[Game.state['current_turn']].hand_cards < max_cards:
-		Game.players[Game.state['current_turn']].drawCard() 
+	if by == entity.Hex.id:
+		if Game.players[entity.Owner].hand_cards < max_cards:
+			Game.players[entity.Owner].drawCard() 

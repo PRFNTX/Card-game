@@ -92,22 +92,21 @@ func complete(target, set_state=null):
 	
 	var hex_target = Game.get_hex_by_id(target)
 	
-	if local:
-		#Game.send_action('dee',45-target,{'delegate_node':str(get_path()).replace("/","~")})
-		#Game.send_action('delegate',45-target,{'delegate_node':'Movement/moveLine','delegate_id':45-entity.Hex.id})
-		Game.send_action('miscMove',45-target,{'active_unit':45-entity.Hex.id})
 	
 	entity.on_move(hex_target.get_node('hexEntity'))
 	entity.use_energy(1)
 	entity.Hex=hex_target
 	Game.setState({'delegate_id':target,'active_unit':target})
-	
-	if Game.check_valid_action(entity.Unit.get_action_name('Attack')) and local and entity.Unit.current_health>0:
-		Game.actionReady=true
-		entity.Unit.start_attack(Game)
-		return false
+	if local:
+		Game.send_action('miscMove',45-target,{'active_unit':45-entity.Hex.id})
+		if Game.check_valid_action(entity.Unit.get_action_name('Attack')) and local and entity.Unit.current_health>0:
+			Game.actionReady=true
+			entity.Unit.start_attack(Game)
+			return false
+		else:
+			return true
 	else:
-		return true
+		Game.actionDone()
 
 func cancel_action():
 	pass

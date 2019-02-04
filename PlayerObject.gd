@@ -148,7 +148,7 @@ func modFaeria(num):
 	#set display
 
 func drawCard():
-	if !is_dummy:
+	if !is_dummy and curr_Deck.size() > 0:
 		var card = floor(rand_range(0,curr_Deck.size()))
 		Hand.push_back(curr_Deck[card])
 		curr_Deck.remove(card)

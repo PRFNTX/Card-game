@@ -52,9 +52,9 @@ func pay_costs():
 
 var valid_targets = [1,2,4,5,6]
 func targeting():
-	for hex in entity.hex.adjacent:
+	for hex in entity.Hex.adjacent:
 		if (
-			hex.stateLocal.hex_type.has(valid_targets)
+			valid_targets.has(hex.stateLocal.hex_type)
 		):
 			hex.setState({
 				'cover':hex.summon, 'target':true
@@ -78,6 +78,7 @@ func complete(target, set_state=null):
 	if local:
 		Game.send_action('delegate',45-target,{'delegate_id':entity.Hex.id,'delegate_node':get_relative_path()})
 	Game.actionDone()
+	entity.actionList.erase(ab_name)
 	queue_free()
 
 func cancel_action():

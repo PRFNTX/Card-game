@@ -5,24 +5,11 @@
 [ext_resource path="res://Cards/entities/entity - Alberian Fortification.tscn" type="PackedScene" id=3]
 
 [node name="Alberian Fortification" type="Control"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_right = 83.0
 margin_bottom = 107.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 script = ExtResource( 1 )
-_sections_unfolded = [ "Rect" ]
 
-[node name="Card" parent="." index="0" instance=ExtResource( 2 )]
-
+[node name="Card" parent="." instance=ExtResource( 2 )]
 position = Vector2( 42, 53.5 )
 scale = Vector2( 0.35, 0.36 )
 card_number = 3
@@ -34,6 +21,6 @@ cost_gold = 7
 cost_faeria = 0
 lands_num = 4
 lands_type = 3
+is_structure = true
 board_entity = ExtResource( 3 )
-
 

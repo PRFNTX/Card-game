@@ -2,14 +2,6 @@
 
 [ext_resource path="res://abilities/current/Play/ply-add-nrg.gd" type="Script" id=1]
 
-[node name="ply-buff-nrg" type="Node" index="0"]
-
+[node name="ply-buff-nrg" type="Node"]
 script = ExtResource( 1 )
-ab_name = ""
-ab_description = ""
-player = 0
-target_type = 1
-then_free = false
-unbuffer = null
-
 
