@@ -35,24 +35,37 @@ func set_mod_att(iden, val, stacks=false):
 			while mod_att.keys().has(iden+str(num)):
 				num+=1
 			mod_att[iden+str(num)] = val
+			get_node('Unit/A').text=str(get_attack())
+			modulate_colors()
+			return iden+str(num)
 		else:
+			get_node('Unit/A').text=str(get_attack())
+			modulate_colors()
 			return null
 	else:
 		mod_att[iden] = val
+		get_node('Unit/A').text=str(get_attack())
+		modulate_colors()
 		return iden
 
 func unmod_att(iden):
 	if mod_att.keys().has(iden):
 		mod_att.erase(iden)
+		get_node('Unit/A').text=str(get_attack())
 		return true
+	get_node('Unit/A').text=str(get_attack())
+	modulate_colors()
 	return false
 
 func set_attack(val):
 	current_attack = val
-	
+	get_node('Unit/A').text=str(get_attack())
+	modulate_colors()
+
+func hard_set_attack(val):
+	current_attack = val
 	for modifier in mod_att.keys():
-		current_attack += mod_att[modifier]
-	
+		mod_att.erase(modifier)
 	get_node('Unit/A').text=str(current_attack)
 	modulate_colors()
 
@@ -109,6 +122,7 @@ export(bool) var is_unit = false
 export(bool) var is_building=false
 export(bool) var is_event=false
 export(bool) var is_orb=false
+export(bool) var is_well=false
 
 export(bool) var move = false
 export(bool) var charge = false
@@ -217,7 +231,7 @@ func on_receive_attack(source):
 					complete = result
 	return complete
 
-func on_end_turn():
+func on_end_turn(current_turn):
 	if on_end_turn:
 		for effectNode in $on_end_turn.get_children():
 			effectNode.activate(get_parent().Game,get_parent(),"")
@@ -276,11 +290,12 @@ func end():
 				child.end()
 
 func modulate_colors():
-	if current_attack > base_attack:
+	var attack = get_attack()
+	if attack > base_attack:
 		get_node("Unit/A").modulate = COLOR_GREATER
-	elif current_attack == base_attack:
+	elif attack == base_attack:
 		get_node("Unit/A").modulate = COLOR_EQUAL
-	elif current_attack < base_attack:
+	elif attack < base_attack:
 		get_node("Unit/A").modulate = COLOR_LESS
 	
 	if current_health > base_health:

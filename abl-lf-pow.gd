@@ -5,7 +5,9 @@ export(String) var ab_description = ""
 
 export(int) var cost = 1
 export(int) var power = 1
+export(bool) var stacks = true
 export(PackedScene) var unbuffer = null
+export(NodePath) var unmodNode
 
 var Game
 var entity
@@ -14,15 +16,19 @@ func init(_entity):
 	Game=entity.Game
 
 func activate(_game, _entity, _unused):
+	if verify_costs():
+		pay_costs()
+	var modName = entity.Unit.set_mod_att('Lichorus', power, stacks)
+	if get_node(unmodNode).has_method('add_mod_name'):
+		get_node(unmodNode).call('add_mod_name', modName)
+	if entity.Owner == 0:
+		Game.send_activation(entity.Hex.id, get_parent().get_name()+"/"+get_name())
+
+func verify_costs():
+	return true
+
+func pay_costs():
 	entity.life_change(-1 * cost)
-	var modName = entity.Unit.set_mod_att('Lichorus', power, true)
-	if unbuffer != null:
-		var attach_unbuffer = unbuffer.instance()
-		attach_unbuffer.set_name(modName)
-		attach_unbuffer.init(entity)
-		entity.Unit.get_node("on_end_turn").add_child(attach_unbuffer)
-		entity.Unit.on_end_turn = true
-		Game.send_activation(entity.Hex.id, get_relative_path())
 
 func get_relative_path():
 	return get_parent().get_name()+'/'+get_name()

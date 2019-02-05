@@ -51,6 +51,7 @@ func possess(entity, hex, player, game, _card_name):
 		Game.connect('on_action', self, 'on_action')
 	if Unit.on_collect:
 		Game.connect('on_collect', self, 'on_collect')
+	Game.connect("TurnEnd", Unit, 'on_end_turn')
 	Game.connect('TurnStart', self, 'sig_turn_start')
 	Game.connect('UpdateState', self, 'sig_update_state')
 	if Unit.auto_collect:
@@ -135,7 +136,8 @@ func collect_from_target(target):
 func on_attack(target):
 	var can_attack = target.will_receive_attack(Unit.current_attack, Hex.id)
 	if can_attack:
-		Unit.attack(target)
+		if not target.Unit.is_well:
+			Unit.attack(target)
 		target.receive_attack(Unit.current_attack, Hex.id)
 	Unit.end()
 

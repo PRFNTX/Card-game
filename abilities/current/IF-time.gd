@@ -13,6 +13,8 @@ var entity
 func init(_entity):
 	entity = _entity
 	Game = entity.Game
+	for child in get_children():
+		child.init(_entity)
 
 const MORNING = 0
 const EVENING = 1

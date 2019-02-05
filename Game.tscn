@@ -34,7 +34,6 @@ scale = Vector2( 0.751495, 1 )
 script = ExtResource( 5 )
 
 [node name="back" type="Sprite" parent="board"]
-editor/display_folded = true
 position = Vector2( 507.593, 241.133 )
 scale = Vector2( 0.720365, 0.73331 )
 texture = ExtResource( 6 )
@@ -432,6 +431,6 @@ autowrap = true
 visible = false
 
 [connection signal="timeout" from="actionTimer" to="." method="_on_Timer_timeout"]
-[connection signal="timeout" from="basic_timeout" to="." method="_on_basic_timeout_timeout"]
 [connection signal="timeout" from="basic_timeout" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="basic_timeout" to="." method="_on_basic_timeout_timeout"]
 [connection signal="pressed" from="endturn" to="." method="_on_endturn_pressed"]

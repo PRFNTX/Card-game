@@ -75,6 +75,7 @@ custom_fonts/font = SubResource( 1 )
 text = "H"
 
 [node name="Value" type="Label" parent="."]
+visible = false
 modulate = Color( 0.0195313, 0.0102234, 0.0102234, 1 )
 margin_left = -17.203
 margin_top = 57.6486
