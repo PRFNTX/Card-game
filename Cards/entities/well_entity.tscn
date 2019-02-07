@@ -2,8 +2,8 @@
 
 [ext_resource path="res://Cards/entities/Empty_entity.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/well.png" type="Texture" id=2]
-[ext_resource path="res://abilities/current/collectFaeria.tscn" type="PackedScene" id=3]
-[ext_resource path="res://abilities/current/spawnFaeria.tscn" type="PackedScene" id=4]
+[ext_resource path="res://abilities/current/spawnFaeria.tscn" type="PackedScene" id=3]
+[ext_resource path="res://abilities/current/collectFaeria.tscn" type="PackedScene" id=4]
 
 [node name="Unit" instance=ExtResource( 1 )]
 max_faeria = 3
@@ -12,14 +12,14 @@ base_attack = 0
 base_health = 0
 base_val = 0
 is_well = true
-on_damage = true
 on_clock = true
+on_receive_attack = true
 frame_alt = ExtResource( 2 )
 
 [node name="Frame" parent="." index="0"]
 scale = Vector2( 0.2, 0.2 )
 
-[node name="collectFaeria" parent="on_damage" index="0" instance=ExtResource( 3 )]
+[node name="spawnFaeria" parent="on_clock" index="0" instance=ExtResource( 3 )]
 
-[node name="spawnFaeria" parent="on_clock" index="0" instance=ExtResource( 4 )]
+[node name="collectFaeria" parent="on_receive_attack" index="0" instance=ExtResource( 4 )]
 

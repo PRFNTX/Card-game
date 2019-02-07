@@ -222,11 +222,12 @@ func action(type,target,state):
 			effectNode.activate(type,target,state)
 
 func on_receive_attack(source):
+	var Game = get_parent().Game
 	var complete = true
 	if on_receive_attack:
 		for effectNode in $on_receive_attack.get_children():
 			if complete:
-				var result = effectNode.activate(source)
+				var result = effectNode.activate(Game, get_parent(), Game.get_hex_by_id(source).get_unit())
 				if result != null:
 					complete = result
 	return complete
@@ -244,9 +245,9 @@ func move(target):
 	for effectNode in $on_move.get_children():
 		effectNode.activate(get_parent().Game,get_parent(), target )
 
-func collect(Game, entity, by, val):
+func collect(val):
 	for effectNode in $on_collect.get_children():
-		effectNode.activate(Game,entity,by,val)
+		effectNode.activate(get_parent().Game,get_parent(),val)
 
 func damage(in_damage):
 	var dmg = in_damage

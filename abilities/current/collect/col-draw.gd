@@ -16,10 +16,9 @@ func init(_entity):
 
 var val
 
-func activate(_Game, _entity,by, _val):
+func activate(_Game, _entity, val):
 	Game = _Game
 	entity = _entity
-	val=_val
-	if by == entity.Hex.id:
-		if Game.players[entity.Owner].hand_cards < max_cards:
-			Game.players[entity.Owner].drawCard() 
+	var unit_owner = Game.players[entity.Owner]
+	if unit_owner.hand_cards < max_cards:
+		unit_owner.drawCard() 

@@ -2,12 +2,6 @@
 
 [ext_resource path="res://abilities/current/scripts/moveLine.gd" type="Script" id=1]
 
-
-[node name="moveLine" type="Node" index="0"]
-
+[node name="moveLine" type="Node"]
 script = ExtResource( 1 )
-distance = 2
-medium = 0
-method = 0
-
 

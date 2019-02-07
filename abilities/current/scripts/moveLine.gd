@@ -41,24 +41,74 @@ func targeting():
 	#second ring with unique adjacency to first
 	#third ring with unique adjacency to second
 	var center_hex = Game.get_hex_by_id(entity.Hex.id)
+	var adj_ring = center_hex.adjacent
+	if method == METHOD_JUMP:
+		var jump_ring = get_jump_ring(center_hex)
+		for hex in jump_ring:
+			if (hex.hex_is_empty_or_self(center_hex.id)) and ((hex.hexType.child.moveLand and medium==0) or (hex.hexType.child.moveAir and medium==1) or (hex.hexType.child.moveWater and medium==2)):
+				hex.setState({'cover':hex.targetOther , 'target' :true})
+			else:
+				hex.setState({'cover':Color(0,0,0,0) , 'target':false})
+		return
 	var rings = []
+	var final_finger = {}
+	for hex in adj_ring:
+		final_finger[hex] = [hex]
+	var final_hexes = []
 	rings.append(center_hex.adjacent)
-	for i in range(2,distance+1):
-		var prev_ring = ring(center_hex,i)
+	for i in range(1,distance):
+		var prev_ring = rings[i-1]
 		var curr_ring = []
+		var curr_finger = {}
+		var negate_ring = []
 		for hex in prev_ring:
+			curr_finger[hex] = [hex]
 			for adj in hex.adjacent:
-				curr_ring.append(adj)
+				if not adj == center_hex and not prev_ring.has(adj) and not curr_ring.has(adj) and not negate_ring.has(adj):
+					curr_ring.append(adj)
+					curr_finger[hex].append(adj)
+				elif curr_ring.has(adj) and not negate_ring.has(adj):
+					for set in curr_finger.values():
+						set.erase(adj)
+					negate_ring.append(adj)
+		for ray in final_finger.values():
+			var joint = ray.pop_back()
+			for one in curr_finger[joint]:
+				ray.append(one)
 		var final_ring = []
-		for hex in curr_ring:
-			if curr_ring.find(hex)==curr_ring.find_last(hex) and (not hex.has_unit() or method==1):
-				final_ring.append(hex)
-		rings.append(final_ring)
+		for direction in curr_finger.values():
+			var negated = false
+			for hex in direction:
+				if not negated and (hex.stateLocal.hex_type != 0 or ([0, 3].has(hex.stateLocal.hex_type) and medium == MEDIUM_AQUATIC) or medium == MEDIUM_FLYING):
+					final_hexes.append(hex)
+		rings.append(curr_ring)
 	rings.append([center_hex])
+	for finger in final_finger.values():
+		var terminate = false
+		for hex in finger:
+			var blockedByLand = (hex.stateLocal.hex_type == 0 and medium==MEDIUM_NONE) or ([2,4,5,6].has(hex.stateLocal.hex_type) and medium == MEDIUM_AQUATIC)
+			var blockedByUnit = hex.has_unit() and (medium==MEDIUM_NONE or medium == MEDIUM_AQUATIC)
+			terminate = blockedByUnit or blockedByLand or terminate
+			if not terminate and (hex.hex_is_empty_or_self(center_hex.id)) and ((hex.hexType.child.moveLand and medium==0) or (hex.hexType.child.moveAir and medium==1) or (hex.hexType.child.moveWater and medium==2)):
+				hex.setState({'cover':hex.targetOther , 'target' :true})
+			else:
+				hex.setState({'cover': Color(0,0,0,0) , 'target': false})
+	return
 	for ring in rings:
 		for hex in ring:
 			if (hex.hex_is_empty_or_self(center_hex.id)) and ((hex.hexType.child.moveLand and medium==0) or (hex.hexType.child.moveAir and medium==1) or (hex.hexType.child.moveWater and medium==2)):
 				hex.setState({'cover':hex.targetOther , 'target' :true})
+			else:
+				hex.setState({'cover': Color(0,0,0,0) , 'target': false})
+
+func get_jump_ring(center):
+	var ring = center.adjacent
+	var jump_ring = []
+	for hex in ring:
+		for hex_adj in hex.adjacent:
+			if not ring.has(hex_adj) and not jump_ring.has(hex_adj):
+				jump_ring.append(hex_adj)
+	return jump_ring
 
 func ring(hex,n):
 	if n == 0:
@@ -91,14 +141,16 @@ func complete(target, set_state=null):
 	
 	
 	var hex_target = Game.get_hex_by_id(target)
-	
+	var start_id
+	if local:
+		start_id = Game.get_state().delegate_id
 	
 	entity.on_move(hex_target.get_node('hexEntity'))
 	entity.use_energy(1)
 	entity.Hex=hex_target
 	Game.setState({'delegate_id':target,'active_unit':target})
 	if local:
-		Game.send_action('miscMove',45-target,{'active_unit':45-entity.Hex.id})
+		Game.send_action('miscMove',45-target,{'active_unit':45-start_id})
 		if Game.check_valid_action(entity.Unit.get_action_name('Attack')) and local and entity.Unit.current_health>0:
 			Game.actionReady=true
 			entity.Unit.start_attack(Game)

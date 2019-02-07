@@ -2,10 +2,6 @@
 
 [ext_resource path="res://cancel_attack.gd" type="Script" id=1]
 
-[node name="cancel_attack" type="Node" index="0"]
-
+[node name="cancel_attack" type="Node"]
 script = ExtResource( 1 )
-ab_name = ""
-ab_description = ""
-
 

@@ -70,7 +70,7 @@ func will_receive_attack(val_damage, source=-1):
 	return true
 
 func receive_collect(by):
-	for node in Unit.get_node('on_damage').get_children():
+	for node in Unit.get_node('on_receive_attack').get_children():
 		node.activate(Game, self, by)
 
 func receive_attack(val_damage, source=-1):
@@ -148,9 +148,9 @@ func on_move(target): #hexEntity
 	if Unit.on_move:
 		Unit.move(Hex.id)
 	
-func on_collect(by, val):
+func on_collect(val):
 	if Unit.on_collect:
-		Unit.collect(Game, self, by, val)
+		Unit.collect(val)
 
 func on_damage(val_damage):
 	if Unit.on_damage:

@@ -10,7 +10,7 @@ export(int) var value = 1
 export(bool) var instead = false
 export(int) var lose_collect_at = 0
 
-func activate(Game, entity, by, val):
+func activate(Game, entity, val):
 	var gain = val
 	if not value_by_faeria:
 		gain = value

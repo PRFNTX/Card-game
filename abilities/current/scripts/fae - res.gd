@@ -9,30 +9,22 @@ export(bool) var value_by_faeria = true
 export(int) var value = 0
 export(bool) var instead = false
 
-func activate(Game, entity, by, val):
-	if by==null:
-		by = Game.get_state().active_unit
-	if by== null:
-		by = Game.get_state().delegate_id
+func activate(Game, entity, val):
+	var unit_owner = Game.players[entity.Owner]
 	var gain = val
 	if not value_by_faeria:
 		gain = value
 	if gain_type==0:
 		for i in range(0,gain):
-			Game.players[Game.get_hex_by_id(by).get_unit().Owner].drawCard()
+			unit_owner.drawCard()
 	if gain_type==1:
-		Game.players[Game.get_hex_by_id(by).get_unit().Owner].modActions(gain)
+		unit_owner.modActions(gain)
 	if gain_type==2:
 		for i in range(0,gain):
-			Game.get_hex_by_id(by).get_unit().add_one_energy()
+			entity.add_one_energy()
 	if gain_type==3:
-		Game.players[Game.get_hex_by_id(by).get_unit().Owner].modCoin(gain)
+		unit_owner.modCoin(gain)
 	if gain_type==4:
-		Game.players[Game.get_hex_by_id(by).get_unit().Owner].modFaeria(value)
+		unit_owner.modFaeria(value)
 	if instead:
-		Game.players[Game.get_hex_by_id(by).get_unit().Owner].modFaeria(-1*val)
-
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+		unit_owner.modFaeria(-1*val)
