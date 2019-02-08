@@ -18,5 +18,5 @@ func can_play():
 func _gui_input(event):
 	if event is InputEventMouseMotion:
 		emit_signal('mouse_entered', me)
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton and event.is_pressed():
 		emit_signal('mouse_button', me)

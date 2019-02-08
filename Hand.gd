@@ -99,6 +99,7 @@ func on_mouse_enter(num):
 
 var buildTypes=['buildAny','buildLake', 'buildTree','buildHill','buildSand']
 func on_mouse_button(num):
+	game.cancelAction()
 	var card = card_nodes[num].get_node('Card')
 	setState({'selected_card':num})
 	game.setState({'preview_card':card.card_name})

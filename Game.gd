@@ -136,25 +136,25 @@ func frame_card(card_name):
 				buttons.back().rect_position.y+=20*num
 				num+=1
 		else:
-			buttons = [Button.new()]
-			$DisplayFrame.add_child(buttons.back())
-			buttons[0].text='cast'
 			var c_instance = globals.card_instances[card_name].get_node('Card')
 			var f_cost = c_instance.cost_faeria
 			var g_cost = c_instance.cost_gold
 			var l_cost = {c_instance.lands_type:c_instance.lands_num}
 			var thing = $DisplayFrame/CardDetails
-			c_instance.scale = Vector2(1.5, 1.5)
-			thing.text = c_instance.card_description
-			if (!players[state['current_turn']].has_resource(g_cost,f_cost,l_cost)
+			if c_instance.is_event:
+				buttons = [Button.new()]
+				$DisplayFrame.add_child(buttons.back())
+				buttons[0].text='cast'
+				if (!players[state['current_turn']].has_resource(g_cost,f_cost,l_cost)
 					or (not displayCard.get_node('Card').play_morning) and state.clock_time==0
 					or (not displayCard.get_node('Card').play_evening) and state.clock_time==1
 					or (not displayCard.get_node('Card').play_night) and state.clock_time==2
-			):
-				buttons[0].disabled = true
-			#buttons[0].name = 'cast'
+				):
+					buttons[0].disabled = true
+					buttons[0].connect('pressed', self, 'frame_activate', ['cast'])
+			c_instance.scale = Vector2(1.5, 1.5)
+			thing.text = c_instance.card_description
 			
-			buttons[0].connect('pressed', self, 'frame_activate', ['cast'])
 	else:
 		for child in $DisplayFrame.get_children():
 			if child.get_name()!="CardDetails":
@@ -276,6 +276,7 @@ func change_turns(none, unused):
 	else:
 		setState({'current_turn':(state['current_turn']+1)%2,'action':"",'active_unit':null,'clock_time':(current_time+1)%3})
 	emit_signal("TurnStart", state['current_turn'])
+	players[state.current_turn].modCoin(2)
 	emit_signal("ActionPhase", state['current_turn'])
 	
 
