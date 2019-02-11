@@ -71,7 +71,6 @@ func targeting():
 			hex.setState({'cover':Color(0,0,0,0) , 'target' :false})
 
 func complete(target, set_state=null):
-	
 	var local = true
 	var state = Game.get_state()
 	if not set_state==null:
@@ -79,18 +78,15 @@ func complete(target, set_state=null):
 		local= false
 	Game.setState({'active_unit':target})
 	Game.actionReady=true
-	get_children()[0].activate(Game,Game.get_hex_by_id(Game.state['active_unit']).get_unit(),val)
-	return false
+	var is_done = get_children()[0].activate(Game,Game.get_hex_by_id(Game.state['active_unit']).get_unit(),val)
+	if is_done == null and local:
+		Game.send_action('delegate',remote_convert(target),{'delegate_id':remote_convert(entity.Hex.id),'delegate_node':get_parent().get_name()+"/"+get_name()})
 
 func cancel_action():
 	pass
 
-func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
-	pass
-
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+func remote_convert(hex_id):
+	if hex_id==0:
+		return 0
+	else:
+		return 45-hex_id

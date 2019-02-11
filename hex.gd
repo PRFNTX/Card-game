@@ -313,6 +313,7 @@ var hexType
 func _ready():
 	hexType=find_node("hexType")
 	hexType.setState(initial_state)
+	setState({'hex_type':initial_state})
 	set_process_input(true)
 	stateLocal['hex_owner']=initial_owner
 
@@ -340,8 +341,6 @@ func cover(val):
 
 func target(val):
 	stateLocal['target']=val
-
-
 
 const land_types = ["empty","orb","land","lake","tree","hill","sand","well"]
 func hex_owner(val):

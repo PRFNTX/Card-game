@@ -196,7 +196,7 @@ func start_attack(Game):
 
 func on_select(Game,hex):
 	if $Movement.get_child_count()>0 and current_energy>0:
-		$Movement.get_children()[0].start_action(get_parent())
+		$Movement.get_children()[max(0,$Movement.get_child_count()-1)].start_action(get_parent())
 	if abilities:
 		Game.setState({'frame_card':get_parent().card_name})
 

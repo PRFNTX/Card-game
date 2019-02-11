@@ -23,7 +23,7 @@ func activate(_Game, _entity, _val):
 		Game.delegate_action(entity.Hex.id,get_relative_path())
 
 func get_relative_path():
-	return get_parent().get_name()+'/'+get_name()
+	return get_parent().get_parent().get_name()+'/'+get_parent().get_name()+'/'+get_name()
 
 func verify_costs():
 	var ret = true
@@ -42,19 +42,22 @@ func pay_costs():
 	
 
 func targeting():
-	for hex in entity.Hex.adjacent:
+	var active_hex = Game.get_hex_by_id(Game.state.active_unit)
+	for unset in get_tree().get_nodes_in_group('Hex'):
+		unset.setState({'cover':Color(0,0,0,0), 'target':false})
+	for hex in active_hex.adjacent:
 		if medium==0:
-			if hex.hexType.child.moveLand and hex.hex_is_empty_or_self() and hex.is_adjacent_or_equal_to(hex.stateLocal['active_unit'].Hex):
+			if hex.hexType.child.moveLand and hex.hex_is_empty_or_self():
 				hex.setState({'cover':hex.move,'target':true})
 			else:
 				hex.setState({'cover':Color(0,0,0,0), 'target':false})
 		elif medium==2:
-			if hex.hexType.child.moveAir and hex.hex_is_empty_or_self() and hex.is_adjacent_or_equal_to(hex.stateLocal['active_unit'].Hex):
+			if hex.hexType.child.moveAir and hex.hex_is_empty_or_self():
 				hex.setState({'cover':hex.move,'target':true})
 			else:
 				hex.setState({'cover':Color(0,0,0,0), 'target':false})
 		elif medium==1:
-			if hex.hexType.child.moveWater and hex.hex_is_empty_or_self() and hex.is_adjacent_or_equal_to(hex.stateLocal['active_unit'].Hex):
+			if hex.hexType.child.moveWater and hex.hex_is_empty_or_self():
 				hex.setState({'cover':hex.move,'target':true})
 			else:
 				hex.setState({'cover':Color(0,0,0,0), 'target':false})
@@ -69,11 +72,13 @@ func complete(target, set_state=null):
 		local= false
 		
 	var hex_target = Game.get_hex_by_id(target)
+	var to_move = Game.state.active_unit
+	var unit_to_move = Game.get_hex_by_id(to_move).get_unit()
 	if local:
-		Game.send_action('hardMove',45-target,{'active_unit':45-entity.Hex.id})
-	entity.on_move(hex_target.get_node('hexEntity'))
+		Game.send_action('hardMove',45-target,{'active_unit':45-to_move})
+	unit_to_move.on_move(hex_target.get_node('hexEntity'))
 	Game.actionDone()
-	
+
 func cancel_action():
 	pass
 

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://abilities/current/end_turn/removeMod.gd" type="Script" id=1]
+
+[node name="removeNodeEOT" type="Node"]
+script = ExtResource( 1 )
+

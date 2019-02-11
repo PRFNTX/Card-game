@@ -31,7 +31,7 @@ func activate(_Game, _entity, _val):
 func conditions(hex):
 	if hex.has_unit():
 		var unit = hex.get_unit()
-		if (target_type == 0 or (target_type == 1 and unit.Unit.is_creature) or (target_type == 2 and unit.Unit.is_building)):
+		if (target_type == 0 or (target_type == 1 and unit.Unit.is_unit) or (target_type == 2 and unit.Unit.is_building)):
 			if player == 0:
 				return true
 			elif unit.Owner==player%2:
@@ -56,8 +56,18 @@ func complete(target, set_state=null):
 	var modName = target_entity.Unit.set_mod_att('mightAndGuts', 1, true)
 	if unbuffer != null:
 		var attach_unbuffer = unbuffer.instance()
-		attach_unbuffer.set_name(modName)
+		attach_unbuffer.add_mod_name(modName)
 		attach_unbuffer.init(target_entity)
 		target_entity.Unit.get_node("on_end_turn").add_child(attach_unbuffer)
 		target_entity.Unit.on_end_turn = true
-	return false
+	if local:
+		Game.send_action('delegate',remote_convert(target),{'delegate_id':remote_convert(entity.Hex.id),'delegate_node':get_parent().get_name()+"/"+get_name()})
+
+func cancel_action():
+	pass
+
+func remote_convert(hex_id):
+	if hex_id==0:
+		return 0
+	else:
+		return 45-hex_id

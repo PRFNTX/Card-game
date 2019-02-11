@@ -45,6 +45,7 @@ var state={
 	'clock_time':0,
 	'hovered':null,
 	'building_card':null,
+	'casting_card_num': null,
 	'delegate_id':null,
 	'delegate_node':null,
 	'frame_card':null,
@@ -107,6 +108,9 @@ func hovered(hex):
 func building_card(card):
 	state['building_card'] = card
 
+func casting_card_num(val):
+	state['casting_card_num'] = val
+
 var buttons=[]
 func frame_card(card_name):
 	complete = true
@@ -145,13 +149,17 @@ func frame_card(card_name):
 				buttons = [Button.new()]
 				$DisplayFrame.add_child(buttons.back())
 				buttons[0].text='cast'
-				if (!players[state['current_turn']].has_resource(g_cost,f_cost,l_cost)
-					or (not displayCard.get_node('Card').play_morning) and state.clock_time==0
-					or (not displayCard.get_node('Card').play_evening) and state.clock_time==1
-					or (not displayCard.get_node('Card').play_night) and state.clock_time==2
+				if (players[state['current_turn']].has_resource(g_cost,f_cost,l_cost)
+					and (
+						(displayCard.get_node('Card').play_morning and state.clock_time==0)
+						or (displayCard.get_node('Card').play_evening and state.clock_time==1)
+						or (displayCard.get_node('Card').play_night and state.clock_time==2)
+					)
 				):
-					buttons[0].disabled = true
+					buttons[0].disabled = false
 					buttons[0].connect('pressed', self, 'frame_activate', ['cast'])
+				else:
+					buttons[0].disabled = true
 			c_instance.scale = Vector2(1.5, 1.5)
 			thing.text = c_instance.card_description
 			
@@ -175,7 +183,8 @@ func frame_activate(ability_name, set_state=null):
 		$hex0/hexEntity.add_child(this_unit)
 		this_unit.hide()
 		var to_instance = globals.card_instances[state['frame_card']].get_node('Card').board_entity
-		if this_unit.possess(to_instance, get_hex_by_id(0), state['current_turn'], self,state['frame_card'])==null:
+		this_unit.possess(to_instance, get_hex_by_id(0), state['current_turn'], self,state['frame_card'])
+		if this_unit.do_play()==null:
 			players[state['current_turn']].discard_selected() #make this function
 			this_unit.queue_free()
 			if local:
@@ -189,6 +198,7 @@ func frame_activate(ability_name, set_state=null):
 			actionDone()
 		elif not get_hex_by_id(state['active_unit']).get_unit().actionList[ability_name].has_method('complete'):
 			actionDone()
+
 ##STATE AGAIN
 
 func delegate_id(val):
@@ -367,6 +377,9 @@ func activate(unit):
 		setState({'active_unit':unit.Hex.id})
 		unit.Unit.on_select(self, unit.Hex)
 
+func resetTargeting():
+	for hex in get_tree().get_nodes_in_group('Hex'):
+		hex.setState({'cover':Color(0,0,0,0), 'target':false})
 
 func completeAction(target):
 	if can_do:
@@ -374,9 +387,10 @@ func completeAction(target):
 		startBasictimeout()
 
 func actionDone():
-	setState({"action":"",'active_unit':null, 'frame_card':null, 'delegate_id':null,"delegate_node":null,'building_card':null})
+	setState({"action":"",'active_unit':null, 'frame_card':null, 'delegate_id':null,"delegate_node":null,'building_card':null,'casting_card_num':null})
 	if $hex0.has_unit():
 		$hex0.get_unit().queue_free()
+	resetTargeting()
 	complete = true
 
 func newAction(set={'action':""}):
@@ -386,7 +400,7 @@ func newAction(set={'action':""}):
 func cancelAction():
 	if state['action']=='delegate' and get_hex_by_id(state['delegate_id']).has_unit() and get_hex_by_id(state['delegate_id']).get_unit().Unit.get_node(state['delegate_node']).has_method('cancel_action'):
 		get_hex_by_id(state['delegate_id']).get_unit().Unit.get_node(state['delegate_node']).cancel_action()
-	setState({"action":"",'active_unit':null, 'frame_card':null, 'delegate_id':null,'delegate_node':null})
+	setState({"action":"",'active_unit':null, 'frame_card':null,'casting_card_num':null, 'delegate_id':null,'delegate_node':null})
 	if $hex0.has_unit():
 		$hex0.get_unit().queue_free()
 	complete = true
@@ -607,19 +621,22 @@ func buildAny(target, set_state=null):
 	if players[state['current_turn']].pay_costs(costs['gold'],costs['faeria']):
 		## replcae with actual board entity
 		var child_card = globals.card_instances[state['building_card']].get_node('Card')
+		var entity = BoardEntity.instance()
+		get_hex_by_id(target).get_node('hexEntity').add_child(entity)
+		entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'],self,child_card.card_name)
 		if local:
 			players[state['current_turn']].discard_hand(building_card_ind)
+			send_action('buildAny', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])},state)
 		else:
 			## remove 1 card from enemy hand counter
 			pass
-		var entity = BoardEntity.instance()
-		get_hex_by_id(target).get_node('hexEntity').add_child(entity)
-		end_if_null = entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'],self,child_card.card_name)
+		actionDone()
+		newAction()
+		end_if_null = entity.do_play()
 		entity.add_to_group('entities')
 	else:
 		end_if_null = null
 	if local:
-		send_action('buildAny', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])},state)
 		if end_if_null == null:
 			actionDone()
 	else:
@@ -639,21 +656,29 @@ func buildLake(target, set_state=null):
 	}
 	var end_if_null
 	if players[state['current_turn']].pay_costs(costs['gold'],costs['faeria']):
-		## replcae with actual board entity
+		## replace with actual board entity
 		var child_card = globals.card_instances[state['building_card']].get_node('Card')
+		var entity = BoardEntity.instance()
+		get_hex_by_id(target).get_node('hexEntity').add_child(entity)
+		entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'],self,child_card.card_name)
 		if local:
 			players[state['current_turn']].discard_hand(building_card_ind)
+			send_action(
+				'buildLake',
+				45-target,
+				{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])},
+				state
+			)
 		else:
 			## remove 1 card from enemy hand counter
 			pass
-		var entity = BoardEntity.instance()
-		get_hex_by_id(target).get_node('hexEntity').add_child(entity)
-		end_if_null = entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'],self,child_card.card_name)
+		actionDone()
+		newAction()
+		end_if_null = entity.do_play()
 		entity.add_to_group('entities')
 	else:
 		end_if_null = null
 	if local:
-		send_action('buildLake', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])},state)
 		if end_if_null == null:
 			actionDone()
 	else:
@@ -675,19 +700,22 @@ func buildTree(target, set_state=null):
 	if players[state['current_turn']].pay_costs(costs['gold'],costs['faeria']):
 		## replcae with actual board entity
 		var child_card = globals.card_instances[state['building_card']].get_node('Card')
+		var entity = BoardEntity.instance()
+		get_hex_by_id(target).get_node('hexEntity').add_child(entity)
+		entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'],self,child_card.card_name)
 		if local:
 			players[state['current_turn']].discard_hand(building_card_ind)
+			send_action('buildTree', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])},state)
 		else:
 			## remove 1 card from enemy hand counter
 			pass
-		var entity = BoardEntity.instance()
-		get_hex_by_id(target).get_node('hexEntity').add_child(entity)
-		end_if_null = entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'],self,child_card.card_name)
+		actionDone()
+		newAction()
+		end_if_null = entity.do_play()
 		entity.add_to_group('entities')
 	else:
 		end_if_null = null
 	if local:
-		send_action('buildTree', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])},state)
 		if end_if_null == null:
 			actionDone()
 	else:
@@ -709,19 +737,22 @@ func buildHill(target, set_state=null):
 	if players[state['current_turn']].pay_costs(costs['gold'],costs['faeria']):
 		## replcae with actual board entity
 		var child_card = globals.card_instances[state['building_card']].get_node('Card')
+		var entity = BoardEntity.instance()
+		get_hex_by_id(target).get_node('hexEntity').add_child(entity)
+		entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'],self,child_card.card_name)
 		if local:
 			players[state['current_turn']].discard_hand(building_card_ind)
+			send_action('buildHill', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])},state)
 		else:
 			## remove 1 card from enemy hand counter
 			pass
-		var entity = BoardEntity.instance()
-		get_hex_by_id(target).get_node('hexEntity').add_child(entity)
-		end_if_null = entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'],self,child_card.card_name)
+		actionDone()
+		newAction()
+		end_if_null = entity.do_play()
 		entity.add_to_group('entities')
 	else:
 		end_if_null = null
 	if local:
-		send_action('buildHill', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])},state)
 		if end_if_null == null:
 			actionDone()
 	else:
@@ -743,19 +774,22 @@ func buildSand(target, set_state=null):
 	if players[state['current_turn']].pay_costs(costs['gold'],costs['faeria']):
 		## replcae with actual board entity
 		var child_card = globals.card_instances[state['building_card']].get_node('Card')
-		if local:
-			players[state['current_turn']].discard_hand(building_card_ind)
-		else:
-			## remove 1 card from enemy hand counter
-			pass
 		var entity = BoardEntity.instance()
 		get_hex_by_id(target).get_node('hexEntity').add_child(entity)
 		end_if_null = entity.possess(child_card.board_entity,get_hex_by_id(target),state['current_turn'],self,child_card.card_name)
+		if local:
+			players[state['current_turn']].discard_hand(building_card_ind)
+			send_action('buildSand', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])},state)
+		else:
+			## remove 1 card from enemy hand counter
+			pass
+		actionDone()
+		newAction()
+		end_if_null = entity.do_play()
 		entity.add_to_group('entities')
 	else:
 		end_if_null = null
 	if local:
-		send_action('buildSand', 45-target,{'current_turn':(state['current_turn']+1%2),'building_card':globals.get_id_by_name(state['building_card'])},state)
 		if end_if_null == null:
 			actionDone()
 	else:
@@ -890,6 +924,8 @@ func send_cast(send_state, cancel=false):
 		#players[state['current_turn']].discard_selected()
 		players[state['current_turn']].play_selected()
 		setState({'frame_card':null})
+	elif state['casting_card_num'] != null:
+		pass
 	
 	globals.send_msg(send)
 	emit_signal('on_action', 'cast', 0, state)

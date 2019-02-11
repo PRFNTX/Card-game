@@ -9,7 +9,7 @@ export(int) var action_cost = 0
 export(int) var faeria_cost = 0
 export(int) var energy_cost = 0
 
-export(int) var damage =-2
+export(int) var life_change =-2
 
 export(int, 'Unit', 'Creature', 'Building') var target_type = 0
 export(int, 'Owner', 'Opponent') var target_player = 1 
@@ -65,7 +65,7 @@ func complete(target, set_state=null):
 		state=set_state
 		local= false
 	var unit = Game.get_hex_by_id(target).get_unit()
-	unit.life_change(damage)
+	unit.life_change(life_change)
 	if local:
 		Game.send_action('delegate',45-target,{'delegate_id':45-entity.Hex.id,'delegate_node':get_relative_path()})
 	Game.actionDone()

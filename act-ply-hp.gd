@@ -16,7 +16,7 @@ func init(_entity):
 	entity = _entity
 
 func activate(type,target,set_state=null):
-	if type.to_lower().includes('build') and conditions(target):
+	if type.to_lower().find('build') >= 0 and conditions(target):
 		var unit = Game.get_hex_by_id(target).get_unit()
 		unit.life_change(1)
 

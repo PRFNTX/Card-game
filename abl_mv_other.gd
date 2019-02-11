@@ -76,5 +76,5 @@ func complete(target, set_state=null):
 		local= false
 	Game.setState({'active_unit':target})
 	Game.actionReady=true
-	get_children()[0].activate(Game,Game.get_hex_by_id(Game.state['active_unit']).get_unit(),val)
+	get_children()[0].activate(Game,entity,val)
 	return false

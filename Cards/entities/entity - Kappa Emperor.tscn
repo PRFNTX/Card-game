@@ -140,7 +140,7 @@ ab_name = "Move Land"
 ab_description = "1 Faeria - Move target adjacent land."
 empty_only = false
 adjacent_only = true
-max_iter = 1
+max_iter = 0
 
 [node name="movehex" parent="Abilities/abl-targ-hex" instance=ExtResource( 9 )]
 

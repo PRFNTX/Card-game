@@ -11,7 +11,6 @@ export(int) var action_cost = 1
 export(int) var faeria_cost = 0
 export(int) var energy_cost = 1
 
-export(bool) var random = true
 
 export(int, 'Owner', 'Opponent') var target_player = 1 
 

@@ -17,7 +17,7 @@ func activate(_Game,_entity,target):
 	
 	if (
 		target_type == 0 and (target.Hex.id==1 or target.Hex.id ==44)
-		or target_type == 1 and (target.Hex.get_unit().Unit.is_building)
+		or target_type == 1 and (target.Hex.get_unit().Unit.is_building and not target.Hex.get_unit().Unit.is_orb)
 	):
 		entity.Unit.current_attack+=2
 		up = true

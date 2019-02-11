@@ -24,7 +24,7 @@ func activate(_Game, _entity, _val):
 	entity = _entity
 	val=_val
 	if verify_costs():
-		Game.delegate_action(entity.Hex.id,get_parent().get_parent().get_name()+'/'+get_parent().get_name()+'/'+get_name())
+		Game.delegate_action(entity.Hex.id,get_parent().get_name()+'/'+get_name())
 	return true
 
 func verify_costs():
@@ -67,17 +67,9 @@ func complete(target, set_state=null):
 		from_hex.get_unit().on_move(to_hex.get_node('hexEntity'))
 	if local:
 		Game.send_action('moveHex',45-target,{'active_unit':45-state['active_unit']},true)
-		if get_parent().repeat():
-			return false
-		elif then_free:
-			entity.queue_free()
-			return true
-		else:
-			return true
+
 
 func cancel_action():
-	Game.newAction()
-	get_parent().iter-=1
-	get_parent().activate(Game,entity,val)
+	pass
 
 

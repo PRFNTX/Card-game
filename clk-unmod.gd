@@ -3,7 +3,7 @@ extends Node
 
 export(String) var ab_name = ""
 export(String) var ab_description = ""
-export(bool) var free_after = false
+export(bool) var free_after = true
 
 var Game
 var entity

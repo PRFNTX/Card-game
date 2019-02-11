@@ -19,7 +19,7 @@ export(int, 'Unit', 'Creature', 'Building') var target_type = 1
 export(int, 'Owner', 'Opponent') var target_player = 0
 export(bool) var adjacent_only = false
 export(bool) var free_after_turn = true
-var ability_freer = load('res://abilities/current/clock/free_abl.tscn')
+export(PackedScene) var ability_freer = load('res://abilities/current/end_turn/removeMod.tscn')
 
 var entity
 var Game
@@ -52,12 +52,12 @@ func pay_costs():
 func targeting():
 	for hex in get_tree().get_nodes_in_group("Hex"):
 		if target_player==0:
-			if hex.has_friendly_unit() and (target_type==0 or (target_type==1 and hex.unit_is_creature()) or (target_type==1 and hex.unit_is_building())) and (entity.Hex.adjacent.has(hex) or adjacent_only==false):
+			if hex.has_friendly_unit() and (target_type==0 or (target_type==1 and hex.unit_is_creature()) or (target_type==2 and hex.unit_is_building())):
 				hex.setState({'cover':hex.targetOther , 'target' :true})
 			else:
 				hex.setState({'cover':Color(0,0,0,0) , 'target' :false})
 		elif target_player==1:
-			if hex.has_opposing_unit() and (target_type==0 or (target_type==1 and hex.unit_is_creature()) or (target_type==1 and hex.unit_is_building())) and (entity.Hex.adjacent.has(hex) or adjacent_only==false):
+			if hex.has_opposing_unit() and (target_type==0 or (target_type==1 and hex.unit_is_creature()) or (target_type==2 and hex.unit_is_building())):
 				hex.setState({'cover':hex.targetOther , 'target' :true})
 			else:
 				hex.setState({'cover':Color(0,0,0,0) , 'target' :false})
@@ -72,23 +72,17 @@ func complete(target, set_state=null):
 		state=set_state
 		local= false
 	var unit = Game.get_hex_by_id(target).get_unit()
-	var replace = ability.instance()
-	var target_node = unit.get_node(ability_type)
-	var target_clock = unit.get_node('on_end_turn')
-	if not find_node(replace.get_name(), false):
-		target.add_child(replace)
-		var freer = ability_freer.instance()
-		freer.free_target = replace
-		target_clock.add_child(freer)
-		if not unit.on_clock:
-			unit.on_end_turn = true
-		if not unit.get(ability_type) and not unactivatable_types.has(ability_type):
-			unit.set(ability_type, true)
-		target_node.move_node(replace, 0)
-		if replace.has_method('init'):
-			replace.init(entity)
-	else:
-		replace.queue_free()
+	var freer = ability_freer.instance()
+	var new_ability = ability.instance()
+	for key in attributes:
+		new_ability.set(key, attributes[key])
+	var target_node = unit.Unit.get_node(ability_type)
+	unit.Unit.set(ability_type, true)
+	var target_freer = unit.Unit.get_node('on_end_turn')
+	unit.Unit.on_end_turn = true
+	target_node.add_child(new_ability)
+	target_freer.add_child(freer)
+	freer.track_node(new_ability)
 	
 	if local:
 		Game.send_action('delegate',45-target,{'delegate_id':entity.Hex.id,'delegate_node':get_relative_path()})

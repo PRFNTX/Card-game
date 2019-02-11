@@ -21,5 +21,5 @@ func activate(type,target,set_state=null):
 	if target==entity.Hex.id:
 		if type.to_lower().find('attack')>=0:
 			var source_hex = Game.get_hex_by_id(active_unit).get_unit().receive_damage(damage)
-			Game.players[entity.Owner].mod_coin(gold_gain)
+			Game.players[entity.Owner].modCoin(gold_gain)
 			queue_free()

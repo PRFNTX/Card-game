@@ -10,11 +10,18 @@ var card_name
 var stunned = false
 
 export(Color, RGBA) var enemy_modulate = Color(0,0,0,0)
+export(Color, RGBA) var friendly_modulate = Color(0,0,0,0)
 
 func set_owner(val):
 	Owner = val
 	if val == 1:
-		Unit.modulate=enemy_modulate
+		$OwnerIndicator.modulate=enemy_modulate
+		$OwnerIndicator.show()
+	elif val == 0:
+		$OwnerIndicator.modulate=friendly_modulate
+		$OwnerIndicator.show()
+	else:
+		$OwnerIndicator.hide()
 
 func set_game(val):
 	Game = val
@@ -36,7 +43,7 @@ func _ready():
 	pass
 
 func possess(entity, hex, player, game, _card_name):
-	Owner = player
+	set_owner(player)
 	set_process_input(true)
 	card_name=_card_name
 	
@@ -56,6 +63,8 @@ func possess(entity, hex, player, game, _card_name):
 	Game.connect('UpdateState', self, 'sig_update_state')
 	if Unit.auto_collect:
 		Game.connect('AutoCollect', self, 'auto_collect')
+
+func do_play():
 	if Game.state.current_turn==0:
 		var free_if_null = Unit.play()
 		if Unit.is_event and free_if_null==null:
@@ -131,7 +140,7 @@ func get_energy():
 #		Unit.play()
 
 func collect_from_target(target):
-	target.receive_collect(Hex.id)
+	target.receive_collect(self)
 
 func on_attack(target):
 	var can_attack = target.will_receive_attack(Unit.current_attack, Hex.id)

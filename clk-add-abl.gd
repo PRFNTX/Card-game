@@ -39,9 +39,10 @@ func activate(_game, _entity, time):
 		or time==EVENING and evening
 		or time==NIGHT and night
 	):
-		added_node = ability.instance()
-		added_node.init(entity)
+		var new_node = ability.instance()
+		new_node.init(entity)
 		for key in attributes.keys():
-			added_node.set(key, attributes[key])
-		get_parent().get_parent().get_node(ability_category).add_child(added_node)
+			new_node.set(key, attributes[key])
+		get_parent().get_parent().get_node(ability_category).add_child(new_node)
+		added_node = weakref(new_node)
 	

@@ -61,13 +61,22 @@ func targeting():
 		var curr_ring = []
 		var curr_finger = {}
 		var negate_ring = []
+		#the last hex in each ring becomes the start of the next
+		for fing in final_finger.values():
+				curr_finger[fing.back()] = [fing.back()]
+		#for each hex in the previous ring
 		for hex in prev_ring:
-			curr_finger[hex] = [hex]
+			#get the list of adjacent hexes
 			for adj in hex.adjacent:
+				#if its not the center hex, isnt in the previous ring, isn't in current ring, and hasnt been removed from current ring
 				if not adj == center_hex and not prev_ring.has(adj) and not curr_ring.has(adj) and not negate_ring.has(adj):
+					#add it to current ring and the finger for the hex its adjacent to
 					curr_ring.append(adj)
-					curr_finger[hex].append(adj)
+					if curr_finger.keys().has(hex):
+						curr_finger[hex].append(adj)
+				#otherwise if current ring has it and negate ring doesnt
 				elif curr_ring.has(adj) and not negate_ring.has(adj):
+					#add it to negate ring and remove it from all fingers
 					for set in curr_finger.values():
 						set.erase(adj)
 					negate_ring.append(adj)
@@ -93,13 +102,8 @@ func targeting():
 				hex.setState({'cover':hex.targetOther , 'target' :true})
 			else:
 				hex.setState({'cover': Color(0,0,0,0) , 'target': false})
+	center_hex.setState({'cover':center_hex.targetOther, 'target': true})
 	return
-	for ring in rings:
-		for hex in ring:
-			if (hex.hex_is_empty_or_self(center_hex.id)) and ((hex.hexType.child.moveLand and medium==0) or (hex.hexType.child.moveAir and medium==1) or (hex.hexType.child.moveWater and medium==2)):
-				hex.setState({'cover':hex.targetOther , 'target' :true})
-			else:
-				hex.setState({'cover': Color(0,0,0,0) , 'target': false})
 
 func get_jump_ring(center):
 	var ring = center.adjacent
