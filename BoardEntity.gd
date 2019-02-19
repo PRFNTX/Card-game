@@ -238,8 +238,8 @@ func sig_update_state(newState,keys):
 
 
 ######
-
-func _gui_input(event):
+#was '_gui_input(event)'
+func hex_clicked(event):
 	Game.setState({'preview_card':card_name})
 	if event.is_action('click') and event.is_action_released('click') and (Unit.current_energy>0 or int(Unit.abilities)==int(true)) and Owner==0:
 		#Unit.on_select(Game,Hex)

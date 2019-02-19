@@ -425,6 +425,10 @@ func _input(event):
 func complete_action_click(event):
 	if stateLocal["target"] and stateCopy["action"]!="" and event.is_pressed():
 		gameNode.completeAction(self)
+	elif not event.is_pressed() and has_unit():
+		var unit = get_unit()
+		if unit.has_method('hex_clicked'):
+			unit.hex_clicked(event)
 
 func _on_Area2D_mouse_exited():
 	gameNode.setState({'hovered':null})
