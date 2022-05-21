@@ -1,0 +1,19 @@
+This is a work in progress project. It will not always be left in a stable state.
+
+This project should be imported using Godot v3.1.
+
+The following builds are for testing in-progress features:
+https://drive.google.com/drive/folders/1bSZ1wMqdnhOZhNPvaf0A2BBNOwdALhtX
+Solo-build - an alternate version of the build which skips the opponent's turn for solo testing.
+Minefield build - multiplayer enabled version of the app, will require a room to be created and joined by another player to begin.
+
+- the windows pck file must be in the same location as the exe. The mac version is stand alone.
+- In the deck builder mode, not all cards will work. Cards are implemented from top to bottom and only up to Oakling (#69) have definitely been implemented, later cards can be tried but will crash the app if they are not implemented
+- to join a game you must have at least one deck saved, you can create a lobby or join a lobby created by another player. Both players must select a deck, and then the host can then start the match
+- Action buttons cannot be clicked, instead use the character keys to spend action points. There is no feedback for invalid actions, so check your action points at the top if nothing is happening
+- For development reasons the app uses a static seed for each game resulting in the same cards being drawn in the same order.
+
+The solo build 
+
+The app requires a username and password to access, the server stores data related to constructed decks and deck names as well as username and password.
+Do not use a secure password or enter any private information into the app.
